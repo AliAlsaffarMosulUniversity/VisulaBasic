@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14325c">
+<title>حقيبة البرمجة المرئية — Visual Basic 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17233b;--mut:#5b6b85;--bg:#f4f1ea;--card:#fff;--line:#e4dfd3;--brand:#14325c;--accent:#f2a900;--teal:#0e7c86;--r:16px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo','Segoe UI',Tahoma,sans-serif;font-size:16px;line-height:1.85;direction:rtl}
+a{color:inherit;text-decoration:none}
+#app{max-width:880px;margin:0 auto;min-height:100vh;padding-bottom:84px}
+header.top{position:sticky;top:0;z-index:20;height:66px;background:var(--brand);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+header.top .logo{width:36px;height:36px;border-radius:10px;background:var(--accent);color:var(--brand);display:grid;place-items:center;font-weight:800;font-size:15px;font-family:monospace}
+header.top b{font-size:16px;line-height:1.2}header.top small{display:block;opacity:.75;font-size:12px;font-weight:400}
+#view{padding:16px}
+.en{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:'Consolas','Courier New',monospace;font-size:.86em;background:#eef2f8;border:1px solid #dbe3f0;border-radius:6px;padding:0 6px;line-height:1.55;color:#12305b;white-space:nowrap}
+h1{font-size:26px;line-height:1.35;margin:.2em 0}h2.sec{font-size:19px;margin:28px 0 10px;color:var(--brand)}
+h3{font-size:19px;margin:30px 0 8px;color:var(--brand);padding-right:12px;border-right:5px solid var(--accent);line-height:1.5}
+p{margin:.5em 0}ul,ol{padding-right:24px;margin:.5em 0}li{margin:.25em 0}
+.muted{color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-weight:700;border:0;background:var(--brand);color:#fff;padding:10px 18px;border-radius:12px;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.btn:active{transform:translateY(1px)}.btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand);box-shadow:none}.btn.small{padding:6px 14px;font-size:14px;margin-top:8px}.btn.danger{color:#b3261e;border-color:#b3261e;margin-top:24px}
+.hero{display:flex;gap:18px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#14325c,#1d4f86 60%,#0e7c86);color:#fff;border-radius:22px;padding:22px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;left:-50px;top:-50px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.05)}
+.kicker{color:var(--accent);font-weight:700;font-size:14px}.hero h1{font-size:28px;margin:.1em 0 .3em}.hero p{opacity:.92;font-size:15px}
+.hero .en{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
+.herobtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.hero .btn{background:var(--accent);color:var(--brand)}.hero .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.ring{--p:0;flex:none;width:96px;height:96px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),rgba(255,255,255,.22) 0);display:grid;place-items:center;position:relative;z-index:1}
+.ring:before{content:'';position:absolute;inset:9px;border-radius:50%;background:#173a66}.ring b,.ring small{position:relative;text-align:center;line-height:1.1}.ring b{font-size:22px;margin-top:20px}.ring small{font-size:11px;margin-top:-34px;opacity:.8}
+.ring.big{width:120px;height:120px;margin:0 auto;background:conic-gradient(var(--teal) calc(var(--p)*1%),#dfe6ee 0)}.ring.big:before{background:#fff}.ring.big b{margin-top:0;color:var(--brand);font-size:26px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chcard{--c:#0e7c86;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;position:relative;display:block;box-shadow:0 1px 0 rgba(0,0,0,.04);border-top:5px solid var(--c)}
+.chcard:active{transform:scale(.99)}.chico{font-size:30px;line-height:1}.chnum{color:var(--c);font-size:13px;font-weight:700;margin-top:6px}.chcard b{display:block;font-size:17px;line-height:1.4}.chcard small{display:block;color:var(--mut);font-size:13px;line-height:1.5;margin:2px 0 10px}
+.bar{height:8px;background:#e8e4d9;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c,var(--teal));border-radius:99px;transition:width .3s}.chmeta{font-size:12px;color:var(--mut);margin-top:6px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.quick a{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;font-weight:700;text-align:center}.quick span{display:block;font-size:26px}.quick small{display:block;color:var(--mut);font-weight:400;font-size:12px}
+.foot{margin:34px 0 8px;text-align:center;color:var(--mut);font-size:14px;font-weight:700}.foot small{display:block;font-weight:400;font-size:12px;opacity:.8}
+nav#nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex;max-width:880px;margin:0 auto;padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 14px rgba(0,0,0,.06)}
+nav#nav a{flex:1;text-align:center;font-size:12px;font-weight:700;color:var(--mut);padding:4px 0;border-radius:12px;line-height:1.3}nav#nav a span{display:block;font-size:20px}nav#nav a.on{color:var(--brand);background:#eef2f8}
+.chhead{--c:#0e7c86;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-right:6px solid var(--c);border-radius:var(--r);padding:12px 14px;position:relative}
+.chhead .chico{font-size:34px}.chhead h1{font-size:22px;margin:0}.chhead .back{position:absolute;left:12px;top:10px;font-size:13px;color:var(--mut)}
+.tabs2{display:flex;gap:6px;margin:14px 0;position:sticky;top:66px;z-index:10;background:var(--bg);padding:6px 0}.tabs2 button{flex:1;font:inherit;font-weight:700;border:2px solid var(--line);background:#fff;color:var(--mut);padding:8px;border-radius:12px;cursor:pointer}.tabs2 button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.chbody{padding:0 2px}
+.callout{display:flex;gap:10px;border-radius:14px;padding:12px 14px;margin:14px 0;font-size:15.5px}.callout>span{font-size:20px;line-height:1.5}.callout.tip{background:#e9f6ef;border:1px solid #b9e2cb}.callout.warn{background:#fff4de;border:1px solid #f1d28b}.callout.note{background:#eaf1fb;border:1px solid #c5d8f2}
+.tblwrap{overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid var(--line);background:#fff}
+.tbl{border-collapse:collapse;width:100%;font-size:15px}.tbl th{background:#14325c;color:#fff;text-align:right;padding:8px 12px;font-weight:700;white-space:nowrap}.tbl td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}.tbl tr:nth-child(even) td{background:#faf8f3}.tl{font-family:monospace;font-size:13px;text-align:left}
+.codewrap{margin:12px 0}.codecap{font-size:13px;color:var(--mut)}
+pre.code{margin:10px 0;background:#0f1d33;color:#e6edf7;border-radius:12px;padding:14px 16px;font-family:'Consolas','Courier New',monospace;font-size:13.5px;line-height:1.75;overflow-x:auto;text-align:left;direction:ltr;white-space:pre;tab-size:3}
+pre.code i{font-style:normal}.code .k{color:#7cc4ff;font-weight:700}.code .s{color:#f9b872}.code .c{color:#8fb78f}.code .n{color:#d7a6ff}.code .t{color:#7fe3b0}
+.excard{background:#fff;border:2px solid #d8e3f3;border-radius:18px;padding:14px;margin:18px 0;box-shadow:0 4px 0 #e6edf8}
+.exhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.exhead b{font-size:17px}.exbadge{background:var(--accent);color:var(--brand);font-weight:800;border-radius:8px;padding:0 10px;font-size:13px}
+.exdesc{color:var(--mut);font-size:15px;margin:.3em 0 10px}
+.runner{background:repeating-linear-gradient(45deg,#e9e5da,#e9e5da 8px,#eeeadf 8px,#eeeadf 16px);border-radius:14px;padding:12px 4px;overflow:hidden;min-height:60px}
+.exbtns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}.exbtns button{font:inherit;font-weight:700;font-size:14px;border:2px solid #cfd9ea;background:#f5f8fd;color:var(--brand);padding:6px 12px;border-radius:10px;cursor:pointer}.exbtns .btn{color:#fff;background:var(--brand);border:0;padding:10px 18px;font-size:16px}.exbtns .btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+.subh{font-weight:800;color:var(--brand);margin:14px 0 4px;font-size:15px}
+.pager{display:flex;justify-content:space-between;margin:34px 0 10px}
+/* VB window */
+.vbhold{margin:0 auto;position:relative}
+.vbwin{direction:ltr;text-align:left;display:inline-block;transform-origin:top left;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:1px 1px 0 #808080,4px 5px 10px rgba(0,0,0,.35);font-family:Tahoma,'Segoe UI',Arial,sans-serif;font-size:11px;color:#000;position:relative;padding:2px}
+.vbwin.small{display:block;transform:none;margin:8px auto;max-width:360px}
+.vbtitle{background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-weight:700;font-size:12px;padding:3px 4px;display:flex;justify-content:space-between;align-items:center;height:22px}
+.vbwb i{font-style:normal;display:inline-block;width:16px;height:14px;background:#d4d0c8;color:#000;border:1px solid;border-color:#fff #404040 #404040 #fff;font-size:9px;line-height:12px;text-align:center;margin-left:2px}
+.vbbody{position:relative;overflow:hidden;background:#d4d0c8;margin-top:2px;border:1px solid #808080;user-select:none;-webkit-user-select:none}
+.vbprint{position:absolute;left:6px;top:4px;right:6px;font-family:'Consolas','Courier New',monospace;font-size:12px;white-space:pre;pointer-events:none;color:#000;z-index:0}
+.vbc{position:absolute;z-index:1;margin:0;font-family:Tahoma,'Segoe UI',Arial,sans-serif;font-size:11px;overflow:hidden}
+.vblabel{white-space:pre-wrap;line-height:1.3;padding:1px 2px}
+.vblabel.bd1,.vbimg.bd1{border:1px solid;border-color:#808080 #fff #fff #808080}
+.vbtext{border:2px solid;border-color:#808080 #fff #fff #808080;outline:0;padding:1px 3px;background:#fff;color:#000;border-radius:0;box-shadow:inset 1px 1px 0 #404040;user-select:text;-webkit-user-select:text;font-size:11px}
+textarea.vbtext{resize:none}
+.vbtext:focus{box-shadow:inset 1px 1px 0 #404040,0 0 0 1px #0a246a}.vbtext:disabled{color:#808080}
+.vbbtn{background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:0 4px;cursor:default;color:#000;outline:0;box-shadow:1px 1px 0 #808080;border-radius:0}
+.vbbtn:active{border-color:#404040 #fff #fff #404040;padding:2px 2px 0 6px}.vbbtn:focus-visible{outline:1px dotted #000;outline-offset:-5px}.vbbtn.isdef{border:2px solid #000;box-shadow:none}.vbbtn:disabled{color:#808080;text-shadow:1px 1px 0 #fff}
+.vbimg{display:grid;place-items:center;line-height:1;cursor:grab}
+.vbghost{position:fixed!important;z-index:9999;opacity:.65;pointer-events:none;display:grid;place-items:center;background:transparent!important}
+.vbov{position:absolute;inset:0;z-index:50;background:rgba(0,0,0,.28);display:grid;place-items:center}
+.vbdlg{background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:2px 3px 10px rgba(0,0,0,.5);min-width:180px;max-width:92%;font-size:12px;padding:2px}
+.dtitle{background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-weight:700;padding:2px 4px;display:flex;justify-content:space-between;align-items:center}.dtitle i{font-style:normal;background:#d4d0c8;color:#000;width:16px;text-align:center;cursor:pointer;border:1px solid;border-color:#fff #404040 #404040 #fff;font-size:10px}
+.dbody{display:flex;gap:12px;padding:14px 14px 10px;align-items:flex-start}.dico{font-size:30px;line-height:1}.dmsg{flex:1;font-size:12px;line-height:1.5;word-break:break-word}.dar{margin-top:8px;font-family:'Cairo',sans-serif;font-size:12.5px;color:#7a1f1f;line-height:1.6}
+.dinput{padding:0 14px 6px}.dinput input{width:100%;border:2px solid;border-color:#808080 #fff #fff #808080;padding:3px 5px;font:inherit;background:#fff;outline:0}
+.dbtns{display:flex;gap:8px;justify-content:center;padding:6px 10px 12px;flex-wrap:wrap}.dbtns button{min-width:68px;padding:3px 10px;font:inherit;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;cursor:pointer;color:#000}.dbtns button.def{border:2px solid #000}.dbtns button:active{border-color:#404040 #fff #fff #404040}
+.vbend{position:absolute;inset:0;z-index:60;background:rgba(30,30,40,.55);display:grid;place-items:center;color:#fff}.vbend div{text-align:center;display:grid;gap:6px;font-family:'Cairo',sans-serif}.vbend b{font-size:22px;font-family:monospace}.vbend button{font:inherit;font-weight:700;background:var(--accent);border:0;border-radius:8px;padding:6px 14px;cursor:pointer;color:#14325c}
+.cerr{background:#2a0f0f;color:#ffb4b4;border-radius:12px;padding:14px;font-family:monospace;font-size:13.5px;line-height:1.6;margin:6px}
+/* widgets */
+.widget{background:#fff;border:2px dashed #c9d6ea;border-radius:16px;padding:12px;margin:14px 0}
+.winfo{background:#f3f7fd;border-radius:12px;padding:10px 12px;margin-top:10px;font-size:15px;min-height:44px}.winfo p{margin:.2em 0}
+.ide{display:grid;gap:6px;font-family:Tahoma,Arial,sans-serif;font-size:12px}.ide .r{font:inherit;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:8px 4px;cursor:pointer;color:#000;font-weight:700}.ide .r.on{background:#ffe9a8;outline:2px solid var(--accent)}
+.ide-main{display:grid;grid-template-columns:70px 1fr 120px;gap:6px;min-height:150px}.ide-right{display:grid;grid-template-rows:1fr 1.3fr .8fr;gap:6px}.ide .r-form{background:repeating-conic-gradient(#fff 0 25%,#f1f1f1 0 50%) 0 0/10px 10px}.ide .r-form span{background:#0a246a;color:#fff;display:block;padding:2px 6px;text-align:left}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}.tools button{font-family:Tahoma,Arial,sans-serif;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:6px 2px;cursor:pointer;color:#000}.tools span{display:block;font-size:20px;line-height:1.2}.tools small{font-size:10.5px}.tools button.on{background:#ffe9a8}
+.wl{display:block;font-weight:700;margin:12px 0 4px;color:var(--brand);font-size:15px}.winput,.sel{width:100%;font:inherit;padding:9px 12px;border:2px solid #cfd9ea;border-radius:12px;background:#fff;color:var(--ink)}.winput[dir=ltr]{font-family:monospace}
+.rule{display:flex;gap:8px;padding:3px 0;font-size:15px}.rule span{font-weight:800;width:20px}.rule.ok span{color:#1b8a4b}.rule.no span{color:#c62828}.verdict{margin-top:8px;border-radius:10px;padding:8px 12px;font-weight:800;text-align:center}.verdict.ok{background:#e3f6ea;color:#17703e}.verdict.no{background:#fde7e7;color:#a4262c}
+.mrow{display:flex;gap:10px;flex-wrap:wrap}.mrow label{flex:1;min-width:100px;font-weight:700;font-size:14px;color:var(--brand)}.mrow input,.mrow select{display:block;width:100%;margin-top:3px;font:inherit;font-family:monospace;padding:7px 9px;border:2px solid #cfd9ea;border-radius:10px;background:#fff}
+.mcode{margin:10px 0}.mcode{background:#0f1d33;color:#e6edf7;border-radius:10px;padding:10px 14px;font-family:monospace;font-size:13.5px;white-space:pre;direction:ltr;text-align:left}.mcode i{font-style:normal}.mcode .k{color:#7cc4ff;font-weight:700}.mcode .s{color:#f9b872}.mcode .c{color:#8fb78f}.mcode .n{color:#d7a6ff}.mcode .t{color:#7fe3b0}
+.memcell{display:inline-block;border:3px solid var(--teal);border-radius:12px;padding:6px 18px;text-align:center;background:#e9f7f8}.memcell small{display:block;color:var(--mut)}.memcell b{font-size:24px;font-family:monospace;color:var(--brand)}.memerr{background:#fde7e7;color:#a4262c;border-radius:10px;padding:10px 12px;font-weight:700}
+.mbstage{margin-top:8px}.mbres{margin-top:6px;font-weight:700}
+.mouse{display:grid;gap:8px}.marea{height:130px;border-radius:12px;background:repeating-linear-gradient(0deg,#eef3fb,#eef3fb 14px,#e2eaf7 14px,#e2eaf7 15px);border:2px solid #b7c8e4;display:grid;place-items:center;color:var(--mut);font-family:monospace;user-select:none;-webkit-user-select:none}.mout{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.mout div{background:#0f1d33;color:#9fe0b1;border-radius:10px;padding:6px 8px;text-align:center;font-family:monospace}.mout span{display:block;font-size:11px;color:#9ab}.mout b{font-size:15px}
+/* quiz */
+.qintro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:12px;display:flex;flex-direction:column}.qintro span{color:var(--mut);font-size:14px}.qintro.big{align-items:center;text-align:center;gap:10px;padding:22px}.qintro.big b{font-size:22px}.scale{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.scale span{background:#eef2f8;border-radius:8px;padding:2px 10px;font-size:13px}
+.qprog{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mut);margin-bottom:8px}.qprog .bar{flex:1}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.qtext{font-size:18px;font-weight:700;line-height:1.7}
+.opts{display:grid;gap:8px;margin-top:12px}.opt{font:inherit;text-align:right;background:#f6f8fc;border:2px solid #d3ddee;border-radius:12px;padding:10px 14px;cursor:pointer;color:var(--ink);line-height:1.6}.opt:active{transform:scale(.99)}.opt:disabled{cursor:default;color:var(--ink)}.opt.right{background:#e3f6ea;border-color:#2e9e5b}.opt.wrong{background:#fde7e7;border-color:#d34a4a}
+.qfb{margin-top:12px;border-radius:12px;padding:10px 14px;font-size:15px}.qfb.good{background:#e9f8ee}.qfb.bad{background:#fff0e0}.qcard .btn{margin-top:12px}
+.result{text-align:center}.rev{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:10px 0;text-align:right}.rev .ans{color:#17703e;font-weight:700;margin-top:4px}.rev small{color:var(--mut)}
+.task{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.tnum{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--brand);display:grid;place-items:center;font-weight:800}.tbody{flex:1;min-width:0}details summary{cursor:pointer;font-weight:700;color:var(--teal);margin-top:6px}
+/* lab */
+.pagehead p{color:var(--mut)}.editor{width:100%;min-height:300px;margin-top:10px;background:#0f1d33;color:#e6edf7;border:0;border-radius:14px;padding:14px;font-family:'Consolas','Courier New',monospace;font-size:13.5px;line-height:1.7;resize:vertical;direction:ltr;text-align:left;tab-size:3;outline:0}
+.editor:focus{box-shadow:0 0 0 3px rgba(242,169,0,.5)}.snips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.snips button{font:inherit;font-family:monospace;font-size:13px;background:#fff;border:1px solid #cfd9ea;border-radius:8px;padding:2px 10px;cursor:pointer;color:var(--brand)}
+.cheat{margin-top:14px}.runner.lab{margin-top:10px}
+.gl{display:grid;gap:8px;margin-top:12px}.gi{display:flex;gap:12px;align-items:baseline;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px}.gi .en{flex:none;min-width:110px;text-align:center}.gi span{font-size:15px}
+.cards2{display:grid;gap:10px}.prow{--c:#0e7c86;display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;border-right:5px solid var(--c)}.pico{font-size:26px}.pmid{flex:1}.pmid small{color:var(--mut)}.ppct{font-weight:800;color:var(--brand);font-size:18px}
+textarea.note{width:100%;min-height:76px;font:inherit;border:2px solid #cfd9ea;border-radius:12px;padding:8px 12px;background:#fff}
+@media (min-width:700px){#view{padding:22px}.hero h1{font-size:34px}}
+@media (max-width:380px){.ide-main{grid-template-columns:56px 1fr 96px}.hero{flex-direction:column-reverse;align-items:flex-start}.mout{grid-template-columns:repeat(3,1fr)}}
+
+</style>
+</head>
+<body>
+<div id="app">
+<header class="top"><div class="logo">VB</div><div><b>حقيبة البرمجة المرئية</b><small>تصميم وبرمجة: الأستاذ علي الصفار</small></div></header>
+<main id="view"></main>
+</div>
+<nav id="nav"></nav>
+<script>
+/* ===== VB6 mini interpreter (teaching subset) ===== */
+(function (root) {
+'use strict';
+class VBError extends Error {
+  constructor(num, desc, kind, line) { super(desc); this.num = num; this.desc = desc; this.kind = kind || 'run'; this.line = line; }
+}
+class EndSignal {}
+class ExitSignal { constructor(k) { this.k = k; } }
+class GotoSignal { constructor(l) { this.l = l; } }
+
+const COLORS = { vbblack: 0, vbred: 255, vbgreen: 65280, vbyellow: 65535, vbblue: 16711680, vbmagenta: 16711935, vbcyan: 16776960, vbwhite: 16777215 };
+const CONSTS = Object.assign({}, COLORS, {
+  vbokonly: 0, vbokcancel: 1, vbabortretryignore: 2, vbyesnocancel: 3, vbyesno: 4, vbretrycancel: 5,
+  vbcritical: 16, vbquestion: 32, vbexclamation: 48, vbinformation: 64,
+  vbok: 1, vbcancel: 2, vbabort: 3, vbretry: 4, vbignore: 5, vbyes: 6, vbno: 7,
+  vbcrlf: '\r\n', vbnewline: '\n', vbtab: '\t', true: true, false: false,
+  vbleftbutton: 1, vbrightbutton: 2, vbmiddlebutton: 4, vbkeyreturn: 13, vbkeyescape: 27, vbkeyspace: 32
+});
+const TYPES = { integer: 'integer', long: 'long', single: 'single', double: 'double', currency: 'currency', string: 'string', boolean: 'boolean', date: 'date', variant: 'variant', byte: 'byte', object: 'variant', control: 'variant' };
+const BOOLPROPS = { visible: 1, enabled: 1, locked: 1, multiline: 1, fontbold: 1, default: 1, cancel: 1 };
+const STRPROPS = { text: 1, caption: 1, tag: 1 };
+const NUMPROPS = { left: 1, top: 1, width: 1, height: 1, fontsize: 1, maxlength: 1, alignment: 1, borderstyle: 1, dragmode: 1, backcolor: 1, forecolor: 1, style: 1 };
+
+/* ---------- value helpers ---------- */
+const NUMRE = /^\s*[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?\s*$/;
+function toNum(v) {
+  if (typeof v === 'number') return v;
+  if (typeof v === 'boolean') return v ? -1 : 0;
+  if (typeof v === 'string' && NUMRE.test(v)) return parseFloat(v);
+  throw new VBError(13, 'Type mismatch');
+}
+function fmtNum(n) {
+  if (Number.isInteger(n)) return String(n);
+  let s = String(Number(n.toPrecision(15)));
+  return s;
+}
+function toStr(v) {
+  if (typeof v === 'string') return v;
+  if (typeof v === 'boolean') return v ? 'True' : 'False';
+  if (typeof v === 'number') return fmtNum(v);
+  return '';
+}
+function bankers(n) {
+  const f = Math.floor(n), d = n - f;
+  if (d < 0.5) return f; if (d > 0.5) return f + 1;
+  return f % 2 === 0 ? f : f + 1;
+}
+function defaultOf(t) { return t === 'string' || t === 'date' ? '' : t === 'boolean' ? false : t === 'variant' ? 0 : 0; }
+function coerce(t, v) {
+  switch (t) {
+    case 'integer': case 'long': case 'byte': {
+      const r = bankers(toNum(v));
+      const lim = t === 'integer' ? 32767 : t === 'byte' ? 255 : 2147483647;
+      const lo = t === 'integer' ? -32768 : t === 'byte' ? 0 : -2147483648;
+      if (r > lim || r < lo) throw new VBError(6, 'Overflow');
+      return r;
+    }
+    case 'single': return Number(Math.fround(toNum(v)).toPrecision(7));
+    case 'double': case 'currency': return toNum(v);
+    case 'string': case 'date': return toStr(v);
+    case 'boolean':
+      if (typeof v === 'boolean') return v;
+      if (typeof v === 'string' && /^true$/i.test(v)) return true;
+      if (typeof v === 'string' && /^false$/i.test(v)) return false;
+      return toNum(v) !== 0;
+    default: return v;
+  }
+}
+function valFn(s) {
+  s = toStr(s).replace(/\s+/g, '');
+  const m = /^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?/.exec(s);
+  return m ? parseFloat(m[0]) : 0;
+}
+
+/* ---------- lexer ---------- */
+function tokenize(s) {
+  const t = []; let i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (c === ' ' || c === '\t' || c === '\r') { i++; continue; }
+    if (c === "'") break;
+    if (c === '"') {
+      let j = i + 1, str = '';
+      for (; ;) {
+        if (j >= s.length) throw new VBError(0, 'Compile error: Expected: end of string', 'compile');
+        if (s[j] === '"') { if (s[j + 1] === '"') { str += '"'; j += 2; continue; } break; }
+        str += s[j++];
+      }
+      t.push({ k: 'str', v: str }); i = j + 1; continue;
+    }
+    if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(s[i + 1] || ''))) {
+      const m = /^(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?/.exec(s.slice(i));
+      t.push({ k: 'num', v: parseFloat(m[0]) }); i += m[0].length; continue;
+    }
+    if (/[A-Za-z_]/.test(c)) {
+      const m = /^[A-Za-z_][A-Za-z0-9_]*/.exec(s.slice(i));
+      t.push({ k: 'id', v: m[0] }); i += m[0].length; continue;
+    }
+    const two = s.substr(i, 2);
+    if (two === '<>' || two === '<=' || two === '>=') { t.push({ k: 'op', v: two }); i += 2; continue; }
+    if ('+-*/\\^&=<>(),;:.'.includes(c)) { t.push({ k: 'op', v: c }); i++; continue; }
+    throw new VBError(0, 'Compile error: Invalid character "' + c + '"', 'compile');
+  }
+  return t;
+}
+
+/* ---------- token stream ---------- */
+class TS {
+  constructor(t, line) { this.t = t; this.p = 0; this.line = line; }
+  peek(o = 0) { return this.t[this.p + o]; }
+  next() { return this.t[this.p++]; }
+  eof() { return this.p >= this.t.length; }
+  isKw(w, o = 0) { const x = this.t[this.p + o]; return !!x && x.k === 'id' && x.v.toLowerCase() === w; }
+  isOp(v, o = 0) { const x = this.t[this.p + o]; return !!x && x.k === 'op' && x.v === v; }
+  err(m) { return new VBError(0, 'Compile error: ' + m, 'compile', this.line); }
+  expectKw(w) { if (!this.isKw(w)) throw this.err('Expected: ' + w); this.p++; }
+  expectOp(v) { if (!this.isOp(v)) throw this.err('Expected: ' + v); this.p++; }
+  id() { const x = this.next(); if (!x || x.k !== 'id') throw this.err('Expected: identifier'); return x.v; }
+}
+
+/* ---------- expression parser ---------- */
+function parseExpr(ts) { return pOr(ts); }
+function binLevel(ts, next, ops) {
+  let a = next(ts);
+  for (; ;) {
+    const x = ts.peek(); if (!x) break;
+    let op = null;
+    if (x.k === 'op' && ops.includes(x.v)) op = x.v;
+    else if (x.k === 'id' && ops.includes(x.v.toLowerCase())) op = x.v.toLowerCase();
+    if (!op) break;
+    ts.p++; const b = next(ts); a = { t: 'bin', op, a, b, line: ts.line };
+  }
+  return a;
+}
+const pOr = ts => binLevel(ts, pAnd, ['or', 'xor']);
+const pAnd = ts => binLevel(ts, pNot, ['and']);
+function pNot(ts) { if (ts.isKw('not')) { ts.p++; return { t: 'un', op: 'not', a: pNot(ts) }; } return pCmp(ts); }
+const pCmp = ts => binLevel(ts, pCat, ['=', '<>', '<', '>', '<=', '>=']);
+const pCat = ts => binLevel(ts, pAdd, ['&']);
+const pAdd = ts => binLevel(ts, pMod, ['+', '-']);
+const pMod = ts => binLevel(ts, pIdiv, ['mod']);
+const pIdiv = ts => binLevel(ts, pMul, ['\\']);
+const pMul = ts => binLevel(ts, pUn, ['*', '/']);
+function pUn(ts) {
+  if (ts.isOp('-')) { ts.p++; return { t: 'un', op: 'neg', a: pUn(ts) }; }
+  if (ts.isOp('+')) { ts.p++; return pUn(ts); }
+  return pPow(ts);
+}
+function pPow(ts) {
+  let a = pPrim(ts);
+  while (ts.isOp('^')) {
+    ts.p++;
+    let b;
+    if (ts.isOp('-')) { ts.p++; b = { t: 'un', op: 'neg', a: pPrim(ts) }; } else b = pPrim(ts);
+    a = { t: 'bin', op: '^', a, b };
+  }
+  return a;
+}
+function pArgs(ts) {
+  const args = [];
+  ts.expectOp('(');
+  if (ts.isOp(')')) { ts.p++; return args; }
+  for (; ;) { args.push(parseExpr(ts)); if (ts.isOp(',')) { ts.p++; continue; } break; }
+  ts.expectOp(')');
+  return args;
+}
+function pPrim(ts) {
+  const x = ts.next();
+  if (!x) throw ts.err('Expected: expression');
+  if (x.k === 'num') return { t: 'num', v: x.v };
+  if (x.k === 'str') return { t: 'str', v: x.v };
+  if (x.k === 'op' && x.v === '(') { const e = parseExpr(ts); ts.expectOp(')'); return e; }
+  if (x.k === 'id') {
+    if (ts.isOp('.') && ts.peek(1) && ts.peek(1).k === 'id') {
+      ts.p++; const prop = ts.next().v;
+      return { t: 'member', obj: x.v, prop, line: ts.line };
+    }
+    if (ts.isOp('(')) return { t: 'call', name: x.v, args: pArgs(ts), line: ts.line };
+    return { t: 'id', name: x.v, line: ts.line };
+  }
+  throw ts.err('Syntax error');
+}
+
+/* ---------- program parser ---------- */
+const lc = s => s.toLowerCase();
+class Parser {
+  constructor(code) {
+    this.lines = [];
+    const raw = code.replace(/\r/g, '').split('\n');
+    for (let n = 0; n < raw.length; n++) {
+      let l = raw[n];
+      while (/\s_\s*$/.test(l) && n + 1 < raw.length) { l = l.replace(/\s_\s*$/, ' ') + raw[++n]; }
+      let toks;
+      try { toks = tokenize(l); } catch (e) { e.line = n + 1; throw e; }
+      if (!toks.length) continue;
+      if (toks[0].k === 'id' && lc(toks[0].v) === 'rem') continue;
+      // split on ':' except label lines
+      if (toks.length === 2 && toks[0].k === 'id' && toks[1].k === 'op' && toks[1].v === ':') { this.lines.push({ t: toks, n: n + 1 }); continue; }
+      let cur = [];
+      for (const tk of toks) {
+        if (tk.k === 'op' && tk.v === ':') { this.pushLine(cur, n + 1); cur = []; } else cur.push(tk);
+      }
+      this.pushLine(cur, n + 1);
+    }
+    this.i = 0;
+  }
+  pushLine(t, n) {
+    if (!t.length) return;
+    if (t[0].k === 'num') { this.lines.push({ t: [t[0]], n }); t = t.slice(1); if (!t.length) return; }
+    this.lines.push({ t, n });
+  }
+  startsWith(line, ...ws) {
+    const t = line.t;
+    for (let k = 0; k < ws.length; k++) { const x = t[k]; if (!x || x.k !== 'id' || lc(x.v) !== ws[k]) return false; }
+    return true;
+  }
+  parseModule() {
+    const mod = { decls: [], procs: new Map(), optionExplicit: false };
+    while (this.i < this.lines.length) {
+      const ln = this.lines[this.i];
+      const ts = new TS(ln.t, ln.n);
+      if (this.startsWith(ln, 'option')) { if (ts.isKw('explicit', 1)) mod.optionExplicit = true; this.i++; continue; }
+      let k = 0; const f = lc(ln.t[0].v || '');
+      if (ln.t[0].k === 'id' && (f === 'private' || f === 'public' || f === 'friend' || f === 'static')) k = 1;
+      const kw = ln.t[k] && ln.t[k].k === 'id' ? lc(ln.t[k].v) : '';
+      if (kw === 'sub' || kw === 'function') { this.parseProc(mod, kw, k); continue; }
+      if (ln.t[0].k === 'id' && (f === 'dim' || f === 'public' || f === 'private' || f === 'const')) {
+        const st = this.parseStatement(ts, true); mod.decls.push(st); this.i++; continue;
+      }
+      throw new VBError(0, 'Compile error: Statement invalid outside Sub or Function', 'compile', ln.n);
+    }
+    return mod;
+  }
+  parseProc(mod, kind, k) {
+    const ln = this.lines[this.i]; const ts = new TS(ln.t, ln.n); ts.p = k + 1;
+    const name = ts.id(); const params = [];
+    if (ts.isOp('(')) {
+      ts.p++;
+      while (!ts.isOp(')')) {
+        if (ts.isKw('byval') || ts.isKw('byref') || ts.isKw('optional')) ts.p++;
+        const pn = ts.id(); let type = 'variant';
+        if (ts.isOp('(')) { ts.p++; ts.expectOp(')'); }
+        if (ts.isKw('as')) { ts.p++; const tn = lc(ts.id()); type = TYPES[tn] || 'variant'; }
+        params.push({ name: pn, type });
+        if (ts.isOp(',')) ts.p++;
+        if (ts.eof()) throw ts.err('Expected: )');
+      }
+      ts.p++;
+    }
+    let rtype = 'variant';
+    if (ts.isKw('as')) { ts.p++; rtype = TYPES[lc(ts.id())] || 'variant'; }
+    if (!ts.eof()) throw ts.err('Expected: end of statement');
+    this.i++;
+    const body = this.parseBlock(l => this.startsWith(l, 'end', kind));
+    if (this.i >= this.lines.length) throw new VBError(0, 'Compile error: Expected: End ' + (kind === 'sub' ? 'Sub' : 'Function'), 'compile', ln.n);
+    this.i++;
+    mod.procs.set(lc(name), { name, kind, params, rtype, body, line: ln.n });
+  }
+  parseBlock(isEnd) {
+    const out = [];
+    while (this.i < this.lines.length) {
+      const ln = this.lines[this.i];
+      if (isEnd(ln)) break;
+      const ts = new TS(ln.t, ln.n);
+      // labels
+      if ((ts.peek().k === 'num' && ts.t.length === 1) || (ts.peek().k === 'id' && ts.isOp(':', 1) && ts.t.length === 2)) {
+        const lab = ts.peek().k === 'num' ? String(ts.peek().v) : lc(ts.peek().v);
+        out.push({ t: 'label', name: lab, line: ln.n });
+        this.i++; continue;
+      }
+      this.i++;
+      const st = this.parseStatement(ts, false);
+      if (st) out.push(st);
+    }
+    return out;
+  }
+  parseStatement(ts, modLevel, noAdvance) {
+    // NOTE: this.i already points to the NEXT line when called from parseBlock
+    const t = ts.peek(); const line = ts.line;
+    if (t.k !== 'id') throw ts.err('Syntax error');
+    const w = lc(t.v);
+    switch (w) {
+      case 'dim': case 'static': case 'private': case 'public': {
+        ts.p++;
+        const items = [];
+        for (; ;) {
+          const name = ts.id(); let type = 'variant';
+          if (ts.isOp('(')) { ts.p++; while (!ts.isOp(')')) { if (ts.eof()) throw ts.err('Expected: )'); ts.p++; } ts.p++; }
+          if (ts.isKw('as')) { ts.p++; const tn = lc(ts.id()); if (!(tn in TYPES)) throw ts.err('User-defined type not defined'); type = TYPES[tn]; }
+          items.push({ name, type });
+          if (ts.isOp(',')) { ts.p++; continue; }
+          break;
+        }
+        if (!ts.eof()) throw ts.err('Expected: end of statement');
+        return { t: 'dim', items, line };
+      }
+      case 'const': {
+        ts.p++; const items = [];
+        for (; ;) {
+          const name = ts.id(); let type = 'variant';
+          if (ts.isKw('as')) { ts.p++; type = TYPES[lc(ts.id())] || 'variant'; }
+          ts.expectOp('='); const e = parseExpr(ts);
+          items.push({ name, type, e });
+          if (ts.isOp(',')) { ts.p++; continue; }
+          break;
+        }
+        return { t: 'const', items, line };
+      }
+      case 'if': return this.parseIf(ts);
+      case 'select': {
+        ts.p++; ts.expectKw('case'); const e = parseExpr(ts);
+        const cases = []; let els = null;
+        while (this.i < this.lines.length) {
+          const ln = this.lines[this.i];
+          if (this.startsWith(ln, 'end', 'select')) break;
+          if (!this.startsWith(ln, 'case')) throw new VBError(0, 'Compile error: Expected: Case', 'compile', ln.n);
+          const cts = new TS(ln.t, ln.n); cts.p = 1; this.i++;
+          if (cts.isKw('else')) { els = this.parseBlock(l => this.startsWith(l, 'case') || this.startsWith(l, 'end', 'select')); continue; }
+          const tests = [];
+          for (; ;) {
+            if (cts.isKw('is')) { cts.p++; const op = cts.next().v; tests.push({ k: 'is', op, e: parseExpr(cts) }); } else {
+              const a = parseExpr(cts);
+              if (cts.isKw('to')) { cts.p++; tests.push({ k: 'range', a, b: parseExpr(cts) }); } else tests.push({ k: 'eq', e: a });
+            }
+            if (cts.isOp(',')) { cts.p++; continue; } break;
+          }
+          const body = this.parseBlock(l => this.startsWith(l, 'case') || this.startsWith(l, 'end', 'select'));
+          cases.push({ tests, body });
+        }
+        if (this.i >= this.lines.length) throw new VBError(0, 'Compile error: Expected: End Select', 'compile', line);
+        this.i++;
+        return { t: 'select', e, cases, els, line };
+      }
+      case 'for': {
+        ts.p++; const v = ts.id(); ts.expectOp('='); const from = parseExpr(ts); ts.expectKw('to'); const to = parseExpr(ts);
+        let step = null; if (ts.isKw('step')) { ts.p++; step = parseExpr(ts); }
+        const body = this.parseBlock(l => this.startsWith(l, 'next'));
+        if (this.i >= this.lines.length) throw new VBError(0, 'Compile error: For without Next', 'compile', line);
+        this.i++;
+        return { t: 'for', v, from, to, step, body, line };
+      }
+      case 'do': case 'while': {
+        ts.p++; let pre = null, preUntil = false;
+        if (w === 'do' && (ts.isKw('while') || ts.isKw('until'))) { preUntil = ts.isKw('until'); ts.p++; pre = parseExpr(ts); }
+        if (w === 'while') pre = parseExpr(ts);
+        const endp = l => (w === 'while' ? this.startsWith(l, 'wend') : this.startsWith(l, 'loop'));
+        const body = this.parseBlock(endp);
+        if (this.i >= this.lines.length) throw new VBError(0, 'Compile error: Do without Loop', 'compile', line);
+        const lts = new TS(this.lines[this.i].t, this.lines[this.i].n); lts.p = 1; this.i++;
+        let post = null, postUntil = false;
+        if (w === 'do' && (lts.isKw('while') || lts.isKw('until'))) { postUntil = lts.isKw('until'); lts.p++; post = parseExpr(lts); }
+        return { t: 'do', pre, preUntil, post, postUntil, body, line };
+      }
+      case 'goto': { ts.p++; const x = ts.next(); return { t: 'goto', name: x.k === 'num' ? String(x.v) : lc(x.v), line }; }
+      case 'print': { ts.p++; return this.parsePrint(ts, line); }
+      case 'msgbox': { ts.p++; return { t: 'msgbox', args: this.parseArgList(ts), line }; }
+      case 'exit': { ts.p++; return { t: 'exit', kind: lc(ts.id()), line }; }
+      case 'end': { ts.p++; if (!ts.eof()) throw ts.err('Syntax error'); return { t: 'end', line }; }
+      case 'unload': return { t: 'end', line };
+      case 'randomize': return { t: 'nop', line };
+      case 'cls': return { t: 'method', obj: null, name: 'cls', args: [], line };
+      case 'call': { ts.p++; const nm = ts.id(); const args = ts.isOp('(') ? pArgs(ts) : []; return { t: 'callsub', name: nm, args, line }; }
+    }
+    // assignment / call
+    if (ts.isOp('=', 1)) { ts.p += 2; return { t: 'assign', name: t.v, prop: null, e: parseExpr(ts), line }; }
+    if (ts.isOp('.', 1) && ts.peek(2) && ts.peek(2).k === 'id') {
+      const obj = t.v, prop = ts.peek(2).v; ts.p += 3;
+      if (ts.isOp('=')) { ts.p++; return { t: 'assign', name: obj, prop, e: parseExpr(ts), line }; }
+      if (lc(prop) === 'print') return this.parsePrint(ts, line);
+      return { t: 'method', obj, name: lc(prop), args: this.parseArgList(ts), line };
+    }
+    ts.p++;
+    return { t: 'callsub', name: t.v, args: this.parseArgList(ts), line };
+  }
+  parseArgList(ts) {
+    const args = [];
+    if (ts.eof()) return args;
+    if (ts.isOp('(') && ts.t[ts.t.length - 1].k === 'op' && ts.t[ts.t.length - 1].v === ')') {
+      // whole-list parens? check matching of first '('
+      let d = 0, ok = true;
+      for (let k = ts.p; k < ts.t.length; k++) { const x = ts.t[k]; if (x.k === 'op' && x.v === '(') d++; if (x.k === 'op' && x.v === ')') { d--; if (d === 0 && k < ts.t.length - 1) { ok = false; break; } } }
+      if (ok) { return pArgs(ts); }
+    }
+    for (; ;) { args.push(parseExpr(ts)); if (ts.isOp(',')) { ts.p++; continue; } break; }
+    if (!ts.eof()) throw ts.err('Expected: end of statement');
+    return args;
+  }
+  parsePrint(ts, line) {
+    const items = [];
+    while (!ts.eof()) {
+      const e = parseExpr(ts); let sep = null;
+      if (ts.isOp(';')) { sep = ';'; ts.p++; } else if (ts.isOp(',')) { sep = ','; ts.p++; }
+      items.push({ e, sep });
+      if (!sep && !ts.eof()) throw ts.err('Expected: end of statement');
+    }
+    return { t: 'print', items, line };
+  }
+  parseIf(ts) {
+    const line = ts.line; ts.p++;
+    const cond = parseExpr(ts); ts.expectKw('then');
+    if (!ts.eof()) { // single line
+      const rest = ts.t.slice(ts.p); let depth = 0, ei = -1;
+      for (let k = 0; k < rest.length; k++) { const x = rest[k]; if (x.k === 'op' && x.v === '(') depth++; else if (x.k === 'op' && x.v === ')') depth--; else if (depth === 0 && x.k === 'id' && lc(x.v) === 'else') { ei = k; break; } }
+      const thenT = ei < 0 ? rest : rest.slice(0, ei), elseT = ei < 0 ? null : rest.slice(ei + 1);
+      const body = [this.parseStatement(new TS(thenT, line))];
+      return { t: 'if', branches: [{ cond, body }], els: elseT && elseT.length ? [this.parseStatement(new TS(elseT, line))] : null, line };
+    }
+    const branches = []; let els = null;
+    let body = this.parseBlock(l => this.startsWith(l, 'elseif') || this.startsWith(l, 'else') || this.startsWith(l, 'end', 'if'));
+    branches.push({ cond, body });
+    for (; ;) {
+      if (this.i >= this.lines.length) throw new VBError(0, 'Compile error: Block If without End If', 'compile', line);
+      const ln = this.lines[this.i]; const lts = new TS(ln.t, ln.n);
+      if (this.startsWith(ln, 'end', 'if')) { this.i++; break; }
+      const isElseIf = this.startsWith(ln, 'elseif') || (this.startsWith(ln, 'else', 'if'));
+      if (isElseIf) {
+        lts.p = this.startsWith(ln, 'elseif') ? 1 : 2; const c = parseExpr(lts); lts.expectKw('then'); this.i++;
+        const b = this.parseBlock(l => this.startsWith(l, 'elseif') || this.startsWith(l, 'else') || this.startsWith(l, 'end', 'if'));
+        branches.push({ cond: c, body: b }); continue;
+      }
+      if (this.startsWith(ln, 'else')) {
+        this.i++; els = this.parseBlock(l => this.startsWith(l, 'end', 'if')); continue;
+      }
+    }
+    return { t: 'if', branches, els, line };
+  }
+}
+
+/* ---------- builtins ---------- */
+const rnd = () => Math.random();
+const B = {
+  val: a => valFn(a[0]),
+  int: a => Math.floor(toNum(a[0])),
+  fix: a => Math.trunc(toNum(a[0])),
+  abs: a => Math.abs(toNum(a[0])),
+  sgn: a => Math.sign(toNum(a[0])),
+  sqr: a => { const n = toNum(a[0]); if (n < 0) throw new VBError(5, 'Invalid procedure call or argument'); return Math.sqrt(n); },
+  sin: a => Math.sin(toNum(a[0])), cos: a => Math.cos(toNum(a[0])), tan: a => Math.tan(toNum(a[0])), atn: a => Math.atan(toNum(a[0])),
+  log: a => { const n = toNum(a[0]); if (n <= 0) throw new VBError(5, 'Invalid procedure call or argument'); return Math.log(n); },
+  exp: a => Math.exp(toNum(a[0])),
+  rnd: () => rnd(),
+  round: a => { const d = a[1] === undefined ? 0 : toNum(a[1]); const f = Math.pow(10, d); return bankers(toNum(a[0]) * f) / f; },
+  len: a => toStr(a[0]).length,
+  ucase: a => toStr(a[0]).toUpperCase(), lcase: a => toStr(a[0]).toLowerCase(),
+  left: a => toStr(a[0]).slice(0, toNum(a[1])), right: a => { const s = toStr(a[0]), n = toNum(a[1]); return n <= 0 ? '' : s.slice(-n); },
+  mid: a => { const s = toStr(a[0]), st = toNum(a[1]) - 1; return a[2] === undefined ? s.slice(st) : s.substr(st, toNum(a[2])); },
+  trim: a => toStr(a[0]).trim(),
+  instr: a => toStr(a[0]).indexOf(toStr(a[1])) + 1,
+  str: a => { const n = toNum(a[0]); return (n >= 0 ? ' ' : '') + fmtNum(n); },
+  cstr: a => toStr(a[0]),
+  cint: a => coerce('integer', a[0]), clng: a => coerce('long', a[0]), cdbl: a => toNum(a[0]), csng: a => coerce('single', a[0]),
+  chr: a => String.fromCharCode(toNum(a[0])), asc: a => toStr(a[0]).charCodeAt(0) || 0,
+  space: a => ' '.repeat(Math.max(0, toNum(a[0]))),
+  isnumeric: a => typeof a[0] === 'number' || (typeof a[0] === 'string' && NUMRE.test(a[0])),
+  rgb: a => toNum(a[0]) + toNum(a[1]) * 256 + toNum(a[2]) * 65536,
+  format: a => { const n = toNum(a[0]); const f = toStr(a[1] || ''); const m = /\.(0+)/.exec(f); const d = m ? m[1].length : 0; let s = n.toFixed(d); if (f.includes(',')) { const p = s.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = p.join('.'); } return s; },
+  now: () => new Date().toLocaleString('en-GB'), date: () => new Date().toLocaleDateString('en-GB'), time: () => new Date().toLocaleTimeString('en-GB'),
+  timer: () => (Date.now() % 86400000) / 1000
+};
+const ZERO = { rnd: 1, now: 1, date: 1, time: 1, timer: 1 };
+
+/* ---------- interpreter ---------- */
+class Interp {
+  constructor(opts) {
+    this.code = opts.code; this.spec = opts.form; this.host = opts.host;
+    this.ctrls = new Map(); this.mod = new Map(); this.consts = new Set(); this.steps = 0; this.depth = 0;
+    this.ended = false; this.printCol = 0; this.queue = Promise.resolve();
+    const f = this.spec;
+    this.form = { name: f.name || 'Form1', type: 'Form', props: { caption: f.caption || 'Form1', backcolor: f.backColor !== undefined ? f.backColor : 13160660 } };
+    this.ctrls.set('me', this.form); this.ctrls.set(lc(this.form.name), this.form); this.ctrls.set('form', this.form);
+    for (const c of (f.controls || [])) {
+      const props = {};
+      for (const k in c) if (k !== 'name' && k !== 'type') props[lc(k)] = c[k];
+      const o = { name: c.name, type: c.type, props };
+      const t = c.type;
+      const d = { visible: true, enabled: true, locked: false, multiline: false, fontbold: false, fontsize: 8, forecolor: 0, backcolor: t === 'TextBox' ? 16777215 : 13160660, alignment: 0, dragmode: 0, borderstyle: 0, maxlength: 0, default: false, cancel: false, width: 100, height: 25, left: 0, top: 0 };
+      for (const k in d) if (!(k in o.props)) o.props[k] = d[k];
+      for (const k of ['left', 'top', 'width', 'height']) o.props[k] = Number(o.props[k]) * 15; // px -> twips
+      if (t === 'TextBox') o.props.text = toStr(o.props.text === undefined ? '' : o.props.text);
+      if (t === 'Label' || t === 'CommandButton') o.props.caption = toStr(o.props.caption === undefined ? '' : o.props.caption);
+      this.ctrls.set(lc(c.name), o);
+    }
+  }
+  compile() {
+    const p = new Parser(this.code);
+    this.prog = p.parseModule();
+    this.explicit = this.prog.optionExplicit;
+    this.procs = this.prog.procs;
+    // module-level decls
+    for (const d of this.prog.decls) {
+      if (d.t === 'dim') for (const it of d.items) this.mod.set(lc(it.name), { type: it.type, val: defaultOf(it.type) });
+    }
+    this.modConstsPending = this.prog.decls.filter(d => d.t === 'const');
+    return this;
+  }
+  async init() {
+    const fr = { vars: new Map(), proc: null };
+    for (const d of this.modConstsPending) await this.exec(d, fr);
+  }
+  async start() { await this.init(); await this.runEvent('form', 'Load', []); }
+  fire(ctrl, evt, args) {
+    // queued user-originated event
+    this.queue = this.queue.then(() => this.runEvent(lc(ctrl), evt, args || [])).catch(() => { });
+    return this.queue;
+  }
+  async runEvent(ctrlKey, evt, args) {
+    if (this.ended) return;
+    let nm = ctrlKey === 'form' ? 'form_' + lc(evt) : ctrlKey + '_' + lc(evt);
+    let proc = this.procs.get(nm);
+    if (!proc && ctrlKey === lc(this.form.name)) proc = this.procs.get('form_' + lc(evt));
+    if (!proc) return;
+    if (this.depth > 25) return;
+    this.depth++;
+    try { await this.callProc(proc, args); } catch (e) {
+      if (e instanceof EndSignal) { this.ended = true; this.host.ended && this.host.ended(); } else if (e instanceof VBError) { this.host.error && this.host.error(e); } else if (e instanceof ExitSignal || e instanceof GotoSignal) { /* ignore */ } else throw e;
+    } finally { this.depth--; }
+  }
+  async callProc(proc, args) {
+    const fr = { vars: new Map(), proc };
+    proc.params.forEach((p, i) => {
+      const v = args[i];
+      fr.vars.set(lc(p.name), { type: p.type, val: v === undefined ? defaultOf(p.type) : (p.type === 'variant' ? v : (typeof v === 'object' ? v : coerce(p.type, v))) });
+    });
+    if (proc.kind === 'function') fr.vars.set(lc(proc.name), { type: proc.rtype, val: defaultOf(proc.rtype), ret: true });
+    this.hoist(proc.body, fr);
+    const labels = new Map(); proc.body.forEach((s, i) => { if (s.t === 'label') labels.set(s.name, i); });
+    let i = 0;
+    while (i < proc.body.length) {
+      try { await this.exec(proc.body[i], fr); i++; } catch (e) {
+        if (e instanceof GotoSignal) { if (labels.has(e.l)) { i = labels.get(e.l); continue; } throw new VBError(0, 'Label not defined: ' + e.l, 'compile'); }
+        if (e instanceof ExitSignal && (e.k === 'sub' || e.k === 'function')) break;
+        throw e;
+      }
+    }
+    return proc.kind === 'function' ? fr.vars.get(lc(proc.name)).val : undefined;
+  }
+  hoist(stmts, fr) {
+    for (const s of stmts) {
+      if (s.t === 'dim') for (const it of s.items) fr.vars.set(lc(it.name), { type: it.type, val: defaultOf(it.type) });
+      else if (s.t === 'if') { s.branches.forEach(b => this.hoist(b.body, fr)); if (s.els) this.hoist(s.els, fr); } else if (s.t === 'select') { s.cases.forEach(c => this.hoist(c.body, fr)); if (s.els) this.hoist(s.els, fr); } else if (s.body) this.hoist(s.body, fr);
+    }
+  }
+  findVar(name, fr) { const k = lc(name); return fr.vars.get(k) || this.mod.get(k); }
+  resolveObj(name, fr) {
+    const v = this.findVar(name, fr);
+    if (v && v.val && typeof v.val === 'object') return v.val;
+    return this.ctrls.get(lc(name));
+  }
+  tick() { if (++this.steps > 300000) { this.steps = 0; throw new VBError(28, 'Out of stack space / program seems stuck in an endless loop'); } }
+
+  async execBlock(b, fr) { for (const s of b) await this.exec(s, fr); }
+  async exec(s, fr) {
+    this.tick();
+    try { return await this.exec2(s, fr); } catch (e) { if (e instanceof VBError && e.line === undefined) e.line = s.line; throw e; }
+  }
+  async exec2(s, fr) {
+    switch (s.t) {
+      case 'nop': case 'label': case 'dim': return;
+      case 'const':
+        for (const it of s.items) { const v = coerce(it.type, await this.ev(it.e, fr)); const rec = { type: it.type, val: v, isConst: true }; (fr.proc ? fr.vars : this.mod).set(lc(it.name), rec); }
+        return;
+      case 'assign': {
+        const val = await this.ev(s.e, fr);
+        if (s.prop) { const o = this.resolveObj(s.name, fr); if (!o) throw new VBError(424, 'Object required'); await this.setProp(o, s.prop, val); return; }
+        const v = this.findVar(s.name, fr);
+        if (v) { if (v.isConst) throw new VBError(0, 'Compile error: Assignment to constant not permitted', 'compile'); v.val = (v.type === 'variant') ? val : coerce(v.type, val); return; }
+        const c = this.ctrls.get(lc(s.name));
+        if (c) { await this.setProp(c, c.type === 'TextBox' ? 'text' : 'caption', val); return; }
+        if (this.explicit) throw new VBError(0, 'Compile error: Variable not defined: ' + s.name, 'compile');
+        (fr.proc ? fr.vars : this.mod).set(lc(s.name), { type: 'variant', val }); return;
+      }
+      case 'if':
+        for (const b of s.branches) { if (this.truthy(await this.ev(b.cond, fr))) { await this.execBlock(b.body, fr); return; } }
+        if (s.els) await this.execBlock(s.els, fr);
+        return;
+      case 'select': {
+        const x = await this.ev(s.e, fr);
+        for (const c of s.cases) {
+          for (const t of c.tests) {
+            let ok = false;
+            if (t.k === 'eq') ok = this.cmp('=', x, await this.ev(t.e, fr));
+            else if (t.k === 'is') ok = this.cmp(t.op, x, await this.ev(t.e, fr));
+            else ok = this.cmp('>=', x, await this.ev(t.a, fr)) && this.cmp('<=', x, await this.ev(t.b, fr));
+            if (ok) { await this.execBlock(c.body, fr); return; }
+          }
+        }
+        if (s.els) await this.execBlock(s.els, fr);
+        return;
+      }
+      case 'for': {
+        const from = toNum(await this.ev(s.from, fr)), to = toNum(await this.ev(s.to, fr)), step = s.step ? toNum(await this.ev(s.step, fr)) : 1;
+        if (step === 0) throw new VBError(5, 'Invalid procedure call or argument');
+        const setv = v => { const r = this.findVar(s.v, fr); if (r) r.val = r.type === 'variant' ? v : coerce(r.type, v); else if (this.explicit) throw new VBError(0, 'Compile error: Variable not defined: ' + s.v, 'compile'); else (fr.proc ? fr.vars : this.mod).set(lc(s.v), { type: 'variant', val: v }); };
+        try {
+          for (let i = from; step > 0 ? i <= to : i >= to; i += step) { setv(i); this.tick(); try { await this.execBlock(s.body, fr); } catch (e) { if (e instanceof ExitSignal && e.k === 'for') break; throw e; } }
+        } finally { }
+        return;
+      }
+      case 'do': {
+        for (; ;) {
+          this.tick();
+          if (s.pre) { const c = this.truthy(await this.ev(s.pre, fr)); if (s.preUntil ? c : !c) break; }
+          try { await this.execBlock(s.body, fr); } catch (e) { if (e instanceof ExitSignal && e.k === 'do') break; throw e; }
+          if (s.post) { const c = this.truthy(await this.ev(s.post, fr)); if (s.postUntil ? c : !c) break; }
+          if (!s.pre && !s.post) { /* infinite Do..Loop, relies on Exit Do */ }
+        }
+        return;
+      }
+      case 'goto': throw new GotoSignal(s.name);
+      case 'exit': throw new ExitSignal(s.kind);
+      case 'end': throw new EndSignal();
+      case 'print': {
+        let out = ''; let nl = true;
+        for (const it of s.items) {
+          const v = await this.ev(it.e, fr);
+          let str = typeof v === 'number' ? (v >= 0 ? ' ' : '-') + fmtNum(Math.abs(v)) + ' ' : toStr(v);
+          if (typeof v === 'boolean') str = toStr(v);
+          out += str; this.printCol += str.length;
+          if (it.sep === ',') { const pad = 14 - (this.printCol % 14); out += ' '.repeat(pad); this.printCol += pad; }
+          nl = !it.sep;
+        }
+        if (nl) { this.printCol = 0; }
+        this.host.print(out, nl);
+        return;
+      }
+      case 'msgbox': {
+        const a = []; for (const e of s.args) a.push(await this.ev(e, fr));
+        await this.msgbox(a); return;
+      }
+      case 'method': {
+        if (s.name === 'cls') { this.printCol = 0; this.host.cls(); return; }
+        const o = s.obj ? this.resolveObj(s.obj, fr) : this.form;
+        if (!o) throw new VBError(424, 'Object required');
+        const a = []; for (const e of s.args) a.push(await this.ev(e, fr));
+        if (s.name === 'setfocus') { this.host.focus(o); return; }
+        if (s.name === 'cls') { this.host.cls(); return; }
+        if (s.name === 'move') { if (a[0] !== undefined) await this.setProp(o, 'left', a[0]); if (a[1] !== undefined) await this.setProp(o, 'top', a[1]); return; }
+        if (s.name === 'hide' || s.name === 'show') return;
+        throw new VBError(438, "Object doesn't support this property or method");
+      }
+      case 'callsub': {
+        const p = this.procs.get(lc(s.name));
+        if (p) { const a = []; for (const e of s.args) a.push(await this.ev(e, fr)); await this.callProc(p, a); return; }
+        const c = this.ctrls.get(lc(s.name));
+        if (c) throw new VBError(0, 'Compile error: Expected: =', 'compile');
+        throw new VBError(35, 'Sub or Function not defined: ' + s.name);
+      }
+    }
+  }
+  truthy(v) { if (typeof v === 'boolean') return v; return toNum(v) !== 0; }
+  async msgbox(a) {
+    const prompt = toStr(a[0]); const sym = a[1] === undefined ? 0 : toNum(a[1]); const title = a[2] === undefined ? this.form.props.caption : toStr(a[2]);
+    return await this.host.msgbox(prompt, sym, title);
+  }
+  async setProp(o, prop, val) {
+    const k = lc(prop);
+    if (k === 'name') throw new VBError(383, "Can't assign to read-only property");
+    const known = (k in BOOLPROPS) || (k in STRPROPS) || (k in NUMPROPS) || k === 'picture' || k === 'value';
+    if (!known) throw new VBError(438, "Object doesn't support this property or method");
+    let v;
+    if (k in BOOLPROPS) v = coerce('boolean', val); else if (k in STRPROPS) v = toStr(val); else if (k in NUMPROPS) v = toNum(val); else v = val;
+    const old = o.props[k]; o.props[k] = v;
+    this.host.refresh(o);
+    if (k === 'text' && o.type === 'TextBox' && old !== v) await this.runEvent(lc(o.name), 'Change', []);
+  }
+  getProp(o, prop) {
+    const k = lc(prop);
+    if (k === 'name') return o.name;
+    if (!(k in o.props)) {
+      if ((k in BOOLPROPS) || (k in STRPROPS) || (k in NUMPROPS) || k === 'value') return (k in BOOLPROPS) ? false : (k in STRPROPS) ? '' : 0;
+      throw new VBError(438, "Object doesn't support this property or method");
+    }
+    return o.props[k];
+  }
+  cmp(op, a, b) {
+    let x = a, y = b;
+    if (typeof a === 'string' && typeof b === 'string') { /* text compare */ } else {
+      if (typeof a === 'string' && !NUMRE.test(a)) throw new VBError(13, 'Type mismatch');
+      if (typeof b === 'string' && !NUMRE.test(b)) throw new VBError(13, 'Type mismatch');
+      x = toNum(a); y = toNum(b);
+    }
+    switch (op) { case '=': return x === y; case '<>': return x !== y; case '<': return x < y; case '>': return x > y; case '<=': return x <= y; case '>=': return x >= y; }
+  }
+  async ev(n, fr) {
+    switch (n.t) {
+      case 'num': case 'str': return n.v;
+      case 'id': {
+        const v = this.findVar(n.name, fr); if (v) return v.val;
+        const k = lc(n.name);
+        if (k in CONSTS) return CONSTS[k];
+        const c = this.ctrls.get(k); if (c) return c.type === 'TextBox' ? c.props.text : (c.props.caption !== undefined ? c.props.caption : '');
+        if (ZERO[k]) return B[k]([]);
+        const p = this.procs.get(k); if (p && p.kind === 'function') return await this.callProc(p, []);
+        if (this.explicit) throw new VBError(0, 'Compile error: Variable not defined: ' + n.name, 'compile', n.line);
+        const rec = { type: 'variant', val: 0 }; (fr.proc ? fr.vars : this.mod).set(k, rec); return 0;
+      }
+      case 'member': {
+        const o = this.resolveObj(n.obj, fr); if (!o) throw new VBError(424, 'Object required');
+        return this.getProp(o, n.prop);
+      }
+      case 'call': {
+        const k = lc(n.name);
+        const a = []; for (const e of n.args) a.push(await this.ev(e, fr));
+        if (k === 'inputbox') return await this.host.inputbox(toStr(a[0]), a[1] === undefined ? this.form.props.caption : toStr(a[1]), a[2] === undefined ? '' : toStr(a[2]));
+        if (k === 'msgbox') return await this.msgbox(a);
+        const p = this.procs.get(k); if (p) return await this.callProc(p, a);
+        if (B[k]) return B[k](a);
+        throw new VBError(35, 'Sub or Function not defined: ' + n.name);
+      }
+      case 'un': { const v = await this.ev(n.a, fr); if (n.op === 'neg') return -toNum(v); return typeof v === 'boolean' ? !v : ~toNum(v); }
+      case 'bin': {
+        const a = await this.ev(n.a, fr), b = await this.ev(n.b, fr);
+        switch (n.op) {
+          case '+': if (typeof a === 'string' && typeof b === 'string') return a + b; return toNum(a) + toNum(b);
+          case '-': return toNum(a) - toNum(b);
+          case '*': return toNum(a) * toNum(b);
+          case '/': { const d = toNum(b); if (d === 0) throw new VBError(11, 'Division by zero'); return toNum(a) / d; }
+          case '\\': { const d = bankers(toNum(b)); if (d === 0) throw new VBError(11, 'Division by zero'); return Math.trunc(bankers(toNum(a)) / d); }
+          case 'mod': { const d = bankers(toNum(b)); if (d === 0) throw new VBError(11, 'Division by zero'); return bankers(toNum(a)) % d; }
+          case '^': { const r = Math.pow(toNum(a), toNum(b)); if (!isFinite(r)) throw new VBError(11, 'Division by zero'); return r; }
+          case '&': return toStr(a) + toStr(b);
+          case '=': case '<>': case '<': case '>': case '<=': case '>=': return this.cmp(n.op, a, b);
+          case 'and': if (typeof a === 'boolean' && typeof b === 'boolean') return a && b; return toNum(a) & toNum(b);
+          case 'or': if (typeof a === 'boolean' && typeof b === 'boolean') return a || b; return toNum(a) | toNum(b);
+          case 'xor': if (typeof a === 'boolean' && typeof b === 'boolean') return a !== b; return toNum(a) ^ toNum(b);
+        }
+      }
+    }
+    throw new VBError(0, 'Internal error');
+  }
+}
+
+root.VB = { Interp, VBError, toStr, toNum, fmtNum, CONSTS, coerce, valFn };
+if (typeof module !== 'undefined') module.exports = root.VB;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ===== runnable examples (forms + VB code) ===== */
+const L = (n, c, l, t, w, h, o) => Object.assign({ name: n, type: 'Label', caption: c, left: l, top: t, width: w, height: h || 20 }, o || {});
+const T = (n, x, l, t, w, h, o) => Object.assign({ name: n, type: 'TextBox', text: x, left: l, top: t, width: w, height: h || 22 }, o || {});
+const C = (n, c, l, t, w, h, o) => Object.assign({ name: n, type: 'CommandButton', caption: c, left: l, top: t, width: w, height: h || 26 }, o || {});
+const IM = (n, pic, l, t, w, h, o) => Object.assign({ name: n, type: 'Image', picture: pic, left: l, top: t, width: w, height: h }, o || {});
+const F = (caption, w, h, controls, o) => Object.assign({ caption, w, h, controls }, o || {});
+
+const EX = {};
+const ex = (id, ch, title, desc, form, code) => { EX[id] = { id, ch, title, desc, form, code: code.replace(/^\n/, '') }; };
+
+/* ---------- الفصل 1 ---------- */
+ex('e1a', 1, 'أول برنامج: Hello', 'أضفنا Label وزرًا. عند الضغط على الزر يتغير نص الـ Label.',
+  F('Form1', 300, 150, [L('Label1', 'اضغط الزر', 20, 20, 260, 40, { fontsize: 16, alignment: 2 }), C('Command1', 'Say Hello', 90, 80, 120, 32)]),
+  String.raw`
+Private Sub Form_Load()
+Label1.Caption = "Welcome to VB6"
+End Sub
+
+Private Sub Command1_Click()
+Label1.Caption = "Hello, World!"
+Label1.ForeColor = vbBlue
+End Sub`);
+
+/* ---------- الفصل 2 ---------- */
+ex('e2a', 2, 'Label: الألوان والإظهار والإخفاء', 'اضغط على الكلمات الأربع (هي Labels) وراقب Label1.',
+  F('Form1', 300, 170, [
+    L('Label1', 'Visual Basic', 70, 15, 160, 30, { fontsize: 16, alignment: 2, fontbold: true, borderstyle: 1 }),
+    L('Label2', 'Forecolor', 15, 80, 62, 22, { alignment: 2, borderstyle: 1 }), L('Label3', 'Backcolor', 85, 80, 62, 22, { alignment: 2, borderstyle: 1 }),
+    L('Label4', 'Show', 155, 80, 62, 22, { alignment: 2, borderstyle: 1 }), L('Label5', 'Hide', 225, 80, 62, 22, { alignment: 2, borderstyle: 1 })]),
+  String.raw`
+Private Sub Label2_Click()
+Label1.ForeColor = vbBlue
+End Sub
+
+Private Sub Label3_Click()
+Label1.BackColor = vbRed
+End Sub
+
+Private Sub Label4_Click()
+Label1.Visible = True
+End Sub
+
+Private Sub Label5_Click()
+Label1.Visible = False
+End Sub`);
+
+ex('e2b', 2, 'TextBox: الحدث GotFocus', 'انقل المؤشر بين المربعين (أو اضغط Tab) وراقب Text3.',
+  F('Form1', 300, 150, [T('Text1', 'Show', 20, 20, 120), T('Text2', 'Hide', 160, 20, 120), T('Text3', 'Visual Basic', 90, 80, 120)]),
+  String.raw`
+Private Sub Text1_GotFocus()
+Text3.Visible = True
+End Sub
+
+Private Sub Text2_GotFocus()
+Text3.Visible = False
+End Sub`);
+
+ex('e2c', 2, 'آلة حاسبة بسيطة', 'اكتب رقمين ثم اختر العملية. الزر Exit يُنفَّذ أيضًا عند الضغط على Esc (Cancel = True).',
+  F('Calculator', 300, 230, [
+    L('Label1', 'Value1', 20, 15, 60), L('Label2', 'Value2', 20, 45, 60), L('Label3', 'Result', 20, 75, 60),
+    T('Text1', '', 100, 12, 160), T('Text2', '', 100, 42, 160), T('Text3', '', 100, 72, 160, 22, { locked: true, backcolor: 14737632 }),
+    C('Command1', '+', 20, 115, 50), C('Command2', '-', 80, 115, 50), C('Command3', '*', 140, 115, 50), C('Command4', '/', 200, 115, 50),
+    C('Command5', 'Clear', 40, 160, 100), C('Command6', '&Exit', 160, 160, 100, 26, { cancel: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Text3 = Val(Text1) + Val(Text2)
+End Sub
+
+Private Sub Command2_Click()
+Text3 = Val(Text1) - Val(Text2)
+End Sub
+
+Private Sub Command3_Click()
+Text3 = Val(Text1) * Val(Text2)
+End Sub
+
+Private Sub Command4_Click()
+Text3 = Val(Text1) / Val(Text2)
+End Sub
+
+Private Sub Command5_Click()
+Text1 = ""
+Text2 = ""
+Text3 = ""
+End Sub
+
+Private Sub Command6_Click()
+End
+End Sub`);
+
+ex('e2d', 2, 'لماذا نحتاج Val؟', 'اضغط الزرين وقارن النتيجتين. الأول يجمع «نصوصًا» والثاني يجمع «أرقامًا».',
+  F('Form1', 300, 170, [T('Text1', '12', 30, 15, 100), T('Text2', '30', 170, 15, 100), L('Label1', 'النتيجة', 20, 125, 260, 24, { alignment: 2, fontsize: 12, fontbold: true }),
+    C('Command1', 'Text1 + Text2', 20, 60, 120), C('Command2', 'Val + Val', 160, 60, 120)]),
+  String.raw`
+Private Sub Command1_Click()
+Label1.Caption = Text1.Text + Text2.Text
+End Sub
+
+Private Sub Command2_Click()
+Label1.Caption = Val(Text1.Text) + Val(Text2.Text)
+End Sub`);
+
+ex('e2e', 2, 'الحدث Change و MaxLength و Locked', 'اكتب في المربع الأول (حد أقصى 12 حرفًا). المربع الثاني مقفل (Locked) ويعرض النص بأحرف كبيرة.',
+  F('Form1', 300, 170, [T('Text1', '', 20, 20, 260, 22, { maxlength: 12 }), T('Text2', '', 20, 60, 260, 22, { locked: true, backcolor: 14737632 }), L('Label1', 'Characters: 0', 20, 105, 260, 22, { fontsize: 11 })]),
+  String.raw`
+Private Sub Text1_Change()
+Text2.Text = UCase(Text1.Text)
+Label1.Caption = "Characters: " & Len(Text1.Text)
+End Sub`);
+
+ex('e2f', 2, 'مساحة المستطيل (حل تمرين)', 'تمرين: الطول × العرض.',
+  F('Rectangle', 300, 190, [L('Label1', 'Length', 20, 18, 70), L('Label2', 'Width', 20, 52, 70), L('Label3', 'Area', 20, 86, 70),
+    T('Text1', '', 110, 15, 150), T('Text2', '', 110, 49, 150), T('Text3', '', 110, 83, 150, 22, { locked: true, backcolor: 14737632 }), C('Command1', 'Calculate', 90, 130, 120)]),
+  String.raw`
+Private Sub Command1_Click()
+Text3.Text = Val(Text1.Text) * Val(Text2.Text)
+End Sub`);
+
+/* ---------- الفصل 3 ---------- */
+ex('e3a', 3, 'الحدث Click (التطبيق 1)', 'انقر على: الزر، الـ Label، صندوق النص، ثم على خلفية النموذج.',
+  F('Form1', 300, 200, [C('Command1', 'Command1', 20, 20, 100, 28), L('Label1', 'Label1', 160, 22, 100, 22, { borderstyle: 1, alignment: 2 }), T('Text1', 'Text1', 20, 80, 100)]),
+  String.raw`
+Private Sub Command1_Click()
+MsgBox "You clicked in to command button"
+End Sub
+
+Private Sub Label1_Click()
+Label1.Caption = "Click"
+End Sub
+
+Private Sub Text1_Click()
+Text1.Left = Text1.Left + 300
+End Sub
+
+Private Sub Form_Click()
+Form1.BackColor = vbRed
+End Sub`);
+
+ex('e3b', 3, 'الحدث DblClick (التطبيق 2)', 'اكتب نصًا في Text1 ثم انقر مرتين متتاليتين على الـ Label.',
+  F('Form1', 300, 170, [T('Text1', 'Hello', 20, 20, 120), T('Text2', '', 160, 20, 120), L('Label1', 'Double click me', 70, 80, 160, 26, { borderstyle: 1, alignment: 2, fontsize: 11 })]),
+  String.raw`
+Private Sub Label1_DblClick()
+Text2.Text = Text1.Text
+Form1.Caption = "Double Click Event"
+End Sub`);
+
+ex('e3c', 3, 'الحدث MouseMove (التطبيق 3)', 'حرّك الفأرة فوق النموذج فتظهر X و Y. ثم مرّر فوق الزرين.',
+  F('Form1', 300, 210, [T('Text1', '', 20, 20, 120), T('Text2', '', 160, 20, 120), C('Command1', 'Font size', 20, 150, 110), C('Command2', 'Back color', 160, 150, 110)]),
+  String.raw`
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Text1.Text = X
+Text2.Text = Y
+Text1.FontSize = 8
+Text2.FontSize = 8
+Text1.BackColor = vbWhite
+Text2.BackColor = vbWhite
+End Sub
+
+Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Text1.FontSize = 16
+Text2.FontSize = 16
+End Sub
+
+Private Sub Command2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Text1.BackColor = vbYellow
+Text2.BackColor = vbYellow
+End Sub`);
+
+ex('e3d', 3, 'السحب والإفلات DragDrop (التطبيق 4)', 'اسحب الصورة وأفلتها في أي مكان على النموذج.',
+  F('Form1', 300, 210, [IM('Image1', '🖼️', 30, 30, 54, 54, { dragmode: 1 })]),
+  String.raw`
+Private Sub Form_DragDrop(Source As Control, X As Single, Y As Single)
+Source.Left = X
+Source.Top = Y
+End Sub`);
+
+ex('e3e', 3, 'MouseDown و MouseUp (تجربة 1)', 'اضغط على الـ Label واستمر بالضغط، ثم أفلت الزر.',
+  F('Form1', 300, 150, [L('Label1', 'Press me', 60, 40, 180, 50, { fontsize: 16, alignment: 2, borderstyle: 1, backcolor: 16777215 })]),
+  String.raw`
+Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Label1.Caption = "Mouse Down"
+Label1.BackColor = vbBlue
+End Sub
+
+Private Sub Label1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Label1.Caption = "Mouse Up"
+Label1.BackColor = vbRed
+End Sub`);
+
+/* ---------- الفصل 4 ---------- */
+ex('e4a', 4, 'مساحة الدائرة ومحيطها (Const)', 'أدخل نصف القطر. الثابت PI لا يتغير أبدًا.',
+  F('The Circle', 300, 220, [L('Label1', 'Enter the radius', 20, 18, 130), L('Label2', 'The Area is', 20, 56, 130), L('Label3', 'The Circumference', 20, 94, 130),
+    T('Text1', '2', 160, 15, 120), T('Text2', '', 160, 53, 120, 22, { locked: true }), T('Text3', '', 160, 91, 120, 22, { locked: true }), C('Command1', 'Press', 90, 140, 120, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Const PI As Single = 3.14
+Dim R As Single
+Dim Z As Single
+R = Text1.Text
+Z = PI * R * R
+Text2.Text = Z
+Text3.Text = 2 * PI * R
+End Sub`);
+
+ex('e4b', 4, 'المتغيرات المحلية (Local)', 'كل إجراء يملك x خاصًا به. اضغط الأزرار الثلاثة.',
+  F('Form1', 300, 230, [C('Command1', 'Command1', 10, 8, 85), C('Command2', 'Command2', 107, 8, 85), C('Command3', 'Command3', 204, 8, 85)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Integer
+x = 1
+Print "Command1: x ="; x
+End Sub
+
+Private Sub Command2_Click()
+Dim x As Integer
+x = 7
+Print "Command2: x ="; x
+End Sub
+
+Private Sub Command3_Click()
+Dim x As String
+x = "welcome"
+Print "Command3: x = "; x
+End Sub`);
+
+ex('e4c', 4, 'متغير على مستوى النموذج (Form)', 'المتغير n معرَّف خارج الإجراءات، فتراه كل الإجراءات وتعدّله.',
+  F('Form1', 300, 230, [C('Command1', 'n = n + 1', 10, 8, 85), C('Command2', 'n = n + 10', 107, 8, 85), C('Command3', 'Reset', 204, 8, 85)]),
+  String.raw`
+Dim n As Integer
+
+Private Sub Command1_Click()
+n = n + 1
+Print "n ="; n
+End Sub
+
+Private Sub Command2_Click()
+n = n + 10
+Print "n ="; n
+End Sub
+
+Private Sub Command3_Click()
+n = 0
+Cls
+End Sub`);
+
+ex('e4d', 4, 'Option Explicit: إجبار التصريح', 'الزر الأول يعمل. الزر الثاني يستخدم متغيرًا لم يُعرَّف فيظهر خطأ. احذف السطر الأول في المختبر وجرّب مرة أخرى.',
+  F('Form1', 300, 200, [C('Command1', 'Declared (Dim s)', 10, 8, 135), C('Command2', 'Not declared', 155, 8, 135)]),
+  String.raw`
+Option Explicit
+
+Private Sub Command1_Click()
+Dim s As Integer
+s = 1
+Print s
+End Sub
+
+Private Sub Command2_Click()
+S2 = 1
+Print S2
+End Sub`);
+
+ex('e4e', 4, 'واجب: ما ناتج Command1 و Command2 و Command3؟', 'تنبّه: Dim a, b As Integer تجعل a من نوع Variant. وDim داخل الإجراء يُخفي المتغير العام. جرّب بالترتيب 1 ثم 2 ثم 3.',
+  F('Form1', 300, 260, [C('Command1', 'Command1', 10, 8, 85), C('Command2', 'Command2', 107, 8, 85), C('Command3', 'Command3', 204, 8, 85)]),
+  String.raw`
+Option Explicit
+Dim a, b As Integer
+Dim z As Integer
+
+Private Sub Command1_Click()
+a = 10
+b = 4
+z = a + b
+Print "a"; a, "b= "; b, "z= "; z
+End Sub
+
+Private Sub Command2_Click()
+Dim b As Integer
+Print "b= "; b
+z = a - b
+Print "a"; a, "b= "; b, "z= "; z
+End Sub
+
+Private Sub Command3_Click()
+Print "z="; z
+Dim a As Integer
+z = z * a
+Print "a"; a, "b= "; b, "z= "; z
+End Sub`);
+
+ex('e4f', 4, 'أنواع المتغيرات: الحدود والتقريب', 'جرّب كل زر وراقب ماذا يحدث عند تجاوز سعة النوع أو عند إسناد قيمة كسرية.',
+  F('Form1', 300, 230, [C('Command1', 'Integer + 10000', 10, 8, 135), C('Command2', 'Long + 10000', 155, 8, 135), C('Command3', 'Integer = 3.7', 10, 44, 135), C('Command4', 'Single = 3.7', 155, 44, 135)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Integer
+x = 30000
+x = x + 10000
+Print x
+End Sub
+
+Private Sub Command2_Click()
+Dim x As Long
+x = 30000
+x = x + 10000
+Print x
+End Sub
+
+Private Sub Command3_Click()
+Dim x As Integer
+x = 3.7
+Print x
+End Sub
+
+Private Sub Command4_Click()
+Dim x As Single
+x = 3.7
+Print x
+End Sub`);
+
+/* ---------- الفصل 5 ---------- */
+ex('e5a', 5, 'InputBox: جمع وطرح عددين', 'الأرقام تُدخَل عبر صناديق إدخال، والنتيجة تُطبع على النموذج.',
+  F('Form1', 300, 200, [C('Command1', 'Add', 20, 10, 120), C('Command2', 'Subtract', 160, 10, 120)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim a As Single, b As Single
+a = Val(InputBox("Enter first number", "Add"))
+b = Val(InputBox("Enter second number", "Add"))
+Print "Sum = "; a + b
+End Sub
+
+Private Sub Command2_Click()
+Dim a As Single, b As Single
+a = Val(InputBox("Enter first number", "Subtract"))
+b = Val(InputBox("Enter second number", "Subtract"))
+Print "Difference = "; a - b
+End Sub`);
+
+ex('e5b', 5, 'ثلاثة صناديق إدخال: y = a × b + c', 'كل صندوق إدخال مخصص لمتغير.',
+  F('Form1', 300, 190, [C('Command1', 'Solve y = a*b + c', 60, 10, 180), L('Label1', '', 20, 60, 260, 40, { fontsize: 13, alignment: 2, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim a As Single, b As Single, c As Single, y As Single
+a = Val(InputBox("Enter a", "Equation"))
+b = Val(InputBox("Enter b", "Equation"))
+c = Val(InputBox("Enter c", "Equation"))
+y = a * b + c
+Label1.Caption = "y = " & y
+End Sub`);
+
+ex('e5c', 5, 'إدخال اسم ومرحلة الطالب', 'InputBox ترجع نصًا (String) فنضعه مباشرة في صندوق النص.',
+  F('Form1', 300, 200, [L('Label1', 'Name', 20, 20, 80), L('Label2', 'Level', 20, 55, 80), T('Text1', '', 110, 17, 160), T('Text2', '', 110, 52, 160), C('Command1', 'Enter data', 80, 100, 140, 28), L('Label3', '', 20, 150, 260, 22, { alignment: 2, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Text1.Text = InputBox("Enter student name", "Student")
+Text2.Text = InputBox("Enter student level", "Student")
+Label3.Caption = Text1.Text & " - " & Text2.Text
+End Sub`);
+
+ex('e5d', 5, 'معرض MsgBox: الأزرار والأيقونات', 'كل زر يعرض صندوق رسائل مختلفًا. الرقم = (قيمة الأزرار + قيمة الأيقونة).',
+  F('Form1', 300, 240, [C('Command1', '1', 10, 10, 85), C('Command2', '1 + 32', 107, 10, 85), C('Command3', '4 + 64', 204, 10, 85), C('Command4', '2 + 16', 10, 50, 85), C('Command5', '5 + 48', 107, 50, 85)]),
+  String.raw`
+Private Sub Command1_Click()
+MsgBox "Save Changes?", 1, "Exit"
+End Sub
+
+Private Sub Command2_Click()
+MsgBox "Save Changes?", 1 + 32, "Exit"
+End Sub
+
+Private Sub Command3_Click()
+MsgBox "save change", 4 + 64, "Exit"
+End Sub
+
+Private Sub Command4_Click()
+MsgBox "Error occurred", 2 + 16, "setup"
+End Sub
+
+Private Sub Command5_Click()
+MsgBox "Error occurred", 5 + 48, "setup"
+End Sub`);
+
+ex('e5e', 5, 'MsgBox ترجع قيمة: تأكيد الخروج', 'نخزن ما يرجعه الصندوق في متغير ثم نقرر. الرقم 6 = Yes و 7 = No.',
+  F('Form1', 300, 160, [C('Command1', 'Exit', 90, 15, 120, 30), L('Label1', '', 20, 70, 260, 40, { alignment: 2, fontsize: 12 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim k As Integer
+k = MsgBox("Do you want to exit?", 4 + 32, "Exit")
+If k = 6 Then
+End
+Else
+Label1.Caption = "You pressed No (value = " & k & ")"
+End If
+End Sub`);
+
+ex('e5f', 5, 'ثلاثة أزرار: Start و Clear و Exit', 'Start يقرأ الاسم. Clear و Exit يطلبان التأكيد عبر MsgBox.',
+  F('Form1', 300, 180, [L('Label1', 'Student', 20, 20, 70), T('Text1', '', 100, 17, 180), C('Command1', 'Start', 15, 80, 80), C('Command2', 'Clear', 110, 80, 80), C('Command3', 'Exit', 205, 80, 80)]),
+  String.raw`
+Private Sub Command1_Click()
+Text1.Text = InputBox("Enter student name", "Start")
+End Sub
+
+Private Sub Command2_Click()
+If MsgBox("Clear the text?", 4 + 32, "Clear") = vbYes Then Text1.Text = ""
+End Sub
+
+Private Sub Command3_Click()
+If MsgBox("Exit the program?", 1 + 48, "Exit") = vbOK Then End
+End Sub`);
+
+ex('e5g', 5, 'GoTo المشروط', 'إذا كان العدد سالبًا ننتقل إلى السطر ErrMsg، وإلا نحسب الجذر التربيعي.',
+  F('Form1', 300, 160, [C('Command1', 'Square root', 80, 15, 140, 30), L('Label1', '', 20, 70, 260, 40, { alignment: 2, fontsize: 12 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Single
+x = Val(InputBox("Enter a number (0 or more)", "Square root"))
+If x < 0 Then GoTo ErrMsg
+Label1.Caption = "Sqr(x) = " & Sqr(x)
+Exit Sub
+ErrMsg:
+Label1.Caption = "Error: negative number!"
+End Sub`);
+
+ex('e5h', 5, 'GoTo غير المشروط (رقم السطر)', 'الأمر GoTo 18 يقفز مباشرة فيتجاوز السطر الذي يضع 60.',
+  F('Form1', 300, 130, [T('Text1', '', 90, 20, 120), C('Command1', 'Run', 90, 65, 120)]),
+  String.raw`
+Private Sub Command1_Click()
+Text1.Text = 50
+GoTo 18
+Text1.Text = 60
+18 End Sub`);
+
+/* ---------- الفصل 6 ---------- */
+ex('e6a', 6, 'عدد فردي أم زوجي؟', 'If … Else مع المعامل Mod (باقي القسمة).',
+  F('Form1', 300, 190, [L('Label1', 'Enter the number', 20, 20, 130), L('Label2', 'The type is', 20, 60, 130), T('Text1', '7', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'Determine', 90, 110, 120, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Integer
+x = Val(Text1.Text)
+If (x Mod 2 = 0) Then
+Text2.Text = "Even"
+Else
+Text2.Text = "Odd"
+End If
+End Sub`);
+
+ex('e6b', 6, 'لعبة Lucky Seven', 'ثلاثة أرقام عشوائية. إذا ظهر الرقم 7 في أيٍّ منها تربح.',
+  F('Lucky Seven', 300, 220, [L('Label1', 'Lucky Seven', 20, 10, 260, 26, { alignment: 2, fontsize: 14, fontbold: true }), L('Label2', 'First Number', 15, 50, 85, 20), L('Label3', 'Second Number', 108, 50, 90, 20), L('Label4', 'Third Number', 205, 50, 85, 20),
+    T('Text1', '', 25, 72, 65, 24, { alignment: 2 }), T('Text2', '', 118, 72, 65, 24, { alignment: 2 }), T('Text3', '', 215, 72, 65, 24, { alignment: 2 }), L('Label5', 'Result', 20, 115, 60), T('Text4', '', 90, 112, 110, 24, { alignment: 2 }),
+    C('Command1', 'Roll', 40, 165, 90), C('Command2', 'Exit', 170, 165, 90)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim a As Integer, b As Integer, c As Integer
+a = Int(Rnd * 10)
+b = Int(Rnd * 10)
+c = Int(Rnd * 10)
+Text1.Text = a
+Text2.Text = b
+Text3.Text = c
+If (a = 7) Or (b = 7) Or (c = 7) Then
+Text4.Text = "You Win"
+Else
+Text4.Text = "You Lose"
+End If
+End Sub
+
+Private Sub Command2_Click()
+End
+End Sub`);
+
+ex('e6c', 6, 'دالة متعددة الشروط (If … ElseIf)', 'y = x+1 إذا x>2 ، و y = x² إذا 0≤x≤2 ، و y = x³−5 إذا x<0.',
+  F('Form1', 300, 190, [L('Label1', 'Enter the value of X', 20, 20, 130), L('Label2', 'The value of Y is', 20, 60, 130), T('Text1', '3', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'PRESS', 90, 110, 120, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim a As Single, b As Single
+a = Val(Text1.Text)
+If (a > 2) Then
+b = a + 1
+ElseIf (a >= 0) And (a <= 2) Then
+b = a ^ 2
+ElseIf (a < 0) Then
+b = (a ^ 3) - 5
+End If
+Text2.Text = b
+End Sub`);
+
+ex('e6d', 6, 'تقدير الطالب (Select Case)', 'أدخل الدرجة وراقب التقدير. لاحظ Case 90 To 100 و Case Is < 50.',
+  F('Form1', 300, 190, [L('Label1', 'MARK', 20, 20, 120), L('Label2', 'EVALUATION', 20, 60, 120), T('Text1', '85', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'EVALUATE', 80, 110, 140, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Integer, y As String
+x = Val(Text1.Text)
+Select Case x
+Case 90 To 100
+y = "Excellent"
+Case 80 To 89
+y = "Very Good"
+Case 70 To 79
+y = "Good"
+Case 60 To 69
+y = "Medium"
+Case 50 To 59
+y = "Fair"
+Case Is < 50
+y = "Failed"
+End Select
+Text2.Text = y
+End Sub`);
+
+ex('e6e', 6, 'اختيار المعادلة (Select Case)', 'أدخل x ثم رقم المعادلة من 1 إلى 4. أي رقم آخر يعطي Wrong Choice.',
+  F('EXAMPLE', 300, 200, [L('Label1', 'Input x', 15, 20, 80), L('Label2', 'Choose 1 to 4', 100, 20, 100), L('Label3', 'Result (y)', 205, 20, 80),
+    T('Text1', '2', 15, 45, 80), T('Text2', '1', 105, 45, 80), T('Text3', '', 195, 45, 90), C('Command1', 'Solution', 90, 100, 120, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Single, n As Integer
+x = Val(Text1.Text)
+n = Val(Text2.Text)
+Select Case n
+Case 1
+Text3.Text = (x ^ 3) + (3 * Exp(-5))
+Case 2
+Text3.Text = Sin(x) + Cos(x ^ 2)
+Case 3
+Text3.Text = Log(x) + Tan(x)
+Case 4
+Text3.Text = (Sin(x)) ^ 2 + (x ^ 4)
+Case Is > 4
+Text3.Text = "Wrong Choice"
+End Select
+End Sub`);
+
+ex('e6f', 6, 'واجب: التحقق من اسم المستخدم وكلمة السر', 'الصحيح: admin / 1234. جرّب الحالات الأربع.',
+  F('Login', 300, 210, [L('Label1', 'Username', 20, 20, 80), L('Label2', 'Password', 20, 56, 80), T('Text1', '', 110, 17, 160), T('Text2', '', 110, 53, 160), C('Command1', 'Check', 90, 100, 120, 30), L('Label3', '', 20, 150, 260, 26, { alignment: 2, fontsize: 12, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim u As String, p As String
+u = Text1.Text
+p = Text2.Text
+If u = "admin" And p = "1234" Then
+Label3.Caption = "Welcome"
+ElseIf u <> "admin" And p <> "1234" Then
+Label3.Caption = "Wrong Information"
+ElseIf u <> "admin" Then
+Label3.Caption = "Wrong user"
+Else
+Label3.Caption = "Wrong password"
+End If
+End Sub`);
+
+ex('e6g', 6, 'واجب: الأكبر والأصغر بين ثلاثة أعداد', 'نفترض أول عدد هو الأكبر والأصغر، ثم نقارن بالبقية.',
+  F('Form1', 300, 230, [L('Label1', 'a', 20, 20, 20), L('Label2', 'b', 110, 20, 20), L('Label3', 'c', 200, 20, 20), T('Text1', '4', 20, 42, 70), T('Text2', '9', 110, 42, 70), T('Text3', '6', 200, 42, 70),
+    C('Command1', 'Find Max and Min', 70, 90, 160, 30), L('Label4', '', 20, 140, 260, 50, { alignment: 2, fontsize: 12, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim a As Single, b As Single, c As Single
+Dim mx As Single, mn As Single
+a = Val(Text1.Text)
+b = Val(Text2.Text)
+c = Val(Text3.Text)
+mx = a
+mn = a
+If b > mx Then mx = b
+If c > mx Then mx = c
+If b < mn Then mn = b
+If c < mn Then mn = c
+Label4.Caption = "Max = " & mx & "   Min = " & mn
+End Sub`);
+
+ex('e6h', 6, 'واجب: القسمة على 4 أو 5', 'نستخدم Mod. إذا كان الباقي صفرًا فالعدد يقبل القسمة.',
+  F('Form1', 300, 190, [L('Label1', 'Enter a number', 20, 20, 120), T('Text1', '20', 160, 17, 110), C('Command1', 'Check', 90, 65, 120, 30), L('Label2', '', 20, 115, 260, 40, { alignment: 2, fontsize: 12, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Long
+x = Val(Text1.Text)
+If x Mod 4 = 0 And x Mod 5 = 0 Then
+Label2.Caption = "Divisible by 4 and 5"
+ElseIf x Mod 4 = 0 Then
+Label2.Caption = "Divisible by 4"
+ElseIf x Mod 5 = 0 Then
+Label2.Caption = "Divisible by 5"
+Else
+Label2.Caption = "Not divisible by 4 or 5"
+End If
+End Sub`);
+
+ex('e6i', 6, 'واجب: دالة بثلاثة فروع (Select Case)', 'y = (x³+5)/(x²−2) عند x=1..4 ، و y = 7x⁻² عند 5≤x≤10 ، و y = 60−x عند x>11. ماذا عن x=11؟',
+  F('Form1', 300, 190, [L('Label1', 'x', 20, 20, 120), L('Label2', 'y', 20, 60, 120), T('Text1', '2', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'Solve', 90, 110, 120, 30)]),
+  String.raw`
+Private Sub Command1_Click()
+Dim x As Single, y As Single
+x = Val(Text1.Text)
+Select Case x
+Case 1, 2, 3, 4
+y = (x ^ 3 + 5) / (x ^ 2 - 2)
+Text2.Text = y
+Case 5 To 10
+y = 7 * x ^ -2
+Text2.Text = y
+Case Is > 11
+y = 60 - x
+Text2.Text = y
+Case Else
+Text2.Text = "Undefined"
+End Select
+End Sub`);
+
+ex('lab0', 0, 'مختبر فارغ', 'نموذج جاهز بثلاثة صناديق نص وثلاث أزرار وثلاث Labels. اكتب شيفرتك وجرّبها.',
+  F('Form1', 300, 260, [L('Label1', 'Label1', 20, 15, 80), L('Label2', 'Label2', 110, 15, 80), L('Label3', 'Label3', 200, 15, 80),
+    T('Text1', '', 20, 42, 80), T('Text2', '', 110, 42, 80), T('Text3', '', 200, 42, 80), C('Command1', 'Command1', 10, 90, 85), C('Command2', 'Command2', 107, 90, 85), C('Command3', 'Command3', 204, 90, 85)]),
+  String.raw`
+Private Sub Command1_Click()
+Text3.Text = Val(Text1.Text) + Val(Text2.Text)
+End Sub
+
+Private Sub Command2_Click()
+Print "Hello from VB"
+End Sub
+
+Private Sub Command3_Click()
+Cls
+End Sub`);
+
+['e4b', 'e4c', 'e4d', 'e4e', 'e5a'].forEach(i => { EX[i].form.printTop = 48; });
+EX.e4f.form.printTop = 88;
+EX.lab0.form.printTop = 130;
+
+
+/* ===== chapters, quizzes, glossary ===== */
+const Q = (q, ok, bad, e, c) => ({ q, ok, bad, e: e || '', c: c || '' });
+
+const CH = [];
+
+/* ====================== الفصل 1 ====================== */
+CH.push({
+  id: 1, icon: '🧭', color: '#0e7c86', title: 'المقدمة وبيئة التطوير', sub: 'لغة Visual Basic 6 ونوافذ البيئة',
+  blocks: [
+    ['h', 'ما هي لغة {{Visual Basic 6}}؟'],
+    ['p', 'هي لغة برمجة من اللغات عالية المستوى.'],
+    ['p', 'أي أن تعليماتها قريبة من لغة الإنسان.'],
+    ['table', ['النوع', 'المعنى', 'أمثلة'], [
+      ['عالية المستوى {{High Level}}', 'تعليماتها قريبة من لغة التخاطب البشرية', '{{Pascal}} ، {{Basic}} ، {{C++}} ، {{Visual Basic}} ، {{C#}} ، {{Delphi}}'],
+      ['منخفضة المستوى {{Low Level}}', 'تتعامل مع الحاسب مباشرة، قريبة من لغة الآلة (0 و 1)', '{{Assembly}}']]],
+    ['p', 'واللغات عالية المستوى قسمان:'],
+    ['ul', ['لغات نصية: {{Pascal}} و {{Basic}} و {{C++}}', 'لغات مرئية: {{Visual Basic}} و {{C#}} و {{Delphi}}']],
+    ['h', 'لماذا تُسمّى «مرئية»؟'],
+    ['p', 'لأنك ترسم واجهة البرنامج بالفأرة.'],
+    ['p', 'تسحب الأدوات إلى النافذة. ثم تكتب شيفرة قصيرة لكل أداة.'],
+    ['p', 'وهي تعمل تحت نظام {{Windows}}. لذلك يجب أن تعرف كيف يتعامل المستخدم مع نظام {{Windows}}.'],
+    ['h', 'لغة مقادة بالحدث {{Event-Driven}}'],
+    ['p', 'فكرتها أن نقسّم البرنامج إلى أجزاء صغيرة.'],
+    ['p', 'كل جزء ينفَّذ عند وقوع حدث معيّن. مثل:'],
+    ['ul', ['ضغط زر بالفأرة', 'مرور فترة زمنية', 'تحريك مؤشر الفأرة فوق نافذة']],
+    ['tip', 'الفكرة الذهبية: برنامج فيجوال بيسك = أدوات على نافذة + شيفرة صغيرة مربوطة بحدث.'],
+    ['ex', 'e1a'],
+    ['h', 'تشغيل البرنامج'],
+    ['ol', ['اضغط قائمة {{Start}}', 'ثم {{All Programs}}', 'ثم مجلد {{Microsoft Visual Studio 6.0}}', 'ثم اختر {{Microsoft Visual Basic 6.0}}']],
+    ['p', 'بعد التثبيت تُنشأ اختصارات في قائمة التشغيل.'],
+    ['p', 'أدوات مشتركة مثل {{Setup}} و {{Tools}} و {{Graphics}} توضع في المسار الافتراضي:'],
+    ['code', 'C:\\Program Files\\Microsoft Visual Studio\\common'],
+    ['h', 'نافذة المشروع الجديد {{New Project}}'],
+    ['p', 'تظهر عند التشغيل، وفيها ثلاث علامات تبويب:'],
+    ['ul', ['{{New}}: لبدء مشروع جديد', '{{Existing}}: لفتح مشروع موجود مسبقًا', '{{Recent}}: لعرض المشاريع التي عملت بها مؤخرًا']],
+    ['p', 'وفي علامة {{New}} أنواع كثيرة من المشاريع:'],
+    ['table', ['نوع المشروع', 'ماذا يفعل؟'], [
+      ['{{Standard EXE}}', 'ينشئ برنامجًا تنفيذيًا عاديًا (ملف EXE). هذا ما سنستخدمه.'],
+      ['{{ActiveX EXE}}', 'برنامج تنفيذي يقدّم خدمات لبرامج أخرى.'],
+      ['{{ActiveX DLL}}', 'مكتبة جاهزة تُستخدم داخل برامج أخرى.'],
+      ['{{ActiveX Control}}', 'لإنشاء أداة جديدة (ملف OCX) تضعها في صندوق الأدوات.'],
+      ['{{ActiveX Document}}', 'مستندات تعمل داخل متصفح الإنترنت.'],
+      ['{{Add-In}}', 'إضافة تُدمج مع بيئة فيجوال بيسك نفسها.'],
+      ['{{VB Application Wizard}}', 'معالج ينشئ هيكل برنامج كامل دون كتابة سطر.'],
+      ['{{Data Project}}', 'مشروع لبيئة قواعد البيانات وتصميم التقارير.'],
+      ['{{DHTML Application}}', 'صفحات ويب ديناميكية بلغة فيجوال بيسك.'],
+      ['{{VB Enterprise Edition Controls}}', 'أدوات إضافية في النسخة الاحترافية.']]],
+    ['h', 'بيئة التطوير {{IDE}}'],
+    ['p', 'اسمها الكامل {{Integrated Development Environment}}.'],
+    ['p', 'هي مجموعة أدوات تجمع كل ما تحتاجه: تصميم النوافذ، كتابة الشيفرة، تنقيح الأخطاء ({{Debugging}})، إدارة ملفات المشروع، تحرير القوائم، وإنشاء قواعد البيانات.'],
+    ['p', 'اضغط على أجزاء الصورة لتعرف وظيفة كل نافذة:'],
+    ['w', 'ide'],
+    ['note', 'نوافذ البيئة من النوع {{MDI}} أي {{Multiple Document Interface}}: عدة نوافذ داخل نافذة كبيرة واحدة.'],
+    ['h', 'نافذة مصمم النماذج {{Form Designer}}'],
+    ['p', 'هي سرّ نجاح فيجوال بيسك منذ إصداراته الأولى.'],
+    ['p', 'عنوانها الابتدائي {{Form1}}. فيها تصمّم واجهة البرنامج.'],
+    ['p', 'تضع الأدوات عليها بالفأرة، كما ترسم مربعات.'],
+    ['p', 'وتعمل فيها عمليات التحرير: نسخ، قص، لصق، وتحريك.'],
+    ['h', 'صندوق الأدوات {{Toolbox}}'],
+    ['p', 'شريط فيه 20 أداة قياسية. تضيفها إلى النموذج بالسحب أو بالنقر المزدوج.'],
+    ['w', 'toolbox'],
+    ['tip', 'لإضافة أدوات جديدة: انقر بالزر الأيمن على الصندوق واختر {{Components}}. حدّد الأداة ثم {{Apply}} ثم {{OK}}. للأدوات من نوع {{ActiveX}} أو {{DLL}} استخدم الزر {{Browse}}.'],
+    ['note', 'لإضافة تبويب جديد: زر أيمن ← {{Add Tab}} ← اكتب الاسم ← {{OK}}. ولحذفه: زر أيمن على التبويب ← {{Delete Tab}}. تنبيه: تُحذف الأدوات التي بداخله معه.'],
+    ['h', 'نافذة الخصائص {{Properties Window}}'],
+    ['p', 'بعد وضع الأداة نضبط خصائصها بطريقتين:'],
+    ['ol', ['من نافذة الخصائص (أثناء التصميم {{Design Time}})', 'من الشيفرة (أثناء التنفيذ {{Run Time}})']],
+    ['p', 'في أعلى النافذة قائمة {{ComboBox}} تختار منها الأداة. وفيها تبويبان:'],
+    ['ul', ['{{Alphabetic}}: ترتيب الخصائص أبجديًا', '{{Categorized}}: ترتيبها حسب الفئة']],
+    ['p', 'القيمة تُكتب مباشرة، أو تُختار من قائمة، أو من مربع حوار يظهر عند الضغط على زر فيه ثلاث نقاط (مثل الخاصية {{Font}}).'],
+    ['h', 'نافذة مستكشف المشروع {{Project Explorer}}'],
+    ['p', 'تزداد أهميتها كلما زاد عدد ملفات المشروع.'],
+    ['p', 'تعرض محتويات المشروع بشكل شجري: النماذج {{Forms}} والوحدات {{Modules}}.'],
+    ['p', 'فيها زران: {{View Code}} لرؤية الشيفرة، و{{View Object}} لرؤية الكائنات.'],
+    ['p', 'ملف المشروع نفسه امتداده {{VBP}}.'],
+    ['h', 'نافذة محرر الشيفرة {{Code Editor}}'],
+    ['p', 'فيجوال بيسك لغة برمجية، فلا بد أن تكتب العبارات بنفسك.'],
+    ['p', 'نفتح هذه النافذة بإحدى ثلاث طرق:'],
+    ['ul', ['نقر مزدوج على الأداة', 'الضغط على المفتاح {{F7}}', 'زر {{View Code}}']],
+    ['p', 'في أعلاها قائمتان:'],
+    ['ul', ['اليسرى: الكائنات الموجودة في النموذج، وفيها {{General}} للتصريحات العامة', 'اليمنى: الأحداث والإجراءات المرتبطة بما اخترته']],
+    ['warn', 'قد تظهر مشاكل في كتابة الحروف العربية داخل الشيفرة في بعض الأنظمة. اكتب الأوامر بالإنجليزية، وضع النصوص العربية داخل علامات التنصيص.'],
+    ['h', 'نافذة مخطط النموذج {{Form Layout}}'],
+    ['p', 'تقع أسفل يمين الشاشة.'],
+    ['p', 'تُريك موقع النموذج وحجمه وقت التنفيذ على الشاشة. لمعرفة الدقة المختلفة انقر بالزر الأيمن واختر {{Resolution Guide}}.']
+  ],
+  quiz: [
+    Q('تُصنَّف لغة Visual Basic 6 ضمن:', 'لغات عالية المستوى (مرئية)', ['لغات منخفضة المستوى', 'لغات الآلة (0 و 1)', 'لغات التجميع'], 'فيجوال بيسك لغة عالية المستوى ومرئية مثل C# و Delphi.'),
+    Q('أيّ مما يلي لغة منخفضة المستوى؟', 'Assembly', ['Pascal', 'Delphi', 'C#'], 'لغة التجميع Assembly قريبة من لغة الآلة.'),
+    Q('ماذا تعني عبارة «لغة مقادة بالحدث»؟', 'البرنامج يُقسَّم إلى أجزاء تنفَّذ عند وقوع أحداث', ['البرنامج يعمل بلا مستخدم', 'البرنامج يُنفَّذ سطرًا واحدًا فقط', 'البرنامج يُكتب بلغة الآلة'], 'مثل الضغط على زر أو تحريك الفأرة.'),
+    Q('أيّ نافذة نستخدمها لتصميم واجهة البرنامج ووضع الأدوات عليها؟', 'Form Designer', ['Project Explorer', 'Properties Window', 'Form Layout'], 'مصمم النماذج هو سطح الرسم.'),
+    Q('المفتاح المختصر لفتح نافذة محرر الشيفرة:', 'F7', ['F1', 'F5', 'F12'], 'أو النقر المزدوج على الأداة.'),
+    Q('ما امتداد ملف مشروع فيجوال بيسك؟', 'VBP', ['EXE', 'DLL', 'TXT'], 'ملف المشروع الذي يحتوي لائحة الملفات المساعدة هو VBP.'),
+    Q('أيّ علامة تبويب في نافذة New Project تعرض المشاريع التي عملت بها مؤخرًا؟', 'Recent', ['New', 'Existing', 'Open'], 'Recent = مؤخرًا.'),
+    Q('أيّ نوع مشروع نستخدمه لإنشاء برنامج تنفيذي عادي؟', 'Standard EXE', ['ActiveX DLL', 'Add-In', 'Data Project'], 'Standard EXE هو الافتراضي للبرامج العادية.'),
+    Q('ما طريقتا عرض الخصائص في نافذة Properties؟', 'Alphabetic و Categorized', ['Design و Run', 'Local و Global', 'Form و Module'], 'أبجديًا أو حسب الفئة.'),
+    Q('كيف تضيف أداة ActiveX إلى صندوق الأدوات؟', 'زر أيمن ← Components', ['Project ← Add Module', 'F7', 'Options ← Font'], 'ثم تختار الأداة وتضغط Apply و OK.')
+  ],
+  tasks: [
+    { t: 'اذكر طريقتين لضبط خصائص الأداة.', a: 'الأولى: من نافذة الخصائص Properties Window أثناء التصميم. الثانية: من الشيفرة Code أثناء التنفيذ.' },
+    { t: 'ما الفرق بين Project Explorer و Properties Window؟', a: 'Project Explorer يعرض ملفات المشروع (النماذج والوحدات) بشكل شجري. Properties Window يعرض خصائص الأداة أو النموذج المحدد حاليًا.' },
+    { t: 'افتح البرنامج وصمم نموذجًا فيه Label وزر. اجعل الزر يغيّر نص الـ Label. (جرّب الحل في المختبر).', ex: 'e1a' }
+  ]
+});
+
+/* ====================== الفصل 2 ====================== */
+CH.push({
+  id: 2, icon: '🧩', color: '#c26a00', title: 'الكائنات والأدوات', sub: 'Label و TextBox و CommandButton',
+  blocks: [
+    ['h', 'الكائنات {{Objects}} أو الأدوات {{Controls}}'],
+    ['p', 'لكل كائن ثلاثة أشياء:'],
+    ['ul', ['خصائص {{Properties}}: تصف شكله (اللون، الحجم، النص)', 'أحداث {{Events}}: ما يستجيب له (نقرة، حركة)', 'طرق {{Methods}}: أفعال يقوم بها (مثل {{SetFocus}})']]
+    , ['h', 'أولًا: {{Label}} (العنوان)'],
+    ['p', 'يُستخدم للعرض فقط. نعرض به نتيجة أو نصًا ما.'],
+    ['table', ['الخاصية', 'وظيفتها'], [
+      ['{{Name}}', 'الاسم الداخلي. نستخدمه عند كتابة الشيفرة.'],
+      ['{{Caption}}', 'النص الظاهر على الأداة.'],
+      ['{{AutoSize}}', 'الحجم التلقائي. {{True}} للتفعيل و {{False}} للإلغاء.'],
+      ['{{BackColor}}', 'لون الخلفية.'],
+      ['{{ForeColor}}', 'لون الكتابة.'],
+      ['{{Font}}', 'نوع الخط وحجمه وشكله.'],
+      ['{{Enabled}}', '{{True}} يمكّن الأداة. {{False}} يلغي التمكين.'],
+      ['{{BorderStyle}}', '{{None}}: مسطح. {{Fixed Single}}: غائر إلى الداخل.'],
+      ['{{Visible}}', '{{True}} يُظهرها. {{False}} يخفيها.'],
+      ['{{Alignment}}', 'محاذاة النص: {{Left}} أو {{Right}} أو {{Center}}.']]],
+    ['tip', 'لا تخلط بين {{Name}} و {{Caption}}. الأول اسمٌ تكتبه في الشيفرة. والثاني نصٌّ يراه المستخدم.'],
+    ['p', 'أحداث {{Label}}:'],
+    ['ul', ['{{Click}}: نقرة واحدة', '{{MouseDown}}: لحظة الضغط على الزر الأيسر قبل تحريره', '{{MouseUp}}: لحظة تحرير الزر']],
+    ['p', 'جرّب: اضغط على الكلمات الأربع وراقب {{Label1}}.'],
+    ['ex', 'e2a'],
+    ['h', 'ثانيًا: {{TextBox}} (مربع النص)'],
+    ['p', 'يُستخدم لإدخال البيانات وفي العمليات الحسابية.'],
+    ['p', 'يشترك مع {{Label}} في: {{Name}} و {{BackColor}} و {{ForeColor}} و {{Enabled}} و {{Visible}} و {{Alignment}} و {{BorderStyle}}.'],
+    ['table', ['خاصية خاصة به', 'وظيفتها'], [
+      ['{{Text}}', 'القيمة الموجودة داخل الصندوق.'],
+      ['{{MultiLine}}', '{{True}} يسمح بالكتابة على عدة أسطر. {{False}} سطر واحد.'],
+      ['{{MaxLength}}', 'أقصى عدد من الأحرف يمكن كتابته.'],
+      ['{{Locked}}', '{{False}} يسمح بالتعديل. {{True}} يمنع تعديل المحتوى.']]],
+    ['table', ['الحدث', 'متى ينفَّذ؟'], [
+      ['{{Change}}', 'عند أي تعديل في المحتوى (إضافة أو حذف).'],
+      ['{{GotFocus}}', 'عند انتقال التركيز إلى الصندوق (بالفأرة أو بمفتاح {{Tab}}).'],
+      ['{{LostFocus}}', 'عندما يفقد الصندوق التركيز.'],
+      ['{{KeyDown}}', 'عند الضغط على أي مفتاح من لوحة المفاتيح.']]],
+    ['p', 'والطريقة المهمة هي {{SetFocus}}: نقل التركيز.'],
+    ['ex', 'e2b'],
+    ['ex', 'e2e'],
+    ['h', 'ثالثًا: {{CommandButton}} (زر الأمر)'],
+    ['p', 'يُستخدم لتنفيذ الأوامر. نكتب الشيفرة داخل حدثه، وأشهرها {{Click}}.'],
+    ['table', ['الخاصية', 'وظيفتها'], [
+      ['{{Style}}', '{{Standard}}: الشكل ثابت. {{Graphical}}: يسمح بتغيير اللون أو وضع صورة.'],
+      ['{{Picture}}', 'صورة خلفية للزر. بشرط أن تكون {{Style}} = {{Graphical}}.'],
+      ['{{Default}}', 'عند {{True}}: ضغط {{Enter}} ينفّذ شيفرة هذا الزر.'],
+      ['{{Cancel}}', 'عند {{True}}: ضغط {{Esc}} ينفّذ شيفرة هذا الزر.']]],
+    ['warn', 'لا يجوز أن تكون {{Default}} أو {{Cancel}} مساوية {{True}} لأكثر من زر على نفس النموذج. لكن يجوز أن يكون الزر نفسه {{Default}} و {{Cancel}} معًا.'],
+    ['h', 'الدالة {{Val}}: لماذا نحتاجها؟'],
+    ['p', 'مربع النص يحمل «نصًا» دائمًا، حتى لو كتبت فيه رقمًا.'],
+    ['p', 'وجمع نصّين يعني ربطهما: {{"12"}} + {{"30"}} = {{"1230"}}.'],
+    ['p', 'الدالة {{Val}} تحوّل النص إلى رقم لنتمكن من الحساب.'],
+    ['ex', 'e2d'],
+    ['h', 'مثال متكامل: آلة حاسبة'],
+    ['p', 'نستخدم ثلاثة {{Label}} وثلاثة {{TextBox}} وستة أزرار.'],
+    ['p', 'Text3 مقفل ({{Locked}} = {{True}}) لأنه للنتيجة فقط.'],
+    ['ex', 'e2c'],
+    ['warn', 'قسمة على صفر؟ جرّب {{/}} والمقسوم عليه 0 ولاحظ رسالة الخطأ {{Division by zero}}.']
+  ],
+  quiz: [
+    Q('الأداة المخصصة للعرض فقط:', 'Label', ['TextBox', 'CommandButton', 'Timer'], 'Label لعرض نص أو نتيجة.'),
+    Q('الخاصية التي تحدد النص الظاهر على الـ Label:', 'Caption', ['Name', 'Text', 'Tag'], 'Name هو الاسم الداخلي، و Caption هو الظاهر.'),
+    Q('لإخفاء Label بالشيفرة نكتب:', 'Label1.Visible = False', ['Label1.Enabled = False', 'Label1.Caption = ""', 'Label1.Hide'], 'Visible تتحكم بالظهور.'),
+    Q('الخاصية التي تحدد لون الكتابة:', 'ForeColor', ['BackColor', 'BorderStyle', 'Font'], 'ForeColor = لون الكتابة، BackColor = لون الخلفية.'),
+    Q('أيّ خاصية تمنع المستخدم من تعديل محتوى TextBox؟', 'Locked = True', ['Enabled = True', 'Visible = False', 'MultiLine = True'], 'Locked = True يقفل المحتوى.'),
+    Q('الحدث الذي ينفَّذ عند أي تعديل في محتوى TextBox هو:', 'Change', ['Click', 'LostFocus', 'KeyDown'], 'Change عند الإضافة أو الحذف.'),
+    Q('الحدث GotFocus ينفَّذ عندما:', 'ينتقل التركيز إلى الصندوق', ['يفقد الصندوق التركيز', 'ينقر المستخدم مرتين', 'يُحذف النص'], 'GotFocus = الحصول على التركيز.'),
+    Q('لماذا نستخدم الدالة Val في الآلة الحاسبة؟', 'لتحويل نص الصندوق إلى رقم قبل الحساب', ['لتكبير الأرقام', 'لإخفاء الصندوق', 'لحذف الفراغات فقط'], 'بدونها يُجمع النصّان ربطًا: "12" + "30" = "1230".'),
+    Q('ما ناتج التعبير: Text1.Text + Text2.Text حيث Text1 = 12 و Text2 = 30؟', '1230', ['42', '360', 'خطأ'], 'كلاهما نص، فالجمع هنا ربط.'),
+    Q('لتفعيل الزر عند الضغط على Enter نضبط عليه:', 'Default = True', ['Cancel = True', 'Style = 1', 'Locked = True'], 'Cancel لمفتاح Esc.'),
+    Q('هل يجوز أن يكون Default = True لزرين على نفس النموذج؟', 'لا يجوز', ['نعم دائمًا', 'نعم إذا اختلف الاسم', 'نعم إذا كان أحدهما Cancel'], 'زر واحد فقط، لكن يجوز أن يكون نفس الزر Default و Cancel معًا.'),
+    Q('لكي تظهر صورة على الزر يجب أن تكون Style =', 'Graphical', ['Standard', 'None', 'Fixed Single'], 'الخاصية Picture تعمل فقط مع Style = Graphical.')
+  ],
+  tasks: [
+    { t: 'صمّم نموذجًا لحساب مساحة المستطيل (الطول × العرض).', ex: 'e2f' },
+    { t: 'أضف إلى الآلة الحاسبة زرًا يُظهر باقي القسمة Mod.', a: 'أضف زرًا Command7 واكتب: Text3 = Val(Text1) Mod Val(Text2).\nجرّبه في المختبر بعد فتح مثال الآلة الحاسبة.' },
+    { t: 'اجعل Label يغيّر لونه عند النقر عليه، ثم يعود لونه الأصلي عند إفلات الزر. (تلميح: MouseDown و MouseUp)', ex: 'e3e' }
+  ]
+});
+
+/* ====================== الفصل 3 ====================== */
+CH.push({
+  id: 3, icon: '🖱️', color: '#7b3fc4', title: 'الأحداث', sub: 'Click و DblClick و MouseMove و DragDrop',
+  blocks: [
+    ['h', 'مفهوم الحدث {{Event}}'],
+    ['p', 'الحدث عمل يحصل على الكائن. مثل النقر عليه، أو النقر المزدوج، أو المرور فوقه بالفأرة.'],
+    ['p', 'لكل كائن أحداثه الخاصة.'],
+    ['p', 'وكل شيفرة مرتبطة بكائن لا بد أن تُنفَّذ بواسطة حدث.'],
+    ['p', 'هذا يعطي اللغة قوة: تبرمج الكائن الواحد بعدد أحداثه.'],
+    ['h', 'كيف نتعرف على أحداث كائن؟'],
+    ['ol', ['أضف الأداة من صندوق الأدوات إلى النموذج', 'انقر نقرًا مزدوجًا على الكائن لتنتقل إلى محرر الشيفرة', 'افتح القائمة اليمنى في أعلى المحرر وستجد كل أحداثه']],
+    ['tip', 'النقر المزدوج على الكائن للانتقال للمحرر هو نفسه حدثٌ ({{DblClick}}) أيضًا!'],
+    ['p', 'اسم الإجراء دائمًا بهذا الشكل:'],
+    ['code', 'Private Sub ControlName_EventName()\n   \' commands here\nEnd Sub'],
+    ['h', '1. حدث النقر {{Click}}'],
+    ['p', 'النقر على أداة. هو الحدث الأكثر استخدامًا.'],
+    ['p', 'التطبيق (1): نقرتك على كل أداة تعطي ردّة فعل مختلفة:'],
+    ['ul', ['الزر: يعرض رسالة {{MsgBox}}', 'الـ {{Label}}: يتغير نصه إلى {{Click}}', 'صندوق النص: يتحرك مكانه', 'النموذج: يصبح لونه أحمر']],
+    ['ex', 'e3a'],
+    ['h', '2. حدث النقر المزدوج {{DblClick}}'],
+    ['p', 'نقرتان متتاليتان بسرعة على الكائن.'],
+    ['p', 'التطبيق (2): عند النقر المزدوج على الـ {{Label}} ننقل نص صندوق إلى صندوق آخر ونغيّر عنوان النموذج.'],
+    ['ex', 'e3b'],
+    ['h', '3. حدث تحريك الفأرة {{MouseMove}}'],
+    ['p', 'تستجيب الأداة عندما يمرّ مؤشر الفأرة فوقها. هذه صيغته:'],
+    ['code', 'Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)\n\nEnd Sub'],
+    ['table', ['الوسيط', 'معناه'], [
+      ['{{Control name}}', 'اسم الأداة التي يجري عليها الحدث'],
+      ['{{Button}}', 'عدد صحيح يمثل زر الفأرة المضغوط (الجدول 1)'],
+      ['{{Shift}}', 'عدد صحيح يمثل المفتاح {{Shift}} أو {{Ctrl}} أو {{Alt}} المضغوط (الجدول 2)'],
+      ['{{X , Y}}', 'الموقع الأفقي (السيني) والعمودي (الصادي) لمؤشر الفأرة']]],
+    ['table', ['قيمة Button', 'الأزرار المضغوطة'], [
+      ['1', '{{Left}} (الأيسر)'], ['2', '{{Right}} (الأيمن)'], ['3', 'الأيسر + الأيمن'], ['4', '{{Middle}} (الأوسط)'], ['5', 'الأيسر + الأوسط'], ['6', 'الأيمن + الأوسط'], ['7', 'كلها']]],
+    ['table', ['قيمة Shift', 'المفاتيح'], [
+      ['1', '{{Shift}}'], ['2', '{{Ctrl}}'], ['3', '{{Shift}} + {{Ctrl}}'], ['4', '{{Alt}}'], ['5', '{{Shift}} + {{Alt}}'], ['6', '{{Ctrl}} + {{Alt}}'], ['7', '{{Shift}} + {{Ctrl}} + {{Alt}}']]],
+    ['note', 'تنبيه: في الملزمة المطبوعة ترتيب القيم مختلف قليلًا ({{Alt}} = 3 و {{Shift}}+{{Ctrl}} = 4). الجدول أعلاه هو ما يعتمده فيجوال بيسك 6 فعلًا (الأرقام 1 و 2 و 4 هي الأساس، والبقية مجموعها). جرّب الصندوق التفاعلي بالأسفل لتتأكد.'],
+    ['p', 'جرّب بنفسك: تحرّك فوق المنطقة وانقر بأزرار مختلفة:'],
+    ['w', 'mouse'],
+    ['p', 'التطبيق (3): نعرض X و Y فوق النموذج. وعند المرور على زر نكبّر الخط أو نغيّر اللون.'],
+    ['ex', 'e3c'],
+    ['note', 'في فيجوال بيسك تقاس X و Y بوحدة اسمها {{Twip}}. الـ {{Twip}} الواحد جزء صغير جدًا من البكسل، لذلك ترى أرقامًا كبيرة (البكسل الواحد = 15 {{Twip}} تقريبًا).'],
+    ['h', '4. حدث السحب والإفلات {{DragDrop}}'],
+    ['p', 'سحب كائن معين إلى مكان آخر فوق النموذج ثم إفلاته.'],
+    ['p', 'تُكتب الشيفرة في إجراء النموذج:'],
+    ['code', 'Private Sub Form_DragDrop(Source As Control, X As Single, Y As Single)\n\nEnd Sub'],
+    ['ul', ['{{Source}}: الأداة التي سيتم نقلها', '{{X , Y}}: الموقع الحالي لمؤشر الفأرة']],
+    ['warn', 'لكي يمكن سحب الأداة اضبط خاصية {{DragMode}} = 1 {{Automatic}}.'],
+    ['p', 'التطبيق (4): صورة نسحبها إلى مكان آخر على النموذج.'],
+    ['ex', 'e3d'],
+    ['tip', 'سؤال: ما الفرق بين {{DblClick}} و {{DragDrop}}؟ الأول نقرتان على الأداة تنفّذان شيفرتها. والثاني سحبٌ للأداة إلى مكان آخر، وتُكتب الشيفرة في إجراء النموذج.'],
+    ['h', '5. الضغط على زر الفأرة وإفلاته {{MouseDown}} و {{MouseUp}}'],
+    ['p', 'يستجيب الكائن أثناء الضغط ({{MouseDown}}) وأثناء الإفلات ({{MouseUp}}).'],
+    ['code', 'Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)\n\nEnd Sub\n\nPrivate Sub Label1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)\n\nEnd Sub'],
+    ['p', 'تجربة (1): عند الضغط يصبح {{Caption}} = {{Mouse Down}} والخلفية زرقاء. وعند الإفلات يصبح {{Mouse Up}} والخلفية حمراء.'],
+    ['ex', 'e3e'],
+    ['table', ['الحدث', 'متى؟', 'الاستخدام'], [
+      ['{{Click}}', 'نقرة واحدة', 'الأكثر استخدامًا'],
+      ['{{DblClick}}', 'نقرتان', 'فتح أو تأكيد'],
+      ['{{MouseMove}}', 'مرور الفأرة', 'تلميحات وتأثيرات'],
+      ['{{MouseDown}}', 'لحظة الضغط', 'بدء عمل'],
+      ['{{MouseUp}}', 'لحظة الإفلات', 'إنهاء عمل'],
+      ['{{DragDrop}}', 'إفلات كائن مسحوب', 'نقل الكائنات']]]
+  ],
+  quiz: [
+    Q('الحدث هو:', 'عمل يجري على الكائن مثل النقر أو المرور فوقه', ['خاصية لون', 'اسم الكائن', 'نوع من المتغيرات'], 'الحدث يرتبط بشيفرة تنفَّذ عند وقوعه.'),
+    Q('اسم الإجراء الصحيح لحدث النقر على زر اسمه Command1:', 'Command1_Click', ['Click_Command1', 'Command1.Click', 'On_Command1'], 'الشكل: اسم الأداة + _ + اسم الحدث.'),
+    Q('أيّ حدث ينفَّذ عند النقر مرتين متتاليتين؟', 'DblClick', ['Click', 'MouseMove', 'DragDrop'], 'Dbl = Double.'),
+    Q('في الحدث MouseMove ما معنى الوسيط X و Y؟', 'موقع مؤشر الفأرة الأفقي والعمودي', ['لون الأداة', 'عرض الأداة وارتفاعها', 'قيمة زر الفأرة'], 'X أفقي (سيني) و Y عمودي (صادي).'),
+    Q('إذا كانت قيمة Button = 2 فهذا يعني:', 'الزر الأيمن', ['الزر الأيسر', 'الزر الأوسط', 'كل الأزرار'], '1 أيسر، 2 أيمن، 4 أوسط.'),
+    Q('إذا كانت قيمة Shift = 2 فالمفتاح المضغوط هو:', 'Ctrl', ['Shift', 'Alt', 'Tab'], '1 = Shift ، 2 = Ctrl ، 4 = Alt.'),
+    Q('في الحدث DragDrop ما هو الوسيط Source؟', 'الأداة التي يتم نقلها', ['النموذج', 'لون الخلفية', 'رقم الزر'], 'Source = الأداة المسحوبة.'),
+    Q('لكي نسحب أداة صورة يجب ضبط:', 'DragMode = 1', ['Style = 1', 'Default = True', 'Locked = True'], 'DragMode = 1 Automatic.'),
+    Q('أيّ حدث ينفَّذ لحظة تحرير زر الفأرة؟', 'MouseUp', ['MouseDown', 'Click', 'Change'], 'Up = إفلات.'),
+    Q('أين نكتب شيفرة الحدث DragDrop في التطبيق (4)؟', 'في إجراء النموذج Form_DragDrop', ['في إجراء الصورة Image1_Click', 'في Module فقط', 'في نافذة الخصائص'], 'نكتبها في النموذج الذي أُفلت عليه الكائن.')
+  ],
+  tasks: [
+    { t: 'ما الفرق بين حدث النقر المزدوج DblClick وحدث السحب والإفلات DragDrop؟', a: 'DblClick: نقرتان متتاليتان على الأداة، وتُكتب الشيفرة في إجراء الأداة نفسها. DragDrop: سحب أداة إلى مكان آخر وإفلاتها فوق النموذج، وتُكتب الشيفرة في إجراء النموذج.' },
+    { t: 'ما الخطوات التي نتعرف بها على قائمة أحداث الكائن؟', a: '1) أضف الأداة من صندوق الأدوات إلى النموذج. 2) انقر نقرًا مزدوجًا عليها لفتح محرر الشيفرة. 3) افتح القائمة اليمنى لتجد جميع أحداثها.' },
+    { t: 'عدّل المثال e3c بحيث يتغير لون خلفية النموذج عند مرور الفأرة فوق زر ثالث.', a: 'أضف زرًا Command3 ثم اكتب:\nPrivate Sub Command3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)\nForm1.BackColor = vbGreen\nEnd Sub', ex: 'e3c' }
+  ]
+});
+
+/* ====================== الفصل 4 ====================== */
+CH.push({
+  id: 4, icon: '📦', color: '#b3261e', title: 'المتغيرات', sub: 'التسمية والأنواع والتعريف ومدى التأثير',
+  blocks: [
+    ['h', 'لماذا نستخدم المتغيرات؟'],
+    ['p', 'عندما ندخل بيانات إلى الأدوات ثم نجري عمليات عليها ونستخرج النتائج، ما الذي يحدث فعلًا؟'],
+    ['p', 'تُخزَّن البيانات مؤقتًا في ذاكرة الجهاز.'],
+    ['p', 'ولكي نصل إليها نعطي لكل موقع في الذاكرة اسمًا.'],
+    ['p', 'هذا هو المتغير {{Variable}}: صندوق في الذاكرة له اسم ونوع وقيمة.'],
+    ['w', 'types'],
+    ['h', 'شروط تسمية المتغير'],
+    ['ol', ['يبدأ بحرف، ولا يجوز أن يبدأ برقم', 'لا يجوز استخدام فراغات', 'لا يزيد عن 255 حرفًا', 'لا يجوز استخدام الإشارات (مثل + - * . ,)', 'لا يكون كلمة محجوزة في فيجوال بيسك']],
+    ['table', ['الاسم', 'الحكم', 'السبب'], [
+      ['{{Space}}', 'صحيح', 'ليست كلمة محجوزة'],
+      ['{{73AB}}', 'خطأ', 'يبدأ برقم'],
+      ['{{A73B}}', 'صحيح', 'يبدأ بحرف'],
+      ['{{A334}}', 'صحيح', 'يبدأ بحرف'],
+      ['{{Date}}', 'خطأ', 'كلمة محجوزة'],
+      ['{{INTEGER}}', 'خطأ', 'كلمة محجوزة'],
+      ['{{My Name}}', 'خطأ', 'فيه فراغ'],
+      ['{{My_name}}', 'صحيح', 'الشرطة السفلية مسموحة']]],
+    ['p', 'اختبر أي اسم تريد:'],
+    ['w', 'namecheck'],
+    ['h', 'أنواع المتغيرات'],
+    ['p', 'البيانات قد تكون أرقامًا صحيحة أو كسرية، أو نصًا، أو تاريخًا، أو قيمًا منطقية.'],
+    ['table', ['النوع', 'التسمية', 'السعة'], [
+      ['أعداد صحيحة', '{{Integer}}', '2 byte'], ['أعداد صحيحة', '{{Long}}', '4 byte'], ['أعداد كسرية', '{{Single}}', '4 byte'], ['أعداد كسرية', '{{Double}}', '8 byte'],
+      ['الأعداد المتداولة (مالية)', '{{Currency}}', '8 byte'], ['النص', '{{String}}', 'حرف واحد = 1 byte'], ['القيم المنطقية', '{{Boolean}}', '2 byte'], ['التاريخ', '{{Date}}', '8 byte'], ['متغير عام النوع', '{{Variant}}', '16 byte']]],
+    ['tip', 'مدى {{Integer}} من -32768 إلى 32767. وإذا تجاوزته يظهر الخطأ {{Overflow}}. استخدم {{Long}} للأرقام الأكبر.'],
+    ['h', 'تعريف المتغيرات'],
+    ['p', 'أولًا اختر النوع المناسب لبياناتك. ثم اتبع القاعدة:'],
+    ['code', 'Dim VariableName As Type'],
+    ['p', 'مثال: نحجز موقعًا اسمه X وسعته 2 byte لأعداد صحيحة.'],
+    ['code', 'Dim X As Integer\nDim My_Name As String\nDim Birthday As Date'],
+    ['p', 'ويمكن تعريف أكثر من متغير في سطر واحد، ولكل متغير نوعه:'],
+    ['code', 'Dim x As Integer, y As Integer\nDim a As Single, s As String'],
+    ['warn', 'انتبه: {{Dim x, y As Integer}} تجعل {{y}} فقط من النوع {{Integer}}، أما {{x}} فيصبح {{Variant}}. اكتب النوع بعد كل متغير.'],
+    ['note', 'تنبيه تصحيحي: في بعض الملازم كُتبت صيغ مثل {{Dim x, y As Integer As String As Date}} و {{Dim Const X}}. هذه الصيغ غير صحيحة في فيجوال بيسك. الصحيح ما رأيته أعلاه، والثابت يُعرَّف بـ {{Const}} فقط.'],
+    ['h', 'مثال: مساحة الدائرة ومحيطها'],
+    ['p', 'المساحة = π × نق². المحيط = 2 × π × نق.'],
+    ['ol', ['أضف 3 {{Label}} و 3 {{TextBox}} وزرًا اسمه {{Press}}', 'غيّر {{Caption}} النموذج إلى {{The Circle}}', 'اكتب الشيفرة داخل حدث الزر']],
+    ['ex', 'e4a'],
+    ['p', 'ماذا حدث في الشيفرة؟'],
+    ['ul', ['{{PI}} من نوع {{Const}} أي قيمة ثابتة 3.14 لا تتغير، ولا يجوز إسناد قيمة جديدة لها', '{{R}} أخذ قيمة نصف القطر من صندوق النص', 'ثم حُسبت المعادلة وأُسندت النتيجة للمتغير {{Z}}']],
+    ['h', 'قاعدة الإسناد (علامة =)'],
+    ['p', 'في معظم لغات البرمجة تُحسب المعادلة التي بعد علامة المساواة أولًا. ثم تُسند النتيجة للمتغير الذي قبلها.'],
+    ['p', 'مثال: إذا كان نصف القطر 2:'],
+    ['code', 'Z = PI * R * R\nZ = 3.14 * 2 * 2     \' step 1: calculate\nZ = 12.56            \' step 2: assign'],
+    ['h', 'مدى تأثير المتغيرات {{Scope}}'],
+    ['p', 'حسب مكان تعريف المتغير يُصنَّف إلى ثلاثة أنواع:'],
+    ['table', ['النوع', 'أين يُعرَّف؟', 'من يراه؟'], [
+      ['محلي {{Local}}', 'داخل الإجراء', 'هذا الإجراء فقط'],
+      ['على مستوى النموذج {{Form}}', 'في أعلى شاشة الشيفرة ({{General Declarations}})', 'كل إجراءات النموذج'],
+      ['عام {{Public}}', 'في {{Module}} بكلمة {{Public}}', 'كل نماذج المشروع']]],
+    ['h', '1) المتغيرات المحلية {{Local}}'],
+    ['p', 'تُعرَّف داخل إجراء الكائن. ولا يستعملها أحد خارجه.'],
+    ['p', 'لكل إجراء متغيره الخاص حتى لو اتفقت الأسماء. كل واحد في موقع مختلف في الذاكرة.'],
+    ['ex', 'e4b'],
+    ['warn', 'إذا عرّفت متغيرًا داخل إجراء، ثم استخدمته في إجراء آخر فلن يتعرّف عليه. ومن الأفضل ألا تختلف تسميات المتغيرات المحلية لكي لا تربك نفسك.'],
+    ['h', '2) متغيرات على مستوى النموذج {{Form}}'],
+    ['p', 'نعرّفها في السطر الأول على شاشة الشيفرة. تسمى هذه الطريقة {{General Declaration}}.'],
+    ['p', 'كل إجراء في النموذج يرى المتغير، وأي تعديل يؤثر عليه في بقية الإجراءات.'],
+    ['ex', 'e4c'],
+    ['h', 'الجملة {{Option Explicit}}'],
+    ['p', 'تصريح عام يجبرك على إعلان كل متغير قبل استخدامه.'],
+    ['table', ['بدون Option Explicit', 'مع Option Explicit'], [
+      ['تستطيع كتابة {{S = 1}} مباشرة دون تعريف، فيُنشأ المتغير تلقائيًا بنوع {{Variant}}', 'إجباري أن تعرّف {{Dim S As Integer}} قبل الاستخدام، وإلا يظهر خطأ']]],
+    ['tip', 'اكتب {{Option Explicit}} دائمًا في أول الشيفرة. تمنع بها أخطاء الإملاء في أسماء المتغيرات.'],
+    ['ex', 'e4d'],
+    ['h', '3) المتغيرات العامة {{Public}}'],
+    ['p', 'تُعرَّف لاستخدامها على مستوى المشروع كله. والمشروع الواحد فيه أكثر من {{Form}}.'],
+    ['p', 'نستبدل الأمر {{Dim}} بالأمر {{Public}}. وتُكتب على سطر مستقل في أول الشيفرة.'],
+    ['code', 'Public x As Integer\nPublic y As String'],
+    ['p', 'وبطريقة أخرى: تُعرَّف في شاشة {{Module}}. نضيفها من القائمة {{Project}} ← {{Add Module}} ← الأيقونة {{Module}} ← {{Open}}. تظهر شاشة بيضاء تشبه شاشة الشيفرة، وتظهر أيقونتها في مستكشف المشروع.'],
+    ['h', 'تحدٍّ: ما ناتج الأزرار الثلاثة؟'],
+    ['p', 'هذا واجب المحاضرة. فكّر أولًا ثم شغّله لتتأكد.'],
+    ['ex', 'e4e'],
+    ['ul', ['{{Command1}}: أسند 10 و 4 وجمعهما. فالنتيجة z = 14', '{{Command2}}: {{Dim b}} محلي يخفي المتغير الخارجي، فقيمته 0. إذن z = 10 − 0 = 10', '{{Command3}}: {{Dim a}} المحلي يخفي {{a}} الخارجي، وقيمته 0. إذن z = z × 0 = 0']],
+    ['note', 'السطر {{Dim a, b As Integer}}: المتغير {{a}} من نوع {{Variant}} (لأن النوع كُتب بعد {{b}} فقط). لا يؤثر هذا على الناتج هنا، لكنها عادة سيئة.'],
+    ['h', 'حدود الأنواع'],
+    ['ex', 'e4f']
+  ],
+  quiz: [
+    Q('المتغير هو:', 'اسم لموقع في ذاكرة الجهاز يخزّن قيمة مؤقتة', ['أداة في صندوق الأدوات', 'نافذة في بيئة التطوير', 'ملف على القرص'], 'نعطي الموقع اسمًا لنستخرج القيمة عند الحاجة.'),
+    Q('أيّ اسم متغير صحيح؟', 'My_name', ['73AB', 'My Name', 'Date'], 'الشرطة السفلية مسموحة، والبقية خطأ (رقم أولًا، فراغ، كلمة محجوزة).'),
+    Q('لماذا الاسم Integer غير صالح كاسم لمتغير؟', 'لأنه كلمة محجوزة', ['لأنه طويل', 'لأنه يحتوي حروفًا كبيرة', 'لأنه يبدأ بحرف'], 'الكلمات المحجوزة لا تُستخدم أسماء للمتغيرات.'),
+    Q('أيّ نوع نستخدم لتخزين الأعداد الصحيحة الكبيرة (فوق 32767)؟', 'Long', ['Integer', 'Boolean', 'Date'], 'Long سعته 4 byte.'),
+    Q('أيّ نوع مناسب لتخزين نص؟', 'String', ['Single', 'Boolean', 'Currency'], 'String للنصوص.'),
+    Q('الصيغة الصحيحة لتعريف متغير صحيح اسمه X:', 'Dim X As Integer', ['Dim Integer As X', 'Var X Integer', 'X As Dim Integer'], 'Dim اسم As نوع.'),
+    Q('ماذا يحدث عند تنفيذ:', 'يظهر الخطأ Overflow', ['x تصبح 40000', 'x تصبح 0', 'لا يحدث شيء'], 'Integer أقصى قيمة له 32767، فيحدث تجاوز للسعة.', 'Dim x As Integer\nx = 30000\nx = x + 10000'),
+    Q('الثابت Const يختلف عن المتغير بأنه:', 'لا تتغير قيمته ولا يجوز إسناد قيمة جديدة له', ['أبطأ دائمًا', 'يقبل النص فقط', 'لا يُكتب في الشيفرة'], 'مثل PI = 3.14.'),
+    Q('المتغير المحلي Local هو المتغير الذي:', 'يُعرَّف داخل الإجراء ويراه هذا الإجراء فقط', ['يراه كل نماذج المشروع', 'يُعرَّف في Module', 'يُعرَّف بـ Public'], 'مداه إجراء واحد.'),
+    Q('أين نعرّف متغيرًا يراه كل إجراءات النموذج الواحد؟', 'General Declarations (أعلى شاشة الشيفرة)', ['داخل إجراء الزر', 'في نافذة الخصائص', 'في Project Explorer'], 'السطر الأول على شاشة الشيفرة.'),
+    Q('لتعريف متغير عام على مستوى المشروع نستخدم:', 'Public داخل Module', ['Dim داخل الإجراء', 'Const داخل الإجراء', 'Option داخل الزر'], 'Public في Module.'),
+    Q('ماذا تفعل الجملة Option Explicit؟', 'تجبرك على تعريف كل متغير قبل استخدامه', ['تحذف المتغيرات غير المستخدمة', 'تحوّل النص إلى رقم', 'تغلق البرنامج'], 'تمنع أخطاء كتابة أسماء المتغيرات.'),
+    Q('إذا كان Dim x, y As Integer فما نوع x؟', 'Variant', ['Integer', 'String', 'Long'], 'النوع يُكتب بعد كل متغير. وإلا يصبح Variant.'),
+    Q('في Z = X * Y * Y أيّ خطوة تحدث أولًا؟', 'حساب ما بعد علامة = ثم إسناد النتيجة إلى Z', ['إسناد Z أولًا ثم الحساب', 'حذف Z', 'تحويل Z إلى نص'], 'نحسب الطرف الأيمن ثم نسند.')
+  ],
+  tasks: [
+    { t: 'حدّد الأسماء الصحيحة: Total_Price ، 2nd ، My Var ، Name1 ، Print', a: 'الصحيح: Total_Price و Name1.\nالخطأ: 2nd (يبدأ برقم) ، My Var (فراغ) ، Print (كلمة محجوزة).' },
+    { t: 'ما ناتج تنفيذ Command1 ثم Command2 ثم Command3 في مثال التحدي؟', a: 'Command1: a=10, b=4, z=14.\nCommand2: b محلي=0 فتُطبع b=0 ثم z=10.\nCommand3: تطبع z=10 ثم تصبح a المحلية=0 فيكون z=0.', ex: 'e4e' },
+    { t: 'اكتب برنامجًا يحسب مساحة الدائرة ومحيطها.', ex: 'e4a' },
+    { t: 'لماذا يحدث خطأ عند تنفيذ x = "welcome" إذا كان x معرَّفًا Integer؟', a: 'لأن المتغير Integer لا يقبل نصًا. يظهر الخطأ Type mismatch. يجب أن يكون النوع String أو Variant.' }
+  ]
+});
+
+/* ====================== الفصل 5 ====================== */
+CH.push({
+  id: 5, icon: '💬', color: '#1f6fd0', title: 'صناديق الإدخال والرسائل', sub: 'InputBox و MsgBox و GoTo',
+  blocks: [
+    ['h', 'صندوق الإدخال {{InputBox}}'],
+    ['p', 'من أهم الأدوات في فيجوال بيسك. يُدخل المستخدم قيمة عبر نافذة حوار.'],
+    ['p', 'فيها عبارة وصندوق نص وزرّا {{OK}} و {{Cancel}}.'],
+    ['p', 'يرجع الصندوق نصًا {{String}}. ولإدخال الأرقام نستخدم الدالة {{Val}}.'],
+    ['code', 'Variable = InputBox("Message", "Title")\n\n\' numbers:\nVariable = Val(InputBox("Message", "Title"))'],
+    ['ul', ['{{Variable}}: اسم المتغير الذي سنخزّن فيه القيمة', '{{Message}}: العبارة التي تظهر في الصندوق', '{{Title}}: عنوان الصندوق (اختياري)']],
+    ['p', 'مثال: جمع رقمين وطرحهما باستخدام صناديق الإدخال.'],
+    ['ex', 'e5a'],
+    ['p', 'مثال: ثلاثة صناديق، كل واحد لمتغير.'],
+    ['ex', 'e5b'],
+    ['p', 'مثال: إدخال اسم ومرحلة الطالب ثم عرضهما.'],
+    ['ex', 'e5c'],
+    ['note', 'المعامل {{&}} يربط النصوص: {{"Name: " & x}}. وهو مختلف عن {{+}} الذي يجمع الأرقام.'],
+    ['h', 'صندوق الرسائل {{MsgBox}}'],
+    ['p', 'نافذة بسيطة تعرض رسالة مع زر أمر واحد أو أكثر.'],
+    ['p', 'نستخدمها ليتأكد البرنامج أن المستخدم قرأ الرسالة. أو ليختار المستخدم قرارًا.'],
+    ['code', 'MsgBox "prompt", symbol, "title"'],
+    ['ul', ['{{prompt}}: الرسالة النصية', '{{symbol}}: رقم صحيح يحدد الأزرار والأيقونة', '{{title}}: عنوان الصندوق (اختياري)']],
+    ['table', ['قيمة الأزرار', 'الأزرار الظاهرة'], [
+      ['0', '{{OK}}'], ['1', '{{OK}} / {{Cancel}}'], ['2', '{{Abort}} / {{Retry}} / {{Ignore}}'], ['3', '{{Yes}} / {{No}} / {{Cancel}}'], ['4', '{{Yes}} / {{No}}'], ['5', '{{Retry}} / {{Cancel}}']]],
+    ['table', ['قيمة الأيقونة', 'الشكل'], [['16', '❌ خطأ حرج {{Critical}}'], ['32', '❓ استفهام {{Question}}'], ['48', '⚠️ تحذير {{Exclamation}}'], ['64', 'ℹ️ معلومة {{Information}}']]],
+    ['tip', 'اجمع رقم الأزرار مع رقم الأيقونة. مثال: {{1 + 32}} أو {{33}} = أزرار {{OK/Cancel}} مع أيقونة الاستفهام.'],
+    ['p', 'ابنِ صندوقك بنفسك:'],
+    ['w', 'msgbuilder'],
+    ['ex', 'e5d'],
+    ['h', 'ماذا يرجع صندوق الرسائل؟'],
+    ['p', 'كل زر يرجع رقمًا. نخزّنه في متغير ونتصرف حسب الاختيار:'],
+    ['code', 'Variable = MsgBox("prompt", symbol, "title")'],
+    ['table', ['القيمة', 'الزر المضغوط'], [['1', '{{OK}}'], ['2', '{{Cancel}}'], ['3', '{{Abort}}'], ['4', '{{Retry}}'], ['5', '{{Ignore}}'], ['6', '{{Yes}}'], ['7', '{{No}}']]],
+    ['warn', 'انتبه للأقواس: عند حفظ القيمة في متغير نضع الأقواس. بدون متغير لا نحتاجها.'],
+    ['ex', 'e5e'],
+    ['p', 'ثلاثة أزرار: {{Start}} يقرأ الاسم، و{{Clear}} و{{Exit}} يطلبان تأكيدًا.'],
+    ['ex', 'e5f'],
+    ['h', 'عبارة الانتقال {{GoTo}}'],
+    ['p', 'تنقل التنفيذ إلى سطر آخر في الشيفرة. وهي نوعان:'],
+    ['h', '1) الانتقال غير المشروط'],
+    ['code', 'GoTo LineNumber'],
+    ['p', 'ينتقل مباشرة دون شرط.'],
+    ['ex', 'e5h'],
+    ['h', '2) الانتقال المشروط'],
+    ['code', 'If (condition) Then\n   Instruction(s)\n   GoTo LineNumber\nEnd If'],
+    ['p', 'نستعمل غالبًا اسمًا لـ {{Label}} في الشيفرة بدل رقم السطر. ويُكتب بعده نقطتان {{:}}.'],
+    ['ex', 'e5g'],
+    ['warn', 'الإكثار من {{GoTo}} يجعل الشيفرة صعبة القراءة. استخدمه عند الحاجة فقط، وفضّل {{If}} و {{Select Case}}.']
+  ],
+  quiz: [
+    Q('ماذا يرجع InputBox؟', 'نصًا String', ['رقمًا دائمًا', 'قيمة منطقية', 'لا شيء'], 'ولذلك نستخدم Val عند الحاجة لرقم.'),
+    Q('الصيغة الصحيحة لإدخال رقم:', 'x = Val(InputBox("Enter x"))', ['x = InputBox Val("Enter x")', 'Val x = InputBox', 'InputBox x = Val'], 'نضع InputBox داخل Val.'),
+    Q('الوسيط الثالث في MsgBox "prompt", symbol, "title" هو:', 'عنوان الصندوق', ['الرسالة', 'رقم الأزرار', 'لون الخلفية'], 'title = عنوان اختياري.'),
+    Q('أيّ قيمة تُظهر الزرين Yes و No؟', '4', ['0', '1', '5'], '4 = Yes/No.'),
+    Q('أيّ قيمة تُظهر الزرين OK و Cancel؟', '1', ['0', '3', '4'], '1 = OK/Cancel.'),
+    Q('ما قيمة الأيقونة ❓ (الاستفهام)؟', '32', ['16', '48', '64'], '16 خطأ، 32 استفهام، 48 تحذير، 64 معلومة.'),
+    Q('أيّ تعبير يُظهر OK/Cancel مع أيقونة الاستفهام؟', 'MsgBox "Save?", 1 + 32', ['MsgBox "Save?", 4 + 16', 'MsgBox "Save?", 0', 'MsgBox "Save?", 5 + 48'], '1 + 32 = 33.'),
+    Q('إذا ضغط المستخدم Yes فالقيمة المرجعة:', '6', ['1', '7', '2'], 'Yes = 6 و No = 7.'),
+    Q('إذا ضغط المستخدم Cancel فالقيمة المرجعة:', '2', ['1', '6', '7'], 'OK = 1 و Cancel = 2.'),
+    Q('لتخزين ما يرجعه MsgBox في متغير نكتب:', 'k = MsgBox("Exit?", 4)', ['k = MsgBox "Exit?", 4', 'MsgBox k = "Exit?", 4', 'MsgBox("Exit?", 4) -> k'], 'عند استخدام القيمة المرجعة نضع الأقواس.'),
+    Q('ماذا تفعل عبارة GoTo 18؟', 'تنقل التنفيذ مباشرة إلى السطر 18', ['تكرر السطر 18 مرتين', 'تحذف السطر 18', 'توقف البرنامج'], 'انتقال غير مشروط.'),
+    Q('ما الفرق بين الانتقال المشروط وغير المشروط؟', 'المشروط يتبع جملة If. وغير المشروط ينتقل دائمًا', ['لا فرق', 'المشروط أسرع', 'غير المشروط للنصوص فقط'], 'الأول داخل If والثاني بلا شرط.')
+  ],
+  tasks: [
+    { t: 'اكتب برنامجًا يطلب رقمين بـ InputBox ويطبع حاصل ضربهما.', a: 'Private Sub Command1_Click()\nDim a As Single, b As Single\na = Val(InputBox("a?"))\nb = Val(InputBox("b?"))\nPrint "a * b = "; a * b\nEnd Sub', ex: 'e5a' },
+    { t: 'كوّن صندوق رسائل فيه الأزرار Yes / No / Cancel وأيقونة تحذير.', a: 'MsgBox "Continue?", 3 + 48, "Warning"\n(3 للأزرار + 48 للأيقونة = 51)' },
+    { t: 'ابنِ زر Exit يسأل المستخدم قبل الإغلاق.', ex: 'e5e' }
+  ]
+});
+
+/* ====================== الفصل 6 ====================== */
+CH.push({
+  id: 6, icon: '🔀', color: '#2e7d32', title: 'الجمل الشرطية', sub: 'If و If-Else و ElseIf و Select Case',
+  blocks: [
+    ['h', 'ما هي الجمل الشرطية؟'],
+    ['p', 'وتسمى أيضًا جمل السيطرة {{Control Statements}}.'],
+    ['p', 'هدفها التحكم بطريقة سير البرنامج. أي أن البرنامج يختار طريقًا بحسب الشرط.'],
+    ['ol', ['{{If … Then}}', '{{If … Else}}', '{{If … ElseIf}}', '{{Select Case}}']],
+    ['h', 'مكونات الشرط'],
+    ['p', 'الشرط تعبير ناتجه {{True}} أو {{False}}. نكوّنه من:'],
+    ['table', ['المعاملات العلائقية', 'المعنى'], [['{{=}}', 'يساوي'], ['{{<>}}', 'لا يساوي'], ['{{>}}', 'أكبر من'], ['{{<}}', 'أصغر من'], ['{{>=}}', 'أكبر من أو يساوي'], ['{{<=}}', 'أصغر من أو يساوي']]],
+    ['table', ['المعاملات المنطقية', 'المعنى'], [['{{And}}', 'يتحقق إذا تحقق الشرطان معًا'], ['{{Or}}', 'يتحقق إذا تحقق شرط واحد على الأقل'], ['{{Not}}', 'يعكس النتيجة']]],
+    ['tip', '{{Mod}} يعطي باقي القسمة. فالعدد زوجي إذا كان {{x Mod 2 = 0}}.'],
+    ['h', '1. العبارة {{If … Then}}'],
+    ['code', 'If (condition) Then\n   Instruction\nEnd If\n\n\' or several instructions:\nIf (condition) Then\n   Instruction 1\n   Instruction 2\n   Instruction n\nEnd If'],
+    ['p', 'تُنفَّذ الأوامر إذا تحقق الشرط. وإلا يتخطاها البرنامج.'],
+    ['code', 'If (A > B) Then\n   C = 6\nEnd If\n\nIf (A <> B) And (C = D) Then\n   Print "It is logical"\nEnd If\n\nIf (Val(Text1.Text) <= Val(Text2.Text)) Then\n   Text3.Text = "You Win"\nEnd If'],
+    ['h', '2. العبارة {{If … Else}}'],
+    ['code', 'If (Condition) Then\n   Instruction 1\nElse\n   Instruction 2\nEnd If'],
+    ['ul', ['{{Instruction 1}}: ينفّذ إذا تحقق الشرط', '{{Instruction 2}}: ينفّذ إذا لم يتحقق']],
+    ['p', 'مثال تطبيقي: عدد فردي أم زوجي.'],
+    ['ex', 'e6a'],
+    ['p', 'مثال تطبيقي: لعبة {{Lucky Seven}}. نستخدم {{Rnd}} لتوليد رقم عشوائي، و{{Int}} لقصّه إلى عدد صحيح.'],
+    ['ex', 'e6b'],
+    ['h', '3. العبارة {{If … ElseIf}}'],
+    ['code', 'If (Condition 1) Then\n   Instruction 1\nElseIf (Condition 2) Then\n   Instruction 2\nElseIf (Condition n) Then\n   Instruction n\nElse\n   Instruction (n+1)\nEnd If'],
+    ['ul', ['تُفحص الشروط بالترتيب، وينفَّذ أول شرط يتحقق فقط', 'أمّا {{Else}} فينفَّذ إذا لم يتحقق أي شرط']],
+    ['note', 'في بعض الملازم تُكتب {{Else If}} بكلمتين. الصيغة الصحيحة في فيجوال بيسك 6 هي {{ElseIf}} بكلمة واحدة.'],
+    ['p', 'مثال: احسب الدالة التالية:'],
+    ['table', ['الشرط', 'y'], [['x > 2', 'x + 1'], ['0 ≤ x ≤ 2', 'x²'], ['x < 0', 'x³ − 5']]],
+    ['ex', 'e6c'],
+    ['h', '4. العبارة {{Select Case}}'],
+    ['p', 'جملة شرطية لفحص عدة حالات لقيمة واحدة. وصيغتها:'],
+    ['code', 'Select Case (Variable)\nCase no.1\n   Instruction(s) 1\nCase no.2\n   Instruction(s) 2\nCase Else\n   Instruction(s) (n+1)\nEnd Select'],
+    ['p', 'وهذه أنماط القيم التي تُكتب بعد {{Case}}:'],
+    ['table', ['المثال', 'النمط'], [['{{Case Is >= 25}}', 'علائقي {{Relational}}'], ['{{Case -5 To 5}}', 'مدى {{Range}}'], ['{{Case 2, -3}}', 'متعدد {{Multiple}}'], ['{{Case "Computer"}}', 'نص {{String}}']]],
+    ['p', 'مثال: تقدير الطالب بحسب درجته.'],
+    ['ex', 'e6d'],
+    ['p', 'مثال: نختار المعادلة (من 1 إلى 4) ثم نحسب قيمتها.'],
+    ['ex', 'e6e'],
+    ['tip', 'متى تستخدم {{Select Case}}؟ عندما تفحص متغيرًا واحدًا مقابل حالات كثيرة. فهي أوضح من سلسلة طويلة من {{ElseIf}}.'],
+    ['h', 'واجبات المحاضرة (جرّب حلولها)'],
+    ['ol', ['اطبع العدد الأكبر من بين عددين', 'ثلاثة أعداد: الأكبر والأصغر', 'عدد يقبل القسمة على 4 أو 5', 'دالة بثلاثة فروع', 'اسم مستخدم وكلمة سر']],
+    ['ex', 'e6g'],
+    ['ex', 'e6h'],
+    ['ex', 'e6i'],
+    ['ex', 'e6f']
+  ],
+  quiz: [
+    Q('الجمل الشرطية تُسمى أيضًا:', 'جمل السيطرة Control Statements', ['جمل الإدخال', 'جمل التعريف', 'جمل الطباعة'], 'هدفها التحكم بمسار تنفيذ البرنامج.'),
+    Q('أيّ معامل يعني «لا يساوي»؟', '<>', ['=', '<=', '>='], 'علامة <> تعني Not Equal.'),
+    Q('إذا كان A = 5 و B = 3 فما ناتج: (A > B) And (B > 4)؟', 'False', ['True', '5', 'خطأ'], 'الشرط الثاني خاطئ فنتيجة And خاطئة.'),
+    Q('ناتج: (A > B) Or (B > 4) حيث A=5 و B=3؟', 'True', ['False', '3', 'خطأ'], 'يكفي أن يتحقق الأول.'),
+    Q('العدد x زوجي إذا:', 'x Mod 2 = 0', ['x Mod 2 = 1', 'x \\ 2 = 0', 'x / 2 = 1'], 'باقي القسمة على 2 يساوي صفرًا.'),
+    Q('عند تنفيذ الشيفرة التالية ما قيمة B؟', '20', ['10', '30', '0'], 'A = 100 لا يحقق الشرطين الأولين.', 'A = 100\nIf (A > 100) Then\n   B = 50\nElseIf (A < 100) Then\n   B = 30\nElse\n   B = 20\nEnd If'),
+    Q('في If…ElseIf ينفَّذ:', 'أول شرط يتحقق فقط', ['كل الشروط المتحققة', 'آخر شرط فقط', 'Else دائمًا'], 'بعد تحقق شرط يخرج من الجملة.'),
+    Q('ما مكتوب بعد Case في: Case 90 To 100؟', 'نمط مدى Range', ['نمط نص', 'نمط علائقي', 'نمط متعدد'], 'To يحدد مدى.'),
+    Q('ما الذي يحقق: Case 1, 2, 3؟', 'القيم 1 أو 2 أو 3', ['القيم من 1 إلى 3 فقط', 'القيمة 6', 'أي قيمة'], 'الفاصلة تعني «أو».'),
+    Q('لمعالجة كل القيم التي لم تطابق أي Case نكتب:', 'Case Else', ['Else Case', 'Default', 'Other'], 'Case Else.'),
+    Q('ما ناتج الدرجة 85 في برنامج التقدير (90-100 Excellent ، 80-89 Very Good)؟', 'Very Good', ['Excellent', 'Good', 'Fair'], '85 ضمن المدى 80 إلى 89.'),
+    Q('أيّ جملة أنسب لفحص متغير واحد مقابل أكثر من خمس حالات؟', 'Select Case', ['If … Then فقط', 'GoTo', 'Print'], 'Select Case أوضح وأقصر.'),
+    Q('ما الصيغة الصحيحة لـ «Else If» في VB6؟', 'ElseIf (كلمة واحدة)', ['Else If على سطر واحد', 'ElIf', 'OrIf'], 'ElseIf بدون فراغ.')
+  ],
+  tasks: [
+    { t: 'صمم برنامجًا يطبع العدد الأكبر والأصغر بين ثلاثة أعداد.', ex: 'e6g' },
+    { t: 'صمم برنامجًا يقرأ عددًا ويحدد إن كان يقبل القسمة على 4 أو 5.', ex: 'e6h' },
+    { t: 'احسب y = (x³+5)/(x²−2) عند x = 1,2,3,4 ، و y = 7x⁻² عند 5≤x≤10 ، و y = 60−x عند x>11.', ex: 'e6i' },
+    { t: 'اقرأ اسم مستخدم وكلمة سر. عند الضغط على Check اطبع: Welcome / Wrong user / Wrong password / Wrong Information.', ex: 'e6f' },
+    { t: 'اطبع العدد الأكبر من بين عددين.', a: 'Private Sub Command1_Click()\nDim a As Single, b As Single\na = Val(Text1.Text)\nb = Val(Text2.Text)\nIf a > b Then\n   Text3.Text = a\nElse\n   Text3.Text = b\nEnd If\nEnd Sub' }
+  ]
+});
+
+/* ====================== مسرد المصطلحات ====================== */
+const GLOSS = [
+  ['IDE', 'بيئة التطوير المتكاملة. فيها كل أدوات التصميم والبرمجة.'], ['Form', 'النموذج: النافذة التي تصمّم عليها واجهة البرنامج.'],
+  ['Control', 'أداة (كائن) توضع على النموذج مثل الزر أو صندوق النص.'], ['Property', 'خاصية: صفة للكائن مثل اللون أو النص.'],
+  ['Event', 'حدث: عمل يقع على الكائن مثل النقر.'], ['Method', 'طريقة: فعل يقوم به الكائن مثل SetFocus.'],
+  ['Toolbox', 'صندوق الأدوات: يحوي الأدوات القياسية.'], ['Project Explorer', 'مستكشف المشروع: يعرض ملفات المشروع شجريًا.'],
+  ['Properties Window', 'نافذة الخصائص: لضبط خصائص الأداة أثناء التصميم.'], ['Code Editor', 'محرر الشيفرة: لكتابة الأوامر. يُفتح بـ F7.'],
+  ['Label', 'أداة للعرض فقط.'], ['TextBox', 'مربع نص للإدخال والحساب. يحمل نصًا دائمًا.'], ['CommandButton', 'زر لتنفيذ الأوامر.'],
+  ['Name', 'الاسم الداخلي للأداة في الشيفرة.'], ['Caption', 'النص الظاهر على الأداة.'], ['Text', 'قيمة صندوق النص.'],
+  ['Visible', 'ظهور الأداة. True أو False.'], ['Enabled', 'تمكين الأداة أو تعطيلها.'], ['Locked', 'قفل صندوق النص ضد التعديل.'],
+  ['Click', 'حدث النقر.'], ['DblClick', 'حدث النقر المزدوج.'], ['MouseMove', 'حدث تحريك الفأرة فوق الأداة.'], ['DragDrop', 'حدث إفلات أداة مسحوبة على النموذج.'],
+  ['Variable', 'متغير: اسم لموقع في الذاكرة يحمل قيمة.'], ['Const', 'ثابت: قيمة لا تتغير.'], ['Dim', 'أمر تعريف المتغير.'],
+  ['Integer', 'عدد صحيح (2 byte).'], ['Long', 'عدد صحيح كبير (4 byte).'], ['Single', 'عدد كسري (4 byte).'], ['Double', 'عدد كسري دقيق (8 byte).'],
+  ['String', 'نص.'], ['Boolean', 'قيمة منطقية True أو False.'], ['Variant', 'نوع عام يقبل أي قيمة.'],
+  ['Scope', 'مدى تأثير المتغير: محلي أو نموذج أو عام.'], ['Option Explicit', 'تجبر تعريف كل المتغيرات.'], ['Module', 'وحدة لتعريف متغيرات وإجراءات عامة.'],
+  ['Val', 'دالة تحوّل النص إلى رقم.'], ['InputBox', 'صندوق لإدخال قيمة من المستخدم.'], ['MsgBox', 'صندوق لعرض رسالة. وقد يرجع رقم الزر المضغوط.'],
+  ['GoTo', 'انتقال التنفيذ إلى سطر آخر.'], ['If', 'جملة شرطية.'], ['ElseIf', 'شرط إضافي داخل If.'], ['Select Case', 'اختيار بين حالات متعددة.'],
+  ['Mod', 'باقي القسمة.'], ['Rnd', 'دالة تعطي رقمًا عشوائيًا بين 0 و 1.'], ['Int', 'دالة تعطي الجزء الصحيح من العدد.'], ['Print', 'طباعة نص على النموذج.'], ['Cls', 'مسح ما طُبع على النموذج.']
+];
+
+
+
+/* ===== UI ===== */
+(function () {
+'use strict';
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const rt = s => String(s).split(/\{\{(.+?)\}\}/).map((p, i) => i % 2 ? '<bdi class="en">' + esc(p) + '</bdi>' : esc(p)).join('');
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const lc = s => s.toLowerCase();
+
+/* ---------- storage (safe) ---------- */
+const mem = {};
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('vbk_' + k); if (v) return JSON.parse(v); } catch (e) { } return k in mem ? mem[k] : d; },
+  set(k, v) { mem[k] = v; try { localStorage.setItem('vbk_' + k, JSON.stringify(v)); } catch (e) { } }
+};
+let prog = store.get('prog', null) || { quiz: {}, ran: {}, notes: {}, last: null, exam: 0 };
+const saveProg = () => store.set('prog', prog);
+
+/* ---------- syntax highlight ---------- */
+const KW = new Set('private public sub function end if then else elseif select case dim as const for to next step do loop while wend goto exit call print and or not mod xor is option explicit static'.split(' '));
+const TY = new Set('integer long single double string boolean date variant currency byte control'.split(' '));
+function hl(code) {
+  const re = /('[^\n]*)|("(?:[^"\n]|"")*")|\b(\d+\.?\d*)\b|\b([A-Za-z_]\w*)\b/g;
+  let out = '', last = 0, m;
+  while ((m = re.exec(code))) {
+    out += esc(code.slice(last, m.index)); last = re.lastIndex;
+    if (m[1]) out += '<i class="c">' + esc(m[1]) + '</i>';
+    else if (m[2]) out += '<i class="s">' + esc(m[2]) + '</i>';
+    else if (m[3]) out += '<i class="n">' + m[3] + '</i>';
+    else { const w = m[4].toLowerCase(); out += KW.has(w) ? '<i class="k">' + m[4] + '</i>' : TY.has(w) ? '<i class="t">' + m[4] + '</i>' : esc(m[4]); }
+  }
+  return out + esc(code.slice(last));
+}
+const codeBlock = (c, cap) => '<div class="codewrap">' + (cap ? '<div class="codecap">' + rt(cap) + '</div>' : '') + '<pre class="code" dir="ltr">' + hl(c) + '</pre></div>';
+
+/* ---------- colors ---------- */
+const bgr = n => { n = Number(n) >>> 0; return 'rgb(' + (n & 255) + ',' + ((n >> 8) & 255) + ',' + ((n >> 16) & 255) + ')'; };
+const btnHtml = c => esc(c).replace(/&amp;&amp;/g, '\u0001').replace(/&amp;(\S)/, '<u>$1</u>').replace(/\u0001/g, '&amp;');
+
+/* ---------- dialog (VB style) ---------- */
+const ICONS = { 16: ['❌', '#c62828'], 32: ['❓', '#1565c0'], 48: ['⚠️', '#e6a100'], 64: ['ℹ️', '#1565c0'] };
+function showDialog(win, o) {
+  return new Promise(res => {
+    const ov = document.createElement('div'); ov.className = 'vbov';
+    const ic = o.icon && ICONS[o.icon] ? '<span class="dico">' + ICONS[o.icon][0] + '</span>' : '';
+    ov.innerHTML = '<div class="vbdlg" role="dialog"><div class="dtitle"><span>' + esc(o.title || '') + '</span><i>✕</i></div><div class="dbody">' + ic +
+      '<div class="dmsg" dir="auto">' + esc(o.msg || '').replace(/\n/g, '<br>') + (o.ar ? '<div class="dar" dir="rtl">' + esc(o.ar) + '</div>' : '') + '</div></div>' +
+      (o.input ? '<div class="dinput"><input type="text" dir="auto" value="' + esc(o.def || '') + '"></div>' : '') +
+      '<div class="dbtns"></div></div>';
+    const bt = ov.querySelector('.dbtns');
+    const done = v => { ov.remove(); res(v); };
+    o.buttons.forEach((b, i) => {
+      const x = document.createElement('button'); x.textContent = b.t; if (i === 0) x.className = 'def';
+      x.onclick = () => done(o.input ? (b.v === 1 ? ov.querySelector('input').value : '') : b.v); bt.appendChild(x);
+    });
+    ov.querySelector('.dtitle i').onclick = () => { const cb = o.buttons.find(b => b.v === 2 || b.v === 7) || o.buttons[o.buttons.length - 1]; done(o.input ? '' : cb.v); };
+    ov.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); bt.firstChild.click(); } if (e.key === 'Escape') { e.preventDefault(); ov.querySelector('.dtitle i').click(); } });
+    ov.addEventListener('pointerdown', e => e.stopPropagation());
+    win.appendChild(ov);
+    const f = ov.querySelector('input') || bt.firstChild; setTimeout(() => f && f.focus && f.focus(), 30);
+  });
+}
+const BTNSETS = { 0: [['OK', 1]], 1: [['OK', 1], ['Cancel', 2]], 2: [['Abort', 3], ['Retry', 4], ['Ignore', 5]], 3: [['Yes', 6], ['No', 7], ['Cancel', 2]], 4: [['Yes', 6], ['No', 7]], 5: [['Retry', 4], ['Cancel', 2]] };
+const msgDialog = (win, prompt, sym, title) => showDialog(win, { title, msg: prompt, icon: sym & 0x70, buttons: (BTNSETS[sym & 15] || BTNSETS[0]).map(b => ({ t: b[0], v: b[1] })) });
+const ERRAR = {
+  13: 'نوع البيانات غير مناسب. مثلًا: إسناد نص إلى متغير رقمي، أو جمع نص فارغ. استخدم Val.',
+  6: 'تجاوزت سعة النوع (Overflow). استخدم نوعًا أكبر مثل Long.',
+  11: 'قسمة على صفر.', 5: 'قيمة غير مسموحة للدالة (مثل جذر عدد سالب أو لوغاريتم الصفر).',
+  424: 'الكائن غير موجود. تحقق من اسم الأداة.', 438: 'هذه الخاصية أو الطريقة غير مدعومة لهذا الكائن.', 35: 'إجراء أو دالة غير معرّفة.', 28: 'يبدو أن البرنامج دخل في تكرار لا ينتهي.', 383: 'خاصية للقراءة فقط.'
+};
+
+/* ---------- form runner ---------- */
+function mountRunner(box, ex, o) {
+  o = o || {};
+  if (box._ctl) box._ctl.destroy();
+  const spec = ex.form, code = o.code != null ? o.code : ex.code;
+  box.innerHTML = '';
+  const hold = document.createElement('div'); hold.className = 'vbhold';
+  const win = document.createElement('div'); win.className = 'vbwin';
+  win.innerHTML = '<div class="vbtitle"><span class="vbcap"></span><span class="vbwb"><i>–</i><i>▢</i><i>✕</i></span></div><div class="vbbody"><div class="vbprint"></div></div>';
+  const body = win.querySelector('.vbbody'), printEl = win.querySelector('.vbprint');
+  body.style.width = spec.w + 'px'; body.style.height = spec.h + 'px'; if (spec.printTop) printEl.style.top = spec.printTop + 'px';
+  hold.appendChild(win); box.appendChild(hold);
+  let buf = '', ran = false, it = null, scale = 1;
+  const els = new Map();
+  const host = {
+    print(s, nl) { buf += s + (nl ? '\n' : ''); printEl.textContent = buf; },
+    cls() { buf = ''; printEl.textContent = ''; },
+    refresh(c) { apply(c); },
+    focus(c) { const e = els.get(c); if (e && e.focus) e.focus(); },
+    msgbox(p, s, t) { return msgDialog(win, p, s, t); },
+    inputbox(p, t, d) { return showDialog(win, { title: t, msg: p, input: true, def: d, buttons: [{ t: 'OK', v: 1 }, { t: 'Cancel', v: 2 }] }); },
+    error(e) {
+      const msg = e.kind === 'compile' ? e.desc : "Run-time error '" + e.num + "':\n" + e.desc;
+      let ar = ERRAR[e.num] || '';
+      if (/Variable not defined/.test(e.desc)) ar = 'المتغير غير معرّف وقد فعّلت Option Explicit. عرّفه أولًا بالأمر Dim.';
+      if (e.line) ar += (ar ? '  ' : '') + '(السطر ' + e.line + ')';
+      return showDialog(win, { title: 'Microsoft Visual Basic', icon: 16, msg: msg, ar: ar, buttons: [{ t: 'OK', v: 1 }] });
+    },
+    ended() {
+      const d = document.createElement('div'); d.className = 'vbend';
+      d.innerHTML = '<div><b>End</b><span>انتهى البرنامج</span><button>↻ تشغيل من جديد</button></div>';
+      d.querySelector('button').onclick = () => ctl.reset(); win.appendChild(d);
+    }
+  };
+  try { it = new VB.Interp({ code, form: spec, host }); it.compile(); } catch (e) {
+    if (e instanceof VB.VBError) {
+      box.innerHTML = '<div class="cerr" dir="ltr"><b>Compile error</b>' + (e.line ? ' — line ' + e.line : '') + '<br>' + esc(e.desc.replace(/^Compile error:\s*/, '')) + '</div>';
+      const ctl0 = { err: e, reset() { }, destroy() { } }; box._ctl = ctl0; return ctl0;
+    } throw e;
+  }
+  const mark = () => { if (!ran) { ran = true; o.onRun && o.onRun(); } };
+  const F = (n, ev, a) => { mark(); return it.fire(n, ev, a); };
+  const twips = (e, el) => { const r = el.getBoundingClientRect(); const sc = r.width / (el.offsetWidth || 1) || 1; return [Math.round((e.clientX - r.left) / sc * 15), Math.round((e.clientY - r.top) / sc * 15)]; };
+  const shiftOf = e => (e.shiftKey ? 1 : 0) | (e.ctrlKey ? 2 : 0) | (e.altKey ? 4 : 0);
+  const btnOf = e => e.button === 0 ? 1 : e.button === 2 ? 2 : 4;
+
+  function apply(c) {
+    const p = c.props;
+    if (c === it.form) { win.querySelector('.vbcap').textContent = p.caption; body.style.background = bgr(p.backcolor); return; }
+    const el = els.get(c); if (!el) return;
+    const s = el.style;
+    s.left = p.left / 15 + 'px'; s.top = p.top / 15 + 'px'; s.width = p.width / 15 + 'px'; s.height = p.height / 15 + 'px';
+    s.background = bgr(p.backcolor); s.color = bgr(p.forecolor); s.fontSize = Math.round(p.fontsize * 1.4) + 'px'; s.fontWeight = p.fontbold ? '700' : '400';
+    s.display = p.visible ? '' : 'none'; s.textAlign = ['left', 'right', 'center'][p.alignment] || 'left';
+    el.classList.toggle('bd1', p.borderstyle === 1);
+    if (c.type === 'TextBox') { if (el.value !== p.text) el.value = p.text; el.readOnly = !!p.locked; el.disabled = !p.enabled; if (p.maxlength > 0) el.maxLength = p.maxlength; else el.removeAttribute('maxlength'); } else if (c.type === 'Label') { el.textContent = p.caption; if (!p.enabled) el.style.opacity = .55; else el.style.opacity = ''; } else if (c.type === 'CommandButton') { el.innerHTML = btnHtml(p.caption); el.disabled = !p.enabled; el.classList.toggle('isdef', !!p.default); } else if (c.type === 'Image') { el.textContent = p.picture || ''; s.fontSize = Math.round(Math.min(p.width, p.height) / 15 * .8) + 'px'; }
+  }
+  const seen = new Set();
+  for (const c of it.ctrls.values()) {
+    if (c === it.form || seen.has(c)) continue; seen.add(c);
+    let el;
+    if (c.type === 'TextBox') { el = document.createElement(c.props.multiline ? 'textarea' : 'input'); if (!c.props.multiline) el.type = 'text'; el.setAttribute('dir', 'auto'); el.spellcheck = false; el.autocomplete = 'off'; el.className = 'vbc vbtext'; } else if (c.type === 'CommandButton') { el = document.createElement('button'); el.className = 'vbc vbbtn'; } else if (c.type === 'Image') { el = document.createElement('div'); el.className = 'vbc vbimg'; } else { el = document.createElement('div'); el.className = 'vbc vblabel'; el.setAttribute('dir', 'auto'); }
+    els.set(c, el); body.appendChild(el);
+    const n = c.name;
+    el.addEventListener('click', () => { F(n, 'Click'); });
+    el.addEventListener('dblclick', () => { F(n, 'DblClick'); });
+    el.addEventListener('mousemove', e => { const [x, y] = twips(e, el); F(n, 'MouseMove', [e.buttons, shiftOf(e), x, y]); });
+    el.addEventListener('mousedown', e => { const [x, y] = twips(e, el); F(n, 'MouseDown', [btnOf(e), shiftOf(e), x, y]); });
+    el.addEventListener('mouseup', e => { const [x, y] = twips(e, el); F(n, 'MouseUp', [btnOf(e), shiftOf(e), x, y]); });
+    el.addEventListener('contextmenu', e => e.preventDefault());
+    if (c.type === 'TextBox') {
+      el.addEventListener('input', () => { c.props.text = el.value; F(n, 'Change'); });
+      el.addEventListener('focus', () => F(n, 'GotFocus'));
+      el.addEventListener('blur', () => F(n, 'LostFocus'));
+      el.addEventListener('keydown', e => { F(n, 'KeyDown', [e.keyCode, shiftOf(e)]); });
+    } else if (c.type === 'CommandButton') { el.addEventListener('focus', () => F(n, 'GotFocus')); el.addEventListener('blur', () => F(n, 'LostFocus')); }
+    if (c.props.dragmode === 1) {
+      el.style.touchAction = 'none'; el.style.cursor = 'grab';
+      let st = null, ghost = null;
+      el.addEventListener('pointerdown', e => { st = { x: e.clientX, y: e.clientY }; el.setPointerCapture(e.pointerId); });
+      el.addEventListener('pointermove', e => {
+        if (!st) return;
+        if (!ghost && Math.hypot(e.clientX - st.x, e.clientY - st.y) > 5) { ghost = el.cloneNode(true); ghost.className += ' vbghost'; document.body.appendChild(ghost); const r = el.getBoundingClientRect(); ghost.style.width = r.width + 'px'; ghost.style.height = r.height + 'px'; }
+        if (ghost) { const r = el.getBoundingClientRect(); ghost.style.left = e.clientX - r.width / 2 + 'px'; ghost.style.top = e.clientY - r.height / 2 + 'px'; }
+      });
+      el.addEventListener('pointerup', e => {
+        if (ghost) { ghost.remove(); const [x, y] = twips(e, body); const r = body.getBoundingClientRect(); if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) F('Form', 'DragDrop', [c, x, y]); }
+        ghost = null; st = null;
+      });
+      el.addEventListener('pointercancel', () => { if (ghost) ghost.remove(); ghost = null; st = null; });
+    }
+  }
+  body.addEventListener('click', e => { if (e.target === body || e.target === printEl) F('Form', 'Click'); });
+  body.addEventListener('dblclick', e => { if (e.target === body || e.target === printEl) F('Form', 'DblClick'); });
+  body.addEventListener('mousemove', e => { if (e.target === body || e.target === printEl) { const [x, y] = twips(e, body); F('Form', 'MouseMove', [e.buttons, shiftOf(e), x, y]); } });
+  body.addEventListener('mousedown', e => { if (e.target === body || e.target === printEl) { const [x, y] = twips(e, body); F('Form', 'MouseDown', [btnOf(e), shiftOf(e), x, y]); } });
+  body.addEventListener('mouseup', e => { if (e.target === body || e.target === printEl) { const [x, y] = twips(e, body); F('Form', 'MouseUp', [btnOf(e), shiftOf(e), x, y]); } });
+  body.addEventListener('contextmenu', e => e.preventDefault());
+  win.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('.vbov')) return;
+    if ((e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') || e.key === 'Escape') {
+      const key = e.key === 'Enter' ? 'default' : 'cancel';
+      for (const [c] of els) if (c.type === 'CommandButton' && c.props[key] && c.props.visible && c.props.enabled) { e.preventDefault(); F(c.name, 'Click'); return; }
+    }
+  });
+  for (const c of seen) apply(c); apply(it.form);
+  const fit = () => {
+    const w = win.offsetWidth, h = win.offsetHeight; if (!w) return;
+    scale = Math.min(1, (box.clientWidth - 4) / w); win.style.transform = 'scale(' + scale + ')'; hold.style.height = h * scale + 'px'; hold.style.width = w * scale + 'px';
+  };
+  let ro = null; if (window.ResizeObserver) { ro = new ResizeObserver(fit); ro.observe(box); } fit(); setTimeout(fit, 60);
+  const ctl = { it, reset() { mountRunner(box, ex, o); }, destroy() { if (ro) ro.disconnect(); it.ended = true; } };
+  box._ctl = ctl;
+  it.start().catch(() => { });
+  return ctl;
+}
+
+/* ---------- example cards ---------- */
+const PROPLABEL = { text: 'Text', caption: 'Caption', locked: 'Locked', maxlength: 'MaxLength', cancel: 'Cancel', default: 'Default', dragmode: 'DragMode', alignment: 'Alignment', fontsize: 'Font size', borderstyle: 'BorderStyle' };
+function designTable(spec) {
+  const rows = spec.controls.map(c => {
+    const ps = [];
+    for (const k of ['caption', 'text', 'locked', 'maxlength', 'cancel', 'dragmode']) {
+      if (c[k] !== undefined && c[k] !== '' && c[k] !== false && c[k] !== 0) ps.push(PROPLABEL[k] + ' = ' + (typeof c[k] === 'string' ? '"' + c[k] + '"' : c[k] === true ? 'True' : c[k]));
+    }
+    return '<tr><td><bdi class="en">' + esc(c.type) + '</bdi></td><td><bdi class="en">' + esc(c.name) + '</bdi></td><td dir="ltr" class="tl">' + esc(ps.join(' ، ') || '—') + '</td></tr>';
+  }).join('');
+  return '<div class="tblwrap"><table class="tbl"><thead><tr><th>الأداة</th><th>Name</th><th>الخصائص</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+function exCard(id) {
+  const e = EX[id];
+  return '<section class="excard" data-ex="' + id + '"><div class="exhead"><span class="exbadge">جرّب</span><b>' + rt(e.title) + '</b></div><p class="exdesc">' + rt(e.desc) + '</p>' +
+    '<div class="runner"></div><div class="exbtns"><button data-act="reset">↻ إعادة</button><button data-act="code">{ } الشيفرة</button><button data-act="lab">🧪 افتح في المختبر</button></div>' +
+    '<div class="excode" hidden><div class="subh">جدول التصميم (الأدوات وخصائصها)</div>' + designTable(e.form) + '<div class="subh">الشيفرة</div>' + codeBlock(e.code) + '</div></section>';
+}
+function bindEx(root) {
+  $$('.excard', root).forEach(card => {
+    const id = card.dataset.ex, e = EX[id], box = $('.runner', card);
+    mountRunner(box, e, { onRun() { if (!prog.ran[id]) { prog.ran[id] = 1; saveProg(); } } });
+    card.addEventListener('click', ev => {
+      const b = ev.target.closest('button[data-act]'); if (!b) return;
+      if (b.dataset.act === 'reset') box._ctl.reset();
+      if (b.dataset.act === 'code') { const c = $('.excode', card); c.hidden = !c.hidden; }
+      if (b.dataset.act === 'lab') openLab(id);
+    });
+  });
+}
+
+/* ---------- blocks ---------- */
+function renderBlocks(blocks) {
+  let h = '';
+  for (const b of blocks) {
+    const k = b[0];
+    if (k === 'h') h += '<h3>' + rt(b[1]) + '</h3>';
+    else if (k === 'p') h += '<p>' + rt(b[1]) + '</p>';
+    else if (k === 'ul') h += '<ul>' + b[1].map(x => '<li>' + rt(x) + '</li>').join('') + '</ul>';
+    else if (k === 'ol') h += '<ol>' + b[1].map(x => '<li>' + rt(x) + '</li>').join('') + '</ol>';
+    else if (k === 'tip') h += '<div class="callout tip"><span>💡</span><div>' + rt(b[1]) + '</div></div>';
+    else if (k === 'warn') h += '<div class="callout warn"><span>⚠️</span><div>' + rt(b[1]) + '</div></div>';
+    else if (k === 'note') h += '<div class="callout note"><span>📌</span><div>' + rt(b[1]) + '</div></div>';
+    else if (k === 'table') h += '<div class="tblwrap"><table class="tbl"><thead><tr>' + b[1].map(x => '<th>' + rt(x) + '</th>').join('') + '</tr></thead><tbody>' + b[2].map(r => '<tr>' + r.map(x => '<td>' + rt(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+    else if (k === 'code') h += codeBlock(b[1], b[2]);
+    else if (k === 'ex') h += exCard(b[1]);
+    else if (k === 'w') h += '<div class="widget" data-w="' + b[1] + '"></div>';
+  }
+  return h;
+}
+
+/* ---------- widgets ---------- */
+const IDEINFO = {
+  menu: ['شريط القوائم والأدوات', 'Menu Bar و Toolbar: فيها أوامر المشروع (File, Edit, View, Project, Run…) وأزرار سريعة مثل تشغيل البرنامج Start وإيقافه End.'],
+  toolbox: ['صندوق الأدوات Toolbox', 'يحوي 20 أداة قياسية. تسحب منه الأداة إلى النموذج أو تنقر عليها نقرًا مزدوجًا.'],
+  form: ['نافذة مصمم النماذج Form Designer', 'سطح الرسم. هنا تصمم واجهة البرنامج وتضع الأدوات. عنوانها الأول Form1 وفيها شبكة نقاط تساعد على المحاذاة.'],
+  proj: ['مستكشف المشروع Project Explorer', 'يعرض ملفات المشروع بشكل شجري (Forms و Modules). فيه زرا View Code و View Object. وملف المشروع امتداده VBP.'],
+  props: ['نافذة الخصائص Properties Window', 'تعرض خصائص الأداة المحددة. تختار الأداة من القائمة في أعلاها. ولها تبويبان: Alphabetic و Categorized.'],
+  layout: ['نافذة مخطط النموذج Form Layout', 'تُريك موقع النموذج على الشاشة وقت التنفيذ. وبالزر الأيمن ← Resolution Guide ترى الدقات المختلفة.'],
+  code: ['نافذة محرر الشيفرة Code Editor', 'تكتب فيها الأوامر. تُفتح بالنقر المزدوج على الأداة أو بالمفتاح F7. فيها قائمتان: الكائنات (يسار) والأحداث (يمين).']
+};
+const TOOLS = [
+  ['Pointer', '↖️', 'يعيد مؤشر الفأرة إلى شكله الطبيعي بعد وضع أداة (لا يضع شيئًا على النموذج).'], ['PictureBox', '🖼️', 'لوضع صور على النموذج ودمجها في المشروع.'],
+  ['Label', '🔤', 'عنوان للعرض فقط على النموذج.'], ['TextBox', '✏️', 'عرض أو إدخال البيانات مثل اسم الموظف.'],
+  ['Frame', '🔲', 'إطار حاضنة للأدوات التي تريد أن تكسبها نفس الخصائص (خاصية التوريث).'], ['CommandButton', '🔘', 'زر لتنفيذ أوامر معينة مثل حفظ وإنهاء وإلغاء.'],
+  ['CheckBox', '☑️', 'صندوق اختيار لخيار واحد أو أكثر من مجموعة خيارات.'], ['OptionButton', '🔵', 'لاختيار خيار واحد فقط من مجموعة خيارات.'],
+  ['ComboBox', '🔽', 'قائمة منسدلة: تُظهر خيارًا واحدًا ويمكن فتحها لباقي الخيارات.'], ['ListBox', '📃', 'قائمة تضعها على النموذج فيها مجموعة خيارات، وتتيح اختيار أكثر من خيار بآن واحد.'],
+  ['HScrollBar', '↔️', 'شريط تمرير أفقي.'], ['VScrollBar', '↕️', 'شريط تمرير عمودي. (الأداتان تستخدمان لوضع شريط تمرير على النافذة).'],
+  ['Timer', '⏱️', 'المؤقت: ينفّذ أمرًا معينًا بعد فترة زمنية محددة (خاصية Interval).'], ['DriveListBox', '💽', 'قائمة تُظهر السواقات المرنة والمضغوطة.'],
+  ['DirListBox', '📁', 'نفس عمل السابقة لكن تطبق الكلام على المجلدات وما تحتويه.'], ['FileListBox', '🗂️', 'نفس الكلام السابق ولكن بالنسبة للملفات.'],
+  ['Shape', '⬛', 'لرسم أشكال هندسية (مستطيل، دائرة…).'], ['Line', '➖', 'لرسم خط على النموذج.'],
+  ['Image', '🌄', 'لوضع صور على النماذج (تختلف قليلًا عن PictureBox وهي أخف).'], ['Data', '🗄️', 'للتعامل مع قواعد البيانات.'], ['OLE', '📎', 'للتعامل مع الكائنات مثل برنامج Word و Excel.']
+];
+const RESERVED = new Set('date integer long single double string boolean variant currency byte dim as if then else elseif end select case const private public static sub function for next to step do loop while wend goto exit call print and or not mod xor is true false option explicit new set let me nothing null empty object'.split(' '));
+const widgets = {
+  ide(el) {
+    el.innerHTML = '<div class="ide" dir="ltr"><button class="r r-menu" data-r="menu">Menu Bar · Toolbar</button><div class="ide-main"><button class="r r-tb" data-r="toolbox">Toolbox</button><button class="r r-form" data-r="form"><span>Form1</span></button><div class="ide-right"><button class="r" data-r="proj">Project Explorer</button><button class="r" data-r="props">Properties</button><button class="r" data-r="layout">Form Layout</button></div></div><button class="r r-code" data-r="code">Code Editor (F7)</button></div><div class="winfo" id="ideinfo">اضغط على أي جزء.</div>';
+    el.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (!b) return; $$('.r', el).forEach(x => x.classList.remove('on')); b.classList.add('on'); const i = IDEINFO[b.dataset.r]; $('.winfo', el).innerHTML = '<b>' + esc(i[0]) + '</b><p>' + rt(i[1]) + '</p>'; });
+  },
+  toolbox(el) {
+    el.innerHTML = '<div class="tools" dir="ltr">' + TOOLS.map((t, i) => '<button data-i="' + i + '"><span>' + t[1] + '</span><small>' + t[0] + '</small></button>').join('') + '</div><div class="winfo">اضغط على أداة لتعرف وظيفتها.</div>';
+    el.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; $$('button', el).forEach(x => x.classList.remove('on')); b.classList.add('on'); const t = TOOLS[b.dataset.i]; $('.winfo', el).innerHTML = '<b><bdi class="en">' + t[0] + '</bdi></b><p>' + esc(t[2]) + '</p>'; });
+  },
+  namecheck(el) {
+    el.innerHTML = '<label class="wl">اكتب اسم متغير:</label><input class="winput" dir="ltr" value="My Name" spellcheck="false"><div class="rules"></div>';
+    const inp = $('input', el), out = $('.rules', el);
+    const run = () => {
+      const v = inp.value;
+      const R = [['يبدأ بحرف (لا برقم)', /^[A-Za-z]/.test(v)], ['بلا فراغات', v.length > 0 && !/\s/.test(v)], ['لا يزيد عن 255 حرفًا', v.length > 0 && v.length <= 255], ['بلا إشارات (+ - * . ,)', v.length > 0 && /^[A-Za-z0-9_]+$/.test(v.replace(/\s/g, ''))], ['ليس كلمة محجوزة', v.length > 0 && !RESERVED.has(v.toLowerCase())]];
+      const ok = R.every(r => r[1]);
+      out.innerHTML = R.map(r => '<div class="rule ' + (r[1] ? 'ok' : 'no') + '"><span>' + (r[1] ? '✓' : '✗') + '</span>' + esc(r[0]) + '</div>').join('') + '<div class="verdict ' + (ok ? 'ok' : 'no') + '">' + (ok ? 'اسم صحيح ✔' : 'اسم خاطئ ✘') + '</div>';
+    };
+    inp.addEventListener('input', run); run();
+  },
+  types(el) {
+    el.innerHTML = '<div class="memdemo"><div class="mrow"><label>الاسم<input id="mn" dir="ltr" value="x"></label><label>النوع<select id="mt" dir="ltr"><option>Integer</option><option>Long</option><option>Single</option><option>Double</option><option>String</option><option>Boolean</option><option>Variant</option></select></label><label>القيمة<input id="mv" dir="ltr" value="3.7"></label></div><div class="mcode" dir="ltr"></div><div class="mbox"></div></div>';
+    const run = () => {
+      const n = $('#mn', el).value || 'x', t = $('#mt', el).value, v = $('#mv', el).value;
+      let res, err = null, val = isNaN(v) || v.trim() === '' ? v : parseFloat(v);
+      try { res = VB.coerce(t.toLowerCase(), val); } catch (e) { err = e; }
+      $('.mcode', el).innerHTML = hl('Dim ' + n + ' As ' + t + '\n' + n + ' = ' + (typeof val === 'string' ? '"' + val + '"' : val));
+      $('.mbox', el).innerHTML = err ? '<div class="memerr">⛔ ' + (err.num === 6 ? 'Overflow — القيمة أكبر من سعة النوع' : 'Type mismatch — النوع لا يقبل هذه القيمة') + '</div>' : '<div class="memcell"><small dir="ltr">' + esc(n) + ' : ' + t + '</small><b dir="auto">' + esc(typeof res === 'boolean' ? (res ? 'True' : 'False') : String(res)) + '</b></div>';
+    };
+    $$('input,select', el).forEach(x => x.addEventListener('input', run)); run();
+  },
+  msgbuilder(el) {
+    el.innerHTML = '<div class="mb"><div class="mrow"><label>الأزرار<select id="bb" dir="ltr"><option value="0">0 — OK</option><option value="1">1 — OK / Cancel</option><option value="2">2 — Abort / Retry / Ignore</option><option value="3">3 — Yes / No / Cancel</option><option value="4">4 — Yes / No</option><option value="5">5 — Retry / Cancel</option></select></label><label>الأيقونة<select id="bi" dir="ltr"><option value="0">0 — none</option><option value="16">16 — Critical</option><option value="32">32 — Question</option><option value="48">48 — Exclamation</option><option value="64">64 — Information</option></select></label></div><div class="mcode" dir="ltr"></div><button class="btn" id="bs">▶ اعرض الصندوق</button><div class="mbstage"></div><div class="mbres"></div></div>';
+    const code = () => { const b = +$('#bb', el).value, i = +$('#bi', el).value; $('.mcode', el).innerHTML = hl('MsgBox "Save Changes?", ' + b + (i ? ' + ' + i : '') + ', "Exit"\n\' symbol value = ' + (b + i)); };
+    $$('select', el).forEach(s => s.addEventListener('change', code)); code();
+    $('#bs', el).onclick = async () => {
+      const st = $('.mbstage', el); st.innerHTML = '<div class="vbwin small"><div class="vbtitle"><span>Exit</span></div><div class="vbbody" style="width:100%;height:150px"></div></div>';
+      const w = st.firstChild, sym = +$('#bb', el).value + +$('#bi', el).value;
+      const v = await msgDialog(w.querySelector('.vbbody'), 'Save Changes?', sym, 'Exit');
+      const names = { 1: 'OK', 2: 'Cancel', 3: 'Abort', 4: 'Retry', 5: 'Ignore', 6: 'Yes', 7: 'No' };
+      $('.mbres', el).innerHTML = 'القيمة المرجعة: <b class="en">' + v + '</b> (' + names[v] + ')';
+    };
+  },
+  mouse(el) {
+    el.innerHTML = '<div class="mouse" dir="ltr"><div class="marea">Move / click here</div><div class="mout"><div><span>Event</span><b id="m_e">—</b></div><div><span>Button</span><b id="m_b">0</b></div><div><span>Shift</span><b id="m_s">0</b></div><div><span>X</span><b id="m_x">0</b></div><div><span>Y</span><b id="m_y">0</b></div></div></div><div class="winfo">اضغط بأزرار الفأرة المختلفة (أو Shift / Ctrl / Alt مع النقر). على الهاتف يظهر الزر الأيسر فقط.</div>';
+    const a = $('.marea', el);
+    const upd = (ev, e, btn) => { const r = a.getBoundingClientRect(); $('#m_e', el).textContent = ev; $('#m_b', el).textContent = btn; $('#m_s', el).textContent = (e.shiftKey ? 1 : 0) | (e.ctrlKey ? 2 : 0) | (e.altKey ? 4 : 0); $('#m_x', el).textContent = Math.round((e.clientX - r.left) * 15); $('#m_y', el).textContent = Math.round((e.clientY - r.top) * 15); };
+    a.addEventListener('mousemove', e => upd('MouseMove', e, e.buttons));
+    a.addEventListener('mousedown', e => upd('MouseDown', e, e.button === 0 ? 1 : e.button === 2 ? 2 : 4));
+    a.addEventListener('mouseup', e => upd('MouseUp', e, e.button === 0 ? 1 : e.button === 2 ? 2 : 4));
+    a.addEventListener('click', e => upd('Click', e, 1));
+    a.addEventListener('dblclick', e => upd('DblClick', e, 1));
+    a.addEventListener('contextmenu', e => e.preventDefault());
+  }
+};
+function bindWidgets(root) { $$('.widget', root).forEach(w => { if (widgets[w.dataset.w]) widgets[w.dataset.w](w); }); }
+
+/* ---------- quiz engine ---------- */
+function runQuiz(box, list, opt) {
+  opt = opt || {};
+  const qs = shuffle(list).slice(0, opt.n || list.length).map(q => { const all = shuffle([q.ok].concat(q.bad)); return Object.assign({}, q, { all, idx: all.indexOf(q.ok) }); });
+  let i = 0, score = 0; const wrong = [];
+  function show() {
+    const q = qs[i];
+    box.innerHTML = '<div class="qprog"><span>سؤال ' + (i + 1) + ' من ' + qs.length + '</span><div class="bar"><i style="width:' + (i / qs.length * 100) + '%"></i></div></div>' +
+      '<div class="qcard"><div class="qtext">' + rt(q.q) + '</div>' + (q.c ? '<pre class="code" dir="ltr">' + hl(q.c) + '</pre>' : '') +
+      '<div class="opts">' + q.all.map((o, k) => '<button class="opt" data-k="' + k + '">' + rt(o) + '</button>').join('') + '</div><div class="qfb" hidden></div></div>';
+    $$('.opt', box).forEach(b => b.onclick = () => {
+      const k = +b.dataset.k; $$('.opt', box).forEach(x => x.disabled = true);
+      const okb = $$('.opt', box)[q.idx]; okb.classList.add('right');
+      const fb = $('.qfb', box); fb.hidden = false;
+      if (k === q.idx) { score++; fb.className = 'qfb good'; fb.innerHTML = '<b>أحسنت ✔</b> ' + rt(q.e); } else { b.classList.add('wrong'); wrong.push(q); fb.className = 'qfb bad'; fb.innerHTML = '<b>الإجابة الصحيحة: </b>' + rt(q.ok) + '<br>' + rt(q.e); }
+      const nx = document.createElement('button'); nx.className = 'btn'; nx.textContent = i + 1 < qs.length ? 'التالي ←' : 'عرض النتيجة'; nx.onclick = () => { i++; i < qs.length ? show() : finish(); }; fb.after(nx);
+    });
+  }
+  function finish() {
+    const pct = Math.round(score / qs.length * 100);
+    const g = pct >= 90 ? 'ممتاز' : pct >= 80 ? 'جيد جدًا' : pct >= 70 ? 'جيد' : pct >= 60 ? 'متوسط' : pct >= 50 ? 'مقبول' : 'راسب';
+    box.innerHTML = '<div class="result"><div class="ring big" style="--p:' + pct + '"><b>' + pct + '%</b></div><h3>' + score + ' من ' + qs.length + ' — ' + g + '</h3>' +
+      (wrong.length ? '<div class="subh">راجع هذه الأسئلة:</div>' + wrong.map(q => '<div class="rev"><div>' + rt(q.q) + '</div>' + (q.c ? '<pre class="code" dir="ltr">' + hl(q.c) + '</pre>' : '') + '<div class="ans">✔ ' + rt(q.ok) + '</div><small>' + rt(q.e) + '</small></div>').join('') : '<p>إجابات كلها صحيحة! 🎉</p>') +
+      '<button class="btn" id="qre">↻ أعد المحاولة</button></div>';
+    $('#qre', box).onclick = () => runQuiz(box, list, opt);
+    opt.onDone && opt.onDone(pct);
+  }
+  show();
+}
+
+/* ---------- views ---------- */
+let labState = { id: 'lab0', code: null };
+const view = $('#view');
+const chapterProg = c => {
+  const ids = Object.keys(EX).filter(k => EX[k].ch === c.id); const r = ids.filter(k => prog.ran[k]).length;
+  const qb = (prog.quiz[c.id] || 0) / 100;
+  return { pct: Math.round((qb * 0.6 + (ids.length ? r / ids.length : 0) * 0.4) * 100), ran: r, total: ids.length, q: prog.quiz[c.id] || 0 };
+};
+const overall = () => Math.round(CH.reduce((a, c) => a + chapterProg(c).pct, 0) / CH.length);
+
+function viewHome() {
+  const ov = overall();
+  view.innerHTML = '<section class="hero"><div class="herotxt"><div class="kicker">برمجة مرئية · المرحلة الثالثة</div><h1>حقيبة <span class="en">Visual Basic 6</span></h1><p>اشرح ← جرّب ← اختبر نفسك. كل مثال برمجي يعمل أمامك فعليًا، وتستطيع تعديل شيفرته.</p>' +
+    '<div class="herobtns"><a class="btn" href="#' + (prog.last ? 'ch' + prog.last : 'ch1') + '">' + (prog.last ? 'تابع من حيث توقفت' : 'ابدأ التعلم') + '</a><a class="btn ghost" href="#lab">🧪 المختبر</a></div></div>' +
+    '<div class="ring" style="--p:' + ov + '"><b>' + ov + '%</b><small>إنجازك</small></div></section>' +
+    '<h2 class="sec">الفصول</h2><div class="cards">' + CH.map(c => { const p = chapterProg(c); return '<a class="chcard" href="#ch' + c.id + '" style="--c:' + c.color + '"><div class="chico">' + c.icon + '</div><div class="chnum">الفصل ' + c.id + '</div><b>' + esc(c.title) + '</b><small dir="auto">' + esc(c.sub) + '</small><div class="bar"><i style="width:' + p.pct + '%"></i></div><div class="chmeta">' + p.ran + '/' + p.total + ' أمثلة · اختبار ' + p.q + '%</div></a>'; }).join('') + '</div>' +
+    '<h2 class="sec">أدوات سريعة</h2><div class="quick"><a href="#lab"><span>🧪</span>مختبر VB<small>اكتب وشغّل</small></a><a href="#exam"><span>📝</span>الاختبار الشامل<small>20 سؤالًا</small></a><a href="#gloss"><span>📖</span>المسرد<small>' + GLOSS.length + ' مصطلحًا</small></a><a href="#me"><span>📊</span>تقدّمي<small>ملاحظات</small></a></div>' +
+    footer();
+}
+const footer = () => '<footer class="foot">تصميم وبرمجة: الأستاذ علي الصفار<small>المحتوى مبني على محاضرات مادة البرمجة المرئية</small></footer>';
+
+let chTab = 'learn';
+function viewChapter(id) {
+  const c = CH[id - 1]; if (!c) return viewHome();
+  prog.last = id; saveProg();
+  const tabs = [['learn', 'الشرح'], ['quiz', 'اختبر نفسك'], ['tasks', 'واجبات']];
+  view.innerHTML = '<div class="chhead" style="--c:' + c.color + '"><a class="back" href="#home">‹ الرئيسية</a><div class="chico">' + c.icon + '</div><div><div class="chnum">الفصل ' + c.id + ' من ' + CH.length + '</div><h1>' + esc(c.title) + '</h1></div></div>' +
+    '<div class="tabs2">' + tabs.map(t => '<button data-t="' + t[0] + '" class="' + (chTab === t[0] ? 'on' : '') + '">' + t[1] + '</button>').join('') + '</div><div id="chbody" class="chbody"></div>';
+  const body = $('#chbody');
+  const draw = () => {
+    $$('.tabs2 button').forEach(b => b.classList.toggle('on', b.dataset.t === chTab));
+    if (chTab === 'learn') {
+      body.innerHTML = renderBlocks(c.blocks) + '<div class="pager">' + (id > 1 ? '<a class="btn ghost" href="#ch' + (id - 1) + '">› السابق</a>' : '<span></span>') + '<button class="btn" data-go="quiz">اختبر نفسك ←</button></div>';
+      bindEx(body); bindWidgets(body);
+    } else if (chTab === 'quiz') {
+      body.innerHTML = '<div class="qintro"><b>اختبار الفصل ' + c.id + '</b><span>' + c.quiz.length + ' سؤالًا. أفضل نتيجة لك: ' + (prog.quiz[c.id] || 0) + '%</span></div><div id="qbox"></div>';
+      runQuiz($('#qbox'), c.quiz, { onDone(p) { if (p > (prog.quiz[c.id] || 0)) { prog.quiz[c.id] = p; saveProg(); } } });
+    } else {
+      body.innerHTML = '<p class="muted">حاول الحل بنفسك أولًا ثم اضغط «الحل».</p>' + c.tasks.map((t, i) => '<div class="task"><div class="tnum">' + (i + 1) + '</div><div class="tbody"><div>' + rt(t.t) + '</div>' + (t.a ? '<details><summary>عرض الحل</summary>' + (/^(Private Sub|MsgBox)/.test(t.a) ? '<pre class="code" dir="ltr">' + hl(t.a) + '</pre>' : '<p>' + esc(t.a).replace(/\n/g, '<br>') + '</p>') + '</details>' : '') + (t.ex ? '<button class="btn small" data-lab="' + t.ex + '">🧪 جرّب الحل في المختبر</button>' : '') + '</div></div>').join('');
+    }
+  };
+  draw();
+  view.addEventListener('click', function h(e) {
+    if (!view.contains(body)) { view.removeEventListener('click', h); return; }
+    const t = e.target.closest('.tabs2 button'); if (t) { chTab = t.dataset.t; draw(); window.scrollTo(0, 0); return; }
+    const g = e.target.closest('[data-go]'); if (g) { chTab = g.dataset.go; draw(); window.scrollTo(0, 0); }
+    const l = e.target.closest('[data-lab]'); if (l) openLab(l.dataset.lab);
+  });
+}
+
+const SNIP = [['Click', 'Private Sub Command1_Click()\n\nEnd Sub\n'], ['If', 'If x > 0 Then\n   \nElse\n   \nEnd If\n'], ['Select', 'Select Case x\nCase 1\n   \nCase Else\n   \nEnd Select\n'], ['InputBox', 'x = Val(InputBox("Enter x", "Title"))\n'], ['MsgBox', 'MsgBox "Hello", 64, "Title"\n'], ['Dim', 'Dim x As Integer\n']];
+function openLab(id, code) { labState = { id: id, code: code == null ? null : code }; if (location.hash === '#lab') viewLab(); else location.hash = '#lab'; }
+function viewLab() {
+  const e = EX[labState.id] || EX.lab0;
+  const groups = [[0, 'مختبر فارغ']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
+  view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
+    '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
+    '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' +
+    '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '</div>' +
+    '<textarea id="labcode" class="editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
+    '<details class="cheat"><summary>📋 ورقة مرجعية سريعة</summary><div class="cheatbody" dir="ltr"><pre class="code">' + hl(CHEAT) + '</pre></div></details>' + footer();
+  const ta = $('#labcode'); ta.value = labState.code != null ? labState.code : e.code;
+  const run = () => { labState.code = ta.value; const c = mountRunner($('#labrun'), e, { code: ta.value }); };
+  run();
+  $('#labsel').onchange = ev => { labState = { id: ev.target.value, code: null }; viewLab(); };
+  $('#labgo').onclick = run;
+  $('#labreset').onclick = () => { ta.value = e.code; run(); };
+  ta.addEventListener('keydown', ev => {
+    if (ev.key === 'Tab') { ev.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '   ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 3; }
+    if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') { ev.preventDefault(); run(); }
+  });
+  $('.snips').onclick = ev => { const b = ev.target.closest('[data-s]'); if (!b) return; const s = ta.selectionStart, t = SNIP[b.dataset.s][1]; ta.value = ta.value.slice(0, s) + t + ta.value.slice(ta.selectionEnd); ta.focus(); ta.selectionStart = ta.selectionEnd = s + t.length; };
+}
+const CHEAT = String.raw`' Events
+Private Sub Command1_Click()
+Private Sub Text1_Change()
+Private Sub Form_Load()
+
+' Properties
+Label1.Caption = "Hi"        ' text shown
+Text1.Text = ""              ' value in box
+Label1.ForeColor = vbBlue
+Text1.Visible = False
+
+' Variables
+Dim x As Integer, s As String
+Const PI As Single = 3.14
+
+' Input / Output
+x = Val(InputBox("Enter x", "Title"))
+MsgBox "Done", 64, "Title"
+Print "x = "; x
+
+' Decisions
+If x > 0 Then ... ElseIf ... Else ... End If
+Select Case x: Case 1 To 5: Case Is > 9: Case Else
+GoTo MyLabel`;
+
+/* exam */
+let examState = null;
+function viewExam() {
+  const all = []; CH.forEach(c => c.quiz.forEach(q => all.push(q)));
+  view.innerHTML = '<div class="pagehead"><h1>📝 الاختبار الشامل</h1><p>20 سؤالًا عشوائيًا من الفصول الستة. التقدير بحسب سلّم المحاضرة.</p></div><div id="exbox"></div>' + footer();
+  const box = $('#exbox');
+  const intro = () => {
+    box.innerHTML = '<div class="qintro big"><b>جاهز؟</b><span>أفضل نتيجة سابقة: ' + (prog.exam || 0) + '%</span><div class="scale"><span>90+ ممتاز</span><span>80 جيد جدًا</span><span>70 جيد</span><span>60 متوسط</span><span>50 مقبول</span><span>أقل: راسب</span></div><button class="btn" id="exgo">ابدأ الاختبار</button></div>';
+    $('#exgo').onclick = () => runQuiz(box, all, { n: 20, onDone(p) { if (p > (prog.exam || 0)) { prog.exam = p; saveProg(); } } });
+  };
+  intro();
+}
+function viewGloss() {
+  view.innerHTML = '<div class="pagehead"><h1>📖 مسرد المصطلحات</h1></div><input id="gs" class="winput" placeholder="ابحث عن مصطلح…" dir="auto"><div id="gl" class="gl"></div>' + footer();
+  const draw = q => { q = q.trim().toLowerCase(); $('#gl').innerHTML = GLOSS.filter(g => !q || g[0].toLowerCase().includes(q) || g[1].includes(q)).map(g => '<div class="gi"><bdi class="en">' + esc(g[0]) + '</bdi><span>' + esc(g[1]) + '</span></div>').join('') || '<p class="muted">لا نتائج.</p>'; };
+  $('#gs').oninput = e => draw(e.target.value); draw('');
+}
+function viewMe() {
+  view.innerHTML = '<div class="pagehead"><h1>📊 تقدّمي</h1></div><div class="cards2">' + CH.map(c => { const p = chapterProg(c); return '<div class="prow" style="--c:' + c.color + '"><div class="pico">' + c.icon + '</div><div class="pmid"><b>الفصل ' + c.id + ': ' + esc(c.title) + '</b><div class="bar"><i style="width:' + p.pct + '%"></i></div><small>' + p.ran + '/' + p.total + ' أمثلة · اختبار ' + p.q + '%</small></div><div class="ppct">' + p.pct + '%</div></div>'; }).join('') + '</div>' +
+    '<div class="prow"><div class="pico">📝</div><div class="pmid"><b>الاختبار الشامل</b><small>أفضل نتيجة</small></div><div class="ppct">' + (prog.exam || 0) + '%</div></div>' +
+    '<h2 class="sec">ملاحظاتي</h2><p class="muted">اكتب ما تريد سؤال الأستاذ عنه في المحاضرة. تُحفظ على هذا الجهاز فقط.</p>' +
+    CH.map(c => '<label class="wl">الفصل ' + c.id + ': ' + esc(c.title) + '</label><textarea class="note" data-n="' + c.id + '" placeholder="ملاحظاتك…" dir="auto">' + esc(prog.notes[c.id] || '') + '</textarea>').join('') +
+    '<button class="btn ghost danger" id="rst">مسح تقدّمي</button>' + footer();
+  $$('.note').forEach(t => t.oninput = () => { prog.notes[t.dataset.n] = t.value; saveProg(); });
+  let armed = false; $('#rst').onclick = e => { if (!armed) { armed = true; e.target.textContent = 'اضغط مرة أخرى للتأكيد'; return; } prog = { quiz: {}, ran: {}, notes: {}, last: null, exam: 0 }; saveProg(); viewMe(); };
+}
+
+/* ---------- router ---------- */
+const NAV = [['home', '🏠', 'الرئيسية'], ['lab', '🧪', 'المختبر'], ['exam', '📝', 'الاختبار'], ['gloss', '📖', 'المسرد'], ['me', '📊', 'تقدّمي']];
+function route() {
+  const h = (location.hash || '#home').slice(1);
+  if (view.querySelector('.runner') ) $$('.runner', view).forEach(r => r._ctl && r._ctl.destroy());
+  let tab = h;
+  if (/^ch\d$/.test(h)) { tab = 'home'; viewChapter(+h.slice(2)); } else if (h === 'lab') viewLab(); else if (h === 'exam') viewExam(); else if (h === 'gloss') viewGloss(); else if (h === 'me') viewMe(); else { tab = 'home'; viewHome(); }
+  $$('#nav a').forEach(a => a.classList.toggle('on', a.dataset.k === tab));
+  if (!/^ch\d$/.test(h) || true) window.scrollTo(0, 0);
+}
+$('#nav').innerHTML = NAV.map(n => '<a href="#' + n[0] + '" data-k="' + n[0] + '"><span>' + n[1] + '</span>' + n[2] + '</a>').join('');
+window.addEventListener('hashchange', route);
+route();
+})();
+
+</script>
+</body>
+</html>
