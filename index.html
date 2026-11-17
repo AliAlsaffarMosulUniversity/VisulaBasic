@@ -2896,7 +2896,7 @@ function mountRunner(box, ex, o) {
     if (c === it.form || seen.has(c)) continue; seen.add(c);
     let el;
     if (c.type === 'TextBox') { el = document.createElement(c.props.multiline ? 'textarea' : 'input'); if (!c.props.multiline) el.type = 'text'; el.setAttribute('dir', 'auto'); el.spellcheck = false; el.autocomplete = 'off'; el.className = 'vbc vbtext'; } else if (c.type === 'CommandButton') { el = document.createElement('button'); el.className = 'vbc vbbtn'; } else if (c.type === 'Image') { el = document.createElement('div'); el.className = 'vbc vbimg'; } else { el = document.createElement('div'); el.className = 'vbc vblabel'; el.setAttribute('dir', 'auto'); }
-    els.set(c, el); body.appendChild(el);
+    els.set(c, el); el.dataset.n = c.name; body.appendChild(el);
     const n = c.name;
     el.addEventListener('click', () => { F(n, 'Click'); });
     el.addEventListener('dblclick', () => { F(n, 'DblClick'); });
