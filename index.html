@@ -4105,7 +4105,7 @@ function viewApps(sel) {
 }
 
 /* ---------- router ---------- */
-const NAV = [['home', '🏠', 'الرئيسية'], ['lab', '🧪', 'المختبر'], ['apps', '🎨', 'تصميمات'], ['exam', '📝', 'الاختبار'], ['gloss', '📖', 'المسرد'], ['me', '📊', 'تقدّمي']];
+const NAV = [['home', '🏠', 'الرئيسية'], ['lab', '🧪', 'المختبر'], ['exam', '📝', 'الاختبار'], ['gloss', '📖', 'المسرد'], ['me', '📊', 'تقدّمي'], ['apps', '🎨', 'تصميمات']];
 function route() {
   const h = (location.hash || '#home').slice(1);
   if (view.querySelector('.runner') ) $$('.runner', view).forEach(r => r._ctl && r._ctl.destroy());
