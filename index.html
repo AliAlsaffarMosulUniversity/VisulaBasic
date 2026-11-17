@@ -2706,7 +2706,11 @@ function mountRunner(box, ex, o) {
   };
   try { it = new VB.Interp({ code, form: spec, host }); it.compile(); } catch (e) {
     if (e instanceof VB.VBError) {
-      box.innerHTML = '<div class="cerr" dir="ltr"><b>Compile error</b>' + (e.line ? ' — line ' + e.line : '') + '<br>' + esc(e.desc.replace(/^Compile error:\s*/, '')) + '</div>';
+      const d0 = e.desc.replace(/^Compile error:\s*/, '');
+      let ar0 = 'يوجد خطأ في كتابة الشيفرة. راجع السطر المذكور.';
+      if (/end of string/i.test(d0)) ar0 = 'نص ناقص: فتحت علامة الاقتباس \" ولم تغلقها في نفس السطر. تأكد أن النص كله في سطر واحد بين علامتين. وإن أضفت قطعة جاهزة (مثل If) فتأكد أن المؤشر لم يكن داخل النص.';
+      else if (/Expected/i.test(d0)) ar0 = 'الأمر ناقص أو مكتوب بشكل غير صحيح. قارن سطرك بالأمثلة.';
+      box.innerHTML = '<div class="cerr" dir="ltr"><b>Compile error</b>' + (e.line ? ' — line ' + e.line : '') + '<br>' + esc(d0) + '<div dir="rtl" style="margin-top:8px;font-family:Cairo,sans-serif;color:#ffd7a8">' + esc(ar0) + (e.line ? ' (السطر ' + e.line + ')' : '') + '</div></div>';
       const ctl0 = { err: e, reset() { }, destroy() { } }; box._ctl = ctl0; return ctl0;
     } throw e;
   }
@@ -3029,7 +3033,17 @@ function viewLab() {
     if (ev.key === 'Tab') { ev.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '   ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 3; }
     if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') { ev.preventDefault(); run(); }
   });
-  $('.snips').onclick = ev => { const b = ev.target.closest('[data-s]'); if (!b) return; const s = ta.selectionStart, t = SNIP[b.dataset.s][1]; ta.value = ta.value.slice(0, s) + t + ta.value.slice(ta.selectionEnd); ta.focus(); ta.selectionStart = ta.selectionEnd = s + t.length; };
+  $('.snips').onclick = ev => {
+    const b = ev.target.closest('[data-s]'); if (!b) return;
+    const t = SNIP[b.dataset.s][1]; let v = ta.value, s = ta.selectionStart;
+    // نُدرج القطعة دائمًا في سطر جديد بعد السطر الحالي، حتى لا تدخل داخل نص بين علامتي اقتباس
+    let ls = v.lastIndexOf('\n', s - 1) + 1, le = v.indexOf('\n', s); if (le < 0) le = v.length;
+    const line = v.slice(ls, le).trim();
+    let pos = line === '' ? ls : le + 1, pre = '';
+    if (line !== '' && le === v.length) { pre = '\n'; pos = v.length; }
+    ta.value = v.slice(0, pos) + pre + t + v.slice(pos);
+    ta.focus(); ta.selectionStart = ta.selectionEnd = pos + pre.length + t.length;
+  };
 }
 const CHEAT = String.raw`' Events
 Private Sub Command1_Click()
