@@ -72,7 +72,7 @@ pre.code i{font-style:normal}.code .k{color:#7cc4ff;font-weight:700}.code .s{col
 .vbtext{border:2px solid;border-color:#808080 #fff #fff #808080;outline:0;padding:1px 3px;background:#fff;color:#000;border-radius:0;box-shadow:inset 1px 1px 0 #404040;user-select:text;-webkit-user-select:text;font-size:11px}
 textarea.vbtext{resize:none}
 .vbtext:focus{box-shadow:inset 1px 1px 0 #404040,0 0 0 1px #0a246a}.vbtext:disabled{color:#808080}
-.vbbtn{background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:0 4px;cursor:default;color:#000;outline:0;box-shadow:1px 1px 0 #808080;border-radius:0}
+.vbbtn{text-align:center!important;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:0 4px;cursor:default;color:#000;outline:0;box-shadow:1px 1px 0 #808080;border-radius:0}
 .vbbtn:active{border-color:#404040 #fff #fff #404040;padding:2px 2px 0 6px}.vbbtn:focus-visible{outline:1px dotted #000;outline-offset:-5px}.vbbtn.isdef{border:2px solid #000;box-shadow:none}.vbbtn:disabled{color:#808080;text-shadow:1px 1px 0 #fff}
 .vbimg{display:grid;place-items:center;line-height:1;cursor:grab}
 .vbghost{position:fixed!important;z-index:9999;opacity:.65;pointer-events:none;display:grid;place-items:center;background:transparent!important}
@@ -120,6 +120,12 @@ textarea.note{width:100%;min-height:76px;font:inherit;border:2px solid #cfd9ea;b
 .gsub{font-weight:800;color:#8a5a00;margin:12px 0 4px;font-size:14.5px}
 .grow{display:flex;flex-direction:column;gap:2px;padding:6px 0;border-top:1px dashed #ecd9a8}
 .gname{line-height:1.4}.gtext{font-size:15px}
+.appgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:14px 0}
+.appcard{position:relative;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 3px 0 #e6e0d2}
+.appcard span{font-size:34px;line-height:1.2}.appcard b{font-size:14px;line-height:1.45}.appcard i{position:absolute;top:6px;left:8px;font-style:normal;color:#1b8a4b;font-weight:800}
+.appcard.on{border-color:var(--accent);background:#fff8e1}
+.gsteps{margin:.3em 0;padding-right:22px}.gsteps li{font-size:15px;margin:.3em 0}
+nav#nav a{font-size:11px}
 
 </style>
 </head>
@@ -585,7 +591,7 @@ const B = {
   space: a => ' '.repeat(Math.max(0, toNum(a[0]))),
   isnumeric: a => typeof a[0] === 'number' || (typeof a[0] === 'string' && NUMRE.test(a[0])),
   rgb: a => toNum(a[0]) + toNum(a[1]) * 256 + toNum(a[2]) * 65536,
-  loadpicture: a => { const k = toStr(a[0]).toLowerCase(); const m = { dog: '🐶', cat: '🐱', happy: '😀', sad: '😢', card: '🎓', star: '⭐', heart: '❤️' }; return m[k] || toStr(a[0]); },
+  loadpicture: a => { const k = toStr(a[0]).toLowerCase(); const m = { dog: '🐶', cat: '🐱', happy: '😀', sad: '😢', card: '🎓', star: '⭐', heart: '❤️', cold: '🥶', warm: '😊', hot: '🥵', think: '🤔', rock: '✊', paper: '✋', scissors: '✌️' }; return m[k] || toStr(a[0]); },
   format: a => { const n = toNum(a[0]); const f = toStr(a[1] || ''); const m = /\.(0+)/.exec(f); const d = m ? m[1].length : 0; let s = n.toFixed(d); if (f.includes(',')) { const p = s.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = p.join('.'); } return s; },
   now: () => new Date().toLocaleString('en-GB'), date: () => new Date().toLocaleDateString('en-GB'), time: () => new Date().toLocaleTimeString('en-GB'),
   timer: () => (Date.now() % 86400000) / 1000
@@ -1907,6 +1913,625 @@ EX.lab0.form.printTop = 130;
 EX.t_form.form.printTop = 110;
 
 
+/* ===== تصميمات: تطبيقات صغيرة جميلة بعد إنهاء المنهج ===== */
+(function () {
+const grid = (rows, x0, y0, w, h, gap, opt) => { const out = []; rows.forEach((r, ri) => r.forEach((c, ci) => { if (c) out.push(C(c[0], c[1], x0 + ci * (w + gap), y0 + ri * (h + gap), w, h, Object.assign({ fontsize: 12, fontbold: true }, opt || {}, c[2] || {}))); })); return out; };
+
+ex('app_calc', 'apps', 'الآلة الحاسبة Calculator', 'آلة حاسبة كاملة بأزرار الأرقام، مثل حاسبة Windows.',
+  F('Calculator', 262, 352, [
+    L('Label1', '', 12, 8, 238, 18, { alignment: 1, forecolor: 8421504 }),
+    T('Text1', '0', 12, 28, 238, 36, { alignment: 1, fontsize: 18, fontbold: true, locked: true }),
+  ].concat(grid([
+    [['cmdClear', 'C', { forecolor: 255 }], ['cmdBack', '←'], ['cmdSqr', '√'], ['cmdDiv', '/']],
+    [['Command7', '7'], ['Command8', '8'], ['Command9', '9'], ['cmdMul', '*']],
+    [['Command4', '4'], ['Command5', '5'], ['Command6', '6'], ['cmdSub', '-']],
+    [['Command1', '1'], ['Command2', '2'], ['Command3', '3'], ['cmdAdd', '+']],
+    [['cmdSign', '±'], ['Command0', '0'], ['cmdDot', '.'], ['cmdEq', '=', { default: true, forecolor: 16711680 }]]
+  ], 12, 76, 55, 46, 6))),
+  String.raw`
+Option Explicit
+Dim first As Double
+Dim op As String
+Dim fresh As Boolean
+
+Private Sub Digit(d As String)
+If fresh Or Text1.Text = "0" Then
+Text1.Text = d
+fresh = False
+Else
+Text1.Text = Text1.Text & d
+End If
+End Sub
+
+Private Sub SetOp(o As String)
+first = Val(Text1.Text)
+op = o
+fresh = True
+Label1.Caption = first & " " & o
+End Sub
+
+Private Sub Command0_Click()
+Digit "0"
+End Sub
+Private Sub Command1_Click()
+Digit "1"
+End Sub
+Private Sub Command2_Click()
+Digit "2"
+End Sub
+Private Sub Command3_Click()
+Digit "3"
+End Sub
+Private Sub Command4_Click()
+Digit "4"
+End Sub
+Private Sub Command5_Click()
+Digit "5"
+End Sub
+Private Sub Command6_Click()
+Digit "6"
+End Sub
+Private Sub Command7_Click()
+Digit "7"
+End Sub
+Private Sub Command8_Click()
+Digit "8"
+End Sub
+Private Sub Command9_Click()
+Digit "9"
+End Sub
+
+Private Sub cmdAdd_Click()
+SetOp "+"
+End Sub
+Private Sub cmdSub_Click()
+SetOp "-"
+End Sub
+Private Sub cmdMul_Click()
+SetOp "*"
+End Sub
+Private Sub cmdDiv_Click()
+SetOp "/"
+End Sub
+
+Private Sub cmdEq_Click()
+Dim second As Double, r As Double
+If op = "" Then Exit Sub
+second = Val(Text1.Text)
+Select Case op
+Case "+"
+r = first + second
+Case "-"
+r = first - second
+Case "*"
+r = first * second
+Case "/"
+If second = 0 Then
+MsgBox "Cannot divide by zero", 16, "Calculator"
+Exit Sub
+End If
+r = first / second
+End Select
+Label1.Caption = first & " " & op & " " & second & " ="
+Text1.Text = r
+op = ""
+fresh = True
+End Sub
+
+Private Sub cmdDot_Click()
+If fresh Then
+Text1.Text = "0."
+fresh = False
+ElseIf InStr(Text1.Text, ".") = 0 Then
+Text1.Text = Text1.Text & "."
+End If
+End Sub
+
+Private Sub cmdSign_Click()
+Text1.Text = -Val(Text1.Text)
+End Sub
+
+Private Sub cmdSqr_Click()
+If Val(Text1.Text) < 0 Then
+MsgBox "Negative number", 48, "Calculator"
+Else
+Label1.Caption = "Sqr(" & Text1.Text & ")"
+Text1.Text = Sqr(Val(Text1.Text))
+fresh = True
+End If
+End Sub
+
+Private Sub cmdBack_Click()
+If Len(Text1.Text) > 1 Then
+Text1.Text = Left(Text1.Text, Len(Text1.Text) - 1)
+Else
+Text1.Text = "0"
+End If
+End Sub
+
+Private Sub cmdClear_Click()
+Text1.Text = "0"
+Label1.Caption = ""
+first = 0
+op = ""
+End Sub`);
+
+ex('app_bmi', 'apps', 'حاسبة كتلة الجسم BMI', 'أدخل الوزن والطول، فيحسب مؤشر كتلة الجسم ويلوّن النتيجة حسب الفئة.',
+  F('BMI Calculator', 320, 260, [
+    L('Label1', 'BMI Calculator', 10, 8, 300, 26, { alignment: 2, fontsize: 14, fontbold: true, forecolor: 8388608 }),
+    L('Label2', 'Weight (kg)', 20, 48, 100), T('Text1', '70', 130, 45, 160),
+    L('Label3', 'Height (cm)', 20, 80, 100), T('Text2', '175', 130, 77, 160),
+    C('Command1', 'Calculate', 30, 115, 120, 30, { default: true }), C('Command2', 'Clear', 170, 115, 120, 30),
+    L('Label4', '', 20, 160, 280, 34, { alignment: 2, fontsize: 16, fontbold: true, borderstyle: 1 }),
+    L('Label5', '', 20, 200, 280, 30, { alignment: 2, fontsize: 12, fontbold: true, borderstyle: 1 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim w As Single, h As Single, bmi As Single
+w = Val(Text1.Text)
+h = Val(Text2.Text) / 100
+If w <= 0 Or h <= 0 Then
+MsgBox "Enter a valid weight and height", 48, "BMI"
+Exit Sub
+End If
+bmi = w / (h * h)
+Label4.Caption = "BMI = " & Format(bmi, "0.0")
+If bmi < 18.5 Then
+Label5.Caption = "Underweight"
+Label5.BackColor = RGB(173, 216, 230)
+ElseIf bmi < 25 Then
+Label5.Caption = "Normal"
+Label5.BackColor = RGB(144, 238, 144)
+ElseIf bmi < 30 Then
+Label5.Caption = "Overweight"
+Label5.BackColor = RGB(255, 200, 100)
+Else
+Label5.Caption = "Obese"
+Label5.BackColor = RGB(255, 120, 120)
+End If
+End Sub
+
+Private Sub Command2_Click()
+Text1.Text = ""
+Text2.Text = ""
+Label4.Caption = ""
+Label5.Caption = ""
+Label5.BackColor = RGB(212, 208, 200)
+Text1.SetFocus
+End Sub`);
+
+ex('app_temp', 'apps', 'محوّل درجات الحرارة', 'يحوّل بين المئوي Celsius والفهرنهايت Fahrenheit، ويعرض وجهًا يعبّر عن الجو.',
+  F('Temperature', 320, 230, [
+    L('Label1', 'Temperature Converter', 10, 8, 300, 26, { alignment: 2, fontsize: 13, fontbold: true, forecolor: 255 }),
+    L('Label2', 'Degree', 20, 50, 70), T('Text1', '30', 95, 47, 120, 26, { fontsize: 12 }),
+    IM('Image1', '🌡️', 235, 40, 60, 60),
+    C('Command1', '°C → °F', 20, 95, 130, 30), C('Command2', '°F → °C', 165, 95, 130, 30),
+    L('Label3', '', 20, 145, 280, 34, { alignment: 2, fontsize: 15, fontbold: true, borderstyle: 1, backcolor: 16777215 })]),
+  String.raw`
+Private Sub Mood(c As Single)
+If c < 10 Then
+Image1.Picture = LoadPicture("cold")
+ElseIf c < 30 Then
+Image1.Picture = LoadPicture("warm")
+Else
+Image1.Picture = LoadPicture("hot")
+End If
+End Sub
+
+Private Sub Command1_Click()
+Dim c As Single, f As Single
+c = Val(Text1.Text)
+f = c * 9 / 5 + 32
+Label3.Caption = c & " °C = " & Format(f, "0.0") & " °F"
+Mood c
+End Sub
+
+Private Sub Command2_Click()
+Dim c As Single, f As Single
+f = Val(Text1.Text)
+c = (f - 32) * 5 / 9
+Label3.Caption = f & " °F = " & Format(c, "0.0") & " °C"
+Mood c
+End Sub`);
+
+ex('app_currency', 'apps', 'محوّل العملات (دولار ↔ دينار)', 'يحوّل بين الدولار والدينار العراقي بسعر صرف تكتبه أنت.',
+  F('Currency', 330, 250, [
+    L('Label1', 'USD ⇄ IQD', 10, 8, 310, 26, { alignment: 2, fontsize: 14, fontbold: true, forecolor: 32768 }),
+    L('Label2', 'Rate (1 $ =)', 20, 48, 100), T('Text1', '1310', 130, 45, 170),
+    L('Label3', 'Amount', 20, 80, 100), T('Text2', '100', 130, 77, 170),
+    C('Command1', '$ → IQD', 20, 115, 140, 30), C('Command2', 'IQD → $', 170, 115, 140, 30),
+    L('Label4', '', 20, 165, 290, 36, { alignment: 2, fontsize: 14, fontbold: true, borderstyle: 1, backcolor: 15794160 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim rate As Double, a As Double
+rate = Val(Text1.Text)
+a = Val(Text2.Text)
+Label4.Caption = Format(a, "#,##0.00") & " $ = " & Format(a * rate, "#,##0") & " IQD"
+End Sub
+
+Private Sub Command2_Click()
+Dim rate As Double, a As Double
+rate = Val(Text1.Text)
+a = Val(Text2.Text)
+If rate = 0 Then
+MsgBox "Enter the exchange rate", 48, "Currency"
+Exit Sub
+End If
+Label4.Caption = Format(a, "#,##0") & " IQD = " & Format(a / rate, "#,##0.00") & " $"
+End Sub`);
+
+ex('app_invoice', 'apps', 'فاتورة مبيعات', 'أضف المواد واحدة بعد الأخرى. يحسب المجموع، ويعطي خصم 10% إذا تجاوز 100,000 دينار.',
+  F('Sales Invoice', 360, 380, [
+    L('Label1', 'Item', 15, 12, 60), T('Text1', 'Pen', 80, 9, 265),
+    L('Label2', 'Price', 15, 44, 60), T('Text2', '1500', 80, 41, 100),
+    L('Label3', 'Qty', 195, 44, 40), T('Text3', '10', 240, 41, 105),
+    C('Command1', 'Add item', 15, 76, 105, 28, { default: true }), C('Command2', 'Total', 128, 76, 105, 28), C('Command3', 'New invoice', 240, 76, 105, 28),
+    L('Label4', 'Items: 0', 15, 112, 160, 20, { fontbold: true }),
+    L('Label5', '', 15, 300, 330, 60, { borderstyle: 1, fontsize: 10, fontbold: true, backcolor: 16777215 })], { printTop: 136 }),
+  String.raw`
+Option Explicit
+Dim total As Double
+Dim count As Integer
+
+Private Sub Command1_Click()
+Dim price As Double, qty As Integer, line As Double
+If Text1.Text = "" Or Val(Text2.Text) <= 0 Or Val(Text3.Text) <= 0 Then
+MsgBox "Enter item, price and quantity", 48, "Invoice"
+Exit Sub
+End If
+price = Val(Text2.Text)
+qty = Val(Text3.Text)
+line = price * qty
+total = total + line
+count = count + 1
+Print count; ") "; Text1.Text; " "; qty; " x "; price; " = "; line
+Label4.Caption = "Items: " & count
+Text1.Text = ""
+Text2.Text = ""
+Text3.Text = "1"
+Text1.SetFocus
+End Sub
+
+Private Sub Command2_Click()
+Dim disc As Double
+If total > 100000 Then disc = total * 0.1
+Label5.Caption = "Total: " & Format(total, "#,##0") & "   Discount: " & Format(disc, "#,##0") & vbCrLf & "To pay: " & Format(total - disc, "#,##0") & " IQD"
+End Sub
+
+Private Sub Command3_Click()
+If MsgBox("Start a new invoice?", 4 + 32, "Invoice") = vbYes Then
+total = 0
+count = 0
+Cls
+Label4.Caption = "Items: 0"
+Label5.Caption = ""
+End If
+End Sub`);
+
+ex('app_salary', 'apps', 'حاسبة الراتب الصافي', 'الراتب الأساسي + المخصصات − الضريبة. نسبة الضريبة تتغير حسب الراتب (Select Case).',
+  F('Salary', 330, 300, [
+    L('Label1', 'Net Salary Calculator', 10, 8, 310, 26, { alignment: 2, fontsize: 13, fontbold: true, forecolor: 8388608 }),
+    L('Label2', 'Basic salary', 20, 48, 110), T('Text1', '750000', 140, 45, 165),
+    L('Label3', 'Allowances', 20, 80, 110), T('Text2', '150000', 140, 77, 165),
+    C('Command1', 'Calculate', 20, 115, 140, 30, { default: true }), C('Command2', 'Clear', 170, 115, 135, 30),
+    L('Label4', 'Gross', 20, 165, 110), T('Text3', '', 140, 162, 165, 22, { locked: true, backcolor: 14737632 }),
+    L('Label5', 'Tax', 20, 197, 110), T('Text4', '', 140, 194, 165, 22, { locked: true, backcolor: 14737632 }),
+    L('Label6', 'Net salary', 20, 229, 110, 20, { fontbold: true }), T('Text5', '', 140, 226, 165, 24, { locked: true, fontbold: true, backcolor: 13434828 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim gross As Double, rate As Double, tax As Double
+gross = Val(Text1.Text) + Val(Text2.Text)
+Select Case gross
+Case Is <= 250000
+rate = 0
+Case Is <= 500000
+rate = 0.03
+Case Is <= 1000000
+rate = 0.05
+Case Else
+rate = 0.1
+End Select
+tax = gross * rate
+Text3.Text = Format(gross, "#,##0")
+Text4.Text = Format(tax, "#,##0") & "  (" & rate * 100 & "%)"
+Text5.Text = Format(gross - tax, "#,##0") & " IQD"
+End Sub
+
+Private Sub Command2_Click()
+Text1.Text = ""
+Text2.Text = ""
+Text3.Text = ""
+Text4.Text = ""
+Text5.Text = ""
+Text1.SetFocus
+End Sub`);
+
+ex('app_guess', 'apps', 'لعبة تخمين الرقم', 'الحاسوب يختار رقمًا سرّيًا من 1 إلى 100. خمّنه بأقل عدد من المحاولات.',
+  F('Guess the Number', 320, 270, [
+    L('Label1', 'I picked a number from 1 to 100', 10, 10, 300, 24, { alignment: 2, fontsize: 11, fontbold: true }),
+    IM('Image1', '🤔', 130, 38, 60, 60),
+    T('Text1', '', 90, 108, 140, 30, { alignment: 2, fontsize: 14 }),
+    C('Command1', 'Guess', 40, 150, 110, 30, { default: true }), C('Command2', 'New game', 170, 150, 110, 30),
+    L('Label2', '', 20, 195, 280, 28, { alignment: 2, fontsize: 13, fontbold: true }),
+    L('Label3', 'Tries: 0', 20, 228, 280, 20, { alignment: 2 })]),
+  String.raw`
+Option Explicit
+Dim secret As Integer
+Dim tries As Integer
+
+Private Sub NewGame()
+Randomize
+secret = Int(Rnd * 100) + 1
+tries = 0
+Label2.Caption = "Type a number and press Guess"
+Label2.ForeColor = vbBlack
+Label3.Caption = "Tries: 0"
+Image1.Picture = LoadPicture("think")
+Text1.Text = ""
+Command1.Enabled = True
+End Sub
+
+Private Sub Form_Load()
+NewGame
+End Sub
+
+Private Sub Command1_Click()
+Dim g As Integer
+g = Val(Text1.Text)
+If g < 1 Or g > 100 Then
+MsgBox "Enter a number from 1 to 100", 48, "Guess"
+Exit Sub
+End If
+tries = tries + 1
+Label3.Caption = "Tries: " & tries
+If g < secret Then
+Label2.Caption = g & " is too small ⬆"
+Label2.ForeColor = vbBlue
+ElseIf g > secret Then
+Label2.Caption = g & " is too big ⬇"
+Label2.ForeColor = vbRed
+Else
+Label2.Caption = "Correct! It is " & secret
+Label2.ForeColor = RGB(0, 140, 0)
+Image1.Picture = LoadPicture("happy")
+Command1.Enabled = False
+MsgBox "You won in " & tries & " tries", 64, "Bravo"
+End If
+Text1.Text = ""
+End Sub
+
+Private Sub Command2_Click()
+NewGame
+End Sub`);
+
+ex('app_rps', 'apps', 'لعبة حجر ورقة مقص', 'اختر حركتك، والحاسوب يختار عشوائيًا. البرنامج يحدد الفائز ويحسب النقاط.',
+  F('Rock Paper Scissors', 330, 290, [
+    L('Label1', 'You', 30, 10, 100, 20, { alignment: 2, fontbold: true }), L('Label2', 'Computer', 200, 10, 100, 20, { alignment: 2, fontbold: true }),
+    IM('Image1', '❔', 45, 32, 70, 70), L('Label3', 'VS', 140, 55, 50, 26, { alignment: 2, fontsize: 14, fontbold: true, forecolor: 255 }), IM('Image2', '❔', 215, 32, 70, 70),
+    C('Command1', 'Rock ✊', 15, 120, 95, 32), C('Command2', 'Paper ✋', 117, 120, 95, 32), C('Command3', 'Scissors ✌️', 219, 120, 95, 32),
+    L('Label4', 'Choose your move', 15, 168, 300, 30, { alignment: 2, fontsize: 14, fontbold: true }),
+    L('Label5', 'You 0 : 0 Computer', 15, 205, 300, 24, { alignment: 2, fontsize: 12, borderstyle: 1 }),
+    C('Command4', 'Reset score', 110, 240, 110, 28)]),
+  String.raw`
+Option Explicit
+Dim me1 As Integer
+Dim pc As Integer
+
+Private Function Pic(m As Integer) As String
+Select Case m
+Case 1
+Pic = "rock"
+Case 2
+Pic = "paper"
+Case 3
+Pic = "scissors"
+End Select
+End Function
+
+Private Sub Play(you As Integer)
+Dim comp As Integer
+comp = Int(Rnd * 3) + 1
+Image1.Picture = LoadPicture(Pic(you))
+Image2.Picture = LoadPicture(Pic(comp))
+If you = comp Then
+Label4.Caption = "Draw"
+Label4.ForeColor = vbBlack
+ElseIf (you = 1 And comp = 3) Or (you = 2 And comp = 1) Or (you = 3 And comp = 2) Then
+Label4.Caption = "You win!"
+Label4.ForeColor = RGB(0, 140, 0)
+me1 = me1 + 1
+Else
+Label4.Caption = "Computer wins"
+Label4.ForeColor = vbRed
+pc = pc + 1
+End If
+Label5.Caption = "You " & me1 & " : " & pc & " Computer"
+End Sub
+
+Private Sub Command1_Click()
+Play 1
+End Sub
+
+Private Sub Command2_Click()
+Play 2
+End Sub
+
+Private Sub Command3_Click()
+Play 3
+End Sub
+
+Private Sub Command4_Click()
+me1 = 0
+pc = 0
+Label5.Caption = "You 0 : 0 Computer"
+Label4.Caption = "Choose your move"
+End Sub`);
+
+ex('app_table', 'apps', 'جدول الضرب', 'اكتب رقمًا فيطبع البرنامج جدول ضربه من 1 إلى 10 باستخدام الحلقة For.',
+  F('Multiplication Table', 300, 330, [
+    L('Label1', 'Number', 20, 15, 70), T('Text1', '7', 90, 12, 60, 24, { alignment: 2, fontsize: 12 }),
+    C('Command1', 'Show', 160, 10, 60, 28, { default: true }), C('Command2', 'Clear', 228, 10, 60, 28)], { printTop: 52 }),
+  String.raw`
+Private Sub Command1_Click()
+Dim n As Integer, i As Integer
+n = Val(Text1.Text)
+Cls
+For i = 1 To 10
+Print n; " x "; i; " = "; n * i
+Next i
+End Sub
+
+Private Sub Command2_Click()
+Cls
+Text1.Text = ""
+Text1.SetFocus
+End Sub`);
+
+ex('app_traffic', 'apps', 'إشارة المرور', 'كل ضغطة على Next تنقل الإشارة: أحمر ← أخضر ← أصفر ← أحمر.',
+  F('Traffic Light', 260, 330, [
+    L('Label9', '', 85, 10, 90, 245, { backcolor: 3289650, borderstyle: 1 }),
+    L('Label1', '', 100, 22, 60, 60, { backcolor: 4210752, borderstyle: 1 }),
+    L('Label2', '', 100, 102, 60, 60, { backcolor: 4210752, borderstyle: 1 }),
+    L('Label3', '', 100, 182, 60, 60, { backcolor: 4210752, borderstyle: 1 }),
+    L('Label4', '', 10, 262, 240, 24, { alignment: 2, fontsize: 13, fontbold: true }),
+    C('Command1', 'Next ▶', 80, 292, 100, 28, { default: true })]),
+  String.raw`
+Option Explicit
+Dim state As Integer
+
+Private Sub ShowLight()
+Label1.BackColor = RGB(64, 64, 64)
+Label2.BackColor = RGB(64, 64, 64)
+Label3.BackColor = RGB(64, 64, 64)
+Select Case state
+Case 0
+Label1.BackColor = vbRed
+Label4.Caption = "STOP"
+Label4.ForeColor = vbRed
+Case 1
+Label3.BackColor = vbGreen
+Label4.Caption = "GO"
+Label4.ForeColor = RGB(0, 140, 0)
+Case 2
+Label2.BackColor = vbYellow
+Label4.Caption = "READY"
+Label4.ForeColor = RGB(200, 150, 0)
+End Select
+End Sub
+
+Private Sub Form_Load()
+state = 0
+ShowLight
+End Sub
+
+Private Sub Command1_Click()
+state = state + 1
+If state > 2 Then state = 0
+ShowLight
+End Sub`);
+
+ex('app_quiz', 'apps', 'تطبيق اختبار (Quiz)', 'خمسة أسئلة عن Visual Basic. اختر الجواب، والبرنامج يصحح ويعطيك الدرجة في النهاية.',
+  F('VB Quiz', 340, 300, [
+    L('Label1', '', 10, 8, 320, 20, { fontbold: true, forecolor: 8388608 }),
+    L('Label2', '', 10, 32, 320, 50, { fontsize: 12, fontbold: true, borderstyle: 1, backcolor: 16777215 }),
+    C('Command1', '', 20, 95, 300, 30), C('Command2', '', 20, 133, 300, 30), C('Command3', '', 20, 171, 300, 30),
+    L('Label3', '', 10, 212, 320, 24, { alignment: 2, fontsize: 12, fontbold: true }),
+    C('Command4', 'Start again', 110, 250, 120, 28, { visible: false })]),
+  String.raw`
+Option Explicit
+Dim q As Integer
+Dim answer As Integer
+Dim score As Integer
+
+Private Sub ShowQ()
+Label1.Caption = "Question " & q & " of 5     Score: " & score
+Select Case q
+Case 1
+Label2.Caption = "Which property shows the text of a Label?"
+Command1.Caption = "Text"
+Command2.Caption = "Caption"
+Command3.Caption = "Name"
+answer = 2
+Case 2
+Label2.Caption = "Which function changes text to a number?"
+Command1.Caption = "Val"
+Command2.Caption = "Len"
+Command3.Caption = "Str"
+answer = 1
+Case 3
+Label2.Caption = "Which statement declares a variable?"
+Command1.Caption = "Const"
+Command2.Caption = "Print"
+Command3.Caption = "Dim"
+answer = 3
+Case 4
+Label2.Caption = "MsgBox returns 6 when the user presses:"
+Command1.Caption = "Yes"
+Command2.Caption = "No"
+Command3.Caption = "Cancel"
+answer = 1
+Case 5
+Label2.Caption = "Which event runs when the form opens?"
+Command1.Caption = "Click"
+Command2.Caption = "Form_Load"
+Command3.Caption = "Change"
+answer = 2
+Case Else
+Label1.Caption = "Finished"
+Label2.Caption = "Your score: " & score & " / 5"
+Command1.Visible = False
+Command2.Visible = False
+Command3.Visible = False
+Command4.Visible = True
+If score >= 3 Then
+Label3.Caption = "Passed 🎉"
+Else
+Label3.Caption = "Try again"
+End If
+End Select
+End Sub
+
+Private Sub Check(c As Integer)
+If c = answer Then
+score = score + 1
+Label3.Caption = "Correct ✔"
+Label3.ForeColor = RGB(0, 140, 0)
+Else
+Label3.Caption = "Wrong ✘"
+Label3.ForeColor = vbRed
+End If
+q = q + 1
+ShowQ
+End Sub
+
+Private Sub Form_Load()
+q = 1
+score = 0
+Label3.Caption = ""
+ShowQ
+End Sub
+
+Private Sub Command1_Click()
+Check 1
+End Sub
+
+Private Sub Command2_Click()
+Check 2
+End Sub
+
+Private Sub Command3_Click()
+Check 3
+End Sub
+
+Private Sub Command4_Click()
+Command1.Visible = True
+Command2.Visible = True
+Command3.Visible = True
+Command4.Visible = False
+Label3.ForeColor = vbBlack
+Form_Load
+End Sub`);
+})();
+
 /* ===== شرح كل مثال: ماذا يفعل، المدخلات، الأزرار، النتيجة ===== */
 const GUIDE = {
 lab0: {
@@ -2202,6 +2827,98 @@ Object.assign(GUIDE.cmd_if, {
 Object.assign(GUIDE.cmd_click, {
   lines: [['Dim clicks As Integer', 'خارج الإجراءات. يحتفظ بقيمته بين النقرات لأنه على مستوى النموذج.'], ['Private Sub Command1_Click()', 'الإجراء الذي ينفَّذ كلما ضغطنا الزر Command1.'], ['clicks = clicks + 1', 'نزيد العدّاد 1.'], ['Label1.Caption = "Clicks: " & clicks', 'نعرض القيمة الجديدة.'], ['Private Sub Command2_Click()', 'ينفَّذ عند الضغط على Reset ويعيد العدّاد إلى صفر.'], ['Private Sub Label2_Click()', 'اسم الإجراء = اسم الأداة + _ + اسم الحدث. فللـ Label أيضًا حدث Click.']],
   learn: 'أن الحدث هو ما يحرّك البرنامج: لا يعمل أي إجراء إلا عندما يحدث شيء مثل النقر. وأن اسم الإجراء يُبنى من اسم الأداة واسم الحدث.' });
+
+Object.assign(GUIDE, {
+app_calc: {
+  what: 'آلة حاسبة حقيقية: تضغط الأرقام فتظهر في الشاشة، ثم العملية، ثم الرقم الثاني، ثم = فتظهر النتيجة. السطر الصغير فوق الشاشة يعرض العملية الجارية.',
+  ins: [['Text1 (الشاشة)', 'مقفلة. لا تكتب فيها بلوحة المفاتيح. الأرقام تدخل عن طريق الأزرار فقط.']],
+  btns: [['0 إلى 9', 'كل زر يستدعي الإجراء Digit فيضيف رقمه إلى الشاشة.'], ['+ - * /', 'تستدعي SetOp: تحفظ الرقم الأول في first والعملية في op، ثم تنتظر الرقم الثاني.'], ['=', 'يقرأ الرقم الثاني ويحسب حسب op بـ Select Case. يمنع القسمة على صفر برسالة. يعمل أيضًا بالمفتاح Enter.'], ['.', 'يضيف فاصلة عشرية مرة واحدة فقط (يفحص بـ InStr).'], ['±', 'يقلب الإشارة.'], ['√', 'الجذر التربيعي، ويرفض الأعداد السالبة.'], ['←', 'يحذف آخر رقم بالدالة Left.'], ['C', 'يمسح كل شيء.']],
+  res: 'اضغط 1 ثم 2 ثم + ثم 8 ثم = فتظهر 20، وفوقها 12 + 8 =. جرّب 9 / 0 = لترى رسالة المنع.',
+  steps: ['ارسم Label1 في الأعلى وText1 تحته. اجعل Text1: Locked = True و Alignment = 1 (يمين) وحجم الخط 18.', 'ارسم 20 زرًا بشبكة 4 × 5. سمّ أزرار الأرقام Command0 إلى Command9، وسمّ الباقي cmdAdd و cmdSub و cmdMul و cmdDiv و cmdEq و cmdDot و cmdSign و cmdSqr و cmdBack و cmdClear.', 'اجعل الزر = بخاصية Default = True.', 'في قسم General اكتب المتغيرات first و op و fresh.', 'اكتب الإجراءين Digit و SetOp، ثم اجعل كل زر يستدعي واحدًا منهما.', 'اكتب إجراء = بـ Select Case، ثم باقي الأزرار.'],
+  learn: 'كتابة إجراء خاص (Sub) يستدعيه أكثر من زر بدل تكرار الشيفرة، والمتغيرات على مستوى النموذج التي تحفظ الحالة بين النقرات.',
+  tryit: 'تحدٍّ: أضف زر % يحسب النسبة المئوية، وزر x² يربّع الرقم.' },
+app_bmi: {
+  what: 'يحسب مؤشر كتلة الجسم = الوزن ÷ (الطول بالمتر)². ثم يحدد الفئة ويغيّر لون الخلفية حسبها.',
+  ins: [['Text1 (Weight)', 'الوزن بالكيلوغرام. مثال: 70'], ['Text2 (Height)', 'الطول بالسنتيمتر. مثال: 175']],
+  btns: [['Command1 (Calculate)', 'يحوّل الطول إلى متر، يحسب BMI، ويعرضه بمنزلة عشرية واحدة. ثم يكتب الفئة ويلوّنها بـ RGB. يعمل أيضًا بالمفتاح Enter.'], ['Command2 (Clear)', 'يمسح كل شيء ويعيد المؤشر إلى Text1.']],
+  res: '70 و 175 تعطي BMI = 22.9 وفئة Normal بالأخضر. جرّب 50 و 175: Underweight بالأزرق. و 100 و 175: Obese بالأحمر.',
+  steps: ['ارسم Label للعنوان، وLabel و TextBox للوزن، وآخرين للطول.', 'ارسم زرين Calculate و Clear.', 'ارسم Label4 للرقم و Label5 للفئة، واجعل BorderStyle = 1.', 'اكتب شيفرة Calculate: Val ثم القسمة ثم If … ElseIf للفئات.'],
+  learn: 'تحويل الوحدات، والتنسيق بـ Format، وتغيير الألوان بالدالة RGB داخل جمل If.',
+  tryit: 'تحدٍّ: أضف Label يكتب الوزن المثالي للطول المدخل.' },
+app_temp: {
+  what: 'يحوّل درجة الحرارة بين المئوي والفهرنهايت، ويغيّر الصورة حسب الجو: 🥶 بارد، 😊 معتدل، 🥵 حار.',
+  ins: [['Text1 (Degree)', 'الدرجة التي تريد تحويلها. مثال: 30']],
+  btns: [['Command1 (°C → °F)', 'يعتبر الرقم مئويًا: F = C × 9 ÷ 5 + 32.'], ['Command2 (°F → °C)', 'يعتبر الرقم فهرنهايت: C = (F − 32) × 5 ÷ 9.'], ['Mood (إجراء خاص)', 'يختار الصورة: أقل من 10 بارد، أقل من 30 معتدل، غير ذلك حار.']],
+  res: '30 مئوي = 86.0 فهرنهايت. و 212 فهرنهايت = 100.0 مئوي.',
+  steps: ['ارسم Label للعنوان، وTextBox للدرجة، وأداة Image للصورة.', 'ارسم زرين للتحويل، وLabel للنتيجة.', 'اكتب الإجراء Mood مرة واحدة واستدعه من الزرين.', 'في VB الحقيقي استعمل LoadPicture("C:\\cold.jpg") مع صور حقيقية.'],
+  learn: 'كتابة المعادلات الرياضية، وإجراء خاص يستقبل قيمة، وتغيير صورة Image بالشيفرة.',
+  tryit: 'تحدٍّ: أضف التحويل إلى الكلفن (K = C + 273.15).' },
+app_currency: {
+  what: 'يحوّل بين الدولار والدينار العراقي حسب سعر الصرف الذي تكتبه، ويعرض الأرقام بفواصل الآلاف.',
+  ins: [['Text1 (Rate)', 'كم دينار يساوي الدولار الواحد. مثال: 1310'], ['Text2 (Amount)', 'المبلغ المراد تحويله. مثال: 100']],
+  btns: [['Command1 ($ → IQD)', 'يضرب المبلغ في السعر.'], ['Command2 (IQD → $)', 'يقسم المبلغ على السعر، ويمنع القسمة إذا كان السعر صفرًا.']],
+  res: '100 دولار بسعر 1310 = 131,000 دينار. و 655,000 دينار = 500.00 دولار.',
+  steps: ['ارسم Label للعنوان، ثم Label و TextBox للسعر، وآخرين للمبلغ.', 'ارسم زرين للتحويل، وLabel للنتيجة.', 'استعمل Format(x, "#,##0") لإظهار فواصل الآلاف.'],
+  learn: 'تنسيق الأرقام المالية بـ Format، والتحقق من القيم قبل القسمة.',
+  tryit: 'تحدٍّ: أضف عملة ثالثة مثل اليورو.' },
+app_invoice: {
+  what: 'فاتورة مبيعات لمحل: تضيف المواد واحدة واحدة، فيطبع كل سطر ويجمع المبلغ. عند Total يحسب الخصم 10% إن تجاوز المجموع 100,000 دينار.',
+  ins: [['Text1 (Item)', 'اسم المادة. مثال: Pen'], ['Text2 (Price)', 'سعر القطعة. مثال: 1500'], ['Text3 (Qty)', 'العدد. مثال: 10']],
+  btns: [['Command1 (Add item)', 'يتحقق من الحقول، يحسب السعر × العدد، يضيفه إلى total، ويطبع السطر على النموذج. ثم يفرغ الحقول. يعمل بالمفتاح Enter.'], ['Command2 (Total)', 'يعرض المجموع والخصم والمبلغ النهائي في Label5.'], ['Command3 (New invoice)', 'يسأل للتأكيد بـ MsgBox، ثم يصفّر كل شيء ويمسح الشاشة بـ Cls.']],
+  res: 'Pen بسعر 1500 × 10 = 15,000. ثم Book بسعر 25000 × 4 = 100,000. المجموع 115,000، والخصم 11,500، والمطلوب دفعه 103,500.',
+  steps: ['ارسم ثلاثة Labels وثلاثة TextBoxes في الأعلى.', 'ارسم ثلاثة أزرار، واجعل Add item هو Default.', 'اترك مساحة فارغة في وسط النموذج للطباعة بـ Print.', 'ارسم Label5 في الأسفل بإطار للمجموع.', 'عرّف total و count في General لأنها تُجمع عبر عدة نقرات.'],
+  learn: 'تجميع القيم في متغيرات على مستوى النموذج، والطباعة بـ Print، وقاعدة خصم بـ If. تطبيق قريب من عمل إدارة الأعمال.',
+  tryit: 'تحدٍّ: أضف ضريبة مبيعات 5% بعد الخصم.' },
+app_salary: {
+  what: 'يحسب الراتب الصافي: الإجمالي = الأساسي + المخصصات. ثم تُخصم ضريبة نسبتها حسب شريحة الإجمالي.',
+  ins: [['Text1 (Basic salary)', 'الراتب الأساسي. مثال: 750000'], ['Text2 (Allowances)', 'المخصصات. مثال: 150000'], ['Text3 و Text4 و Text5', 'مقفلة. تظهر فيها النتائج.']],
+  btns: [['Command1 (Calculate)', 'يحدد النسبة بـ Select Case: حتى 250,000 بدون ضريبة. حتى 500,000 نسبة 3%. حتى 1,000,000 نسبة 5%. أكثر من ذلك 10%.'], ['Command2 (Clear)', 'يمسح كل الحقول.']],
+  res: '750,000 + 150,000 = 900,000. الضريبة 5% = 45,000. الصافي 855,000 دينار.',
+  steps: ['ارسم Labels و TextBoxes للأساسي والمخصصات.', 'ارسم زرين.', 'ارسم ثلاثة TextBoxes للنتائج واجعلها Locked = True بلون مختلف.', 'اكتب Select Case بالصيغة Case Is <= قيمة.'],
+  learn: 'استعمال Select Case مع المقارنات Is <= لتطبيق شرائح، وهي فكرة شائعة في الأنظمة المالية.',
+  tryit: 'تحدٍّ: أضف حقلًا لعدد الأطفال، ولكل طفل 50,000 مخصصات إضافية.' },
+app_guess: {
+  what: 'لعبة: عند فتح النموذج يختار الحاسوب رقمًا سريًا من 1 إلى 100. تكتب تخمينك فيخبرك: أكبر أم أصغر. حتى تصل إليه.',
+  ins: [['Text1', 'اكتب تخمينك. ابدأ بـ 50 ثم اقترب.']],
+  btns: [['Form_Load', 'يستدعي NewGame لاختيار رقم جديد بالدالة Rnd.'], ['Command1 (Guess)', 'يزيد عدد المحاولات، ويقارن تخمينك بالرقم السري. إن أصبت تظهر رسالة الفوز ويتعطل الزر. يعمل بالمفتاح Enter.'], ['Command2 (New game)', 'يبدأ لعبة جديدة برقم جديد.']],
+  res: 'بطريقة التنصيف (50 ثم 25 أو 75 …) تصل للرقم في 7 محاولات أو أقل.',
+  steps: ['ارسم Label للتعليمات، وImage للوجه، وTextBox كبيرًا في الوسط.', 'ارسم زرين Guess و New game.', 'ارسم Label2 للتلميح و Label3 للمحاولات.', 'عرّف secret و tries في General.', 'استعمل Int(Rnd * 100) + 1 لاختيار رقم من 1 إلى 100.'],
+  learn: 'الأرقام العشوائية Rnd، والحدث Form_Load، وتعطيل الزر Enabled = False عند انتهاء اللعبة.',
+  tryit: 'تحدٍّ: حدد 7 محاولات فقط، وبعدها تظهر رسالة خسارة.' },
+app_rps: {
+  what: 'لعبة حجر ورقة مقص ضد الحاسوب. الحجر يكسر المقص، والمقص يقص الورقة، والورقة تغطي الحجر.',
+  ins: [],
+  btns: [['Command1 و Command2 و Command3', 'كل زر يستدعي Play بحركتك: 1 حجر، 2 ورقة، 3 مقص.'], ['Play (إجراء خاص)', 'يختار حركة الحاسوب عشوائيًا، يعرض الصورتين، ويقارن بـ If و Or لتحديد الفائز، ثم يحدّث النتيجة.'], ['Pic (دالة خاصة)', 'Function ترجع اسم الصورة حسب رقم الحركة.'], ['Command4 (Reset score)', 'يصفّر النقاط.']],
+  res: 'العب عدة جولات وراقب العدّاد في الأسفل.',
+  steps: ['ارسم Image1 و Image2 وبينهما Label للكلمة VS.', 'ارسم ثلاثة أزرار للحركات.', 'ارسم Label4 للنتيجة و Label5 للعدّاد، ثم زر Reset.', 'اكتب الدالة Pic والإجراء Play، ثم اجعل كل زر يستدعي Play برقم.'],
+  learn: 'الفرق بين Sub الذي ينفّذ أوامر و Function الذي يرجع قيمة، والشروط المركّبة بـ And و Or.',
+  tryit: 'تحدٍّ: أعلن الفائز عندما يصل أحد اللاعبين إلى 5 نقاط.' },
+app_table: {
+  what: 'يطبع جدول الضرب لأي رقم من 1 إلى 10 باستخدام الحلقة For.',
+  ins: [['Text1 (Number)', 'الرقم. مثال: 7']],
+  btns: [['Command1 (Show)', 'يمسح الشاشة بـ Cls، ثم يكرر الطباعة 10 مرات: For i = 1 To 10.'], ['Command2 (Clear)', 'يمسح الطباعة والحقل.']],
+  res: '7 x 1 = 7 ، 7 x 2 = 14 … حتى 7 x 10 = 70.',
+  steps: ['ارسم Label و TextBox وزرين في أعلى النموذج فقط.', 'اترك باقي النموذج فارغًا للطباعة.', 'اكتب الحلقة For … Next داخل زر Show.'],
+  learn: 'الحلقة For … Next: تكرار نفس الأمر عدة مرات بدل كتابته عشر مرات.',
+  tryit: 'تحدٍّ: اجعله يطبع حتى 12، أو يطبع الأعداد الزوجية فقط بإضافة Step 2.' },
+app_traffic: {
+  what: 'محاكاة إشارة المرور. ثلاثة Labels تمثل المصابيح. كل ضغطة تنقل الإشارة إلى الحالة التالية.',
+  ins: [],
+  btns: [['Form_Load', 'يبدأ بالحالة 0 (أحمر).'], ['Command1 (Next)', 'يزيد state، وإن تجاوز 2 يعود إلى 0. ثم يستدعي ShowLight. يعمل بالمفتاح Enter.'], ['ShowLight (إجراء خاص)', 'يطفئ المصابيح الثلاثة (رمادي)، ثم يضيء واحدًا فقط حسب state بـ Select Case.']],
+  res: 'أحمر STOP ← أخضر GO ← أصفر READY ← أحمر من جديد.',
+  steps: ['ارسم Label كبيرًا داكنًا كهيكل للإشارة.', 'ارسم فوقه ثلاثة Labels مربعة، كل منها 60 × 60.', 'ارسم Label للكلمة، وزر Next.', 'عرّف state في General.'],
+  learn: 'تمثيل حالة البرنامج بمتغير، والانتقال بين الحالات بشكل دائري.',
+  tryit: 'تحدٍّ: أضف زرًا لإشارة المشاة.' },
+app_quiz: {
+  what: 'تطبيق اختبار من خمسة أسئلة عن VB. السؤال في الأعلى، والخيارات الثلاثة أزرار. بعد كل جواب يصحح وينتقل للسؤال التالي، وفي النهاية يعرض الدرجة.',
+  ins: [],
+  btns: [['Form_Load', 'يبدأ من السؤال 1 والدرجة صفر.'], ['ShowQ (إجراء خاص)', 'يكتب السؤال والخيارات حسب رقم السؤال q بـ Select Case، ويحفظ رقم الجواب الصحيح في answer. بعد السؤال 5 يعرض النتيجة ويخفي الأزرار.'], ['Command1 و Command2 و Command3', 'تستدعي Check برقم الخيار. Check يقارنه بـ answer ويزيد الدرجة إن كان صحيحًا.'], ['Command4 (Start again)', 'يظهر في النهاية فقط. يعيد الاختبار من البداية.']],
+  res: 'الأجوبة الصحيحة: Caption ثم Val ثم Dim ثم Yes ثم Form_Load. خمسة منها تعطي 5 / 5.',
+  steps: ['ارسم Label1 لرقم السؤال و Label2 كبيرًا للسؤال.', 'ارسم ثلاثة أزرار عريضة للخيارات، واتركها بلا نص.', 'ارسم Label3 للتصحيح، وزر Start again مع Visible = False.', 'عرّف q و answer و score في General.', 'اكتب ShowQ و Check، ثم أحداث الأزرار.'],
+  learn: 'بناء تطبيق كامل يتغير محتواه أثناء التشغيل، وإظهار الأدوات وإخفاؤها بـ Visible.',
+  tryit: 'تحدٍّ: أضف سؤالين جديدين وغيّر 5 إلى 7.' }
+});
+for (const k in GUIDE) if (EX[k] && k.indexOf('app_') === 0) EX[k].guide = GUIDE[k];
 
 /* ===== chapters, quizzes, glossary ===== */
 const Q = (q, ok, bad, e, c) => ({ q, ok, bad, e: e || '', c: c || '' });
@@ -2710,7 +3427,8 @@ CH.push({
     ['p', 'هذا البرنامج يجمع ما تعلمناه في كل الفصول.'],
     ['ul', ['الأدوات: {{Form}} و {{Label}} و {{TextBox}} و {{CommandButton}} و {{Image}}.', 'الصناديق: {{InputBox}} و {{MsgBox}}.', 'المتغيرات: {{Dim}} و {{Option Explicit}} (الفصل 4).', 'القرارات: {{If}} و {{Select Case}} (الفصل 6).', 'الأحداث: {{Click}} و {{GotFocus}} و {{Form_Load}} (الفصل 3).']],
     ['ex', 'all1'],
-    ['tip', 'جرّب تغيير الشيفرة في المختبر. مثلًا أضف تقديرًا جديدًا أو غيّر شروط الرسوب.']
+    ['tip', 'جرّب تغيير الشيفرة في المختبر. مثلًا أضف تقديرًا جديدًا أو غيّر شروط الرسوب.'],
+    ['note', 'أنهيت المنهج؟ انتقل إلى قسم «🎨 تصميمات» من الشريط السفلي: آلة حاسبة، وفاتورة مبيعات، وألعاب، وتطبيقات أخرى تصممها بنفسك.']
   ],
   quiz: [
     Q('الجمل الشرطية تُسمى أيضًا:', 'جمل السيطرة Control Statements', ['جمل الإدخال', 'جمل التعريف', 'جمل الطباعة'], 'هدفها التحكم بمسار تنفيذ البرنامج.'),
@@ -2972,6 +3690,7 @@ function guideHtml(e) {
     (g.btns && g.btns.length ? '<div class="gsub">② ماذا يفعل كل زر أو حدث</div>' + rows(g.btns) : '') +
     '<div class="gsub">③ النتيجة المتوقعة</div><p>' + rt(g.res) + '</p>' +
     (g.lines && g.lines.length ? '<div class="gsub">④ شرح الشيفرة سطرًا سطرًا</div>' + g.lines.map(r => '<div class="grow"><div class="gname"><code class="en">' + esc(r[0]) + '</code></div><div class="gtext">' + rt(r[1]) + '</div></div>').join('') : '') +
+    (g.steps ? '<div class="gsub">🛠 خطوات تصميمه في Visual Basic 6</div><ol class="gsteps">' + g.steps.map(x => '<li>' + rt(x) + '</li>').join('') + '</ol>' : '') +
     (g.learn ? '<div class="gsub">🎓 ماذا يتعلم الطالب؟</div><p>' + rt(g.learn) + '</p>' : '') +
     (g.tryit ? '<div class="gsub">💡 جرّب</div><p>' + rt(g.tryit) + '</p>' : '') + '</details>';
 }
@@ -3140,7 +3859,7 @@ function viewHome() {
     '<div class="herobtns"><a class="btn" href="#' + (prog.last ? 'ch' + prog.last : 'ch1') + '">' + (prog.last ? 'تابع من حيث توقفت' : 'ابدأ التعلم') + '</a><a class="btn ghost" href="#lab">🧪 المختبر</a></div></div>' +
     '<div class="ring" style="--p:' + ov + '"><b>' + ov + '%</b><small>إنجازك</small></div></section>' +
     '<h2 class="sec">الفصول</h2><div class="cards">' + CH.map(c => { const p = chapterProg(c); return '<a class="chcard" href="#ch' + c.id + '" style="--c:' + c.color + '"><div class="chico">' + c.icon + '</div><div class="chnum">الفصل ' + c.id + '</div><b>' + esc(c.title) + '</b><small dir="auto">' + esc(c.sub) + '</small><div class="bar"><i style="width:' + p.pct + '%"></i></div><div class="chmeta">' + p.ran + '/' + p.total + ' أمثلة · اختبار ' + p.q + '%</div></a>'; }).join('') + '</div>' +
-    '<h2 class="sec">أدوات سريعة</h2><div class="quick"><a href="#lab"><span>🧪</span>مختبر VB<small>اكتب وشغّل</small></a><a href="#exam"><span>📝</span>الاختبار الشامل<small>20 سؤالًا</small></a><a href="#gloss"><span>📖</span>المسرد<small>' + GLOSS.length + ' مصطلحًا</small></a><a href="#me"><span>📊</span>تقدّمي<small>ملاحظات</small></a></div>' +
+    '<h2 class="sec">أدوات سريعة</h2><div class="quick"><a href="#apps"><span>🎨</span>تصميمات<small>' + APPS.length + ' تطبيقًا جاهزًا</small></a><a href="#lab"><span>🧪</span>مختبر VB<small>اكتب وشغّل</small></a><a href="#exam"><span>📝</span>الاختبار الشامل<small>20 سؤالًا</small></a><a href="#gloss"><span>📖</span>المسرد<small>' + GLOSS.length + ' مصطلحًا</small></a><a href="#me"><span>📊</span>تقدّمي<small>ملاحظات</small></a></div>' +
     footer();
 }
 const footer = () => '<footer class="foot"><b>تصميم وبرمجة :</b><br>م. سهير عبد داؤد<br>م.م. علي عبد الوهاب الصفار<small>المحتوى مبني على محاضرات مادة البرمجة المرئية</small></footer>';
@@ -3178,7 +3897,7 @@ const SNIP = [['Click', 'Private Sub Command1_Click()\n\nEnd Sub\n'], ['If', 'If
 function openLab(id, code) { labState = { id: id, code: code == null ? null : code }; if (location.hash === '#lab') viewLab(); else location.hash = '#lab'; }
 function viewLab() {
   const e = EX[labState.id] || EX.lab0;
-  const groups = [[0, 'مختبر فارغ'], ['cmd', 'أمثلة الأوامر السريعة']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
+  const groups = [[0, 'مختبر فارغ'], ['cmd', 'أمثلة الأوامر السريعة'], ['apps', 'تصميمات: تطبيقات جاهزة']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
   view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
     '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
     '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' + guideHtml(e) +
@@ -3274,13 +3993,28 @@ function viewMe() {
   let armed = false; $('#rst').onclick = e => { if (!armed) { armed = true; e.target.textContent = 'اضغط مرة أخرى للتأكيد'; return; } prog = { quiz: {}, ran: {}, notes: {}, last: null, exam: 0 }; saveProg(); viewMe(); };
 }
 
+/* ---------- تصميمات ---------- */
+const APPS = Object.values(EX).filter(e => e.ch === 'apps');
+const APPICON = { app_calc: '🧮', app_bmi: '⚖️', app_temp: '🌡️', app_currency: '💱', app_invoice: '🧾', app_salary: '💰', app_guess: '🎯', app_rps: '✊', app_table: '✖️', app_traffic: '🚦', app_quiz: '❓' };
+function viewApps(sel) {
+  const done = CH.filter(c => chapterProg(c).pct >= 60).length;
+  const cur = sel || (location.hash.split('/')[1]) || null;
+  view.innerHTML = '<div class="pagehead"><h1>🎨 تصميمات</h1><p>تطبيقات صغيرة جميلة تستطيع تصميمها بنفسك في Visual Basic 6 بعد إنهاء المنهج. كل تطبيق يعمل هنا، ومعه جدول التصميم وخطوات البناء والشيفرة كاملة.</p></div>' +
+    '<div class="callout ' + (done === CH.length ? 'tip' : 'note') + '"><span>' + (done === CH.length ? '🏆' : '📌') + '</span><div>' + (done === CH.length ? 'أنهيت الفصول كلها. أنت جاهز لتصميم هذه التطبيقات!' : 'أنهيت ' + done + ' من ' + CH.length + ' فصول. يمكنك تجربة التطبيقات الآن، لكن ستفهمها أفضل بعد إنهاء الفصول.') + '</div></div>' +
+    '<div class="appgrid">' + APPS.map(e => '<a class="appcard' + (cur === e.id ? ' on' : '') + '" href="#apps/' + e.id + '"><span>' + (APPICON[e.id] || '🧩') + '</span><b>' + rt(e.title) + '</b>' + (prog.ran[e.id] ? '<i>✔</i>' : '') + '</a>').join('') + '</div>' +
+    '<div class="callout tip"><span>💡</span><div>لكل تطبيق: اضغط «{ } الشيفرة» لترى <b>جدول التصميم</b> (الأدوات وخصائصها) ثم الشيفرة. انسخهما إلى VB6 وابنِ التطبيق بنفسك.</div></div>' +
+    '<div id="appcards">' + APPS.filter(e => !cur || e.id === cur).map(e => exCard(e.id)).join('') + '</div>' +
+    (cur ? '<div class="pager"><a class="btn ghost" href="#apps">← كل التطبيقات</a></div>' : '') + footer();
+  bindEx(view);
+}
+
 /* ---------- router ---------- */
-const NAV = [['home', '🏠', 'الرئيسية'], ['lab', '🧪', 'المختبر'], ['exam', '📝', 'الاختبار'], ['gloss', '📖', 'المسرد'], ['me', '📊', 'تقدّمي']];
+const NAV = [['home', '🏠', 'الرئيسية'], ['lab', '🧪', 'المختبر'], ['apps', '🎨', 'تصميمات'], ['exam', '📝', 'الاختبار'], ['gloss', '📖', 'المسرد'], ['me', '📊', 'تقدّمي']];
 function route() {
   const h = (location.hash || '#home').slice(1);
   if (view.querySelector('.runner') ) $$('.runner', view).forEach(r => r._ctl && r._ctl.destroy());
   let tab = h;
-  if (/^ch\d$/.test(h)) { tab = 'home'; viewChapter(+h.slice(2)); } else if (h === 'lab') viewLab(); else if (h === 'exam') viewExam(); else if (h === 'gloss') viewGloss(); else if (h === 'me') viewMe(); else { tab = 'home'; viewHome(); }
+  if (/^apps\//.test(h)) { tab = 'apps'; viewApps(h.split('/')[1]); } else if (/^ch\d$/.test(h)) { tab = 'home'; viewChapter(+h.slice(2)); } else if (h === 'lab') viewLab(); else if (h === 'apps') viewApps(); else if (h === 'exam') viewExam(); else if (h === 'gloss') viewGloss(); else if (h === 'me') viewMe(); else { tab = 'home'; viewHome(); }
   $$('#nav a').forEach(a => a.classList.toggle('on', a.dataset.k === tab));
   if (!/^ch\d$/.test(h) || true) window.scrollTo(0, 0);
 }
