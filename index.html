@@ -1770,6 +1770,133 @@ Private Sub Image1_Click()
 MsgBox "Students calculated: " & count, 64, "Info"
 End Sub`);
 
+
+/* ---------- مثال لكل أمر من أوامر المختبر السريعة ---------- */
+ex('cmd_dim', 'cmd', 'مثال Dim: تعريف المتغيرات', 'نعرّف متغيرات من أنواع مختلفة ثم نستخدمها في جملة واحدة.',
+  F('Dim Example', 320, 220, [L('Label1', 'Name', 15, 18, 80), T('Text1', 'Ali', 100, 15, 190), L('Label2', 'Age', 15, 52, 80), T('Text2', '20', 100, 49, 190),
+    C('Command1', 'Show', 100, 90, 110, 28), L('Label3', '', 15, 135, 290, 50, { borderstyle: 1, fontsize: 10 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim n As String
+Dim age As Integer
+Dim nextYear As Integer
+n = Text1.Text
+age = Val(Text2.Text)
+nextYear = age + 1
+Label3.Caption = n & " is " & age & " now, and " & nextYear & " next year"
+End Sub`);
+
+ex('cmd_msgbox', 'cmd', 'مثال MsgBox: أنواع رسائل التنبيه', 'كل زر يعرض نوعًا مختلفًا من الرسائل. الزر الأخير يسأل ويتصرف حسب جوابك.',
+  F('MsgBox Example', 320, 220, [C('Command1', 'Info', 15, 15, 85), C('Command2', 'Warning', 118, 15, 85), C('Command3', 'Error', 221, 15, 85),
+    C('Command4', 'Delete file?', 90, 60, 140, 28), L('Label1', '', 15, 110, 290, 30, { alignment: 2, fontsize: 11, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+MsgBox "Saved successfully", 64, "Info"
+End Sub
+
+Private Sub Command2_Click()
+MsgBox "Battery is low", 48, "Warning"
+End Sub
+
+Private Sub Command3_Click()
+MsgBox "File not found", 16, "Error"
+End Sub
+
+Private Sub Command4_Click()
+If MsgBox("Delete the file?", 4 + 32, "Delete") = vbYes Then
+Label1.Caption = "File deleted"
+Else
+Label1.Caption = "Cancelled"
+End If
+End Sub`);
+
+ex('cmd_inputbox', 'cmd', 'مثال InputBox: أخذ بيانات من المستخدم', 'الزر الأول يسأل عن الاسم. الزر الثاني يسأل عن رقمين ويجمعهما.',
+  F('InputBox Example', 320, 200, [C('Command1', 'Ask my name', 15, 15, 140, 28), C('Command2', 'Add two numbers', 165, 15, 140, 28),
+    L('Label1', '', 15, 70, 290, 26, { borderstyle: 1, alignment: 2, fontsize: 11 }), L('Label2', '', 15, 108, 290, 26, { borderstyle: 1, alignment: 2, fontsize: 11 })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim n As String
+n = InputBox("What is your name?", "Name", "Guest")
+If n = "" Then
+Label1.Caption = "No name entered"
+Else
+Label1.Caption = "Hello " & n
+End If
+End Sub
+
+Private Sub Command2_Click()
+Dim a As Single, b As Single
+a = Val(InputBox("First number", "Add"))
+b = Val(InputBox("Second number", "Add"))
+Label2.Caption = a & " + " & b & " = " & (a + b)
+End Sub`);
+
+ex('cmd_select', 'cmd', 'مثال Select Case: أيام الأسبوع', 'اكتب رقمًا من 1 إلى 7 فيظهر اسم اليوم (1 = السبت). أي رقم آخر يظهر تنبيهًا.',
+  F('Select Example', 320, 190, [L('Label1', 'Day number', 15, 18, 90), T('Text1', '3', 115, 15, 80), C('Command1', 'Show day', 205, 13, 100, 26),
+    L('Label2', '', 15, 70, 290, 36, { borderstyle: 1, alignment: 2, fontsize: 14, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim d As Integer
+d = Val(Text1.Text)
+Select Case d
+Case 1
+Label2.Caption = "Saturday"
+Case 2
+Label2.Caption = "Sunday"
+Case 3
+Label2.Caption = "Monday"
+Case 4
+Label2.Caption = "Tuesday"
+Case 5
+Label2.Caption = "Wednesday"
+Case 6
+Label2.Caption = "Thursday"
+Case 7
+Label2.Caption = "Friday"
+Case Else
+Label2.Caption = "Enter a number from 1 to 7"
+End Select
+End Sub`);
+
+ex('cmd_if', 'cmd', 'مثال If: فحص العمر', 'اكتب العمر فيحدد البرنامج الفئة: طفل أو مراهق أو بالغ.',
+  F('If Example', 320, 190, [L('Label1', 'Age', 15, 18, 80), T('Text1', '25', 100, 15, 100), C('Command1', 'Check', 210, 13, 90, 26),
+    L('Label2', '', 15, 70, 290, 36, { borderstyle: 1, alignment: 2, fontsize: 14, fontbold: true })]),
+  String.raw`
+Private Sub Command1_Click()
+Dim age As Integer
+age = Val(Text1.Text)
+If age < 0 Then
+Label2.Caption = "Invalid age"
+ElseIf age < 13 Then
+Label2.Caption = "Child"
+ElseIf age < 18 Then
+Label2.Caption = "Teenager"
+Else
+Label2.Caption = "Adult"
+End If
+End Sub`);
+
+ex('cmd_click', 'cmd', 'مثال Click: عدّاد النقرات', 'كل نقرة على الزر تزيد العدّاد. وكل أداة لها حدث Click خاص بها.',
+  F('Click Example', 320, 200, [C('Command1', 'Click me', 15, 15, 130, 32), C('Command2', 'Reset', 160, 15, 130, 32),
+    L('Label1', 'Clicks: 0', 15, 70, 290, 36, { borderstyle: 1, alignment: 2, fontsize: 14, fontbold: true }), L('Label2', 'Click this label too', 15, 120, 290, 24, { alignment: 2 })]),
+  String.raw`
+Dim clicks As Integer
+
+Private Sub Command1_Click()
+clicks = clicks + 1
+Label1.Caption = "Clicks: " & clicks
+End Sub
+
+Private Sub Command2_Click()
+clicks = 0
+Label1.Caption = "Clicks: 0"
+Label1.ForeColor = vbBlack
+End Sub
+
+Private Sub Label2_Click()
+Label1.ForeColor = vbRed
+End Sub`);
+
 ['e4b', 'e4c', 'e4d', 'e4e', 'e5a'].forEach(i => { EX[i].form.printTop = 48; });
 EX.e4f.form.printTop = 88;
 EX.lab0.form.printTop = 130;
@@ -2042,6 +2169,35 @@ GUIDE.all1 = {
   tryit: 'اضغط Pass mark واكتب 80. ثم احسب طالبًا معدله 75 فيصبح راسبًا لأن درجة النجاح صارت 80.'
 };
 for (const k of ['t_label', 't_text', 't_btn', 't_img', 't_form', 'all1']) if (EX[k]) EX[k].guide = GUIDE[k];
+
+Object.assign(GUIDE, {
+cmd_dim: { what: 'يوضح الأمر {{Dim}}: نعرّف متغيرًا نصيًا واثنين رقميين، ثم نجمعها في جملة.', ins: [['Text1 (Name)', 'اكتب اسمًا. مثال: Ali'], ['Text2 (Age)', 'اكتب عمرًا. مثال: 20']], btns: [['Command1 (Show)', 'يخزّن الاسم في n والعمر في age، ويحسب nextYear = age + 1، ثم يعرضها في Label3.']], res: 'Ali و 20 تعطي: Ali is 20 now, and 21 next year.', tryit: 'جرّب تغيير النوع Integer إلى String ولاحظ الفرق عند الجمع.' },
+cmd_msgbox: { what: 'يوضح الأمر {{MsgBox}} بثلاث رسائل جاهزة، ورسالة سؤال تعطيك جوابًا.', ins: [], btns: [['Command1 (Info)', 'رسالة معلومات: الرقم 64.'], ['Command2 (Warning)', 'رسالة تحذير: الرقم 48.'], ['Command3 (Error)', 'رسالة خطأ: الرقم 16.'], ['Command4 (Delete file?)', 'تسأل بالأزرار Yes و No (الرقم 4 + 32). إن اخترت Yes يظهر File deleted. وإن اخترت No يظهر Cancelled.']], res: 'جرّب الأزرار الأربعة. الأرقام تحدد الأيقونة والأزرار.' },
+cmd_inputbox: { what: 'يوضح الأمر {{InputBox}}: صندوق يطلب من المستخدم أن يكتب قيمة.', ins: [['صندوق الاسم', 'اكتب اسمك. أو اتركه فارغًا لترى الرسالة البديلة. القيمة الجاهزة: Guest'], ['صندوقا الرقمين', 'اكتب رقمًا في كل صندوق. مثال: 7 ثم 5']], btns: [['Command1 (Ask my name)', 'يسأل عن الاسم. إن كتبت Ali يظهر Hello Ali. وإن تركته فارغًا يظهر No name entered.'], ['Command2 (Add two numbers)', 'يسأل عن رقمين ويعرض 7 + 5 = 12.']], res: 'تظهر النتيجة في الصناديق الصغيرة أسفل الأزرار.' },
+cmd_select: { what: 'يوضح الأمر {{Select Case}}: يختار حالة واحدة حسب قيمة المتغير.', ins: [['Text1 (Day number)', 'رقم من 1 إلى 7. القيمة الجاهزة: 3']], btns: [['Command1 (Show day)', 'يقرأ الرقم ويكتب اسم اليوم. الرقم 1 هو Saturday والرقم 7 هو Friday. أي رقم آخر يدخل في Case Else.']], res: '3 تعطي Monday. و 7 تعطي Friday. و 9 تعطي Enter a number from 1 to 7.' },
+cmd_if: { what: 'يوضح الأمر {{If}} مع {{ElseIf}} و {{Else}}: يفحص شروطًا بالترتيب.', ins: [['Text1 (Age)', 'اكتب العمر. القيمة الجاهزة: 25']], btns: [['Command1 (Check)', 'أقل من 0: Invalid age. أقل من 13: Child. أقل من 18: Teenager. غير ذلك: Adult.']], res: '25 تعطي Adult. و 15 تعطي Teenager. و 8 تعطي Child. و -3 تعطي Invalid age.' },
+cmd_click: { what: 'يوضح الحدث {{Click}}: الشيفرة التي تعمل عند النقر على أداة.', ins: [], btns: [['Command1 (Click me)', 'كل نقرة تزيد المتغير clicks وتعرضه في Label1.'], ['Command2 (Reset)', 'يعيد العدّاد إلى صفر واللون إلى الأسود.'], ['Label2', 'النقر على هذا الـ Label يجعل Label1 أحمر. فالـ Label له أيضًا حدث Click.']], res: 'اضغط Click me ثلاث مرات فيظهر Clicks: 3. ثم انقر على Label2 فيتحول اللون إلى أحمر.' }
+});
+for (const k of ['cmd_dim','cmd_msgbox','cmd_inputbox','cmd_select','cmd_if','cmd_click']) if (EX[k]) EX[k].guide = GUIDE[k];
+
+Object.assign(GUIDE.cmd_dim, {
+  lines: [['Dim n As String', 'نحجز مكانًا في الذاكرة اسمه n يحمل نصًا.'], ['Dim age As Integer', 'نحجز مكانًا اسمه age يحمل عددًا صحيحًا.'], ['Dim nextYear As Integer', 'مكان ثالث لحفظ عمر السنة القادمة.'], ['n = Text1.Text', 'ننسخ ما كتبه المستخدم في Text1 إلى n.'], ['age = Val(Text2.Text)', 'Val تحوّل النص إلى رقم، ثم نحفظه في age.'], ['nextYear = age + 1', 'نحسب العمر بعد سنة.'], ['Label3.Caption = n & ...', 'العلامة & تربط النصوص والأرقام في جملة واحدة وتعرضها.']],
+  learn: 'أن المتغير صندوق له اسم ونوع، وأن Dim يعرّفه قبل الاستخدام. وأن Val ضرورية قبل أي عملية حسابية على ما يكتبه المستخدم.' });
+Object.assign(GUIDE.cmd_msgbox, {
+  lines: [['MsgBox "Saved successfully", 64, "Info"', 'الأول نص الرسالة. الثاني 64 يعني أيقونة معلومات. الثالث عنوان النافذة.'], ['MsgBox "Battery is low", 48, "Warning"', 'الرقم 48 يعني علامة تعجب (تحذير).'], ['MsgBox "File not found", 16, "Error"', 'الرقم 16 يعني أيقونة خطأ.'], ['If MsgBox(...4 + 32...) = vbYes Then', 'هنا MsgBox دالة ترجع جواب المستخدم. الرقم 4 يعني الزرين Yes و No. والرقم 32 علامة استفهام. نقارن الجواب بـ vbYes.'], ['Label1.Caption = "File deleted"', 'يُنفَّذ إن ضغط Yes.'], ['Else ... "Cancelled"', 'يُنفَّذ إن ضغط No.']],
+  learn: 'أن MsgBox إما تعرض خبرًا فقط، أو تسأل المستخدم وتعيد جوابه لنقرر به. وأن الأرقام تجمع: شكل الأزرار + الأيقونة.' });
+Object.assign(GUIDE.cmd_inputbox, {
+  lines: [['Dim n As String', 'متغير نصي لحفظ الاسم.'], ['n = InputBox("What is your name?", "Name", "Guest")', 'يفتح صندوق إدخال. الأول السؤال، والثاني العنوان، والثالث قيمة جاهزة. ما تكتبه يُحفظ في n.'], ['If n = "" Then', 'إذا ضغط Cancel أو ترك الصندوق فارغًا يكون n نصًا فارغًا.'], ['Dim a As Single, b As Single', 'متغيران عشريان لحفظ الرقمين.'], ['a = Val(InputBox("First number", "Add"))', 'InputBox ترجع نصًا دائمًا. نحوّله إلى رقم بـ Val.'], ['Label2.Caption = a & " + " & b & " = " & (a + b)', 'نعرض العملية والناتج. الأقواس تجمع الرقمين أولًا.']],
+  learn: 'أن البرنامج يستطيع أن يسأل المستخدم أثناء التشغيل، وأن InputBox ترجع نصًا، وأن عليه فحص الجواب الفارغ.' });
+Object.assign(GUIDE.cmd_select, {
+  lines: [['Dim d As Integer', 'متغير لرقم اليوم.'], ['d = Val(Text1.Text)', 'نقرأ الرقم من الصندوق ونحوّله إلى عدد.'], ['Select Case d', 'نبدأ الاختيار حسب قيمة d.'], ['Case 1', 'إن كان d يساوي 1 ننفّذ السطر التالي ونتجاهل باقي الحالات.'], ['Case 2 … Case 7', 'نفس الفكرة لباقي الأيام.'], ['Case Else', 'إن لم تطابق أي حالة (مثل 9 أو 0) ينفَّذ هذا الجزء.'], ['End Select', 'نهاية الجملة.']],
+  learn: 'أن Select Case أوضح من كتابة If كثيرة عندما نقارن متغيرًا واحدًا بعدة قيم. وأن Case Else يصطاد القيم الخاطئة.' });
+Object.assign(GUIDE.cmd_if, {
+  lines: [['Dim age As Integer', 'متغير للعمر.'], ['age = Val(Text1.Text)', 'نقرأ العمر من الصندوق.'], ['If age < 0 Then', 'الشرط الأول: عمر سالب غير منطقي فنعرض Invalid age.'], ['ElseIf age < 13 Then', 'يُفحص فقط إن فشل الشرط الأول: أقل من 13 فهو Child.'], ['ElseIf age < 18 Then', 'ثم أقل من 18 فهو Teenager.'], ['Else', 'كل ما بقي (18 فأكثر) فهو Adult.'], ['End If', 'نهاية الجملة.']],
+  learn: 'أن الشروط تُفحص بالترتيب من الأعلى، وأن أول شرط يتحقق هو الذي ينفَّذ وحده. فالترتيب مهم.' });
+Object.assign(GUIDE.cmd_click, {
+  lines: [['Dim clicks As Integer', 'خارج الإجراءات. يحتفظ بقيمته بين النقرات لأنه على مستوى النموذج.'], ['Private Sub Command1_Click()', 'الإجراء الذي ينفَّذ كلما ضغطنا الزر Command1.'], ['clicks = clicks + 1', 'نزيد العدّاد 1.'], ['Label1.Caption = "Clicks: " & clicks', 'نعرض القيمة الجديدة.'], ['Private Sub Command2_Click()', 'ينفَّذ عند الضغط على Reset ويعيد العدّاد إلى صفر.'], ['Private Sub Label2_Click()', 'اسم الإجراء = اسم الأداة + _ + اسم الحدث. فللـ Label أيضًا حدث Click.']],
+  learn: 'أن الحدث هو ما يحرّك البرنامج: لا يعمل أي إجراء إلا عندما يحدث شيء مثل النقر. وأن اسم الإجراء يُبنى من اسم الأداة واسم الحدث.' });
 
 /* ===== chapters, quizzes, glossary ===== */
 const Q = (q, ok, bad, e, c) => ({ q, ok, bad, e: e || '', c: c || '' });
@@ -2811,6 +2967,8 @@ function guideHtml(e) {
     (g.ins && g.ins.length ? '<div class="gsub">① ماذا تكتب في الحقول</div>' + rows(g.ins) : '') +
     (g.btns && g.btns.length ? '<div class="gsub">② ماذا يفعل كل زر أو حدث</div>' + rows(g.btns) : '') +
     '<div class="gsub">③ النتيجة المتوقعة</div><p>' + rt(g.res) + '</p>' +
+    (g.lines && g.lines.length ? '<div class="gsub">④ شرح الشيفرة سطرًا سطرًا</div>' + g.lines.map(r => '<div class="grow"><div class="gname"><code class="en">' + esc(r[0]) + '</code></div><div class="gtext">' + rt(r[1]) + '</div></div>').join('') : '') +
+    (g.learn ? '<div class="gsub">🎓 ماذا يتعلم الطالب؟</div><p>' + rt(g.learn) + '</p>' : '') +
     (g.tryit ? '<div class="gsub">💡 جرّب</div><p>' + rt(g.tryit) + '</p>' : '') + '</details>';
 }
 function exCard(id) {
@@ -3016,11 +3174,12 @@ const SNIP = [['Click', 'Private Sub Command1_Click()\n\nEnd Sub\n'], ['If', 'If
 function openLab(id, code) { labState = { id: id, code: code == null ? null : code }; if (location.hash === '#lab') viewLab(); else location.hash = '#lab'; }
 function viewLab() {
   const e = EX[labState.id] || EX.lab0;
-  const groups = [[0, 'مختبر فارغ']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
+  const groups = [[0, 'مختبر فارغ'], ['cmd', 'أمثلة الأوامر السريعة']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
   view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
     '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
     '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' + guideHtml(e) +
     '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '<button data-clear="1">🗑 مسح المحرر</button></div>' +
+    '<div class="subh">مثال كامل لكل أمر (يُحمَّل في المحرر):</div><div class="snips ex2">' + [['cmd_dim', 'Dim'], ['cmd_msgbox', 'MsgBox'], ['cmd_inputbox', 'InputBox'], ['cmd_select', 'Select Case'], ['cmd_if', 'If'], ['cmd_click', 'Click']].map(x => '<button data-ex2="' + x[0] + '"' + (e.id === x[0] ? ' class="on"' : '') + '>▶ ' + x[1] + '</button>').join('') + '</div>' +
     '<textarea id="labcode" class="editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
     '<details class="cheat"><summary>📋 ورقة مرجعية سريعة</summary><div class="cheatbody" dir="ltr"><pre class="code">' + hl(CHEAT) + '</pre></div></details>' + footer();
   const ta = $('#labcode'); ta.value = labState.code != null ? labState.code : e.code;
@@ -3034,7 +3193,8 @@ function viewLab() {
     if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') { ev.preventDefault(); run(); }
   });
   let lastSnip = null; // آخر قطعة أُدرجت: {start, text}
-  $('.snips').onclick = ev => {
+  const snipHandler = ev => {
+    const e2 = ev.target.closest('[data-ex2]'); if (e2) { labState = { id: e2.dataset.ex2, code: null }; viewLab(); return; }
     const clr = ev.target.closest('[data-clear]');
     if (clr) { ta.value = ''; lastSnip = null; ta.focus(); return; }
     const b = ev.target.closest('[data-s]'); if (!b) return;
@@ -3055,6 +3215,7 @@ function viewLab() {
     lastSnip = { start: pos + pre.length, text: t };
     ta.focus(); ta.selectionStart = ta.selectionEnd = pos + pre.length + t.length;
   };
+  $$('.snips').forEach(el => { el.onclick = snipHandler; });
   ta.addEventListener('input', () => { lastSnip = null; });
 }
 const CHEAT = String.raw`' Events
