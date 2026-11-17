@@ -3020,7 +3020,7 @@ function viewLab() {
   view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
     '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
     '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' + guideHtml(e) +
-    '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '</div>' +
+    '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '<button data-clear="1">🗑 مسح المحرر</button></div>' +
     '<textarea id="labcode" class="editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
     '<details class="cheat"><summary>📋 ورقة مرجعية سريعة</summary><div class="cheatbody" dir="ltr"><pre class="code">' + hl(CHEAT) + '</pre></div></details>' + footer();
   const ta = $('#labcode'); ta.value = labState.code != null ? labState.code : e.code;
@@ -3033,17 +3033,29 @@ function viewLab() {
     if (ev.key === 'Tab') { ev.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '   ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 3; }
     if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') { ev.preventDefault(); run(); }
   });
+  let lastSnip = null; // آخر قطعة أُدرجت: {start, text}
   $('.snips').onclick = ev => {
+    const clr = ev.target.closest('[data-clear]');
+    if (clr) { ta.value = ''; lastSnip = null; ta.focus(); return; }
     const b = ev.target.closest('[data-s]'); if (!b) return;
-    const t = SNIP[b.dataset.s][1]; let v = ta.value, s = ta.selectionStart;
-    // نُدرج القطعة دائمًا في سطر جديد بعد السطر الحالي، حتى لا تدخل داخل نص بين علامتي اقتباس
+    const t = SNIP[b.dataset.s][1]; let v = ta.value;
+    // إن كانت القطعة السابقة ما زالت كما أُدرجت دون تعديل، نستبدلها بالجديدة
+    if (lastSnip && v.slice(lastSnip.start, lastSnip.start + lastSnip.text.length) === lastSnip.text) {
+      ta.value = v.slice(0, lastSnip.start) + t + v.slice(lastSnip.start + lastSnip.text.length);
+      lastSnip = { start: lastSnip.start, text: t };
+      ta.focus(); ta.selectionStart = ta.selectionEnd = lastSnip.start + t.length; return;
+    }
+    // وإلا نُدرجها في سطر جديد بعد السطر الحالي، حتى لا تدخل داخل نص بين علامتي اقتباس
+    let s = ta.selectionStart;
     let ls = v.lastIndexOf('\n', s - 1) + 1, le = v.indexOf('\n', s); if (le < 0) le = v.length;
     const line = v.slice(ls, le).trim();
     let pos = line === '' ? ls : le + 1, pre = '';
     if (line !== '' && le === v.length) { pre = '\n'; pos = v.length; }
     ta.value = v.slice(0, pos) + pre + t + v.slice(pos);
+    lastSnip = { start: pos + pre.length, text: t };
     ta.focus(); ta.selectionStart = ta.selectionEnd = pos + pre.length + t.length;
   };
+  ta.addEventListener('input', () => { lastSnip = null; });
 }
 const CHEAT = String.raw`' Events
 Private Sub Command1_Click()
