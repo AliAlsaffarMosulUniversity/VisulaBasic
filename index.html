@@ -59,7 +59,7 @@ pre.code i{font-style:normal}.code .k{color:#7cc4ff;font-weight:700}.code .s{col
 .subh{font-weight:800;color:var(--brand);margin:14px 0 4px;font-size:15px}
 .pager{display:flex;justify-content:space-between;margin:34px 0 10px}
 /* VB window */
-.vbhold{margin:0 auto;position:relative}
+.vbhold{margin:0 auto;position:relative;direction:ltr}
 .vbwin{direction:ltr;text-align:left;display:inline-block;transform-origin:top left;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:1px 1px 0 #808080,4px 5px 10px rgba(0,0,0,.35);font-family:Tahoma,'Segoe UI',Arial,sans-serif;font-size:11px;color:#000;position:relative;padding:2px}
 .vbwin.small{display:block;transform:none;margin:8px auto;max-width:360px}
 .vbtitle{background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-weight:700;font-size:12px;padding:3px 4px;display:flex;justify-content:space-between;align-items:center;height:22px}
@@ -114,6 +114,12 @@ textarea.vbtext{resize:none}
 textarea.note{width:100%;min-height:76px;font:inherit;border:2px solid #cfd9ea;border-radius:12px;padding:8px 12px;background:#fff}
 @media (min-width:700px){#view{padding:22px}.hero h1{font-size:34px}}
 @media (max-width:380px){.ide-main{grid-template-columns:56px 1fr 96px}.hero{flex-direction:column-reverse;align-items:flex-start}.mout{grid-template-columns:repeat(3,1fr)}}
+.guide{background:#fffaf0;border:2px solid #f1d28b;border-radius:14px;padding:10px 14px;margin:10px 0}
+.guide summary{cursor:pointer;font-weight:800;color:var(--brand);margin:0 0 4px}
+.guide p{margin:.3em 0;font-size:15.5px}
+.gsub{font-weight:800;color:#8a5a00;margin:12px 0 4px;font-size:14.5px}
+.grow{display:flex;flex-direction:column;gap:2px;padding:6px 0;border-top:1px dashed #ecd9a8}
+.gname{line-height:1.4}.gtext{font-size:15px}
 
 </style>
 </head>
@@ -579,6 +585,7 @@ const B = {
   space: a => ' '.repeat(Math.max(0, toNum(a[0]))),
   isnumeric: a => typeof a[0] === 'number' || (typeof a[0] === 'string' && NUMRE.test(a[0])),
   rgb: a => toNum(a[0]) + toNum(a[1]) * 256 + toNum(a[2]) * 65536,
+  loadpicture: a => { const k = toStr(a[0]).toLowerCase(); const m = { dog: '🐶', cat: '🐱', happy: '😀', sad: '😢', card: '🎓', star: '⭐', heart: '❤️' }; return m[k] || toStr(a[0]); },
   format: a => { const n = toNum(a[0]); const f = toStr(a[1] || ''); const m = /\.(0+)/.exec(f); const d = m ? m[1].length : 0; let s = n.toFixed(d); if (f.includes(',')) { const p = s.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = p.join('.'); } return s; },
   now: () => new Date().toLocaleString('en-GB'), date: () => new Date().toLocaleDateString('en-GB'), time: () => new Date().toLocaleTimeString('en-GB'),
   timer: () => (Date.now() % 86400000) / 1000
@@ -1480,10 +1487,561 @@ Private Sub Command3_Click()
 Cls
 End Sub`);
 
+
+/* ---------- تطبيق عملي على كل أداة ---------- */
+ex('t_label', 2, 'تطبيق على Label: كل الخصائص', 'اضغط الأزرار وراقب كيف تتغير خصائص Label1 الكبير.',
+  F('Form1', 340, 230, [L('Label1', 'Hello', 20, 15, 300, 60, { borderstyle: 1, fontsize: 12 }),
+    C('Command1', 'Caption', 8, 100, 75), C('Command2', 'ForeColor', 90, 100, 75), C('Command3', 'BackColor', 172, 100, 75), C('Command4', 'FontSize', 254, 100, 75),
+    C('Command5', 'FontBold', 8, 140, 75), C('Command6', 'BorderStyle', 90, 140, 75), C('Command7', 'Alignment', 172, 140, 75), C('Command8', 'Reset', 254, 140, 75)]),
+  String.raw`
+Private Sub Command1_Click()
+Label1.Caption = "Visual Basic 6"
+End Sub
+
+Private Sub Command2_Click()
+Label1.ForeColor = vbBlue
+End Sub
+
+Private Sub Command3_Click()
+Label1.BackColor = vbYellow
+End Sub
+
+Private Sub Command4_Click()
+Label1.FontSize = 24
+End Sub
+
+Private Sub Command5_Click()
+Label1.FontBold = True
+End Sub
+
+Private Sub Command6_Click()
+Label1.BorderStyle = 0
+End Sub
+
+Private Sub Command7_Click()
+Label1.Alignment = 2
+End Sub
+
+Private Sub Command8_Click()
+Label1.Caption = "Hello"
+Label1.ForeColor = vbBlack
+Label1.BackColor = 13160660
+Label1.FontSize = 12
+Label1.FontBold = False
+Label1.BorderStyle = 1
+Label1.Alignment = 0
+End Sub`);
+
+ex('t_text', 2, 'تطبيق على TextBox: الخصائص والطرق', 'اكتب في الصندوقين، ثم جرّب الأزرار. لاحظ MaxLength و MultiLine و Locked و Enabled و SetFocus.',
+  F('Form1', 340, 280, [L('Label1', 'Name', 15, 15, 70), T('Text1', '', 90, 12, 230, 22, { maxlength: 10 }), L('Label2', 'Notes', 15, 50, 70), T('Text2', '', 90, 47, 230, 56, { multiline: true }),
+    L('Label3', '', 15, 112, 305, 22, { borderstyle: 1 }),
+    C('Command1', 'Copy to Label', 8, 145, 100), C('Command2', 'SetFocus Text2', 116, 145, 100), C('Command3', 'Locked on/off', 224, 145, 100),
+    C('Command4', 'Clear', 8, 185, 100), C('Command5', 'Disable', 116, 185, 100), C('Command6', 'Enable', 224, 185, 100)]),
+  String.raw`
+Private Sub Command1_Click()
+Label3.Caption = Text1.Text
+End Sub
+
+Private Sub Command2_Click()
+Text2.SetFocus
+End Sub
+
+Private Sub Command3_Click()
+Text1.Locked = Not Text1.Locked
+End Sub
+
+Private Sub Command4_Click()
+Text1.Text = ""
+Text2.Text = ""
+Text1.SetFocus
+End Sub
+
+Private Sub Command5_Click()
+Text1.Enabled = False
+End Sub
+
+Private Sub Command6_Click()
+Text1.Enabled = True
+End Sub`);
+
+ex('t_btn', 2, 'تطبيق على CommandButton: الخصائص والأحداث', 'الزر Target هو الهدف. باقي الأزرار تتحكم به. الزر الأخير Default فيعمل أيضًا بالمفتاح Enter.',
+  F('Form1', 340, 260, [C('Command3', 'Target', 110, 12, 120, 30), L('Label1', 'Waiting...', 20, 55, 300, 22, { borderstyle: 1, alignment: 2 }),
+    C('Command1', 'Disable Target', 8, 95, 100), C('Command2', 'Enable Target', 116, 95, 100), C('Command4', 'Rename', 224, 95, 100),
+    C('Command5', 'Hide/Show', 8, 135, 100), C('Command6', 'Move right', 116, 135, 100), C('Command7', 'OK (Default)', 224, 135, 100, 26, { default: true })]),
+  String.raw`
+Private Sub Command3_Click()
+Label1.Caption = "Target was clicked"
+End Sub
+
+Private Sub Command1_Click()
+Command3.Enabled = False
+End Sub
+
+Private Sub Command2_Click()
+Command3.Enabled = True
+End Sub
+
+Private Sub Command4_Click()
+Command3.Caption = "Renamed"
+End Sub
+
+Private Sub Command5_Click()
+Command3.Visible = Not Command3.Visible
+End Sub
+
+Private Sub Command6_Click()
+Command3.Left = Command3.Left + 300
+End Sub
+
+Private Sub Command7_Click()
+Label1.Caption = "Default button (Enter key)"
+End Sub`);
+
+ex('t_img', 2, 'تطبيق على Image: الصورة', 'الأداة Image تعرض صورة. هنا نستعمل رموزًا بدل ملفات الصور. جرّب الأزرار، وانقر على الصورة نفسها.',
+  F('Form1', 340, 260, [IM('Image1', '🐱', 140, 15, 60, 60), L('Label1', 'Click the image', 20, 90, 300, 22, { borderstyle: 1, alignment: 2 }),
+    C('Command1', 'Dog', 8, 130, 75), C('Command2', 'Cat', 90, 130, 75), C('Command3', 'Hide/Show', 172, 130, 75), C('Command4', 'Bigger', 254, 130, 75),
+    C('Command5', 'Move right', 8, 170, 100), C('Command6', 'Reset', 116, 170, 100)]),
+  String.raw`
+Private Sub Command1_Click()
+Image1.Picture = LoadPicture("dog")
+End Sub
+
+Private Sub Command2_Click()
+Image1.Picture = LoadPicture("cat")
+End Sub
+
+Private Sub Command3_Click()
+Image1.Visible = Not Image1.Visible
+End Sub
+
+Private Sub Command4_Click()
+Image1.Width = Image1.Width + 600
+Image1.Height = Image1.Height + 600
+End Sub
+
+Private Sub Command5_Click()
+Image1.Left = Image1.Left + 300
+End Sub
+
+Private Sub Command6_Click()
+Image1.Left = 2100
+Image1.Width = 900
+Image1.Height = 900
+Image1.Visible = True
+End Sub
+
+Private Sub Image1_Click()
+Label1.Caption = "You clicked the image"
+End Sub`);
+
+ex('t_form', 2, 'تطبيق على Form: النموذج نفسه', 'النموذج أيضًا كائن له خصائص وأحداث. غيّر لونه وعنوانه، وانقر على خلفيته.',
+  F('Form1', 340, 250, [L('Label1', 'Title', 15, 15, 60), T('Text1', 'My Form', 80, 12, 160), C('Command1', 'Set Caption', 250, 10, 80),
+    C('Command2', 'Red', 8, 60, 75), C('Command3', 'Green', 90, 60, 75), C('Command4', 'Blue', 172, 60, 75), C('Command5', 'Print', 254, 60, 75)]),
+  String.raw`
+Private Sub Form_Load()
+Form1.Caption = "Form Demo"
+End Sub
+
+Private Sub Command1_Click()
+Form1.Caption = Text1.Text
+End Sub
+
+Private Sub Command2_Click()
+Form1.BackColor = vbRed
+End Sub
+
+Private Sub Command3_Click()
+Form1.BackColor = vbGreen
+End Sub
+
+Private Sub Command4_Click()
+Form1.BackColor = vbBlue
+End Sub
+
+Private Sub Command5_Click()
+Print "Hello from the form"
+End Sub
+
+Private Sub Form_Click()
+Form1.Caption = "You clicked the form"
+End Sub`);
+
+ex('all1', 6, 'المشروع الشامل: نظام نتائج الطالب', 'برنامج واحد يجمع كل الأدوات: Form و Label و TextBox و CommandButton و Image مع InputBox و MsgBox والمتغيرات و If و Select Case.',
+  F('Student Result System', 360, 350, [
+    L('Label1', 'Student Result System', 10, 8, 340, 26, { fontsize: 12, fontbold: true, alignment: 2 }),
+    L('Label2', 'Name', 20, 42, 80), T('Text1', '', 110, 39, 230),
+    L('Label3', 'Math', 20, 72, 100), L('Label4', 'English', 130, 72, 100), L('Label5', 'Computer', 240, 72, 100),
+    T('Text2', '', 20, 92, 90), T('Text3', '', 130, 92, 90), T('Text4', '', 240, 92, 90),
+    C('Command1', 'Calculate', 20, 130, 100, 28), C('Command2', 'Clear', 130, 130, 100, 28), C('Command3', 'Exit', 240, 130, 100, 28, { cancel: true }),
+    L('Label6', 'Average', 20, 178, 80), T('Text5', '', 110, 175, 100, 22, { locked: true, backcolor: 14737632 }),
+    L('Label7', 'Grade', 20, 210, 80), T('Text6', '', 110, 207, 100, 22, { locked: true, backcolor: 14737632 }),
+    IM('Image1', '🎓', 250, 168, 70, 70),
+    C('Command4', 'Pass mark', 20, 247, 100, 26), L('Label8', '', 130, 250, 210, 20),
+    L('Label9', '', 20, 288, 320, 24, { borderstyle: 1 })]),
+  String.raw`
+Option Explicit
+Dim passMark As Integer
+Dim count As Integer
+
+Private Sub Form_Load()
+passMark = 50
+Label8.Caption = "Pass mark = " & passMark
+Label9.Caption = "Type the student name"
+End Sub
+
+Private Sub Text1_GotFocus()
+Label9.Caption = "Type the student name"
+End Sub
+
+Private Sub Text2_GotFocus()
+Label9.Caption = "Enter the Math mark (0 - 100)"
+End Sub
+
+Private Sub Text3_GotFocus()
+Label9.Caption = "Enter the English mark (0 - 100)"
+End Sub
+
+Private Sub Text4_GotFocus()
+Label9.Caption = "Enter the Computer mark (0 - 100)"
+End Sub
+
+Private Sub Command1_Click()
+Dim m As Single, e As Single, c As Single, avg As Single
+If Text1.Text = "" Then
+MsgBox "Please enter the student name", 48, "Missing name"
+Text1.SetFocus
+Exit Sub
+End If
+m = Val(Text2.Text)
+e = Val(Text3.Text)
+c = Val(Text4.Text)
+If m < 0 Or m > 100 Or e < 0 Or e > 100 Or c < 0 Or c > 100 Then
+MsgBox "Marks must be between 0 and 100", 16, "Error"
+Exit Sub
+End If
+avg = (m + e + c) / 3
+Text5.Text = Format(avg, "0.0")
+Select Case avg
+Case Is >= 90
+Text6.Text = "Excellent"
+Case Is >= 80
+Text6.Text = "Very Good"
+Case Is >= 70
+Text6.Text = "Good"
+Case Is >= 60
+Text6.Text = "Medium"
+Case Is >= 50
+Text6.Text = "Fair"
+Case Else
+Text6.Text = "Failed"
+End Select
+If avg >= passMark Then
+Image1.Picture = LoadPicture("happy")
+Label9.Caption = Text1.Text & " passed"
+Else
+Image1.Picture = LoadPicture("sad")
+Label9.Caption = Text1.Text & " failed"
+End If
+count = count + 1
+Label1.Caption = "Student Result System (" & count & ")"
+End Sub
+
+Private Sub Command2_Click()
+Text1.Text = ""
+Text2.Text = ""
+Text3.Text = ""
+Text4.Text = ""
+Text5.Text = ""
+Text6.Text = ""
+Image1.Picture = LoadPicture("card")
+Text1.SetFocus
+End Sub
+
+Private Sub Command3_Click()
+If MsgBox("Exit the program?", 4 + 32, "Exit") = vbYes Then End
+End Sub
+
+Private Sub Command4_Click()
+passMark = Val(InputBox("Enter the pass mark (1 - 100)", "Pass mark", passMark))
+Label8.Caption = "Pass mark = " & passMark
+End Sub
+
+Private Sub Image1_Click()
+MsgBox "Students calculated: " & count, 64, "Info"
+End Sub`);
+
 ['e4b', 'e4c', 'e4d', 'e4e', 'e5a'].forEach(i => { EX[i].form.printTop = 48; });
 EX.e4f.form.printTop = 88;
 EX.lab0.form.printTop = 130;
+EX.t_form.form.printTop = 110;
 
+
+/* ===== شرح كل مثال: ماذا يفعل، المدخلات، الأزرار، النتيجة ===== */
+const GUIDE = {
+lab0: {
+  what: 'نموذج جاهز للتجربة: ثلاث {{Label}} وثلاثة صناديق نص وثلاثة أزرار. الـ {{Label}} مجرد عناوين، لا شيفرة لها.',
+  ins: [['Text1', 'اكتب فيه الرقم الأول. مثال: 1'], ['Text2', 'اكتب فيه الرقم الثاني. مثال: 2'], ['Text3', 'لا تكتب فيه. تظهر فيه نتيجة الجمع.']],
+  btns: [['Command1', 'يجمع الرقم في Text1 مع الرقم في Text2 ويضع الناتج في Text3. مثال: 1 + 2 يعطي 3.'], ['Command2', 'يطبع العبارة Hello from VB على النموذج.'], ['Command3', 'يمسح كل ما طُبع على النموذج (الأمر Cls).']],
+  res: 'اكتب 1 و 2 ثم اضغط Command1 فيظهر 3 في Text3. اضغط Command2 فتظهر العبارة على النموذج. اضغط Command3 فتختفي.',
+  tryit: 'غيّر الشيفرة في المحرر ليصبح Command1 يضرب الرقمين بدل أن يجمعهما.'
+},
+e1a: {
+  what: 'أول برنامج في VB. فيه Label وزر واحد.',
+  ins: [],
+  btns: [['Form_Load', 'يعمل تلقائيًا عند فتح البرنامج، فيكتب في Label1 العبارة Welcome to VB6.'], ['Command1', 'عند الضغط عليه يتغير النص إلى Hello, World! ويصبح لونه أزرق.']],
+  res: 'قبل الضغط: Welcome to VB6. بعد الضغط: Hello, World! بالأزرق.'
+},
+e2a: {
+  what: 'أربع كلمات هي Labels، تتحكم بمظهر Label1 الكبير.',
+  ins: [],
+  btns: [['Label2 (Forecolor)', 'اضغط عليها فيصبح لون كتابة Label1 أزرق.'], ['Label3 (Backcolor)', 'اضغط عليها فتصبح خلفية Label1 حمراء.'], ['Label4 (Show)', 'تُظهر Label1 إن كان مخفيًا.'], ['Label5 (Hide)', 'تُخفي Label1.']],
+  res: 'جرّب بالترتيب: Hide ثم Show ثم Forecolor ثم Backcolor وراقب Label1.'
+},
+e2b: {
+  what: 'يوضح الحدث {{GotFocus}}، أي لحظة دخول المؤشر إلى صندوق النص. لا توجد أزرار.',
+  ins: [['Text1', 'انقر داخله، أو انتقل إليه بالمفتاح Tab.'], ['Text2', 'انقر داخله، أو انتقل إليه بالمفتاح Tab.']],
+  btns: [['Text1_GotFocus', 'عند دخول المؤشر إلى Text1 يظهر Text3.'], ['Text2_GotFocus', 'عند دخول المؤشر إلى Text2 يختفي Text3.']],
+  res: 'انقر في Text2 فيختفي Text3. انقر في Text1 فيظهر من جديد.'
+},
+e2c: {
+  what: 'آلة حاسبة تجري عملية على رقمين.',
+  ins: [['Text1 (Value1)', 'الرقم الأول. مثال: 12'], ['Text2 (Value2)', 'الرقم الثاني. مثال: 5'], ['Text3 (Result)', 'مقفل. تظهر فيه النتيجة فقط.']],
+  btns: [['Command1 (+)', 'يجمع. النتيجة 17.'], ['Command2 (-)', 'يطرح. النتيجة 7.'], ['Command3 (*)', 'يضرب. النتيجة 60.'], ['Command4 (/)', 'يقسم. النتيجة 2.4.'], ['Command5 (Clear)', 'يمسح الصناديق الثلاثة.'], ['Command6 (Exit)', 'ينهي البرنامج. يعمل أيضًا بالمفتاح Esc.']],
+  res: 'اكتب 12 و 5 ثم جرّب الأزرار الأربعة. جرّب القسمة على 0 لترى رسالة الخطأ.',
+  tryit: 'الدالة {{Val}} تحوّل النص في الصندوق إلى رقم.'
+},
+e2d: {
+  what: 'يوضح الفرق بين جمع النصوص وجمع الأرقام.',
+  ins: [['Text1', 'الرقم الأول. القيمة الجاهزة: 12'], ['Text2', 'الرقم الثاني. القيمة الجاهزة: 30']],
+  btns: [['Command1', 'يجمع بدون {{Val}}. يلصق النصين فتظهر 1230.'], ['Command2', 'يجمع مع {{Val}}. يحسبهما أرقامًا فتظهر 42.']],
+  res: 'النتيجة تظهر في Label1 أسفل النموذج. نفس الرقمين، ونتيجتان مختلفتان.'
+},
+e2e: {
+  what: 'يوضح الحدث {{Change}} والخاصيتين {{MaxLength}} و {{Locked}}.',
+  ins: [['Text1', 'اكتب أي نص. لا يقبل أكثر من 12 حرفًا (MaxLength = 12).'], ['Text2', 'مقفل (Locked). لا تكتب فيه. يعرض النص نفسه بأحرف كبيرة.']],
+  btns: [['Text1_Change', 'يعمل مع كل حرف تكتبه. ينسخ النص إلى Text2 بأحرف كبيرة، ويعرض عدد الحروف في Label1.']],
+  res: 'اكتب hello فيظهر في Text2 كلمة HELLO، وفي Label1 العبارة Characters: 5.'
+},
+e2f: {
+  what: 'يحسب مساحة المستطيل.',
+  ins: [['Text1 (Length)', 'الطول. مثال: 6'], ['Text2 (Width)', 'العرض. مثال: 4'], ['Text3 (Area)', 'مقفل. تظهر فيه المساحة.']],
+  btns: [['Command1 (Calculate)', 'يضرب الطول في العرض ويضع الناتج في Text3.']],
+  res: '6 و 4 تعطي 24.'
+},
+e3a: {
+  what: 'يوضح الحدث {{Click}} على أربعة عناصر مختلفة.',
+  ins: [],
+  btns: [['Command1', 'اضغط عليه فيظهر صندوق رسالة: You clicked in to command button.'], ['Label1', 'اضغط عليه فيتغير نصه إلى Click.'], ['Text1', 'انقر عليه فيتحرك إلى اليمين مسافة 300 وحدة.'], ['Form (الخلفية)', 'انقر على أي مكان فارغ فتصبح خلفية النموذج حمراء.']],
+  res: 'اضغط على كل عنصر بالترتيب وراقب ما يحدث.'
+},
+e3b: {
+  what: 'يوضح الحدث {{DblClick}} أي النقر المزدوج.',
+  ins: [['Text1', 'اكتب أي نص. القيمة الجاهزة: Hello'], ['Text2', 'يبقى فارغًا. سيصله النص.']],
+  btns: [['Label1 (Double click me)', 'انقر عليه مرتين بسرعة. ينسخ نص Text1 إلى Text2، ويغيّر عنوان النافذة إلى Double Click Event.']],
+  res: 'نقرة واحدة لا تفعل شيئًا. النقر المزدوج هو الذي يعمل.'
+},
+e3c: {
+  what: 'يوضح الحدث {{MouseMove}}، أي حركة الفأرة.',
+  ins: [['Text1', 'لا تكتب فيه. يعرض موضع الفأرة الأفقي X.'], ['Text2', 'لا تكتب فيه. يعرض موضع الفأرة العمودي Y.']],
+  btns: [['Form_MouseMove', 'حرّك الفأرة فوق النموذج فتتغير الأرقام. يعيد الصندوقين إلى الخط الصغير والخلفية البيضاء.'], ['Command1 (Font size)', 'مرّر الفأرة فوقه (بدون ضغط) فيكبر خط الصندوقين.'], ['Command2 (Back color)', 'مرّر الفأرة فوقه فتصبح خلفية الصندوقين صفراء.']],
+  res: 'لا حاجة للضغط. يكفي تحريك الفأرة.'
+},
+e3d: {
+  what: 'سحب الصورة وإفلاتها في مكان آخر.',
+  ins: [],
+  btns: [['Image1', 'اضغط عليها واسحبها (DragMode = 1).'], ['Form_DragDrop', 'عند الإفلات تنتقل الصورة إلى النقطة التي أفلتّها فيها.']],
+  res: 'اسحب الصورة إلى أي زاوية في النموذج.'
+},
+e3e: {
+  what: 'يوضح الحدثين {{MouseDown}} و {{MouseUp}}.',
+  ins: [],
+  btns: [['Label1_MouseDown', 'عند الضغط على الزر (قبل الإفلات) يصبح النص Mouse Down والخلفية زرقاء.'], ['Label1_MouseUp', 'عند إفلات الزر يصبح النص Mouse Up والخلفية حمراء.']],
+  res: 'اضغط باستمرار وراقب اللون الأزرق، ثم أفلت فيصبح أحمر.'
+},
+e4a: {
+  what: 'يحسب مساحة الدائرة ومحيطها. الثابت {{PI}} = 3.14 لا يتغير.',
+  ins: [['Text1', 'نصف القطر. القيمة الجاهزة: 2'], ['Text2', 'مقفل. تظهر فيه المساحة.'], ['Text3', 'مقفل. يظهر فيه المحيط.']],
+  btns: [['Command1 (Press)', 'يحسب المساحة = 3.14 × نق × نق، والمحيط = 2 × 3.14 × نق.']],
+  res: 'نصف القطر 2 يعطي مساحة 12.56 ومحيطًا 12.56. جرّب 5: المساحة 78.5 والمحيط 31.4.'
+},
+e4b: {
+  what: 'يوضح المتغير المحلي {{Local}}. كل زر عنده متغير x خاص به، لا يتأثر بالآخرين.',
+  ins: [],
+  btns: [['Command1', 'يعرّف x رقمًا قيمته 1 ويطبع Command1: x = 1.'], ['Command2', 'يعرّف x رقمًا قيمته 7 ويطبع Command2: x = 7.'], ['Command3', 'يعرّف x نصًا قيمته welcome ويطبع Command3: x = welcome.']],
+  res: 'السطور تُطبع على النموذج تحت الأزرار. كل اضغطة تضيف سطرًا.'
+},
+e4c: {
+  what: 'يوضح متغير مستوى النموذج {{Form-level}}. المتغير n معرَّف خارج الإجراءات فتراه كل الأزرار وتحافظ على قيمته.',
+  ins: [],
+  btns: [['Command1', 'يزيد n بمقدار 1 ويطبعه.'], ['Command2', 'يزيد n بمقدار 10 ويطبعه.'], ['Command3', 'يجعل n = 0 ويمسح الشاشة.']],
+  res: 'اضغط Command1 ثلاث مرات: 1 ثم 2 ثم 3. اضغط Command2: 13. اضغط Command3 فيعود كل شيء إلى الصفر.'
+},
+e4d: {
+  what: 'يوضح {{Option Explicit}} الذي يُجبرك على تعريف كل متغير قبل استخدامه.',
+  ins: [],
+  btns: [['Command1 (Declared)', 'المتغير s معرَّف بـ Dim، فيعمل ويطبع 1.'], ['Command2 (Not declared)', 'يستخدم S2 بدون تعريف، فيظهر الخطأ Variable not defined.']],
+  res: 'اضغط الزرين وقارن. ثم افتح المختبر واحذف السطر Option Explicit وجرّب الزر الثاني مرة أخرى: سيعمل.'
+},
+e4e: {
+  what: 'واجب: توقّع ما يطبعه كل زر، ثم تحقق. يعرض تأثير المتغير المحلي والعام.',
+  ins: [],
+  btns: [['Command1', 'يعطي a = 10 و b = 4 فيكون z = 14. يطبع: a 10 b= 4 z= 14.'], ['Command2', 'يعرّف b محليًا فقيمته 0. فيكون z = 10 − 0 = 10. يطبع: a 10 b= 0 z= 10.'], ['Command3', 'يعرّف a محليًا فقيمته 0. فيكون z = 10 × 0 = 0. يطبع: a 0 b= 4 z= 0.']],
+  res: 'اضغط بالترتيب: Command1 ثم Command2 ثم Command3.',
+  tryit: 'لو اضغطت Command2 أولًا قبل Command1 فستكون قيمة a صفرًا.'
+},
+e4f: {
+  what: 'يوضح حدود أنواع المتغيرات.',
+  ins: [],
+  btns: [['Command1 (Integer + 10000)', 'x من النوع Integer (أكبر قيمة 32767). 30000 + 10000 تتجاوز الحد فيظهر الخطأ Overflow.'], ['Command2 (Long + 10000)', 'النوع Long يتسع لها، فيطبع 40000.'], ['Command3 (Integer = 3.7)', 'Integer لا يحمل كسرًا. يقرّب القيمة فيطبع 4.'], ['Command4 (Single = 3.7)', 'Single يحمل الكسور، فيطبع 3.7.']],
+  res: 'جرّب الأزرار الأربعة وقارن.'
+},
+e5a: {
+  what: 'يجمع أو يطرح رقمين تدخلهما عبر صناديق إدخال.',
+  ins: [['صندوق الإدخال الأول', 'يظهر بعد الضغط على الزر. اكتب الرقم الأول. مثال: 7'], ['صندوق الإدخال الثاني', 'اكتب الرقم الثاني. مثال: 5']],
+  btns: [['Command1 (Add)', 'يسأل عن رقمين ثم يطبع Sum = 12.'], ['Command2 (Subtract)', 'يسأل عن رقمين ثم يطبع Difference = 2.']],
+  res: 'النتيجة تُطبع على النموذج.'
+},
+e5b: {
+  what: 'يحل المعادلة y = a × b + c. يسأل عن ثلاثة أرقام.',
+  ins: [['الصندوق الأول (a)', 'مثال: 2'], ['الصندوق الثاني (b)', 'مثال: 3'], ['الصندوق الثالث (c)', 'مثال: 4']],
+  btns: [['Command1', 'يعرض الصناديق الثلاثة بالتتابع ثم يحسب y.']],
+  res: '2 و 3 و 4 تعطي y = 10. تظهر في Label1.'
+},
+e5c: {
+  what: 'يستقبل اسم الطالب ومرحلته عبر {{InputBox}}.',
+  ins: [['الصندوق الأول', 'اكتب الاسم. مثال: Ahmed'], ['الصندوق الثاني', 'اكتب المرحلة. مثال: Third']],
+  btns: [['Command1 (Enter data)', 'يضع الاسم في Text1 والمرحلة في Text2، ويجمعهما في Label3 بشكل: Ahmed - Third.']],
+  res: 'تظهر البيانات في صندوقي النص وفي Label3.'
+},
+e5d: {
+  what: 'معرض يعرض أشكال {{MsgBox}}. الرقم على كل زر هو رقم الشكل.',
+  ins: [],
+  btns: [['Command1 (1)', 'الأزرار OK و Cancel بدون أيقونة.'], ['Command2 (1 + 32)', 'الأزرار OK و Cancel مع علامة استفهام.'], ['Command3 (4 + 64)', 'الأزرار Yes و No مع أيقونة معلومات.'], ['Command4 (2 + 16)', 'الأزرار Abort و Retry و Ignore مع أيقونة خطأ.'], ['Command5 (5 + 48)', 'الأزرار Retry و Cancel مع علامة تعجب.']],
+  res: 'الرقم الأول يحدد الأزرار (0 إلى 5). والثاني يحدد الأيقونة: 16 خطأ، 32 استفهام، 48 تعجب، 64 معلومات.'
+},
+e5e: {
+  what: 'يسأل «هل تريد الخروج؟» ثم يتصرف حسب جوابك. يحفظ جواب المستخدم في المتغير k.',
+  ins: [],
+  btns: [['Command1 (Exit)', 'يعرض صندوقًا فيه Yes و No. إن اخترت Yes (قيمتها 6) ينتهي البرنامج. وإن اخترت No (قيمتها 7) تظهر في Label1 العبارة You pressed No (value = 7).']],
+  res: 'اضغط Exit ثم اختر No لترى الرقم 7.'
+},
+e5f: {
+  what: 'ثلاثة أزرار: Start و Clear و Exit، وبعضها يطلب تأكيدك قبل التنفيذ.',
+  ins: [['Text1 (Student)', 'يمتلئ تلقائيًا بعد الضغط على Start.']],
+  btns: [['Command1 (Start)', 'يطلب الاسم عبر InputBox ويضعه في Text1.'], ['Command2 (Clear)', 'يسأل: Clear the text? إن اخترت Yes يمسح Text1.'], ['Command3 (Exit)', 'يسأل: Exit the program? إن اخترت OK ينتهي البرنامج.']],
+  res: 'اضغط Start واكتب اسمًا. ثم اضغط Clear واختر Yes فيختفي الاسم.'
+},
+e5g: {
+  what: 'يحسب الجذر التربيعي، ويمنع الأعداد السالبة بالأمر {{GoTo}}.',
+  ins: [['صندوق الإدخال', 'يظهر بعد الضغط على الزر. اكتب رقمًا. مثال: 16 أو -4']],
+  btns: [['Command1 (Square root)', 'إذا كان الرقم أقل من صفر يقفز إلى ErrMsg. وإلا يحسب الجذر.']],
+  res: '16 تعطي Sqr(x) = 4. أما -4 فتعطي Error: negative number!'
+},
+e5h: {
+  what: 'يوضح القفز بـ {{GoTo}} إلى رقم سطر.',
+  ins: [['Text1', 'لا تكتب فيه. يعرض الناتج.']],
+  btns: [['Command1 (Run)', 'يضع 50 في Text1، ثم GoTo 18 يقفز إلى السطر 18 فيتجاوز السطر الذي يضع 60.']],
+  res: 'يظهر 50 وليس 60.'
+},
+e6a: {
+  what: 'يحدد إن كان العدد فرديًا أم زوجيًا باستخدام {{Mod}} (باقي القسمة).',
+  ins: [['Text1', 'أدخل عددًا صحيحًا. القيمة الجاهزة: 7'], ['Text2', 'مقفل. يظهر فيه النوع.']],
+  btns: [['Command1 (Determine)', 'إن كان باقي القسمة على 2 يساوي صفرًا فالعدد زوجي (Even)، وإلا فردي (Odd).']],
+  res: '7 تعطي Odd. 10 تعطي Even.'
+},
+e6b: {
+  what: 'لعبة حظ: ثلاثة أرقام عشوائية من 0 إلى 9.',
+  ins: [['Text1 و Text2 و Text3', 'لا تكتب فيها. تظهر فيها الأرقام العشوائية.'], ['Text4 (Result)', 'تظهر فيه النتيجة.']],
+  btns: [['Command1 (Roll)', 'يرمي ثلاثة أرقام. إذا كان أحدها 7 يعرض You Win، وإلا يعرض You Lose.'], ['Command2 (Exit)', 'ينهي البرنامج.']],
+  res: 'اضغط Roll عدة مرات. ربحك يحتاج رقم 7 واحدًا على الأقل.'
+},
+e6c: {
+  what: 'يحسب قيمة y حسب قيمة x بثلاثة شروط.',
+  ins: [['Text1 (X)', 'أدخل رقمًا. القيمة الجاهزة: 3'], ['Text2 (Y)', 'مقفل. تظهر فيه النتيجة.']],
+  btns: [['Command1 (PRESS)', 'إذا كان x أكبر من 2 فإن y = x + 1. وإذا كان بين 0 و 2 فإن y = x². وإذا كان سالبًا فإن y = x³ − 5.']],
+  res: 'x = 3 تعطي 4. و x = 2 تعطي 4. و x = 0 تعطي 0. و x = -2 تعطي -13.'
+},
+e6d: {
+  what: 'يحوّل درجة الطالب إلى تقدير بالأمر {{Select Case}}.',
+  ins: [['Text1 (MARK)', 'أدخل الدرجة من 0 إلى 100. القيمة الجاهزة: 85'], ['Text2 (EVALUATION)', 'مقفل. يظهر فيه التقدير.']],
+  btns: [['Command1 (EVALUATE)', 'يفحص الدرجة ويكتب التقدير.']],
+  res: '95 Excellent. 85 Very Good. 75 Good. 65 Medium. 55 Fair. 45 Failed.'
+},
+e6e: {
+  what: 'يختار إحدى أربع معادلات حسب رقمك.',
+  ins: [['Text1 (Input x)', 'قيمة x. القيمة الجاهزة: 2'], ['Text2 (Choose 1 to 4)', 'رقم المعادلة من 1 إلى 4. القيمة الجاهزة: 1'], ['Text3 (Result y)', 'مقفل. تظهر فيه النتيجة.']],
+  btns: [['Command1 (Solution)', 'يطبق المعادلة المختارة على x.']],
+  res: 'مع x = 2: الاختيار 1 يعطي 8.02. والاختيار 2 يعطي 0.2557. والاختيار 3 يعطي -1.4919. والاختيار 4 يعطي 16.83. أما الاختيار 5 فأكبر يعطي Wrong Choice.'
+},
+e6f: {
+  what: 'واجب: التحقق من اسم المستخدم وكلمة السر. الصحيح هو admin و 1234.',
+  ins: [['Text1 (Username)', 'اسم المستخدم'], ['Text2 (Password)', 'كلمة السر']],
+  btns: [['Command1 (Check)', 'يفحص الاثنين معًا ثم يكتب النتيجة في Label3.']],
+  res: 'admin و 1234: Welcome. admin و 999: Wrong password. xyz و 1234: Wrong user. xyz و 999: Wrong Information.'
+},
+e6g: {
+  what: 'واجب: يجد الأكبر والأصغر بين ثلاثة أعداد.',
+  ins: [['Text1 (a)', 'العدد الأول. القيمة الجاهزة: 4'], ['Text2 (b)', 'العدد الثاني. القيمة الجاهزة: 9'], ['Text3 (c)', 'العدد الثالث. القيمة الجاهزة: 6']],
+  btns: [['Command1 (Find Max and Min)', 'يفترض أن a هو الأكبر والأصغر، ثم يقارنه بـ b و c.']],
+  res: 'مع 4 و 9 و 6: Max = 9 و Min = 4.'
+},
+e6h: {
+  what: 'واجب: يفحص هل العدد يقبل القسمة على 4 أو 5 أو كليهما.',
+  ins: [['Text1', 'أدخل عددًا. القيمة الجاهزة: 20']],
+  btns: [['Command1 (Check)', 'يستخدم Mod. إذا كان الباقي صفرًا فالعدد يقبل القسمة.']],
+  res: '20 تقبل القسمة على 4 و 5. 8 على 4 فقط. 15 على 5 فقط. 7 لا تقبل أيًّا منهما.'
+},
+e6i: {
+  what: 'واجب: دالة بثلاثة فروع باستخدام {{Select Case}}.',
+  ins: [['Text1 (x)', 'قيمة x. القيمة الجاهزة: 2'], ['Text2 (y)', 'مقفل. تظهر فيه النتيجة.']],
+  btns: [['Command1 (Solve)', 'x من 1 إلى 4: y = (x³+5)/(x²−2). و x من 5 إلى 10: y = 7 × x⁻². و x أكبر من 11: y = 60 − x. وغير ذلك: Undefined.']],
+  res: 'x = 2 تعطي 6.5. و x = 6 تعطي 0.1944. و x = 15 تعطي 45. و x = 11 تعطي Undefined لأنها خارج كل الحالات.'
+}
+};
+for (const k in GUIDE) if (EX[k]) EX[k].guide = GUIDE[k];
+
+GUIDE.t_label = {
+  what: 'تطبيق على الأداة {{Label}}. الـ Label الكبير في الأعلى هو الهدف، والأزرار تغيّر خصائصه واحدة واحدة.',
+  ins: [],
+  btns: [['Command1 (Caption)', 'يغيّر النص إلى Visual Basic 6.'], ['Command2 (ForeColor)', 'يجعل لون الكتابة أزرق.'], ['Command3 (BackColor)', 'يجعل الخلفية صفراء.'], ['Command4 (FontSize)', 'يكبّر الخط إلى 24.'], ['Command5 (FontBold)', 'يجعل الخط غامقًا.'], ['Command6 (BorderStyle)', 'يزيل الإطار.'], ['Command7 (Alignment)', 'يجعل النص في الوسط.'], ['Command8 (Reset)', 'يعيد كل الخصائص إلى حالتها الأولى.']],
+  res: 'اضغط الأزرار بالترتيب. كل زر يغيّر خاصية واحدة. ثم اضغط Reset لتبدأ من جديد.',
+  tryit: 'الـ Label لا يقبل الكتابة من المستخدم. هو للعرض فقط.'
+};
+GUIDE.t_text = {
+  what: 'تطبيق على الأداة {{TextBox}}: الخصائص {{Text}} و {{MaxLength}} و {{MultiLine}} و {{Locked}} و {{Enabled}}، والطريقة {{SetFocus}}.',
+  ins: [['Text1 (Name)', 'اسم قصير. أقصى طول 10 حروف (MaxLength = 10).'], ['Text2 (Notes)', 'ملاحظات. يقبل عدة أسطر (MultiLine = True).']],
+  btns: [['Command1 (Copy to Label)', 'ينسخ نص Text1 إلى Label3.'], ['Command2 (SetFocus Text2)', 'ينقل المؤشر إلى Text2.'], ['Command3 (Locked on/off)', 'يقفل Text1 أو يفتحه. المقفول يُقرأ ولا يُكتب فيه.'], ['Command4 (Clear)', 'يمسح الصندوقين ويعيد المؤشر إلى Text1.'], ['Command5 (Disable)', 'يعطّل Text1 فيصير رماديًا ولا يستجيب.'], ['Command6 (Enable)', 'يعيد تفعيل Text1.']],
+  res: 'اكتب Ali في Text1 ثم اضغط Copy to Label فيظهر الاسم في Label3. جرّب كتابة أكثر من 10 حروف.',
+  tryit: 'الفرق: Locked يمنع الكتابة لكن يسمح بالنسخ. Enabled = False يعطّل الصندوق كليًا.'
+};
+GUIDE.t_btn = {
+  what: 'تطبيق على الأداة {{CommandButton}}. الزر Target في الأعلى هو الهدف، وباقي الأزرار تتحكم به.',
+  ins: [],
+  btns: [['Target', 'عند الضغط عليه تظهر في Label1 العبارة Target was clicked.'], ['Command1 (Disable Target)', 'يعطّل Target (Enabled = False) فلا يستجيب.'], ['Command2 (Enable Target)', 'يعيد تفعيله.'], ['Command4 (Rename)', 'يغيّر نص Target إلى Renamed.'], ['Command5 (Hide/Show)', 'يخفي Target أو يظهره (Visible).'], ['Command6 (Move right)', 'يحرّك Target إلى اليمين (Left).'], ['Command7 (OK)', 'هذا الزر Default. يعمل أيضًا عند الضغط على Enter.']],
+  res: 'عطّل Target ثم اضغط عليه: لا يحدث شيء. فعّله ثم اضغط عليه: تظهر العبارة.',
+  tryit: 'اضغط المفتاح Enter على لوحة المفاتيح لترى الزر Default يعمل.'
+};
+GUIDE.t_img = {
+  what: 'تطبيق على الأداة {{Image}}. الصورة هنا رمز تعبيري بدل ملف، لكن الفكرة نفسها: {{Picture}} و {{LoadPicture}}.',
+  ins: [],
+  btns: [['Command1 (Dog)', 'يغيّر الصورة إلى كلب. في VB الحقيقي: LoadPicture("C:\\dog.jpg").'], ['Command2 (Cat)', 'يغيّرها إلى قط.'], ['Command3 (Hide/Show)', 'يخفي الصورة أو يظهرها.'], ['Command4 (Bigger)', 'يكبّر الصورة (Width و Height).'], ['Command5 (Move right)', 'يحرّكها إلى اليمين (Left).'], ['Command6 (Reset)', 'يعيد الحجم والمكان والظهور.'], ['Image1_Click', 'عند النقر على الصورة يظهر في Label1: You clicked the image.']],
+  res: 'اضغط Dog فتتغير الصورة. اضغط Bigger عدة مرات فتكبر. انقر على الصورة نفسها.',
+  tryit: 'الصورة تستقبل الأحداث مثل Click تمامًا كالزر.'
+};
+GUIDE.t_form = {
+  what: 'تطبيق على النموذج {{Form}} نفسه. النموذج كائن له خصائص وأحداث مثل أي أداة.',
+  ins: [['Text1 (Title)', 'اكتب عنوانًا جديدًا للنافذة. القيمة الجاهزة: My Form']],
+  btns: [['Form_Load', 'يعمل عند فتح النموذج. يضبط العنوان على Form Demo.'], ['Command1 (Set Caption)', 'يجعل عنوان النافذة هو ما كتبته في Text1.'], ['Command2 و Command3 و Command4', 'يغيّرون لون خلفية النموذج إلى أحمر وأخضر وأزرق.'], ['Command5 (Print)', 'يطبع Hello from the form على النموذج.'], ['Form_Click', 'انقر على أي مكان فارغ في النموذج فيتغير عنوانه.']],
+  res: 'اكتب عنوانًا ثم اضغط Set Caption. جرّب الألوان الثلاثة. انقر على الخلفية.'
+};
+GUIDE.all1 = {
+  what: 'المشروع الشامل. نظام يحسب معدل الطالب ويعطيه تقديرًا. يجمع كل الأدوات: {{Form}} و {{Label}} و {{TextBox}} و {{CommandButton}} و {{Image}}، مع {{InputBox}} و {{MsgBox}} والمتغيرات و {{If}} و {{Select Case}}.',
+  ins: [['Text1 (Name)', 'اسم الطالب. إجباري. مثال: Sara'], ['Text2 (Math)', 'درجة الرياضيات من 0 إلى 100. مثال: 90'], ['Text3 (English)', 'درجة الإنكليزي. مثال: 95'], ['Text4 (Computer)', 'درجة الحاسوب. مثال: 100'], ['Text5 (Average)', 'مقفل. يظهر فيه المعدل.'], ['Text6 (Grade)', 'مقفل. يظهر فيه التقدير.']],
+  btns: [['Command1 (Calculate)', 'يتحقق أولًا: إن كان الاسم فارغًا يعرض MsgBox ويعيد المؤشر إلى Text1. وإن كانت درجة خارج 0 إلى 100 يعرض رسالة خطأ. ثم يحسب المعدل، ويكتب التقدير بـ Select Case، ويغيّر الصورة إلى 😀 عند النجاح أو 😢 عند الرسوب.'], ['Command2 (Clear)', 'يمسح كل الحقول ويعيد الصورة الأولى.'], ['Command3 (Exit)', 'يسأل عبر MsgBox إن كنت تريد الخروج. يعمل أيضًا بالمفتاح Esc.'], ['Command4 (Pass mark)', 'يفتح InputBox لتغيير درجة النجاح. القيمة الأصلية 50.'], ['Image1_Click', 'انقر على الصورة فتظهر رسالة بعدد الطلاب الذين حُسبت نتائجهم.'], ['Text1 إلى Text4 (GotFocus)', 'عند دخول كل حقل يكتب Label9 في الأسفل ما المطلوب إدخاله.']],
+  res: 'Sara و 90 و 95 و 100 تعطي معدلًا 95.0 وتقديرًا Excellent وصورة 😀. أما 30 و 40 و 20 فتعطي 30.0 و Failed و 😢.',
+  tryit: 'اضغط Pass mark واكتب 80. ثم احسب طالبًا معدله 75 فيصبح راسبًا لأن درجة النجاح صارت 80.'
+};
+for (const k of ['t_label', 't_text', 't_btn', 't_img', 't_form', 'all1']) if (EX[k]) EX[k].guide = GUIDE[k];
 
 /* ===== chapters, quizzes, glossary ===== */
 const Q = (q, ok, bad, e, c) => ({ q, ok, bad, e: e || '', c: c || '' });
@@ -1647,7 +2205,20 @@ CH.push({
     ['p', 'نستخدم ثلاثة {{Label}} وثلاثة {{TextBox}} وستة أزرار.'],
     ['p', 'Text3 مقفل ({{Locked}} = {{True}}) لأنه للنتيجة فقط.'],
     ['ex', 'e2c'],
-    ['warn', 'قسمة على صفر؟ جرّب {{/}} والمقسوم عليه 0 ولاحظ رسالة الخطأ {{Division by zero}}.']
+    ['warn', 'قسمة على صفر؟ جرّب {{/}} والمقسوم عليه 0 ولاحظ رسالة الخطأ {{Division by zero}}.'],
+    ['h', 'تطبيق عملي على كل أداة'],
+    ['p', 'لكل أداة برنامج صغير يوضحها. كل برنامج له لوحة شرح: ماذا تكتب، وماذا يفعل كل زر، وما النتيجة.'],
+    ['h', 'أولًا: الأداة {{Label}}'],
+    ['ex', 't_label'],
+    ['h', 'ثانيًا: الأداة {{TextBox}}'],
+    ['ex', 't_text'],
+    ['h', 'ثالثًا: الأداة {{CommandButton}}'],
+    ['ex', 't_btn'],
+    ['h', 'رابعًا: الأداة {{Image}}'],
+    ['ex', 't_img'],
+    ['h', 'خامسًا: النموذج {{Form}}'],
+    ['ex', 't_form'],
+    ['tip', 'في آخر الكتاب (الفصل السادس) مشروع شامل يجمع كل هذه الأدوات في برنامج واحد.']
   ],
   quiz: [
     Q('الأداة المخصصة للعرض فقط:', 'Label', ['TextBox', 'CommandButton', 'Timer'], 'Label لعرض نص أو نتيجة.'),
@@ -1974,7 +2545,12 @@ CH.push({
     ['ex', 'e6g'],
     ['ex', 'e6h'],
     ['ex', 'e6i'],
-    ['ex', 'e6f']
+    ['ex', 'e6f'],
+    ['h', 'المشروع الشامل: كل الأدوات في برنامج واحد'],
+    ['p', 'هذا البرنامج يجمع ما تعلمناه في كل الفصول.'],
+    ['ul', ['الأدوات: {{Form}} و {{Label}} و {{TextBox}} و {{CommandButton}} و {{Image}}.', 'الصناديق: {{InputBox}} و {{MsgBox}}.', 'المتغيرات: {{Dim}} و {{Option Explicit}} (الفصل 4).', 'القرارات: {{If}} و {{Select Case}} (الفصل 6).', 'الأحداث: {{Click}} و {{GotFocus}} و {{Form_Load}} (الفصل 3).']],
+    ['ex', 'all1'],
+    ['tip', 'جرّب تغيير الشيفرة في المختبر. مثلًا أضف تقديرًا جديدًا أو غيّر شروط الرسوب.']
   ],
   quiz: [
     Q('الجمل الشرطية تُسمى أيضًا:', 'جمل السيطرة Control Statements', ['جمل الإدخال', 'جمل التعريف', 'جمل الطباعة'], 'هدفها التحكم بمسار تنفيذ البرنامج.'),
@@ -2223,10 +2799,20 @@ function designTable(spec) {
   }).join('');
   return '<div class="tblwrap"><table class="tbl"><thead><tr><th>الأداة</th><th>Name</th><th>الخصائص</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
 }
+function guideHtml(e) {
+  const g = e.guide; if (!g) return '';
+  const rows = a => a.map(r => '<div class="grow"><div class="gname"><bdi class="en">' + esc(r[0]) + '</bdi></div><div class="gtext">' + rt(r[1]) + '</div></div>').join('');
+  return '<details class="guide" open><summary>📖 شرح البرنامج: ماذا يفعل؟</summary>' +
+    '<p>' + rt(g.what) + '</p>' +
+    (g.ins && g.ins.length ? '<div class="gsub">① ماذا تكتب في الحقول</div>' + rows(g.ins) : '') +
+    (g.btns && g.btns.length ? '<div class="gsub">② ماذا يفعل كل زر أو حدث</div>' + rows(g.btns) : '') +
+    '<div class="gsub">③ النتيجة المتوقعة</div><p>' + rt(g.res) + '</p>' +
+    (g.tryit ? '<div class="gsub">💡 جرّب</div><p>' + rt(g.tryit) + '</p>' : '') + '</details>';
+}
 function exCard(id) {
   const e = EX[id];
   return '<section class="excard" data-ex="' + id + '"><div class="exhead"><span class="exbadge">جرّب</span><b>' + rt(e.title) + '</b></div><p class="exdesc">' + rt(e.desc) + '</p>' +
-    '<div class="runner"></div><div class="exbtns"><button data-act="reset">↻ إعادة</button><button data-act="code">{ } الشيفرة</button><button data-act="lab">🧪 افتح في المختبر</button></div>' +
+    '<div class="runner"></div><div class="exbtns"><button data-act="reset">↻ إعادة</button><button data-act="code">{ } الشيفرة</button><button data-act="lab">🧪 افتح في المختبر</button></div>' + guideHtml(e) +
     '<div class="excode" hidden><div class="subh">جدول التصميم (الأدوات وخصائصها)</div>' + designTable(e.form) + '<div class="subh">الشيفرة</div>' + codeBlock(e.code) + '</div></section>';
 }
 function bindEx(root) {
@@ -2429,7 +3015,7 @@ function viewLab() {
   const groups = [[0, 'مختبر فارغ']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
   view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
     '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
-    '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' +
+    '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' + guideHtml(e) +
     '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '</div>' +
     '<textarea id="labcode" class="editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
     '<details class="cheat"><summary>📋 ورقة مرجعية سريعة</summary><div class="cheatbody" dir="ltr"><pre class="code">' + hl(CHEAT) + '</pre></div></details>' + footer();
