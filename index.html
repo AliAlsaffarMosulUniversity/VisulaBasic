@@ -944,7 +944,11 @@ Text3 = Val(Text1) * Val(Text2)
 End Sub
 
 Private Sub Command4_Click()
+If Val(Text2) = 0 Then
+Text3 = "Cannot divide by 0"
+Else
 Text3 = Val(Text1) / Val(Text2)
+End If
 End Sub
 
 Private Sub Command5_Click()
@@ -1065,7 +1069,7 @@ Private Sub Command1_Click()
 Const PI As Single = 3.14
 Dim R As Single
 Dim Z As Single
-R = Text1.Text
+R = Val(Text1.Text)
 Z = PI * R * R
 Text2.Text = Z
 Text3.Text = 2 * PI * R
@@ -1112,7 +1116,7 @@ n = 0
 Cls
 End Sub`);
 
-ex('e4d', 4, 'Option Explicit: إجبار التصريح', 'الزر الأول يعمل. الزر الثاني يستخدم متغيرًا لم يُعرَّف فيظهر خطأ. احذف السطر الأول في المختبر وجرّب مرة أخرى.',
+ex('e4d', 4, 'Option Explicit: إجبار التصريح (خطأ مقصود)', 'الزر الأول يعمل. الزر الثاني يُظهر خطأ عمدًا لأنه يستخدم متغيرًا لم يُعرَّف. احذف السطر الأول في المختبر وجرّب مرة أخرى.',
   F('Form1', 300, 200, [C('Command1', 'Declared (Dim s)', 10, 8, 135), C('Command2', 'Not declared', 155, 8, 135)]),
   String.raw`
 Option Explicit
@@ -1156,7 +1160,7 @@ z = z * a
 Print "a"; a, "b= "; b, "z= "; z
 End Sub`);
 
-ex('e4f', 4, 'أنواع المتغيرات: الحدود والتقريب', 'جرّب كل زر وراقب ماذا يحدث عند تجاوز سعة النوع أو عند إسناد قيمة كسرية.',
+ex('e4f', 4, 'أنواع المتغيرات: الحدود والتقريب', 'جرّب كل زر. الزر الأول يُظهر الخطأ Overflow عمدًا ليريك حدود النوع Integer.',
   F('Form1', 300, 230, [C('Command1', 'Integer + 10000', 10, 8, 135), C('Command2', 'Long + 10000', 155, 8, 135), C('Command3', 'Integer = 3.7', 10, 44, 135), C('Command4', 'Single = 3.7', 155, 44, 135)]),
   String.raw`
 Private Sub Command1_Click()
@@ -1302,7 +1306,7 @@ ex('e6a', 6, 'عدد فردي أم زوجي؟', 'If … Else مع المعامل
   F('Form1', 300, 190, [L('Label1', 'Enter the number', 20, 20, 130), L('Label2', 'The type is', 20, 60, 130), T('Text1', '7', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'Determine', 90, 110, 120, 30)]),
   String.raw`
 Private Sub Command1_Click()
-Dim x As Integer
+Dim x As Long
 x = Val(Text1.Text)
 If (x Mod 2 = 0) Then
 Text2.Text = "Even"
@@ -1355,7 +1359,7 @@ ex('e6d', 6, 'تقدير الطالب (Select Case)', 'أدخل الدرجة و�
   F('Form1', 300, 190, [L('Label1', 'MARK', 20, 20, 120), L('Label2', 'EVALUATION', 20, 60, 120), T('Text1', '85', 160, 17, 110), T('Text2', '', 160, 57, 110, 22, { locked: true }), C('Command1', 'EVALUATE', 80, 110, 140, 30)]),
   String.raw`
 Private Sub Command1_Click()
-Dim x As Integer, y As String
+Dim x As Long, y As String
 x = Val(Text1.Text)
 Select Case x
 Case 90 To 100
@@ -1379,7 +1383,7 @@ ex('e6e', 6, 'اختيار المعادلة (Select Case)', 'أدخل x ثم ر�
     T('Text1', '2', 15, 45, 80), T('Text2', '1', 105, 45, 80), T('Text3', '', 195, 45, 90), C('Command1', 'Solution', 90, 100, 120, 30)]),
   String.raw`
 Private Sub Command1_Click()
-Dim x As Single, n As Integer
+Dim x As Single, n As Long
 x = Val(Text1.Text)
 n = Val(Text2.Text)
 Select Case n
@@ -1680,8 +1684,8 @@ ex('all1', 6, 'المشروع الشامل: نظام نتائج الطالب', '
     L('Label9', '', 20, 288, 320, 24, { borderstyle: 1 })]),
   String.raw`
 Option Explicit
-Dim passMark As Integer
-Dim count As Integer
+Dim passMark As Long
+Dim count As Long
 
 Private Sub Form_Load()
 passMark = 50
@@ -1778,8 +1782,8 @@ ex('cmd_dim', 'cmd', 'مثال Dim: تعريف المتغيرات', 'نعرّف 
   String.raw`
 Private Sub Command1_Click()
 Dim n As String
-Dim age As Integer
-Dim nextYear As Integer
+Dim age As Long
+Dim nextYear As Long
 n = Text1.Text
 age = Val(Text2.Text)
 nextYear = age + 1
@@ -1836,7 +1840,7 @@ ex('cmd_select', 'cmd', 'مثال Select Case: أيام الأسبوع', 'اكت
     L('Label2', '', 15, 70, 290, 36, { borderstyle: 1, alignment: 2, fontsize: 14, fontbold: true })]),
   String.raw`
 Private Sub Command1_Click()
-Dim d As Integer
+Dim d As Long
 d = Val(Text1.Text)
 Select Case d
 Case 1
@@ -1863,7 +1867,7 @@ ex('cmd_if', 'cmd', 'مثال If: فحص العمر', 'اكتب العمر في�
     L('Label2', '', 15, 70, 290, 36, { borderstyle: 1, alignment: 2, fontsize: 14, fontbold: true })]),
   String.raw`
 Private Sub Command1_Click()
-Dim age As Integer
+Dim age As Long
 age = Val(Text1.Text)
 If age < 0 Then
 Label2.Caption = "Invalid age"
@@ -1933,8 +1937,8 @@ e2b: {
 e2c: {
   what: 'آلة حاسبة تجري عملية على رقمين.',
   ins: [['Text1 (Value1)', 'الرقم الأول. مثال: 12'], ['Text2 (Value2)', 'الرقم الثاني. مثال: 5'], ['Text3 (Result)', 'مقفل. تظهر فيه النتيجة فقط.']],
-  btns: [['Command1 (+)', 'يجمع. النتيجة 17.'], ['Command2 (-)', 'يطرح. النتيجة 7.'], ['Command3 (*)', 'يضرب. النتيجة 60.'], ['Command4 (/)', 'يقسم. النتيجة 2.4.'], ['Command5 (Clear)', 'يمسح الصناديق الثلاثة.'], ['Command6 (Exit)', 'ينهي البرنامج. يعمل أيضًا بالمفتاح Esc.']],
-  res: 'اكتب 12 و 5 ثم جرّب الأزرار الأربعة. جرّب القسمة على 0 لترى رسالة الخطأ.',
+  btns: [['Command1 (+)', 'يجمع. النتيجة 17.'], ['Command2 (-)', 'يطرح. النتيجة 7.'], ['Command3 (*)', 'يضرب. النتيجة 60.'], ['Command4 (/)', 'يقسم. النتيجة 2.4. وإن كان المقسوم عليه صفرًا تظهر العبارة Cannot divide by 0.'], ['Command5 (Clear)', 'يمسح الصناديق الثلاثة.'], ['Command6 (Exit)', 'ينهي البرنامج. يعمل أيضًا بالمفتاح Esc.']],
+  res: 'اكتب 12 و 5 ثم جرّب الأزرار الأربعة. جرّب القسمة على 0 لترى كيف يتجنب البرنامج الخطأ.',
   tryit: 'الدالة {{Val}} تحوّل النص في الصندوق إلى رقم.'
 },
 e2d: {
@@ -2006,7 +2010,7 @@ e4c: {
 e4d: {
   what: 'يوضح {{Option Explicit}} الذي يُجبرك على تعريف كل متغير قبل استخدامه.',
   ins: [],
-  btns: [['Command1 (Declared)', 'المتغير s معرَّف بـ Dim، فيعمل ويطبع 1.'], ['Command2 (Not declared)', 'يستخدم S2 بدون تعريف، فيظهر الخطأ Variable not defined.']],
+  btns: [['Command1 (Declared)', 'المتغير s معرَّف بـ Dim، فيعمل ويطبع 1.'], ['Command2 (Not declared)', 'خطأ مقصود: يستخدم S2 بدون تعريف، فيظهر Variable not defined. هذا هو المطلوب إظهاره.']],
   res: 'اضغط الزرين وقارن. ثم افتح المختبر واحذف السطر Option Explicit وجرّب الزر الثاني مرة أخرى: سيعمل.'
 },
 e4e: {
@@ -2019,7 +2023,7 @@ e4e: {
 e4f: {
   what: 'يوضح حدود أنواع المتغيرات.',
   ins: [],
-  btns: [['Command1 (Integer + 10000)', 'x من النوع Integer (أكبر قيمة 32767). 30000 + 10000 تتجاوز الحد فيظهر الخطأ Overflow.'], ['Command2 (Long + 10000)', 'النوع Long يتسع لها، فيطبع 40000.'], ['Command3 (Integer = 3.7)', 'Integer لا يحمل كسرًا. يقرّب القيمة فيطبع 4.'], ['Command4 (Single = 3.7)', 'Single يحمل الكسور، فيطبع 3.7.']],
+  btns: [['Command1 (Integer + 10000)', 'خطأ مقصود: x من النوع Integer (أكبر قيمة 32767). 30000 + 10000 تتجاوز الحد فيظهر Overflow. هذا هو المطلوب إظهاره.'], ['Command2 (Long + 10000)', 'النوع Long يتسع لها، فيطبع 40000.'], ['Command3 (Integer = 3.7)', 'Integer لا يحمل كسرًا. يقرّب القيمة فيطبع 4.'], ['Command4 (Single = 3.7)', 'Single يحمل الكسور، فيطبع 3.7.']],
   res: 'جرّب الأزرار الأربعة وقارن.'
 },
 e5a: {
@@ -2171,7 +2175,7 @@ GUIDE.all1 = {
 for (const k of ['t_label', 't_text', 't_btn', 't_img', 't_form', 'all1']) if (EX[k]) EX[k].guide = GUIDE[k];
 
 Object.assign(GUIDE, {
-cmd_dim: { what: 'يوضح الأمر {{Dim}}: نعرّف متغيرًا نصيًا واثنين رقميين، ثم نجمعها في جملة.', ins: [['Text1 (Name)', 'اكتب اسمًا. مثال: Ali'], ['Text2 (Age)', 'اكتب عمرًا. مثال: 20']], btns: [['Command1 (Show)', 'يخزّن الاسم في n والعمر في age، ويحسب nextYear = age + 1، ثم يعرضها في Label3.']], res: 'Ali و 20 تعطي: Ali is 20 now, and 21 next year.', tryit: 'جرّب تغيير النوع Integer إلى String ولاحظ الفرق عند الجمع.' },
+cmd_dim: { what: 'يوضح الأمر {{Dim}}: نعرّف متغيرًا نصيًا واثنين رقميين، ثم نجمعها في جملة.', ins: [['Text1 (Name)', 'اكتب اسمًا. مثال: Ali'], ['Text2 (Age)', 'اكتب عمرًا. مثال: 20']], btns: [['Command1 (Show)', 'يخزّن الاسم في n والعمر في age، ويحسب nextYear = age + 1، ثم يعرضها في Label3.']], res: 'Ali و 20 تعطي: Ali is 20 now, and 21 next year.', tryit: 'النوع Long يحمل أعدادًا كبيرة. جرّب تغيير age إلى String ولاحظ الفرق.' },
 cmd_msgbox: { what: 'يوضح الأمر {{MsgBox}} بثلاث رسائل جاهزة، ورسالة سؤال تعطيك جوابًا.', ins: [], btns: [['Command1 (Info)', 'رسالة معلومات: الرقم 64.'], ['Command2 (Warning)', 'رسالة تحذير: الرقم 48.'], ['Command3 (Error)', 'رسالة خطأ: الرقم 16.'], ['Command4 (Delete file?)', 'تسأل بالأزرار Yes و No (الرقم 4 + 32). إن اخترت Yes يظهر File deleted. وإن اخترت No يظهر Cancelled.']], res: 'جرّب الأزرار الأربعة. الأرقام تحدد الأيقونة والأزرار.' },
 cmd_inputbox: { what: 'يوضح الأمر {{InputBox}}: صندوق يطلب من المستخدم أن يكتب قيمة.', ins: [['صندوق الاسم', 'اكتب اسمك. أو اتركه فارغًا لترى الرسالة البديلة. القيمة الجاهزة: Guest'], ['صندوقا الرقمين', 'اكتب رقمًا في كل صندوق. مثال: 7 ثم 5']], btns: [['Command1 (Ask my name)', 'يسأل عن الاسم. إن كتبت Ali يظهر Hello Ali. وإن تركته فارغًا يظهر No name entered.'], ['Command2 (Add two numbers)', 'يسأل عن رقمين ويعرض 7 + 5 = 12.']], res: 'تظهر النتيجة في الصناديق الصغيرة أسفل الأزرار.' },
 cmd_select: { what: 'يوضح الأمر {{Select Case}}: يختار حالة واحدة حسب قيمة المتغير.', ins: [['Text1 (Day number)', 'رقم من 1 إلى 7. القيمة الجاهزة: 3']], btns: [['Command1 (Show day)', 'يقرأ الرقم ويكتب اسم اليوم. الرقم 1 هو Saturday والرقم 7 هو Friday. أي رقم آخر يدخل في Case Else.']], res: '3 تعطي Monday. و 7 تعطي Friday. و 9 تعطي Enter a number from 1 to 7.' },
@@ -2361,7 +2365,7 @@ CH.push({
     ['p', 'نستخدم ثلاثة {{Label}} وثلاثة {{TextBox}} وستة أزرار.'],
     ['p', 'Text3 مقفل ({{Locked}} = {{True}}) لأنه للنتيجة فقط.'],
     ['ex', 'e2c'],
-    ['warn', 'قسمة على صفر؟ جرّب {{/}} والمقسوم عليه 0 ولاحظ رسالة الخطأ {{Division by zero}}.'],
+    ['warn', 'قسمة على صفر؟ البرنامج يفحص المقسوم عليه أولًا. فإن كان 0 يكتب {{Cannot divide by 0}} بدل أن يتوقف بالخطأ {{Division by zero}}. انظر شيفرة الزر الرابع.'],
     ['h', 'تطبيق عملي على كل أداة'],
     ['p', 'لكل أداة برنامج صغير يوضحها. كل برنامج له لوحة شرح: ماذا تكتب، وماذا يفعل كل زر، وما النتيجة.'],
     ['h', 'أولًا: الأداة {{Label}}'],
