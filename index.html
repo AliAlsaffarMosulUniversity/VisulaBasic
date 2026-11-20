@@ -238,6 +238,10 @@ body:not(.home) .themebtn{top:18px}
 .pracintro b{display:flex;align-items:center;gap:8px;font-size:17px}
 .pracn{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}.pracn span{font-size:14px;color:var(--mut)}.pracn .btn{margin-top:0}
 @media (prefers-reduced-motion:reduce){.newbadge,.newbadge:after{animation:none}}
+h2.h3{font-size:19px;margin:30px 0 8px;color:var(--brand);padding-right:12px;border-right:5px solid var(--accent);line-height:1.5}
+html[data-theme=dark] h2.h3{color:#cfe0ff}
+details summary{color:#0a5c63}
+html[data-theme=dark] details summary{color:#7fd6dd}
 
 </style>
 </head>
@@ -3983,7 +3987,7 @@ function mountRunner(box, ex, o) {
   for (const c of it.ctrls.values()) {
     if (c === it.form || seen.has(c)) continue; seen.add(c);
     let el;
-    if (c.type === 'TextBox') { el = document.createElement(c.props.multiline ? 'textarea' : 'input'); if (!c.props.multiline) el.type = 'text'; el.setAttribute('dir', 'auto'); el.spellcheck = false; el.autocomplete = 'off'; el.className = 'vbc vbtext'; } else if (c.type === 'CommandButton') { el = document.createElement('button'); el.className = 'vbc vbbtn'; } else if (c.type === 'Image') { el = document.createElement('div'); el.className = 'vbc vbimg'; } else { el = document.createElement('div'); el.className = 'vbc vblabel'; el.setAttribute('dir', 'auto'); }
+    if (c.type === 'TextBox') { el = document.createElement(c.props.multiline ? 'textarea' : 'input'); if (!c.props.multiline) el.type = 'text'; el.setAttribute('dir', 'auto'); el.spellcheck = false; el.autocomplete = 'off'; el.className = 'vbc vbtext'; el.setAttribute('aria-label', c.name); } else if (c.type === 'CommandButton') { el = document.createElement('button'); el.className = 'vbc vbbtn'; } else if (c.type === 'Image') { el = document.createElement('div'); el.className = 'vbc vbimg'; } else { el = document.createElement('div'); el.className = 'vbc vblabel'; el.setAttribute('dir', 'auto'); }
     els.set(c, el); el.dataset.n = c.name; body.appendChild(el);
     const n = c.name;
     el.addEventListener('click', () => { F(n, 'Click'); });
@@ -4088,7 +4092,7 @@ function renderBlocks(blocks) {
   let h = '';
   for (const b of blocks) {
     const k = b[0];
-    if (k === 'h') h += '<h3>' + rt(b[1]) + '</h3>';
+    if (k === 'h') h += '<h2 class="h3">' + rt(b[1]) + '</h2>';
     else if (k === 'p') h += '<p>' + rt(b[1]) + '</p>';
     else if (k === 'ul') h += '<ul>' + b[1].map(x => '<li>' + rt(x) + '</li>').join('') + '</ul>';
     else if (k === 'ol') h += '<ol>' + b[1].map(x => '<li>' + rt(x) + '</li>').join('') + '</ol>';
@@ -4279,11 +4283,11 @@ function viewLab() {
   const e = EX[labState.id] || EX.lab0;
   const groups = [[0, 'مختبر فارغ'], ['cmd', 'أمثلة الأوامر السريعة'], ['apps', 'تصميمات: تطبيقات جاهزة']].concat(CH.map(c => [c.id, 'الفصل ' + c.id + ': ' + c.title]));
   view.innerHTML = '<div class="pagehead"><h1>🧪 مختبر Visual Basic</h1><p>اختر مثالًا أو اكتب شيفرتك. ثم اضغط «تشغيل». الأدوات في النموذج تتفاعل كما في برنامج حقيقي.</p></div>' +
-    '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
+    '<label class="wl">اختر مثالًا:</label><select id="labsel" class="sel" aria-label="اختر مثالًا">' + groups.map(g => '<optgroup label="' + esc(g[1]) + '">' + Object.values(EX).filter(x => x.ch === g[0]).map(x => '<option value="' + x.id + '"' + (x.id === e.id ? ' selected' : '') + '>' + esc(x.title) + '</option>').join('') + '</optgroup>').join('') + '</select>' +
     '<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ تشغيل الشيفرة</button><button class="btn ghost" id="labreset">↺ استرجع الشيفرة الأصلية</button></div>' + guideHtml(e) +
     '<div class="snips">' + SNIP.map((s, i) => '<button data-s="' + i + '">+ ' + s[0] + '</button>').join('') + '<button data-clear="1">🗑 مسح المحرر</button></div>' +
     '<div class="subh">مثال كامل لكل أمر (يُحمَّل في المحرر):</div><div class="snips ex2">' + [['cmd_dim', 'Dim'], ['cmd_msgbox', 'MsgBox'], ['cmd_inputbox', 'InputBox'], ['cmd_select', 'Select Case'], ['cmd_if', 'If'], ['cmd_click', 'Click']].map(x => '<button data-ex2="' + x[0] + '"' + (e.id === x[0] ? ' class="on"' : '') + '>▶ ' + x[1] + '</button>').join('') + '</div>' +
-    '<textarea id="labcode" class="editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
+    '<textarea id="labcode" class="editor" aria-label="محرر الشيفرة" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
     '<details class="cheat"><summary>📋 ورقة مرجعية سريعة</summary><div class="cheatbody" dir="ltr"><pre class="code">' + hl(CHEAT) + '</pre></div></details>' + footer();
   const ta = $('#labcode'); ta.value = labState.code != null ? labState.code : e.code;
   const run = () => { labState.code = ta.value; const c = mountRunner($('#labrun'), e, { code: ta.value }); };
