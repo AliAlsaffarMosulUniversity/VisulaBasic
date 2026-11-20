@@ -1,0 +1,248 @@
+@@431
+The first is the message text. The second, 64, means an information icon. The third is the window title.
+@@432
+The number 48 means an exclamation mark (a warning).
+@@433
+The number 16 means an error icon.
+@@434
+Here MsgBox is a function that returns the user's answer. 4 means the Yes and No buttons, and 32 a question mark. We compare the answer with vbYes.
+@@435
+Runs if Yes was pressed.
+@@436
+Runs if No was pressed.
+@@437
+That MsgBox either just shows information, or asks the user and returns the answer for us to decide on. And that the numbers add up: button style + icon.
+@@438
+A text variable to store the name.
+@@439
+Opens an input box. The first argument is the question, the second the title, and the third a default value. What you type is stored in n.
+@@440
+If Cancel is pressed or the box is left empty, n is an empty string.
+@@441
+Two decimal variables to store the two numbers.
+@@442
+InputBox always returns text. We convert it to a number with Val.
+@@443
+We show the operation and the result. The brackets add the two numbers first.
+@@444
+That a program can ask the user while it runs, that InputBox returns text, and that you must check for an empty answer.
+@@445
+A variable for the day number.
+@@446
+We read the number from the box and convert it to a number.
+@@447
+We start choosing according to the value of d.
+@@448
+If d equals 1 we run the next line and skip the remaining cases.
+@@449
+The same idea for the other days.
+@@450
+If no case matches (such as 9 or 0), this part runs.
+@@451
+The end of the statement.
+@@452
+That Select Case is clearer than writing many Ifs when we compare one variable with several values. And that Case Else catches wrong values.
+@@453
+A variable for the age.
+@@454
+We read the age from the box.
+@@455
+The first condition: a negative age makes no sense, so we show Invalid age.
+@@456
+Checked only if the first condition fails: under 13 means Child.
+@@457
+Then under 18 means Teenager.
+@@458
+Everything left (18 and over) is Adult.
+@@459
+That conditions are checked in order from the top, and only the first condition that is true runs. So order matters.
+@@460
+Outside the procedures. It keeps its value between clicks because it is form-level.
+@@461
+The procedure that runs every time we press Command1.
+@@462
+We add 1 to the counter.
+@@463
+We show the new value.
+@@464
+Runs when Reset is pressed and sets the counter back to zero.
+@@465
+The procedure name = control name + _ + event name. So a Label also has a Click event.
+@@466
+That events drive the program: no procedure runs until something happens, such as a click. And that a procedure's name is built from the control's name and the event's name.
+@@467
+A real calculator: press digits and they appear on the display, then an operation, then the second number, then = to see the result. The small line above the display shows the current operation.
+@@468
+Text1 (the display)
+@@469
+Locked. Do not type in it with the keyboard. Digits are entered only through the buttons.
+@@470
+0 to 9
+@@471
+Each button calls the Digit procedure, which adds its digit to the display.
+@@472
+They call SetOp: it stores the first number in first and the operation in op, then waits for the second number.
+@@473
+Reads the second number and calculates according to op with Select Case. It blocks division by zero with a message. The Enter key also runs it.
+@@474
+Adds a decimal point only once (checked with InStr).
+@@475
+Changes the sign.
+@@476
+Square root; it rejects negative numbers.
+@@477
+Deletes the last digit with the Left function.
+@@478
+Clears everything.
+@@479
+Press 1, 2, +, 8, = and 20 appears, with 12 + 8 = above it. Try 9 / 0 = to see the blocking message.
+@@480
+Draw Label1 at the top and Text1 below it. Set Text1: Locked = True, Alignment = 1 (right) and font size 18.
+@@481
+Draw 20 buttons in a 4 × 5 grid. Name the digit buttons Command0 to Command9, and name the rest cmdAdd, cmdSub, cmdMul, cmdDiv, cmdEq, cmdDot, cmdSign, cmdSqr, cmdBack and cmdClear.
+@@482
+Set the = button's Default property to True.
+@@483
+In the General section, write the variables first, op and fresh.
+@@484
+Write the Digit and SetOp procedures, then make each button call one of them.
+@@485
+Write the = procedure with Select Case, then the remaining buttons.
+@@486
+Writing your own procedure (Sub) that several buttons call instead of repeating code, and form-level variables that keep the state between clicks.
+@@487
+Challenge: add a % button that computes a percentage, and an x² button that squares the number.
+@@488
+Computes body mass index = weight ÷ (height in metres)². Then it decides the category and changes the background colour accordingly.
+@@489
+Weight in kilograms. Example: 70
+@@490
+Height in centimetres. Example: 175
+@@491
+Converts the height to metres, computes the BMI and shows it to one decimal place. Then it writes the category and colours it with RGB. The Enter key also runs it.
+@@492
+Clears everything and returns the cursor to Text1.
+@@493
+70 and 175 give BMI = 22.9 and the category Normal in green. Try 50 and 175: Underweight in blue. And 100 and 175: Obese in red.
+@@494
+Draw a Label for the title, a Label and a TextBox for the weight, and two more for the height.
+@@495
+Draw two buttons: Calculate and Clear.
+@@496
+Draw Label4 for the number and Label5 for the category, and set BorderStyle = 1.
+@@497
+Write the Calculate code: Val, then the division, then If … ElseIf for the categories.
+@@498
+Converting units, formatting with Format, and changing colours with the RGB function inside If statements.
+@@499
+Challenge: add a Label that shows the ideal weight for the height entered.
+@@500
+Converts a temperature between Celsius and Fahrenheit, and changes the picture to match the weather: 🥶 cold, 😊 mild, 🥵 hot.
+@@501
+The temperature you want to convert. Example: 30
+@@502
+Treats the number as Celsius: F = C × 9 ÷ 5 + 32.
+@@503
+Treats the number as Fahrenheit: C = (F − 32) × 5 ÷ 9.
+@@504
+Mood (a custom procedure)
+@@505
+Chooses the picture: below 10 is cold, below 30 is mild, otherwise hot.
+@@506
+30 Celsius = 86.0 Fahrenheit. And 212 Fahrenheit = 100.0 Celsius.
+@@507
+Draw a Label for the title, a TextBox for the temperature, and an Image control for the picture.
+@@508
+Draw two buttons for the conversions and a Label for the result.
+@@509
+Write the Mood procedure once and call it from both buttons.
+@@510
+In real VB use LoadPicture("C:\cold.jpg") with real pictures.
+@@511
+Writing mathematical formulas, a custom procedure that receives a value, and changing an Image's picture in code.
+@@512
+Challenge: add conversion to Kelvin (K = C + 273.15).
+@@513
+Converts between the US dollar and the Iraqi dinar at the exchange rate you type, and shows the numbers with thousands separators.
+@@514
+How many dinars one dollar is worth. Example: 1310
+@@515
+The amount to convert. Example: 100
+@@516
+Multiplies the amount by the rate.
+@@517
+Divides the amount by the rate, and blocks the division if the rate is zero.
+@@518
+100 dollars at 1310 = 131,000 dinars. And 655,000 dinars = 500.00 dollars.
+@@519
+Draw a Label for the title, then a Label and a TextBox for the rate, and two more for the amount.
+@@520
+Use Format(x, "#,##0") to show thousands separators.
+@@521
+Formatting money values with Format, and checking values before dividing.
+@@522
+Challenge: add a third currency such as the euro.
+@@523
+A shop's sales invoice: you add items one at a time; it prints each line and adds up the amount. On Total it applies a 10% discount if the total exceeds 100,000 dinars.
+@@524
+The item name. Example: Pen
+@@525
+The unit price. Example: 1500
+@@526
+The quantity. Example: 10
+@@527
+Checks the fields, computes price × quantity, adds it to total, and prints the line on the form. Then it empties the fields. The Enter key runs it.
+@@528
+Shows the total, the discount and the final amount in Label5.
+@@529
+Asks for confirmation with MsgBox, then resets everything and clears the screen with Cls.
+@@530
+Pen at 1500 × 10 = 15,000. Then Book at 25000 × 4 = 100,000. The total is 115,000, the discount 11,500, and the amount to pay 103,500.
+@@531
+Draw three Labels and three TextBoxes at the top.
+@@532
+Draw three buttons, and make Add item the Default button.
+@@533
+Leave an empty area in the middle of the form for printing with Print.
+@@534
+Draw Label5 at the bottom with a border for the total.
+@@535
+Declare total and count in General, because they accumulate over several clicks.
+@@536
+Accumulating values in form-level variables, printing with Print, and a discount rule with If. An application close to business-administration work.
+@@537
+Challenge: add a 5% sales tax after the discount.
+@@538
+Computes net salary: gross = basic + allowances. Then a tax is deducted at a rate that depends on the gross bracket.
+@@539
+The basic salary. Example: 750000
+@@540
+The allowances. Example: 150000
+@@541
+Text3, Text4 and Text5
+@@542
+Locked. The results appear here.
+@@543
+Sets the rate with Select Case: up to 250,000 no tax; up to 500,000 at 3%; up to 1,000,000 at 5%; above that 10%.
+@@544
+Clears all the fields.
+@@545
+750,000 + 150,000 = 900,000. Tax at 5% = 45,000. Net 855,000 dinars.
+@@546
+Draw Labels and TextBoxes for the basic salary and the allowances.
+@@547
+Draw two buttons.
+@@548
+Draw three TextBoxes for the results and set Locked = True with a different colour.
+@@549
+Write Select Case in the form Case Is <= value.
+@@550
+Using Select Case with Is <= comparisons to apply brackets, a common idea in financial systems.
+@@551
+Challenge: add a field for the number of children, with an extra 50,000 allowance per child.
+@@552
+A game: when the form opens, the computer picks a secret number from 1 to 100. You type your guess and it tells you: higher or lower, until you reach it.
+@@553
+Type your guess. Start with 50, then get closer.
+@@554
+Calls NewGame to pick a new number with the Rnd function.

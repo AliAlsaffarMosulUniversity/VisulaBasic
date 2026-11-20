@@ -1,0 +1,296 @@
+@@0
+First program: Hello
+@@1
+We added a Label and a button. Pressing the button changes the Label's text.
+@@2
+Press the button
+@@3
+Label: colours, show and hide
+@@4
+Click the four words (they are Labels) and watch Label1.
+@@5
+TextBox: the GotFocus event
+@@6
+Move the cursor between the two boxes (or press Tab) and watch Text3.
+@@7
+A simple calculator
+@@8
+Type two numbers, then choose the operation. The Exit button also runs when you press Esc (Cancel = True).
+@@9
+Why do we need Val?
+@@10
+Press both buttons and compare the results. The first adds "text"; the second adds "numbers".
+@@11
+Result
+@@12
+The Change event, MaxLength and Locked
+@@13
+Type in the first box (12 characters maximum). The second box is locked (Locked) and shows the text in capital letters.
+@@14
+Rectangle area (exercise solution)
+@@15
+Exercise: length × width.
+@@16
+The Click event (Application 1)
+@@17
+Click the button, the Label, the text box, and then the form background.
+@@18
+The DblClick event (Application 2)
+@@19
+Type some text in Text1, then double-click the Label.
+@@20
+The MouseMove event (Application 3)
+@@21
+Move the mouse over the form to see X and Y. Then pass over the two buttons.
+@@22
+Drag and drop: DragDrop (Application 4)
+@@23
+Drag the picture and drop it anywhere on the form.
+@@24
+MouseDown and MouseUp (Experiment 1)
+@@25
+Press on the Label and hold, then release the button.
+@@26
+Area and circumference of a circle (Const)
+@@27
+Enter the radius. The constant PI never changes.
+@@28
+Local variables
+@@29
+Each procedure has its own x. Press the three buttons.
+@@30
+A form-level variable
+@@31
+The variable n is declared outside the procedures, so every procedure can see it and change it.
+@@32
+Option Explicit: forcing declaration (intentional error)
+@@33
+The first button works. The second button shows an error on purpose, because it uses a variable that was not declared. Delete the first line in the lab and try again.
+@@34
+Homework: what do Command1, Command2 and Command3 produce?
+@@35
+Note: Dim a, b As Integer makes a a Variant. A Dim inside a procedure hides the module-level variable. Try them in order: 1, then 2, then 3.
+@@36
+Variable types: limits and rounding
+@@37
+Try each button. The first button raises an Overflow error on purpose, to show you the limits of the Integer type.
+@@38
+InputBox: adding and subtracting two numbers
+@@39
+The numbers are entered through input boxes, and the result is printed on the form.
+@@40
+Three input boxes: y = a × b + c
+@@41
+Each input box is for one variable.
+@@42
+Entering a student's name and stage
+@@43
+InputBox returns text (String), so we put it straight into the text box.
+@@44
+MsgBox gallery: buttons and icons
+@@45
+Each button shows a different message box. The number = (buttons value + icon value).
+@@46
+MsgBox returns a value: confirming exit
+@@47
+We store what the box returns in a variable, then decide. 6 = Yes and 7 = No.
+@@48
+Three buttons: Start, Clear and Exit
+@@49
+Start reads the name. Clear and Exit ask for confirmation with MsgBox.
+@@50
+Conditional GoTo
+@@51
+If the number is negative we jump to the line ErrMsg; otherwise we compute the square root.
+@@52
+Unconditional GoTo (line number)
+@@53
+GoTo 18 jumps straight ahead, skipping the line that sets 60.
+@@54
+Odd or even?
+@@55
+If … Else with the Mod operator (remainder of division).
+@@56
+The Lucky Seven game
+@@57
+Three random numbers. If 7 appears in any of them, you win.
+@@58
+A multi-condition function (If … ElseIf)
+@@59
+y = x+1 if x>2, y = x² if 0≤x≤2, and y = x³−5 if x<0.
+@@60
+Student grade (Select Case)
+@@61
+Enter the mark and watch the grade. Note Case 90 To 100 and Case Is < 50.
+@@62
+Choosing an equation (Select Case)
+@@63
+Enter x, then the equation number from 1 to 4. Any other number gives Wrong Choice.
+@@64
+Homework: checking the user name and password
+@@65
+The correct pair is admin / 1234. Try all four cases.
+@@66
+Homework: the largest and smallest of three numbers
+@@67
+We assume the first number is both the largest and the smallest, then compare it with the others.
+@@68
+Homework: divisible by 4 or 5
+@@69
+We use Mod. If the remainder is zero, the number is divisible.
+@@70
+Homework: a three-branch function (Select Case)
+@@71
+y = (x³+5)/(x²−2) for x = 1..4, y = 7x⁻² for 5≤x≤10, and y = 60−x for x>11. What about x = 11?
+@@72
+Empty lab
+@@73
+A ready form with three text boxes, three buttons and three Labels. Write your code and try it.
+@@74
+Label application: all properties
+@@75
+Press the buttons and watch how the properties of the large Label1 change.
+@@76
+TextBox application: properties and methods
+@@77
+Type in both boxes, then try the buttons. Note MaxLength, MultiLine, Locked, Enabled and SetFocus.
+@@78
+CommandButton application: properties and events
+@@79
+The Target button is the target; the other buttons control it. The last button is the Default button, so the Enter key also runs it.
+@@80
+Image application: the picture
+@@81
+The Image control shows a picture. Here we use symbols instead of image files. Try the buttons, and click the picture itself.
+@@82
+Form application: the form itself
+@@83
+The form is also an object with properties and events. Change its colour and title, and click its background.
+@@84
+Complete project: student results system
+@@85
+One program that combines every control: Form, Label, TextBox, CommandButton and Image, with InputBox, MsgBox, variables, If and Select Case.
+@@86
+Dim example: declaring variables
+@@87
+We declare variables of different types, then use them in one sentence.
+@@88
+MsgBox example: kinds of alert messages
+@@89
+Each button shows a different kind of message. The last button asks a question and acts on your answer.
+@@90
+InputBox example: getting data from the user
+@@91
+The first button asks for your name. The second asks for two numbers and adds them.
+@@92
+Select Case example: days of the week
+@@93
+Type a number from 1 to 7 to see the day's name (1 = Saturday). Any other number shows a warning.
+@@94
+If example: checking age
+@@95
+Type an age and the program decides the group: child, teenager or adult.
+@@96
+Click example: a click counter
+@@97
+Each click on the button increases the counter. Every control has its own Click event.
+@@98
+Calculator
+@@99
+A complete calculator with number buttons, like the Windows calculator.
+@@100
+BMI calculator
+@@101
+Enter weight and height; it computes the body mass index and colours the result by category.
+@@102
+Temperature converter
+@@103
+Converts between Celsius and Fahrenheit, and shows a face that matches the weather.
+@@104
+Currency converter (dollar ↔ dinar)
+@@105
+Converts between the US dollar and the Iraqi dinar at an exchange rate you type.
+@@106
+Sales invoice
+@@107
+Add items one after another. It computes the total and gives a 10% discount if the total exceeds 100,000 dinars.
+@@108
+Net salary calculator
+@@109
+Basic salary + allowances − tax. The tax rate depends on the salary (Select Case).
+@@110
+Number-guessing game
+@@111
+The computer picks a secret number from 1 to 100. Guess it in as few tries as you can.
+@@112
+Rock, paper, scissors
+@@113
+Choose your move; the computer chooses at random. The program decides the winner and keeps the score.
+@@114
+Multiplication table
+@@115
+Type a number and the program prints its multiplication table from 1 to 10 with a For loop.
+@@116
+Traffic light
+@@117
+Each press on Next moves the light: red → green → yellow → red.
+@@118
+Quiz app
+@@119
+Five questions about Visual Basic. Choose an answer; the program marks it and gives you a score at the end.
+@@120
+A ready form for experiments: three {{Label}} controls, three text boxes and three buttons. The {{Label}} controls are just captions with no code.
+@@121
+Type the first number here. Example: 1
+@@122
+Type the second number here. Example: 2
+@@123
+Do not type here. The sum appears here.
+@@124
+Adds the number in Text1 to the number in Text2 and puts the result in Text3. Example: 1 + 2 gives 3.
+@@125
+Prints the phrase Hello from VB on the form.
+@@126
+Clears everything printed on the form (the Cls statement).
+@@127
+Type 1 and 2, then press Command1: 3 appears in Text3. Press Command2 and the phrase appears on the form. Press Command3 and it disappears.
+@@128
+Change the code in the editor so that Command1 multiplies the two numbers instead of adding them.
+@@129
+The first program in VB. It has a Label and one button.
+@@130
+Runs automatically when the program opens and writes Welcome to VB6 in Label1.
+@@131
+When pressed, the text changes to Hello, World! and turns blue.
+@@132
+Before pressing: Welcome to VB6. After pressing: Hello, World! in blue.
+@@133
+Four words, all Labels, that control how the large Label1 looks.
+@@134
+Click it to make Label1's text blue.
+@@135
+Click it to make Label1's background red.
+@@136
+Shows Label1 if it is hidden.
+@@137
+Hides Label1.
+@@138
+Try them in order: Hide, Show, Forecolor, then Backcolor, and watch Label1.
+@@139
+Shows the {{GotFocus}} event: the moment the cursor enters a text box. There are no buttons.
+@@140
+Click inside it, or move to it with the Tab key.
+@@141
+When the cursor enters Text1, Text3 appears.
+@@142
+When the cursor enters Text2, Text3 disappears.
+@@143
+Click in Text2 and Text3 disappears. Click in Text1 and it appears again.
+@@144
+A calculator that performs an operation on two numbers.
+@@145
+The first number. Example: 12
+@@146
+The second number. Example: 5
+@@147
+Locked. It only shows the result.

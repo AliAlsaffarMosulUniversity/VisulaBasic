@@ -1,0 +1,284 @@
+@@555
+Increases the number of tries and compares your guess with the secret number. If you are right, a winning message appears and the button is disabled. The Enter key runs it.
+@@556
+Starts a new game with a new number.
+@@557
+By halving (50, then 25 or 75 …) you reach the number in 7 tries or fewer.
+@@558
+Draw a Label for the instructions, an Image for the face, and a large TextBox in the middle.
+@@559
+Draw two buttons: Guess and New game.
+@@560
+Draw Label2 for the hint and Label3 for the tries.
+@@561
+Declare secret and tries in General.
+@@562
+Use Int(Rnd * 100) + 1 to pick a number from 1 to 100.
+@@563
+Random numbers with Rnd, the Form_Load event, and disabling the button with Enabled = False when the game ends.
+@@564
+Challenge: allow only 7 tries, after which a losing message appears.
+@@565
+Rock, paper, scissors against the computer. Rock breaks scissors, scissors cut paper, and paper covers rock.
+@@566
+Command1, Command2 and Command3
+@@567
+Each button calls Play with your move: 1 rock, 2 paper, 3 scissors.
+@@568
+Play (a custom procedure)
+@@569
+Picks the computer's move at random, shows both pictures, compares them with If and Or to decide the winner, then updates the score.
+@@570
+Pic (a custom function)
+@@571
+A Function that returns the picture name for a move number.
+@@572
+Resets the score.
+@@573
+Play several rounds and watch the counter at the bottom.
+@@574
+Draw Image1 and Image2 with a Label for the word VS between them.
+@@575
+Draw three buttons for the moves.
+@@576
+Draw Label4 for the result and Label5 for the score, then a Reset button.
+@@577
+Write the Pic function and the Play procedure, then make each button call Play with a number.
+@@578
+The difference between a Sub, which carries out statements, and a Function, which returns a value, and compound conditions with And and Or.
+@@579
+Challenge: announce the winner when either player reaches 5 points.
+@@580
+Prints the multiplication table of any number from 1 to 10 using a For loop.
+@@581
+The number. Example: 7
+@@582
+Clears the screen with Cls, then repeats the printing 10 times: For i = 1 To 10.
+@@583
+Clears the printout and the field.
+@@584
+7 x 1 = 7, 7 x 2 = 14 … up to 7 x 10 = 70.
+@@585
+Draw a Label, a TextBox and two buttons at the top of the form only.
+@@586
+Leave the rest of the form empty for printing.
+@@587
+Write the For … Next loop inside the Show button.
+@@588
+The For … Next loop: repeating the same statement several times instead of writing it ten times.
+@@589
+Challenge: make it print up to 12, or print only even numbers by adding Step 2.
+@@590
+A traffic-light simulation. Three Labels represent the lamps. Each press moves the light to the next state.
+@@591
+Starts in state 0 (red).
+@@592
+Increases state, and if it goes past 2 it returns to 0. Then it calls ShowLight. The Enter key runs it.
+@@593
+ShowLight (a custom procedure)
+@@594
+Turns off the three lamps (grey), then lights only one according to state with Select Case.
+@@595
+Red STOP → green GO → yellow READY → red again.
+@@596
+Draw a large dark Label as the body of the light.
+@@597
+Draw three square Labels on top of it, each 60 × 60.
+@@598
+Draw a Label for the word and a Next button.
+@@599
+Declare state in General.
+@@600
+Representing the program's state with a variable, and moving between states in a cycle.
+@@601
+Challenge: add a button for a pedestrian light.
+@@602
+A quiz app with five questions about VB. The question is at the top and the three choices are buttons. After each answer it marks it and moves to the next question; at the end it shows the score.
+@@603
+Starts at question 1 with a score of zero.
+@@604
+ShowQ (a custom procedure)
+@@605
+Writes the question and the choices according to the question number q with Select Case, and stores the number of the correct answer in answer. After question 5 it shows the result and hides the buttons.
+@@606
+They call Check with the choice number. Check compares it with answer and increases the score if it is correct.
+@@607
+Appears only at the end. It restarts the quiz from the beginning.
+@@608
+The correct answers: Caption, then Val, then Dim, then Yes, then Form_Load. All five give 5 / 5.
+@@609
+Draw Label1 for the question number and a large Label2 for the question.
+@@610
+Draw three wide buttons for the choices, and leave them without text.
+@@611
+Draw Label3 for the feedback and a Start again button with Visible = False.
+@@612
+Declare q, answer and score in General.
+@@613
+Write ShowQ and Check, then the button events.
+@@614
+Building a complete app whose content changes while it runs, and showing and hiding controls with Visible.
+@@615
+Challenge: add two new questions and change 5 to 7.
+@@616
+Introduction and the development environment
+@@617
+The Visual Basic 6 language and the IDE windows
+@@618
+What is {{Visual Basic 6}}?
+@@619
+It is a high-level programming language.
+@@620
+That is, its statements are close to human language.
+@@621
+Type
+@@622
+Meaning
+@@623
+Examples
+@@624
+High level {{High Level}}
+@@625
+Its statements are close to the language people speak
+@@626
+{{Pascal}}, {{Basic}}, {{C++}}, {{Visual Basic}}, {{C#}}, {{Delphi}}
+@@627
+Low level {{Low Level}}
+@@628
+Deals with the computer directly, close to machine language (0 and 1)
+@@629
+High-level languages come in two kinds:
+@@630
+Text-based languages: {{Pascal}}, {{Basic}} and {{C++}}
+@@631
+Visual languages: {{Visual Basic}}, {{C#}} and {{Delphi}}
+@@632
+Why is it called "visual"?
+@@633
+Because you draw the program's interface with the mouse.
+@@634
+You drag controls onto the window, then write a short piece of code for each control.
+@@635
+It runs under {{Windows}}, so you need to know how a user works with {{Windows}}.
+@@636
+An event-driven language {{Event-Driven}}
+@@637
+The idea is to divide the program into small parts.
+@@638
+Each part runs when a particular event happens, such as:
+@@639
+Clicking a button with the mouse
+@@640
+A period of time passing
+@@641
+Moving the mouse pointer over a window
+@@642
+The golden idea: a Visual Basic program = controls on a window + small pieces of code tied to events.
+@@643
+Starting the program
+@@644
+Open the {{Start}} menu
+@@645
+then {{All Programs}}
+@@646
+then the folder {{Microsoft Visual Studio 6.0}}
+@@647
+then choose {{Microsoft Visual Basic 6.0}}
+@@648
+Installation creates shortcuts in the Start menu.
+@@649
+Shared tools such as {{Setup}}, {{Tools}} and {{Graphics}} are placed in the default path:
+@@650
+The {{New Project}} window
+@@651
+It appears at start-up and has three tabs:
+@@652
+{{New}}: to start a new project
+@@653
+{{Existing}}: to open an existing project
+@@654
+{{Recent}}: to show projects you worked on recently
+@@655
+The {{New}} tab offers many kinds of project:
+@@656
+Project type
+@@657
+What does it do?
+@@658
+Creates an ordinary executable program (an EXE file). This is the one we will use.
+@@659
+An executable program that provides services to other programs.
+@@660
+A ready-made library used inside other programs.
+@@661
+Creates a new control (an OCX file) to put in the toolbox.
+@@662
+Documents that run inside a web browser.
+@@663
+An add-in that plugs into the Visual Basic environment itself.
+@@664
+A wizard that creates the skeleton of a complete program without writing a line.
+@@665
+A project for the database environment and report design.
+@@666
+Dynamic web pages in Visual Basic.
+@@667
+Extra controls in the Professional edition.
+@@668
+The development environment {{IDE}}
+@@669
+Its full name is {{Integrated Development Environment}}.
+@@670
+It is a set of tools that gathers everything you need: designing windows, writing code, finding errors ({{Debugging}}), managing project files, editing menus and creating databases.
+@@671
+Click the parts of the picture to learn what each window does:
+@@672
+The environment's windows are of the {{MDI}} type, that is, {{Multiple Document Interface}}: several windows inside one large window.
+@@673
+The {{Form Designer}} window
+@@674
+It has been the secret of Visual Basic's success since its first versions.
+@@675
+Its initial title is {{Form1}}. This is where you design the program's interface.
+@@676
+You place controls on it with the mouse, as if drawing boxes.
+@@677
+You also edit there: copy, cut, paste and move.
+@@678
+The {{Toolbox}}
+@@679
+A bar with 20 standard controls. You add them to the form by dragging or by double-clicking.
+@@680
+To add new controls: right-click the toolbox and choose {{Components}}. Tick the control, then {{Apply}}, then {{OK}}. For {{ActiveX}} or {{DLL}} controls use the {{Browse}} button.
+@@681
+To add a new tab: right-click → {{Add Tab}} → type the name → {{OK}}. To delete it: right-click the tab → {{Delete Tab}}. Warning: the controls inside it are deleted with it.
+@@682
+The {{Properties Window}}
+@@683
+After placing a control, we set its properties in two ways:
+@@684
+From the Properties window (at design time {{Design Time}})
+@@685
+From code (at run time {{Run Time}})
+@@686
+At the top of the window is a {{ComboBox}} list from which you choose the control. It has two tabs:
+@@687
+{{Alphabetic}}: properties in alphabetical order
+@@688
+{{Categorized}}: properties grouped by category
+@@689
+A value is typed directly, chosen from a list, or chosen from a dialog that opens when you press a button with three dots (as for the {{Font}} property).
+@@690
+The {{Project Explorer}} window
+@@691
+It becomes more important as the number of project files grows.
+@@692
+It shows the project's contents as a tree: forms {{Forms}} and modules {{Modules}}.
+@@693
+It has two buttons: {{View Code}} to see the code, and {{View Object}} to see the objects.
+@@694
+The project file itself has the extension {{VBP}}.
+@@695
+The {{Code Editor}} window
+@@696
+Visual Basic is a programming language, so you must write the statements yourself.

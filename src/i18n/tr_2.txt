@@ -1,0 +1,266 @@
+@@298
+Enter the mark from 0 to 100. Default value: 85
+@@299
+Locked. The grade appears here.
+@@300
+Checks the mark and writes the grade.
+@@301
+Chooses one of four equations according to your number.
+@@302
+The value of x. Default value: 2
+@@303
+The equation number from 1 to 4. Default value: 1
+@@304
+Applies the chosen equation to x.
+@@305
+With x = 2: choice 1 gives 8.02, choice 2 gives 0.2557, choice 3 gives -1.4919, and choice 4 gives 16.83. Choice 5 or more gives Wrong Choice.
+@@306
+Homework: checking the user name and password. The correct pair is admin and 1234.
+@@307
+User name
+@@308
+Password
+@@309
+Checks both together, then writes the result in Label3.
+@@310
+admin and 1234: Welcome. admin and 999: Wrong password. xyz and 1234: Wrong user. xyz and 999: Wrong Information.
+@@311
+Homework: finds the largest and smallest of three numbers.
+@@312
+The first number. Default value: 4
+@@313
+The second number. Default value: 9
+@@314
+The third number. Default value: 6
+@@315
+Assumes a is both the largest and the smallest, then compares it with b and c.
+@@316
+With 4, 9 and 6: Max = 9 and Min = 4.
+@@317
+Homework: checks whether a number is divisible by 4, by 5, or by both.
+@@318
+Enter a number. Default value: 20
+@@319
+Uses Mod. If the remainder is zero, the number is divisible.
+@@320
+20 is divisible by 4 and 5. 8 by 4 only. 15 by 5 only. 7 by neither.
+@@321
+Homework: a three-branch function using {{Select Case}}.
+@@322
+x from 1 to 4: y = (x³+5)/(x²−2). x from 5 to 10: y = 7 × x⁻². x greater than 11: y = 60 − x. Otherwise: Undefined.
+@@323
+x = 2 gives 6.5, x = 6 gives 0.1944, x = 15 gives 45, and x = 11 gives Undefined because it falls outside every case.
+@@324
+An application of the {{Label}} control. The large Label at the top is the target; the buttons change its properties one at a time.
+@@325
+Changes the text to Visual Basic 6.
+@@326
+Makes the text colour blue.
+@@327
+Makes the background yellow.
+@@328
+Enlarges the font to 24.
+@@329
+Makes the font bold.
+@@330
+Removes the border.
+@@331
+Centres the text.
+@@332
+Returns every property to its original state.
+@@333
+Press the buttons in order. Each button changes one property. Then press Reset to start again.
+@@334
+A Label does not accept typing from the user. It is for display only.
+@@335
+An application of the {{TextBox}} control: the {{Text}}, {{MaxLength}}, {{MultiLine}}, {{Locked}} and {{Enabled}} properties, and the {{SetFocus}} method.
+@@336
+A short name. Maximum length 10 characters (MaxLength = 10).
+@@337
+Notes. Accepts several lines (MultiLine = True).
+@@338
+Copies the text of Text1 to Label3.
+@@339
+Moves the cursor to Text2.
+@@340
+Locks or unlocks Text1. A locked box can be read but not typed in.
+@@341
+Clears both boxes and returns the cursor to Text1.
+@@342
+Disables Text1, so it turns grey and does not respond.
+@@343
+Enables Text1 again.
+@@344
+Type Ali in Text1, then press Copy to Label: the name appears in Label3. Try typing more than 10 characters.
+@@345
+The difference: Locked prevents typing but allows copying. Enabled = False disables the box completely.
+@@346
+An application of the {{CommandButton}} control. The Target button at the top is the target; the other buttons control it.
+@@347
+When pressed, Label1 shows Target was clicked.
+@@348
+Disables Target (Enabled = False), so it does not respond.
+@@349
+Enables it again.
+@@350
+Changes the text of Target to Renamed.
+@@351
+Hides or shows Target (Visible).
+@@352
+Moves Target to the right (Left).
+@@353
+This is the Default button. It also runs when you press Enter.
+@@354
+Disable Target, then press it: nothing happens. Enable it, then press it: the message appears.
+@@355
+Press Enter on the keyboard to see the Default button work.
+@@356
+An application of the {{Image}} control. The picture here is an emoji instead of a file, but the idea is the same: {{Picture}} and {{LoadPicture}}.
+@@357
+Changes the picture to a dog. In real VB: LoadPicture("C:\dog.jpg").
+@@358
+Changes it to a cat.
+@@359
+Hides or shows the picture.
+@@360
+Enlarges the picture (Width and Height).
+@@361
+Moves it to the right (Left).
+@@362
+Restores the size, position and visibility.
+@@363
+When you click the picture, Label1 shows: You clicked the image.
+@@364
+Press Dog and the picture changes. Press Bigger several times and it grows. Click the picture itself.
+@@365
+The picture receives events such as Click, just like a button.
+@@366
+An application of the {{Form}} itself. The form is an object with properties and events, like any control.
+@@367
+Type a new title for the window. Default value: My Form
+@@368
+Runs when the form opens. It sets the title to Form Demo.
+@@369
+Sets the window title to what you typed in Text1.
+@@370
+Command2, Command3 and Command4
+@@371
+Change the form's background colour to red, green and blue.
+@@372
+Prints Hello from the form on the form.
+@@373
+Click any empty spot on the form and its title changes.
+@@374
+Type a title, then press Set Caption. Try the three colours. Click the background.
+@@375
+The complete project: a system that computes a student's average and gives a grade. It combines every control: {{Form}}, {{Label}}, {{TextBox}}, {{CommandButton}} and {{Image}}, with {{InputBox}}, {{MsgBox}}, variables, {{If}} and {{Select Case}}.
+@@376
+The student's name. Required. Example: Sara
+@@377
+The maths mark from 0 to 100. Example: 90
+@@378
+The English mark. Example: 95
+@@379
+The computer mark. Example: 100
+@@380
+Locked. The average appears here.
+@@381
+First it checks: if the name is empty, it shows a MsgBox and returns the cursor to Text1. If a mark is outside 0 to 100, it shows an error message. Then it computes the average, writes the grade with Select Case, and changes the picture to 😀 for a pass or 😢 for a fail.
+@@382
+Clears all the fields and restores the first picture.
+@@383
+Asks through MsgBox whether you want to exit. The Esc key also runs it.
+@@384
+Opens an InputBox to change the pass mark. The original value is 50.
+@@385
+Click the picture and a message shows how many students' results have been computed.
+@@386
+Text1 to Text4 (GotFocus)
+@@387
+When you enter each field, Label9 at the bottom says what to enter.
+@@388
+Sara, 90, 95 and 100 give an average of 95.0, the grade Excellent and the picture 😀. But 30, 40 and 20 give 30.0, Failed and 😢.
+@@389
+Press Pass mark and type 80. Then compute a student whose average is 75: the student now fails, because the pass mark is 80.
+@@390
+Shows the {{Dim}} statement: we declare one text variable and two number variables, then combine them in a sentence.
+@@391
+Type a name. Example: Ali
+@@392
+Type an age. Example: 20
+@@393
+Stores the name in n and the age in age, computes nextYear = age + 1, then shows them in Label3.
+@@394
+Ali and 20 give: Ali is 20 now, and 21 next year.
+@@395
+The Long type holds large numbers. Try changing age to String and notice the difference.
+@@396
+Shows the {{MsgBox}} statement with three ready messages, and a question message that gives you an answer.
+@@397
+Information message: number 64.
+@@398
+Warning message: number 48.
+@@399
+Error message: number 16.
+@@400
+Asks with Yes and No buttons (4 + 32). If you choose Yes, File deleted appears. If you choose No, Cancelled appears.
+@@401
+Try the four buttons. The numbers set the icon and the buttons.
+@@402
+Shows the {{InputBox}} statement: a box that asks the user to type a value.
+@@403
+The name box
+@@404
+Type your name, or leave it empty to see the alternative message. Default value: Guest
+@@405
+The two number boxes
+@@406
+Type a number in each box. Example: 7, then 5
+@@407
+Asks for the name. If you type Ali, Hello Ali appears. If you leave it empty, No name entered appears.
+@@408
+Asks for two numbers and shows 7 + 5 = 12.
+@@409
+The result appears in the small boxes under the buttons.
+@@410
+Shows the {{Select Case}} statement: it chooses one case according to the variable's value.
+@@411
+A number from 1 to 7. Default value: 3
+@@412
+Reads the number and writes the day's name. 1 is Saturday and 7 is Friday. Any other number falls into Case Else.
+@@413
+3 gives Monday, 7 gives Friday, and 9 gives Enter a number from 1 to 7.
+@@414
+Shows the {{If}} statement with {{ElseIf}} and {{Else}}: it checks conditions in order.
+@@415
+Type the age. Default value: 25
+@@416
+Less than 0: Invalid age. Less than 13: Child. Less than 18: Teenager. Otherwise: Adult.
+@@417
+25 gives Adult, 15 gives Teenager, 8 gives Child, and -3 gives Invalid age.
+@@418
+Shows the {{Click}} event: the code that runs when a control is clicked.
+@@419
+Each click increases the variable clicks and shows it in Label1.
+@@420
+Resets the counter to zero and the colour to black.
+@@421
+Clicking this Label makes Label1 red. So a Label also has a Click event.
+@@422
+Press Click me three times and Clicks: 3 appears. Then click Label2 and the colour turns red.
+@@423
+We reserve a place in memory called n that holds text.
+@@424
+We reserve a place called age that holds a whole number.
+@@425
+A third place to store next year's age.
+@@426
+We copy what the user typed in Text1 into n.
+@@427
+Val converts the text into a number, then we store it in age.
+@@428
+We compute the age one year from now.
+@@429
+The & sign joins text and numbers into one sentence and displays it.
+@@430
+That a variable is a box with a name and a type, and that Dim declares it before use. And that Val is needed before any arithmetic on what the user types.

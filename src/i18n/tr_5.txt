@@ -1,0 +1,333 @@
+@@697
+We open this window in one of three ways:
+@@698
+Double-click the control
+@@699
+Press the {{F7}} key
+@@700
+The {{View Code}} button
+@@701
+At its top are two lists:
+@@702
+The left one: the objects on the form, including {{General}} for general declarations
+@@703
+The right one: the events and procedures linked to what you chose
+@@704
+On some systems, non-English (for example Arabic) letters inside the code can cause problems. Write the statements in English and put other-language text inside quotation marks.
+@@705
+The {{Form Layout}} window
+@@706
+It sits at the bottom right of the screen.
+@@707
+It shows where the form will appear on the screen at run time and how big it will be. To see different resolutions, right-click and choose {{Resolution Guide}}.
+@@708
+Visual Basic 6 is classed as:
+@@709
+A high-level (visual) language
+@@710
+A low-level language
+@@711
+Machine language (0 and 1)
+@@712
+An assembly language
+@@713
+Visual Basic is a high-level, visual language like C# and Delphi.
+@@714
+Which of the following is a low-level language?
+@@715
+Assembly language is close to machine language.
+@@716
+What does "an event-driven language" mean?
+@@717
+The program is divided into parts that run when events happen
+@@718
+The program runs without a user
+@@719
+The program executes only one line
+@@720
+The program is written in machine language
+@@721
+Such as pressing a button or moving the mouse.
+@@722
+Which window do we use to design the program's interface and place controls on it?
+@@723
+The form designer is the drawing surface.
+@@724
+The shortcut key that opens the Code Editor window:
+@@725
+Or double-click the control.
+@@726
+What is the extension of a Visual Basic project file?
+@@727
+The project file, which lists the supporting files, is VBP.
+@@728
+Which tab in the New Project window shows the projects you worked on recently?
+@@729
+Recent = lately.
+@@730
+Which project type do we use to create an ordinary executable program?
+@@731
+Standard EXE is the default for ordinary programs.
+@@732
+What are the two ways of listing properties in the Properties window?
+@@733
+Alphabetic and Categorized
+@@734
+Design and Run
+@@735
+Local and Global
+@@736
+Form and Module
+@@737
+Alphabetically or by category.
+@@738
+How do you add an ActiveX control to the toolbox?
+@@739
+Right-click → Components
+@@740
+Then choose the control and press Apply and OK.
+@@741
+Name two ways of setting a control's properties.
+@@742
+First: from the Properties Window at design time. Second: from code at run time.
+@@743
+What is the difference between Project Explorer and the Properties Window?
+@@744
+Project Explorer shows the project's files (forms and modules) as a tree. The Properties Window shows the properties of the control or form currently selected.
+@@745
+Open the program and design a form with a Label and a button. Make the button change the Label's text. (Try the solution in the lab.)
+@@746
+Objects and controls
+@@747
+Label, TextBox and CommandButton
+@@748
+Objects {{Objects}} or controls {{Controls}}
+@@749
+Every object has three things:
+@@750
+Properties {{Properties}}: describe how it looks (colour, size, text)
+@@751
+Events {{Events}}: what it responds to (a click, a movement)
+@@752
+Methods {{Methods}}: actions it performs (such as {{SetFocus}})
+@@753
+First: {{Label}}
+@@754
+Used for display only. We use it to show a result or some text.
+@@755
+Property
+@@756
+What it does
+@@757
+The internal name. We use it when writing code.
+@@758
+The text shown on the control.
+@@759
+Automatic sizing. {{True}} to turn it on, {{False}} to turn it off.
+@@760
+The background colour.
+@@761
+The text colour.
+@@762
+The font type, size and style.
+@@763
+{{True}} enables the control. {{False}} disables it.
+@@764
+{{None}}: flat. {{Fixed Single}}: sunken.
+@@765
+{{True}} shows it. {{False}} hides it.
+@@766
+Text alignment: {{Left}}, {{Right}} or {{Center}}.
+@@767
+Do not confuse {{Name}} with {{Caption}}. The first is a name you write in code. The second is text the user sees.
+@@768
+{{Label}} events:
+@@769
+{{Click}}: a single click
+@@770
+{{MouseDown}}: the moment the left button is pressed, before release
+@@771
+{{MouseUp}}: the moment the button is released
+@@772
+Try it: click the four words and watch {{Label1}}.
+@@773
+Second: {{TextBox}}
+@@774
+Used to enter data and in calculations.
+@@775
+It shares these with {{Label}}: {{Name}}, {{BackColor}}, {{ForeColor}}, {{Enabled}}, {{Visible}}, {{Alignment}} and {{BorderStyle}}.
+@@776
+Its own property
+@@777
+The value inside the box.
+@@778
+{{True}} allows typing on several lines. {{False}} means one line.
+@@779
+The maximum number of characters that can be typed.
+@@780
+{{False}} allows editing. {{True}} prevents changes to the content.
+@@781
+Event
+@@782
+When does it run?
+@@783
+On any change to the content (adding or deleting).
+@@784
+When the focus moves to the box (with the mouse or the {{Tab}} key).
+@@785
+When the box loses the focus.
+@@786
+When any key on the keyboard is pressed.
+@@787
+The important method is {{SetFocus}}: moving the focus.
+@@788
+Third: {{CommandButton}}
+@@789
+Used to run commands. We write the code inside its event, most often {{Click}}.
+@@790
+{{Standard}}: fixed look. {{Graphical}}: allows changing the colour or adding a picture.
+@@791
+A background picture for the button. Requires {{Style}} = {{Graphical}}.
+@@792
+When {{True}}: pressing {{Enter}} runs this button's code.
+@@793
+When {{True}}: pressing {{Esc}} runs this button's code.
+@@794
+{{Default}} or {{Cancel}} may not be {{True}} for more than one button on the same form. But the same button may be both {{Default}} and {{Cancel}}.
+@@795
+The {{Val}} function: why do we need it?
+@@796
+A text box always holds "text", even if you type a number in it.
+@@797
+And adding two texts means joining them: {{"12"}} + {{"30"}} = {{"1230"}}.
+@@798
+The {{Val}} function converts text into a number so that we can calculate.
+@@799
+A complete example: a calculator
+@@800
+We use three {{Label}} controls, three {{TextBox}} controls and six buttons.
+@@801
+Text3 is locked ({{Locked}} = {{True}}) because it is for the result only.
+@@802
+Division by zero? The program checks the divisor first. If it is 0, it writes {{Cannot divide by 0}} instead of stopping with the error {{Division by zero}}. See the code of the fourth button.
+@@803
+A practical application for each control
+@@804
+Each control has a small program that demonstrates it. Every program has a guide panel: what to type, what each button does, and what the result is.
+@@805
+First: the {{Label}} control
+@@806
+Second: the {{TextBox}} control
+@@807
+Third: the {{CommandButton}} control
+@@808
+Fourth: the {{Image}} control
+@@809
+Fifth: the {{Form}}
+@@810
+At the end of the book (Chapter 6) a complete project combines all these controls in one program.
+@@811
+The control used for display only:
+@@812
+A Label displays text or a result.
+@@813
+The property that sets the text shown on a Label:
+@@814
+Name is the internal name, and Caption is what is shown.
+@@815
+To hide a Label in code we write:
+@@816
+Visible controls whether it is shown.
+@@817
+The property that sets the text colour:
+@@818
+ForeColor = text colour, BackColor = background colour.
+@@819
+Which property stops the user from changing a TextBox's content?
+@@820
+Locked = True locks the content.
+@@821
+The event that runs on any change to a TextBox's content is:
+@@822
+Change, on adding or deleting.
+@@823
+The GotFocus event runs when:
+@@824
+The focus moves to the box
+@@825
+The box loses the focus
+@@826
+The user double-clicks
+@@827
+The text is deleted
+@@828
+GotFocus = getting the focus.
+@@829
+Why do we use the Val function in the calculator?
+@@830
+To convert the box's text into a number before calculating
+@@831
+To enlarge the numbers
+@@832
+To hide the box
+@@833
+Only to remove spaces
+@@834
+Without it the two texts are joined: "12" + "30" = "1230".
+@@835
+What is the result of Text1.Text + Text2.Text, where Text1 = 12 and Text2 = 30?
+@@836
+Error
+@@837
+Both are text, so + here means joining.
+@@838
+To make a button run when Enter is pressed, we set:
+@@839
+Cancel is for the Esc key.
+@@840
+Can Default = True be set for two buttons on the same form?
+@@841
+No
+@@842
+Yes, always
+@@843
+Yes, if their names differ
+@@844
+Yes, if one of them is Cancel
+@@845
+Only one button, but the same button may be both Default and Cancel.
+@@846
+For a picture to appear on a button, Style must be =
+@@847
+The Picture property works only with Style = Graphical.
+@@848
+Design a form that computes the area of a rectangle (length × width).
+@@849
+Add a button to the calculator that shows the remainder of division (Mod).
+@@850
+Add a button Command7 and write: Text3 = Val(Text1) Mod Val(Text2).
+Try it in the lab after opening the calculator example.
+@@851
+Make a Label change colour when clicked and return to its original colour when the mouse button is released. (Hint: MouseDown and MouseUp)
+@@852
+Events
+@@853
+Click, DblClick, MouseMove and DragDrop
+@@854
+The concept of an {{Event}}
+@@855
+An event is something that happens to an object, such as clicking it, double-clicking it, or passing the mouse over it.
+@@856
+Every object has its own events.
+@@857
+And all code linked to an object must be run by an event.
+@@858
+This gives the language its power: you can program one object for each of its events.
+@@859
+How do we find an object's events?
+@@860
+Add the control from the toolbox to the form
+@@861
+Double-click the object to go to the Code Editor
+@@862
+Open the right-hand list at the top of the editor and you will find all its events

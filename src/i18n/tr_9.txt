@@ -1,0 +1,456 @@
+@@1449
+{{End}} (the square)
+@@1450
+The End button stops the run.
+@@1451
+Which of the following is a high-level language?
+@@1452
+Machine language
+@@1453
+Binary code
+@@1454
+High-level languages are close to human language.
+@@1455
+Machine language consists of:
+@@1456
+The digits 0 and 1
+@@1457
+English words
+@@1458
+Pictures and icons
+@@1459
+Arabic letters
+@@1460
+The computer directly understands binary machine language.
+@@1461
+The basic element on which every {{VB6}} program's interface is built is:
+@@1462
+The form {{Form}}
+@@1463
+The button
+@@1464
+The variable
+@@1465
+The menu
+@@1466
+All controls are placed on the form.
+@@1467
+To save the whole project we choose from the {{File}} menu:
+@@1468
+Save Project saves the forms and the project file.
+@@1469
+When the program runs, the first event that usually happens to the form is:
+@@1470
+Load happens when the form is loaded.
+@@1471
+To draw a control on the form:
+@@1472
+We choose it from the toolbox, then drag on the form
+@@1473
+We type its name in the Properties window
+@@1474
+We press F5
+@@1475
+We open the Code Editor
+@@1476
+Or we double-click it and it is added in the centre.
+@@1477
+Which window is used to try short statements and print values while running?
+@@1478
+The Immediate window; its shortcut is Ctrl + G.
+@@1479
+When a control is clicked once at design time:
+@@1480
+Its properties appear in the Properties window
+@@1481
+The Click event runs
+@@1482
+The control is deleted
+@@1483
+The program stops
+@@1484
+Events do not run at design time.
+@@1485
+Design time {{Design Time}} is the time when:
+@@1486
+We draw the interface and write the code
+@@1487
+The program runs in front of the user
+@@1488
+The program is printed
+@@1489
+The computer shuts down
+@@1490
+Run time is when you press F5.
+@@1491
+Run time {{Run Time}} is:
+@@1492
+The time when the program runs and responds to events
+@@1493
+The time for drawing controls
+@@1494
+The time for saving files
+@@1495
+The time for installing VB6
+@@1496
+At run time the user interacts with the program.
+@@1497
+Every event procedure in the code starts with {{Private Sub}} and ends with:
+@@1498
+The property that holds the window's title (the text in the title bar) is:
+@@1499
+Form1.Caption changes the window's title.
+@@1500
+The property we use in code to refer to a control is:
+@@1501
+The name is the control's identifier in code.
+@@1502
+To add a new form to the project we choose from the {{Project}} menu:
+@@1503
+What is the main benefit of an integrated development environment?
+@@1504
+It brings design, coding, running and debugging together in one place
+@@1505
+It makes the program run without a computer
+@@1506
+It turns the program into pictures
+@@1507
+It prevents errors completely
+@@1508
+All the tools in one window.
+@@1509
+The control that shows text the user cannot change is:
+@@1510
+A Label is for display only.
+@@1511
+The property that holds the text shown on a {{Label}} is:
+@@1512
+The property that holds the text typed inside a {{TextBox}} is:
+@@1513
+The property that holds the text shown on a {{CommandButton}}:
+@@1514
+To make a text box accept several lines we set:
+@@1515
+MultiLine is set at design time.
+@@1516
+To hide what the user types (a password), we set this text-box property:
+@@1517
+Each character appears as an asterisk.
+@@1518
+The {{MaxLength}} property of a text box sets:
+@@1519
+The maximum number of characters that may be typed
+@@1520
+The font size
+@@1521
+The box's width
+@@1522
+The number of lines
+@@1523
+The value 0 means no limit.
+@@1524
+When we set {{Locked = True}} on a text box:
+@@1525
+The user cannot type in it but can copy from it
+@@1526
+The box disappears
+@@1527
+It turns grey and does not respond
+@@1528
+It differs from Enabled = False, which disables it completely.
+@@1529
+When we set {{Enabled = False}} on a button:
+@@1530
+It turns grey and does not respond to clicks
+@@1531
+It disappears completely
+@@1532
+Its event runs twice
+@@1533
+It moves to the right
+@@1534
+Enabled disables the control.
+@@1535
+To hide a control at run time we write:
+@@1536
+For the button that runs when the {{Enter}} key is pressed, we set:
+@@1537
+Only one button on the form can be Default.
+@@1538
+For the button that runs when the {{Esc}} key is pressed, we set:
+@@1539
+Suitable for exit and cancel buttons.
+@@1540
+Writing & before a letter in a button's {{Caption}}, as in {{&Exit}}, means:
+@@1541
+The button can be pressed with Alt + E
+@@1542
+The letter is shown in bold
+@@1543
+The letter is deleted
+@@1544
+The button becomes the default
+@@1545
+The letter appears underlined.
+@@1546
+The result of the following code if {{Text1}} = 12 and {{Text2}} = 30:
+@@1547
+Without Val the texts are joined.
+@@1548
+Val converts text into a number.
+@@1549
+The value of {{Val("25abc")}} is:
+@@1550
+Val reads digits from the start and stops at the first letter.
+@@1551
+The value of {{Val("abc")}} is:
+@@1552
+There is no number at the start, so the result is zero.
+@@1553
+To clear the content of a text box we write:
+@@1554
+We assign it an empty string.
+@@1555
+To move the cursor to the text box {{Text2}} we use the method:
+@@1556
+SetFocus is a method.
+@@1557
+The {{ForeColor}} property changes:
+@@1558
+The text colour
+@@1559
+The border colour
+@@1560
+Only the form's colour
+@@1561
+Fore = front = the text.
+@@1562
+The {{BackColor}} property changes:
+@@1563
+The font type
+@@1564
+Back = the background.
+@@1565
+To centre the text in a {{Label}} we set the {{Alignment}} property to:
+@@1566
+0 left, 1 right, 2 centre.
+@@1567
+The property {{BorderStyle = 1}} on a {{Label}} means:
+@@1568
+It shows a border
+@@1569
+It disappears
+@@1570
+The text becomes bold
+@@1571
+It moves
+@@1572
+0 is no border and 1 is a border.
+@@1573
+To make a {{Label}} resize automatically to fit its text we set:
+@@1574
+AutoSize enlarges the Label to fit its content.
+@@1575
+The conventional prefix for a text box's name is:
+@@1576
+As in txtName.
+@@1577
+The conventional prefix for a button's name is:
+@@1578
+Only {{btn}}, otherwise an error occurs
+@@1579
+As in cmdExit.
+@@1580
+The conventional prefix for a {{Label}}'s name is:
+@@1581
+Only {{lab}}
+@@1582
+As in lblResult.
+@@1583
+Which line changes the text colour of {{Label1}} to red?
+@@1584
+vbRed is a built-in constant for red.
+@@1585
+To enlarge the font of {{Label1}} to 20 we write:
+@@1586
+FontSize is the font size.
+@@1587
+To make the font of {{Label1}} bold we write:
+@@1588
+FontBold is True or False.
+@@1589
+The control that shows a picture on the form is:
+@@1590
+And also PictureBox.
+@@1591
+To load a picture into {{Image1}} at run time we use:
+@@1592
+To make the picture stretch to fill the {{Image}} control we set:
+@@1593
+Stretch is a property of Image.
+@@1594
+To change the window's title at run time we write:
+@@1595
+A form's Caption is its title.
+@@1596
+Which of the following is a property, not a method?
+@@1597
+A property is a characteristic; a method is an action the object performs.
+@@1598
+Which of the following is a {{Method}}?
+@@1599
+Methods are actions the control carries out.
+@@1600
+The {{ToolTipText}} property shows:
+@@1601
+A small hint when the mouse rests on the control
+@@1602
+Text inside the text box
+@@1603
+An error message
+@@1604
+The window's title
+@@1605
+Useful for explaining what a button does.
+@@1606
+To move {{Command1}} 300 units to the right we write:
+@@1607
+Left sets the distance from the left edge.
+@@1608
+Which line joins the first and last names with a space between them?
+@@1609
+The & sign joins text.
+@@1610
+What is wrong with this code for computing a rectangle's area?
+@@1611
+Nothing is wrong; it works
+@@1612
+Val must be removed
+@@1613
+Caption must be used instead of Text
+@@1614
+Multiplication is not allowed in VB
+@@1615
+Val converts both texts, then the two numbers are multiplied.
+@@1616
+An {{Event}} is:
+@@1617
+An action that happens to an object, to which the code responds
+@@1618
+A colour property
+@@1619
+Such as a click or a mouse movement.
+@@1620
+The name of the click-event procedure for {{Command1}} is:
+@@1621
+Control name + _ + event name.
+@@1622
+The event that happens on a double click is:
+@@1623
+The event that happens when the mouse moves over an object is:
+@@1624
+It happens with every small movement.
+@@1625
+The event that happens the moment a mouse button is pressed (before release):
+@@1626
+MouseDown, then MouseUp, then Click.
+@@1627
+The event that happens the moment a mouse button is released:
+@@1628
+Up = lifting the finger.
+@@1629
+The event that happens when a dragged object is dropped on the form:
+@@1630
+DragDrop happens on the target.
+@@1631
+For a picture to be dragged automatically with the mouse, we set:
+@@1632
+The {{Change}} event of a text box happens when:
+@@1633
+The text changes, even by one character
+@@1634
+The program closes
+@@1635
+The user clicks the box
+@@1636
+The cursor enters the box
+@@1637
+It happens with every character typed or deleted.
+@@1638
+The {{GotFocus}} event happens when:
+@@1639
+The cursor enters the control
+@@1640
+The cursor leaves the control
+@@1641
+The mouse moves
+@@1642
+The text changes
+@@1643
+Got = got the focus.
+@@1644
+The {{LostFocus}} event happens when:
+@@1645
+The cursor leaves the control for another control
+@@1646
+The cursor enters the control
+@@1647
+A button is pressed
+@@1648
+The form is loaded
+@@1649
+Useful for checking a value after typing.
+@@1650
+The event that happens automatically when the form opens, before it appears:
+@@1651
+Only {{Form_Activate}}
+@@1652
+Load is a good place to set initial values.
+@@1653
+In the {{MouseMove}} event, the arguments {{X}} and {{Y}} represent:
+@@1654
+The position of the mouse pointer
+@@1655
+The number of clicks
+@@1656
+The mouse's colour
+@@1657
+The mouse's speed
+@@1658
+X is horizontal and Y is vertical.
+@@1659
+In mouse events, the {{Button}} argument with the value 1 means:
+@@1660
+No button
+@@1661
+In mouse events, {{Button = 2}} means:
+@@1662
+In mouse events, the {{Shift}} argument with the value 2 means the user is pressing:
+@@1663
+1 Shift, 2 Ctrl, 4 Alt.
+@@1664
+The value {{Shift = 3}} means pressing:
+@@1665
+{{Shift}} and {{Ctrl}} together
+@@1666
+Only {{Alt}}
+@@1667
+{{Ctrl}} and {{Alt}}
+@@1668
+The value {{Shift = 4}} means pressing:
+@@1669
+What does the following code do?
+@@1670
+Makes the form's background red when it is clicked
+@@1671
+Closes the form
+@@1672
+Writes Red on the form
+@@1673
+Does nothing
+@@1674
+Form_Click happens when an empty spot is clicked.
+@@1675
+What happens when the code runs and {{Text1}} is clicked?
+@@1676
+The box moves 300 units to the right

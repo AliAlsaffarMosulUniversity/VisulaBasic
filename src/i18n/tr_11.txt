@@ -1,0 +1,440 @@
+@@1919
+The number 5 in the buttons argument means:
+@@1920
+{{Abort}} and {{Ignore}}
+@@1921
+The number 16 in a message box shows the icon:
+@@1922
+Error ✖
+@@1923
+Question ?
+@@1924
+Exclamation !
+@@1925
+Information i
+@@1926
+The number 32 shows the icon:
+@@1927
+The number 48 shows the icon:
+@@1928
+Exclamation (warning) !
+@@1929
+The number 64 shows the icon:
+@@1930
+To show the {{Yes}} and {{No}} buttons with a question mark, we write in the buttons argument:
+@@1931
+We add the buttons number to the icon number.
+@@1932
+When the user presses {{Yes}}, {{MsgBox}} returns the value:
+@@1933
+When the user presses {{No}}, {{MsgBox}} returns the value:
+@@1934
+When the user presses {{OK}}, {{MsgBox}} returns the value:
+@@1935
+When the user presses {{Cancel}}, {{MsgBox}} returns the value:
+@@1936
+The values {{MsgBox}} returns for the {{Abort}}, {{Retry}} and {{Ignore}} buttons are:
+@@1937
+3, 4 and 5
+@@1938
+1, 2 and 3
+@@1939
+6, 7 and 8
+@@1940
+2, 3 and 4
+@@1941
+Abort 3, Retry 4, Ignore 5.
+@@1942
+To know which button the user pressed, we write {{MsgBox}} as:
+@@1943
+A function in brackets whose value we take, such as {{k = MsgBox("Exit?", 4)}}
+@@1944
+Only an ordinary statement without brackets
+@@1945
+Inside an InputBox
+@@1946
+It cannot be known
+@@1947
+Brackets make it a function that returns a value.
+@@1948
+What happens if the user presses {{Yes}}?
+@@1949
+The program ends
+@@1950
+The message appears again
+@@1951
+Yes is written on the form
+@@1952
+vbYes = 6, so End runs.
+@@1953
+Which line shows the message "Saved" with an information icon and the title "Info"?
+@@1954
+The message first, then the number, then the title.
+@@1955
+The {{GoTo}} statement is used to:
+@@1956
+Move to a particular line in the procedure
+@@1957
+Run another program
+@@1958
+Close the form
+@@1959
+Declare a variable
+@@1960
+It moves execution to a label.
+@@1961
+The label that {{GoTo}} jumps to is written as:
+@@1962
+A name followed by a colon, such as {{ErrMsg:}}, or a line number
+@@1963
+Inside quotation marks
+@@1964
+As a control on the form
+@@1965
+As in GoTo ErrMsg.
+@@1966
+An unconditional jump is:
+@@1967
+A {{GoTo}} that always runs, with no condition
+@@1968
+A {{GoTo}} inside an If
+@@1969
+Moving between forms
+@@1970
+Calling InputBox
+@@1971
+A conditional one looks like If x < 0 Then GoTo E.
+@@1972
+What appears in {{Text1}}?
+@@1973
+50, then 60
+@@1974
+GoTo 18 skips the line that sets 60.
+@@1975
+What is the result if the user enters -4?
+@@1976
+A programming error
+@@1977
+The condition jumps to ErrMsg.
+@@1978
+Why do we write {{Exit Sub}} before the label {{ErrMsg:}} in the previous example?
+@@1979
+So that the error message does not run in the valid case
+@@1980
+To close the program
+@@1981
+Because VB always requires it
+@@1982
+To define the label
+@@1983
+Exit Sub leaves the procedure.
+@@1984
+Why is it advisable to use {{GoTo}} sparingly?
+@@1985
+Because too many make the program tangled and hard to understand
+@@1986
+Because it is very slow
+@@1987
+Because it deletes variables
+@@1988
+Because it does not work in VB6
+@@1989
+This is called "spaghetti code".
+@@1990
+The {{End}} statement:
+@@1991
+Ends the whole program
+@@1992
+Ends the procedure only
+@@1993
+Closes the message box
+@@1994
+Exit Sub, by contrast, ends only the procedure.
+@@1995
+What is the result of the code if the user enters 7 and then 5?
+@@1996
+Val converted the two texts into two numbers.
+@@1997
+Which of the following shows a single {{OK}} button with an error icon?
+@@1998
+The constant {{vbYesNo}} equals:
+@@1999
+The same as the number 4.
+@@2000
+Which statement is correct?
+@@2001
+{{InputBox}} is for input, and {{MsgBox}} is for output and questions
+@@2002
+Both are for input only
+@@2003
+{{MsgBox}} accepts typed text
+@@2004
+{{InputBox}} returns no value
+@@2005
+Each has its own job.
+@@2006
+Conditional statements are used to:
+@@2007
+Run different statements depending on whether a condition is true
+@@2008
+Repeat statements endlessly
+@@2009
+Draw controls
+@@2010
+The program makes a decision.
+@@2011
+The sign that means "not equal to" in {{VB6}}:
+@@2012
+As in If x <> 0 Then.
+@@2013
+The sign that means "greater than or equal to":
+@@2014
+Only {{=>}}
+@@2015
+{{≥}} is written as it is
+@@2016
+We write >= .
+@@2017
+The logical operator that requires both conditions to be true:
+@@2018
+And is true if both sides are true.
+@@2019
+The logical operator that needs only one condition to be true:
+@@2020
+Only {{Xor}}
+@@2021
+Or is true if either one is true.
+@@2022
+The {{Not}} operator:
+@@2023
+Reverses the value of the condition
+@@2024
+Adds two conditions
+@@2025
+Compares two numbers
+@@2026
+Ends the condition
+@@2027
+The correct form of a multi-line {{If}} statement ends with:
+@@2028
+Every block If is closed with End If.
+@@2029
+Does an {{If}} statement written on one line need {{End If}}?
+@@2030
+No
+@@2031
+Yes, if it contains a number
+@@2032
+Only inside Form_Load
+@@2033
+As in: If x > 0 Then Print "Positive".
+@@2034
+What is the result of the code if {{x = 7}}?
+@@2035
+To check whether the number {{x}} is even, we write the condition:
+@@2036
+An even number has a remainder of zero when divided by 2.
+@@2037
+What is the result of the code if {{age = 15}}?
+@@2038
+Child and Teenager
+@@2039
+The first true condition is age < 18.
+@@2040
+In an {{If … ElseIf … Else}} statement, how many branches run?
+@@2041
+Only one branch: the first true condition
+@@2042
+Every true branch
+@@2043
+Always the last branch
+@@2044
+No branch runs
+@@2045
+After a branch runs, it jumps to End If.
+@@2046
+The {{Else}} part runs when:
+@@2047
+No condition before it is true
+@@2048
+Every condition is true
+@@2049
+Only when x is zero
+@@2050
+Always
+@@2051
+Else is the final alternative.
+@@2052
+What is the result of the code if {{x = -2}}?
+@@2053
+The suitable statement for comparing one variable with several values:
+@@2054
+Clearer than a long chain of If.
+@@2055
+A {{Select Case}} statement ends with:
+@@2056
+To select a range from 80 to 89 in {{Select Case}} we write:
+@@2057
+To means a range.
+@@2058
+To select every value greater than or equal to 90 we write:
+@@2059
+Is with comparison signs.
+@@2060
+To select the values 1, 3 or 5 in one case:
+@@2061
+The part that runs when no case matches in {{Select Case}}:
+@@2062
+Like Else in If.
+@@2063
+What is the result of the code if {{m = 85}}?
+@@2064
+85 lies between 80 and 89.
+@@2065
+What is the result of the previous code if {{m = 45}}?
+@@2066
+No case matched, so Case Else runs.
+@@2067
+What is the result of the code if {{d = 9}}?
+@@2068
+There is no Case 9.
+@@2069
+What is the result of the code if the user name is admin and the password is 999?
+@@2070
+The name is right and the password is wrong.
+@@2071
+The condition that is true if the number is divisible by both 4 and 5:
+@@2072
+And, because both conditions are required.
+@@2073
+To find the larger of {{a}} and {{b}} we write:
+@@2074
+If a is larger it is the largest; otherwise b is.
+@@2075
+What is the result of the code if {{a = 4, b = 9, c = 6}}?
+@@2076
+We start with a, then compare it with b and c.
+@@2077
+What is wrong with the following code?
+@@2078
+There is no {{End If}} to close the statement
+@@2079
+Else may not be used
+@@2080
+Then must be written before If
+@@2081
+Nothing is wrong
+@@2082
+A block If needs End If.
+@@2083
+Which spelling is correct in {{VB6}}?
+@@2084
+{{ElseIf}}, one word
+@@2085
+{{Else If}}, always two words
+@@2086
+Else If as two words opens a new If that needs its own End If.
+@@2087
+When comparing strings, the condition {{"Ali" = "ali"}} is, by default:
+@@2088
+{{False}}, because the comparison is case-sensitive
+@@2089
+Always {{True}}
+@@2090
+It depends on the length of the text
+@@2091
+The default is Option Compare Binary.
+@@2092
+Which line writes "Pass" if the mark is 50 or more?
+@@2093
+>= includes fifty.
+@@2094
+What is the value of {{y}} if {{x = 2}}?
+@@2095
+x is not greater than 2, and it is ≥ 0, so y = x².
+@@2096
+The number of {{End If}} words needed in one {{If … ElseIf … ElseIf … Else}} statement:
+@@2097
+One
+@@2098
+Three
+@@2099
+Two
+@@2100
+ElseIf does not need its own End If.
+@@2101
+What is the result of the code if {{n = 1}}?
+@@2102
+Case 1: x³ + 3e⁻⁵ with x = 2, so it is 8 + 0.02.
+@@2103
+Which statement correctly checks that a number is between 1 and 100?
+@@2104
+In VB we write two conditions with And.
+@@2105
+The condition {{Not (x > 5)}} is equivalent to:
+@@2106
+The opposite of "greater than" is "less than or equal to".
+@@2107
+In {{Select Case}}, if the value matches more than one case:
+@@2108
+Only the first matching case runs
+@@2109
+Every matching case runs
+@@2110
+Case Else runs
+@@2111
+Like If … ElseIf.
+@@2112
+What is the result of the code if the second random number is 7?
+@@2113
+It is enough for one of them to be 7, because of Or.
+@@2114
+What is the result of the code if {{x = 15}}?
+@@2115
+15 is divisible by 3 and by 5, so both separate If statements are true.
+@@2116
+The line {{If x > 0 Then GoTo Done}} is an example of:
+@@2117
+A conditional jump
+@@2118
+An unconditional jump
+@@2119
+A message box
+@@2120
+A GoTo inside a condition.
+@@2121
+Unsuitable data type. For example: assigning text to a numeric variable, or adding an empty string. Use Val.
+@@2122
+The type's capacity was exceeded (Overflow). Use a larger type such as Long.
+@@2123
+Division by zero.
+@@2124
+A value not allowed for the function (such as the square root of a negative number or the logarithm of zero).
+@@2125
+The object does not exist. Check the control's name.
+@@2126
+This property or method is not supported by this object.
+@@2127
+An undefined procedure or function.
+@@2128
+The program seems to be stuck in a loop that never ends.
+@@2129
+A read-only property.
+@@2130
+The variable is not declared and Option Explicit is on. Declare it first with Dim.
+@@2131
+(line
+@@2132
+<div><b>End</b><span>The program has ended</span><button>↻ Run again</button></div>
+@@2133
+There is a mistake in how the code is written. Check the line shown.
+@@2134
+Unfinished text: you opened a quotation mark " and did not close it on the same line. Make sure the whole text is on one line between two quotation marks. If you inserted a ready snippet (such as If), make sure the cursor was not inside a text.
+@@2135
+The statement is incomplete or written incorrectly. Compare your line with the examples.
+@@2136
+ (line
+@@2137
+,
+@@2138
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Control</th><th>Name</th><th>Properties</th></tr></thead><tbody>

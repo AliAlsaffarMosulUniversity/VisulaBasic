@@ -1,0 +1,367 @@
+@@863
+Double-clicking an object to go to the editor is itself an event ({{DblClick}}) too!
+@@864
+A procedure's name always has this form:
+@@865
+1. The click event {{Click}}
+@@866
+Clicking a control. It is the most used event.
+@@867
+Application (1): your click on each control gives a different reaction:
+@@868
+The button: shows a {{MsgBox}} message
+@@869
+The {{Label}}: its text changes to {{Click}}
+@@870
+The text box: moves to a new place
+@@871
+The form: turns red
+@@872
+2. The double-click event {{DblClick}}
+@@873
+Two quick clicks in a row on the object.
+@@874
+Application (2): when the {{Label}} is double-clicked, we copy one box's text into another box and change the form's title.
+@@875
+3. The mouse-move event {{MouseMove}}
+@@876
+The control responds when the mouse pointer passes over it. This is its form:
+@@877
+Argument
+@@878
+Meaning
+@@879
+The name of the control the event happens on
+@@880
+A whole number for the mouse button pressed (Table 1)
+@@881
+A whole number for the {{Shift}}, {{Ctrl}} or {{Alt}} key pressed (Table 2)
+@@882
+The horizontal (X) and vertical (Y) position of the mouse pointer
+@@883
+Button value
+@@884
+Buttons pressed
+@@885
+{{Left}}
+@@886
+{{Right}}
+@@887
+Left + Right
+@@888
+{{Middle}}
+@@889
+Left + Middle
+@@890
+Right + Middle
+@@891
+All of them
+@@892
+Shift value
+@@893
+Keys
+@@894
+Note: in the printed handout the order of the values is slightly different ({{Alt}} = 3 and {{Shift}}+{{Ctrl}} = 4). The table above is what Visual Basic 6 actually uses (1, 2 and 4 are the basic values and the rest are their sums). Try the interactive box below to check.
+@@895
+Try it yourself: move over the area and click with different buttons:
+@@896
+Application (3): we show X and Y over the form. When the mouse passes over a button, we enlarge the font or change the colour.
+@@897
+In Visual Basic, X and Y are measured in a unit called the {{Twip}}. One {{Twip}} is a very small part of a pixel, so you see large numbers (one pixel ≈ 15 {{Twip}}).
+@@898
+4. The drag-and-drop event {{DragDrop}}
+@@899
+Dragging an object to another place on the form, then dropping it.
+@@900
+The code is written in the form's procedure:
+@@901
+{{Source}}: the control being moved
+@@902
+{{X , Y}}: the current position of the mouse pointer
+@@903
+To make a control draggable, set its {{DragMode}} property = 1 {{Automatic}}.
+@@904
+Application (4): a picture that we drag to another place on the form.
+@@905
+Question: what is the difference between {{DblClick}} and {{DragDrop}}? The first is two clicks on a control that run its code. The second is dragging the control to another place, and the code is written in the form's procedure.
+@@906
+5. Pressing and releasing a mouse button {{MouseDown}} and {{MouseUp}}
+@@907
+The object responds while the button is pressed ({{MouseDown}}) and when it is released ({{MouseUp}}).
+@@908
+Experiment (1): on press, {{Caption}} = {{Mouse Down}} and the background turns blue. On release, it becomes {{Mouse Up}} and the background turns red.
+@@909
+When?
+@@910
+Use
+@@911
+A single click
+@@912
+The most used
+@@913
+Two clicks
+@@914
+Opening or confirming
+@@915
+Mouse passing over
+@@916
+Hints and effects
+@@917
+The moment of pressing
+@@918
+Starting an action
+@@919
+The moment of release
+@@920
+Ending an action
+@@921
+Dropping a dragged object
+@@922
+Moving objects
+@@923
+An event is:
+@@924
+Something that happens to an object, such as a click or passing over it
+@@925
+A colour property
+@@926
+The object's name
+@@927
+A kind of variable
+@@928
+An event is linked to code that runs when it happens.
+@@929
+The correct procedure name for the click event of a button named Command1:
+@@930
+The form is: control name + _ + event name.
+@@931
+Which event runs on two quick clicks in a row?
+@@932
+In the MouseMove event, what do the arguments X and Y mean?
+@@933
+The horizontal and vertical position of the mouse pointer
+@@934
+The control's colour
+@@935
+The control's width and height
+@@936
+The mouse-button value
+@@937
+X is horizontal and Y is vertical.
+@@938
+If Button = 2, this means:
+@@939
+The right button
+@@940
+The left button
+@@941
+The middle button
+@@942
+All the buttons
+@@943
+1 left, 2 right, 4 middle.
+@@944
+If Shift = 2, the key pressed is:
+@@945
+1 = Shift, 2 = Ctrl, 4 = Alt.
+@@946
+In the DragDrop event, what is the Source argument?
+@@947
+The control being moved
+@@948
+The form
+@@949
+The background colour
+@@950
+The button number
+@@951
+Source = the dragged control.
+@@952
+To drag an Image control, we must set:
+@@953
+Which event runs the moment the mouse button is released?
+@@954
+Up = release.
+@@955
+Where do we write the DragDrop code in Application (4)?
+@@956
+In the form's procedure Form_DragDrop
+@@957
+In the picture's procedure Image1_Click
+@@958
+Only in a Module
+@@959
+In the Properties window
+@@960
+We write it in the form on which the object is dropped.
+@@961
+What is the difference between the double-click event DblClick and the drag-and-drop event DragDrop?
+@@962
+DblClick: two quick clicks on a control, and the code is written in that control's own procedure. DragDrop: dragging a control to another place and dropping it on the form, and the code is written in the form's procedure.
+@@963
+What are the steps for finding an object's list of events?
+@@964
+1) Add the control from the toolbox to the form. 2) Double-click it to open the Code Editor. 3) Open the right-hand list to find all its events.
+@@965
+Change example e3c so that the form's background colour changes when the mouse passes over a third button.
+@@966
+Add a button Command3, then write:
+Private Sub Command3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Form1.BackColor = vbGreen
+End Sub
+@@967
+Variables
+@@968
+Naming, types, declaration and scope
+@@969
+Why do we use variables?
+@@970
+When we enter data into controls, process it and get results, what actually happens?
+@@971
+The data are stored temporarily in the computer's memory.
+@@972
+To reach them, we give each memory location a name.
+@@973
+This is a {{Variable}}: a box in memory with a name, a type and a value.
+@@974
+Rules for naming a variable
+@@975
+It starts with a letter; it must not start with a digit
+@@976
+No spaces are allowed
+@@977
+No more than 255 characters
+@@978
+No symbols are allowed (such as + - * . ,)
+@@979
+It must not be a Visual Basic reserved word
+@@980
+Name
+@@981
+Verdict
+@@982
+Reason
+@@983
+Valid
+@@984
+Not a reserved word
+@@985
+Starts with a digit
+@@986
+Starts with a letter
+@@987
+Reserved word
+@@988
+Contains a space
+@@989
+The underscore is allowed
+@@990
+Test any name you like:
+@@991
+Variable types
+@@992
+Data can be whole or decimal numbers, text, dates or logical values.
+@@993
+Name
+@@994
+Size
+@@995
+Whole numbers
+@@996
+Decimal numbers
+@@997
+Currency (money) values
+@@998
+Text
+@@999
+One character = 1 byte
+@@1000
+Logical values
+@@1001
+Date
+@@1002
+A general-purpose variable
+@@1003
+The range of {{Integer}} is -32768 to 32767. If you go past it, the error {{Overflow}} appears. Use {{Long}} for larger numbers.
+@@1004
+Declaring variables
+@@1005
+First choose the right type for your data. Then follow the rule:
+@@1006
+Example: we reserve a location named X, 2 bytes in size, for whole numbers.
+@@1007
+You can declare several variables on one line, each with its own type:
+@@1008
+Careful: {{Dim x, y As Integer}} makes only {{y}} an {{Integer}}; {{x}} becomes a {{Variant}}. Write the type after every variable.
+@@1009
+Correction note: some course handouts contain forms such as {{Dim x, y As Integer As String As Date}} and {{Dim Const X}}. These forms are not valid in Visual Basic. The correct form is the one shown above, and a constant is declared with {{Const}} only.
+@@1010
+Example: area and circumference of a circle
+@@1011
+Area = π × r². Circumference = 2 × π × r.
+@@1012
+Add 3 {{Label}} controls, 3 {{TextBox}} controls and a button named {{Press}}
+@@1013
+Change the form's {{Caption}} to {{The Circle}}
+@@1014
+Write the code inside the button's event
+@@1015
+What happened in the code?
+@@1016
+{{PI}} is a {{Const}}, that is, a fixed value 3.14 that never changes, and no new value may be assigned to it
+@@1017
+{{R}} took the value of the radius from the text box
+@@1018
+Then the formula was computed and the result assigned to the variable {{Z}}
+@@1019
+The assignment rule (the = sign)
+@@1020
+In most programming languages, the expression after the equals sign is computed first. Then the result is assigned to the variable before it.
+@@1021
+Example: if the radius is 2:
+@@1022
+Variable scope {{Scope}}
+@@1023
+Depending on where a variable is declared, it falls into one of three kinds:
+@@1024
+Where is it declared?
+@@1025
+Who can see it?
+@@1026
+Local {{Local}}
+@@1027
+Inside the procedure
+@@1028
+This procedure only
+@@1029
+Form-level {{Form}}
+@@1030
+At the top of the code window ({{General Declarations}})
+@@1031
+All the form's procedures
+@@1032
+Public {{Public}}
+@@1033
+In a {{Module}}, with the word {{Public}}
+@@1034
+All the project's forms
+@@1035
+1) Local variables {{Local}}
+@@1036
+Declared inside an object's procedure. Nothing outside it can use them.
+@@1037
+Each procedure has its own variable even if the names are the same. Each one is in a different memory location.
+@@1038
+If you declare a variable inside one procedure and then use it in another, it will not be recognised. It is better not to vary the names of local variables, so as not to confuse yourself.
+@@1039
+2) Form-level variables {{Form}}
+@@1040
+We declare them on the first line of the code window. This is called a {{General Declaration}}.
+@@1041
+Every procedure in the form can see the variable, and any change affects it in all the other procedures.
+@@1042
+The {{Option Explicit}} statement
+@@1043
+A general declaration that forces you to declare every variable before using it.
+@@1044
+Without Option Explicit

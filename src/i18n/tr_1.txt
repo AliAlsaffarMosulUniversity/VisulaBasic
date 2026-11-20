@@ -1,0 +1,300 @@
+@@148
+Adds. The result is 17.
+@@149
+Subtracts. The result is 7.
+@@150
+Multiplies. The result is 60.
+@@151
+Divides. The result is 2.4. If the divisor is zero, the message Cannot divide by 0 appears.
+@@152
+Clears the three boxes.
+@@153
+Ends the program. The Esc key also runs it.
+@@154
+Type 12 and 5, then try the four buttons. Try dividing by 0 to see how the program avoids the error.
+@@155
+The {{Val}} function converts the text in the box into a number.
+@@156
+Shows the difference between adding text and adding numbers.
+@@157
+The first number. Default value: 12
+@@158
+The second number. Default value: 30
+@@159
+Adds without {{Val}}. It joins the two texts, so 1230 appears.
+@@160
+Adds with {{Val}}. It treats them as numbers, so 42 appears.
+@@161
+The result appears in Label1 at the bottom of the form. The same two numbers give two different results.
+@@162
+Shows the {{Change}} event and the {{MaxLength}} and {{Locked}} properties.
+@@163
+Type any text. It accepts no more than 12 characters (MaxLength = 12).
+@@164
+Locked. Do not type in it. It shows the same text in capital letters.
+@@165
+Runs with every character you type. It copies the text to Text2 in capitals and shows the number of characters in Label1.
+@@166
+Type hello: Text2 shows HELLO and Label1 shows Characters: 5.
+@@167
+Computes the area of a rectangle.
+@@168
+Length. Example: 6
+@@169
+Width. Example: 4
+@@170
+Locked. The area appears here.
+@@171
+Multiplies the length by the width and puts the result in Text3.
+@@172
+6 and 4 give 24.
+@@173
+Shows the {{Click}} event on four different elements.
+@@174
+Press it and a message box appears: You clicked in to command button.
+@@175
+Click it and its text changes to Click.
+@@176
+Click it and it moves 300 units to the right.
+@@177
+Form (the background)
+@@178
+Click any empty spot and the form background turns red.
+@@179
+Click each element in turn and watch what happens.
+@@180
+Shows the {{DblClick}} event, that is, a double click.
+@@181
+Type any text. Default value: Hello
+@@182
+Stays empty. The text will be copied here.
+@@183
+Double-click it quickly. It copies the text of Text1 into Text2 and changes the window title to Double Click Event.
+@@184
+A single click does nothing. Only the double click works.
+@@185
+Shows the {{MouseMove}} event, that is, mouse movement.
+@@186
+Do not type in it. It shows the horizontal mouse position X.
+@@187
+Do not type in it. It shows the vertical mouse position Y.
+@@188
+Move the mouse over the form and the numbers change. It also returns the two boxes to the small font and white background.
+@@189
+Pass the mouse over it (without clicking) and the two boxes' font gets bigger.
+@@190
+Pass the mouse over it and the two boxes' background turns yellow.
+@@191
+No clicking is needed. Moving the mouse is enough.
+@@192
+Dragging the picture and dropping it somewhere else.
+@@193
+Press on it and drag it (DragMode = 1).
+@@194
+When you drop it, the picture moves to the point where you released it.
+@@195
+Drag the picture to any corner of the form.
+@@196
+Shows the {{MouseDown}} and {{MouseUp}} events.
+@@197
+When the mouse button is pressed (before release), the text becomes Mouse Down and the background turns blue.
+@@198
+When the mouse button is released, the text becomes Mouse Up and the background turns red.
+@@199
+Press and hold to see blue, then release to see red.
+@@200
+Computes the area and circumference of a circle. The constant {{PI}} = 3.14 never changes.
+@@201
+The radius. Default value: 2
+@@202
+Locked. The circumference appears here.
+@@203
+Computes area = 3.14 × r × r and circumference = 2 × 3.14 × r.
+@@204
+A radius of 2 gives an area of 12.56 and a circumference of 12.56. Try 5: area 78.5 and circumference 31.4.
+@@205
+Shows a {{Local}} variable. Each button has its own variable x, unaffected by the others.
+@@206
+Declares x as a number with the value 1 and prints Command1: x = 1.
+@@207
+Declares x as a number with the value 7 and prints Command2: x = 7.
+@@208
+Declares x as text with the value welcome and prints Command3: x = welcome.
+@@209
+The lines are printed on the form under the buttons. Each press adds a line.
+@@210
+Shows a {{Form-level}} variable. The variable n is declared outside the procedures, so every button can see it and it keeps its value.
+@@211
+Increases n by 1 and prints it.
+@@212
+Increases n by 10 and prints it.
+@@213
+Sets n = 0 and clears the screen.
+@@214
+Press Command1 three times: 1, 2, 3. Press Command2: 13. Press Command3 and everything goes back to zero.
+@@215
+Shows {{Option Explicit}}, which forces you to declare every variable before you use it.
+@@216
+The variable s is declared with Dim, so it works and prints 1.
+@@217
+Intentional error: it uses S2 without declaring it, so Variable not defined appears. This is what we want to show.
+@@218
+Press both buttons and compare. Then open the lab, delete the Option Explicit line, and try the second button again: it will work.
+@@219
+Homework: predict what each button prints, then check. It shows the effect of local and module-level variables.
+@@220
+Sets a = 10 and b = 4, so z = 14. Prints: a 10 b= 4 z= 14.
+@@221
+Declares b locally, so its value is 0. So z = 10 − 0 = 10. Prints: a 10 b= 0 z= 10.
+@@222
+Declares a locally, so its value is 0. So z = 10 × 0 = 0. Prints: a 0 b= 4 z= 0.
+@@223
+Press them in order: Command1, Command2, then Command3.
+@@224
+If you press Command2 before Command1, a will be zero.
+@@225
+Shows the limits of variable types.
+@@226
+Intentional error: x is an Integer (largest value 32767). 30000 + 10000 exceeds the limit, so Overflow appears. This is what we want to show.
+@@227
+The Long type can hold it, so it prints 40000.
+@@228
+An Integer holds no fraction. It rounds the value and prints 4.
+@@229
+A Single holds fractions, so it prints 3.7.
+@@230
+Try the four buttons and compare.
+@@231
+Adds or subtracts two numbers that you enter through input boxes.
+@@232
+First input box
+@@233
+Appears after you press the button. Type the first number. Example: 7
+@@234
+Second input box
+@@235
+Type the second number. Example: 5
+@@236
+Asks for two numbers, then prints Sum = 12.
+@@237
+Asks for two numbers, then prints Difference = 2.
+@@238
+The result is printed on the form.
+@@239
+Solves the equation y = a × b + c. It asks for three numbers.
+@@240
+First box (a)
+@@241
+Example: 2
+@@242
+Second box (b)
+@@243
+Example: 3
+@@244
+Third box (c)
+@@245
+Example: 4
+@@246
+Shows the three boxes one after another, then computes y.
+@@247
+2, 3 and 4 give y = 10. It appears in Label1.
+@@248
+Takes the student's name and stage through {{InputBox}}.
+@@249
+First box
+@@250
+Type the name. Example: Ahmed
+@@251
+Second box
+@@252
+Type the stage. Example: Third
+@@253
+Puts the name in Text1 and the stage in Text2, and combines them in Label3 as: Ahmed - Third.
+@@254
+The data appear in the two text boxes and in Label3.
+@@255
+A gallery of {{MsgBox}} styles. The number on each button is the style number.
+@@256
+OK and Cancel buttons with no icon.
+@@257
+OK and Cancel buttons with a question mark.
+@@258
+Yes and No buttons with an information icon.
+@@259
+Abort, Retry and Ignore buttons with an error icon.
+@@260
+Retry and Cancel buttons with an exclamation mark.
+@@261
+The first number sets the buttons (0 to 5). The second sets the icon: 16 error, 32 question, 48 exclamation, 64 information.
+@@262
+Asks "Do you want to exit?" and acts on your answer. It stores the user's answer in the variable k.
+@@263
+Shows a box with Yes and No. If you choose Yes (value 6), the program ends. If you choose No (value 7), Label1 shows You pressed No (value = 7).
+@@264
+Press Exit, then choose No to see the number 7.
+@@265
+Three buttons: Start, Clear and Exit. Some of them ask for your confirmation first.
+@@266
+Filled automatically after you press Start.
+@@267
+Asks for the name through InputBox and puts it in Text1.
+@@268
+Asks: Clear the text? If you choose Yes, it clears Text1.
+@@269
+Asks: Exit the program? If you choose OK, the program ends.
+@@270
+Press Start and type a name. Then press Clear and choose Yes: the name disappears.
+@@271
+Computes the square root and blocks negative numbers with the {{GoTo}} statement.
+@@272
+Input box
+@@273
+Appears after you press the button. Type a number. Example: 16 or -4
+@@274
+If the number is less than zero it jumps to ErrMsg. Otherwise it computes the root.
+@@275
+16 gives Sqr(x) = 4. But -4 gives Error: negative number!
+@@276
+Shows a {{GoTo}} jump to a line number.
+@@277
+Do not type in it. It shows the result.
+@@278
+Puts 50 in Text1, then GoTo 18 jumps to line 18, skipping the line that sets 60.
+@@279
+50 appears, not 60.
+@@280
+Decides whether a number is odd or even using {{Mod}} (remainder of division).
+@@281
+Enter a whole number. Default value: 7
+@@282
+Locked. The type appears here.
+@@283
+If the remainder of division by 2 is zero, the number is Even; otherwise it is Odd.
+@@284
+7 gives Odd. 10 gives Even.
+@@285
+A game of luck: three random numbers from 0 to 9.
+@@286
+Text1, Text2 and Text3
+@@287
+Do not type in them. The random numbers appear here.
+@@288
+The result appears here.
+@@289
+Rolls three numbers. If one of them is 7 it shows You Win; otherwise You Lose.
+@@290
+Ends the program.
+@@291
+Press Roll several times. To win you need at least one 7.
+@@292
+Computes y from x using three conditions.
+@@293
+Enter a number. Default value: 3
+@@294
+Locked. The result appears here.
+@@295
+If x is greater than 2, y = x + 1. If it is between 0 and 2, y = x². If it is negative, y = x³ − 5.
+@@296
+x = 3 gives 4, x = 2 gives 4, x = 0 gives 0, and x = -2 gives -13.
+@@297
+Converts a student's mark into a grade with the {{Select Case}} statement.

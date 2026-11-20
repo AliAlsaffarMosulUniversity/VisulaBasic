@@ -1,0 +1,426 @@
+@@1236
+Worked example: odd or even.
+@@1237
+Worked example: the {{Lucky Seven}} game. We use {{Rnd}} to generate a random number and {{Int}} to cut it to a whole number.
+@@1238
+3. The {{If … ElseIf}} statement
+@@1239
+The conditions are checked in order, and only the first true condition runs
+@@1240
+{{Else}} runs if no condition is true
+@@1241
+Some handouts write {{Else If}} as two words. The correct form in Visual Basic 6 is {{ElseIf}}, one word.
+@@1242
+Example: compute the following function:
+@@1243
+Condition
+@@1244
+4. The {{Select Case}} statement
+@@1245
+A conditional statement that checks several cases for one value. Its form:
+@@1246
+These are the kinds of value written after {{Case}}:
+@@1247
+Example
+@@1248
+Kind
+@@1249
+Relational {{Relational}}
+@@1250
+Range {{Range}}
+@@1251
+Multiple {{Multiple}}
+@@1252
+Text {{String}}
+@@1253
+Example: a student's grade according to the mark.
+@@1254
+Example: we choose an equation (from 1 to 4), then compute its value.
+@@1255
+When should you use {{Select Case}}? When you check one variable against many cases. It is clearer than a long chain of {{ElseIf}}.
+@@1256
+Lecture homework (try the solutions)
+@@1257
+Print the larger of two numbers
+@@1258
+Three numbers: the largest and the smallest
+@@1259
+A number divisible by 4 or 5
+@@1260
+A three-branch function
+@@1261
+User name and password
+@@1262
+The complete project: every control in one program
+@@1263
+This program brings together what we learned in all the chapters.
+@@1264
+Controls: {{Form}}, {{Label}}, {{TextBox}}, {{CommandButton}} and {{Image}}.
+@@1265
+Boxes: {{InputBox}} and {{MsgBox}}.
+@@1266
+Variables: {{Dim}} and {{Option Explicit}} (Chapter 4).
+@@1267
+Decisions: {{If}} and {{Select Case}} (Chapter 6).
+@@1268
+Events: {{Click}}, {{GotFocus}} and {{Form_Load}} (Chapter 3).
+@@1269
+Try changing the code in the lab. For example, add a new grade or change the failing conditions.
+@@1270
+Finished the syllabus? Go to the "🎨 Designs" section in the bottom bar: a calculator, a sales invoice, games and other apps to build yourself.
+@@1271
+Conditional statements are also called:
+@@1272
+Control statements (Control Statements)
+@@1273
+Input statements
+@@1274
+Declaration statements
+@@1275
+Print statements
+@@1276
+Their purpose is to control the program's path of execution.
+@@1277
+Which operator means "not equal to"?
+@@1278
+The sign <> means Not Equal.
+@@1279
+If A = 5 and B = 3, what is the result of (A > B) And (B > 4)?
+@@1280
+The second condition is false, so the And result is false.
+@@1281
+The result of (A > B) Or (B > 4), where A = 5 and B = 3?
+@@1282
+It is enough for the first to be true.
+@@1283
+The number x is even if:
+@@1284
+The remainder of division by 2 is zero.
+@@1285
+When the following code runs, what is the value of B?
+@@1286
+A = 100 does not satisfy the first two conditions.
+@@1287
+In If…ElseIf, what runs is:
+@@1288
+Only the first true condition
+@@1289
+Every true condition
+@@1290
+Only the last condition
+@@1291
+Always Else
+@@1292
+Once a condition is true, it leaves the statement.
+@@1293
+What is written after Case in Case 90 To 100?
+@@1294
+A range (Range)
+@@1295
+A text value
+@@1296
+A relational value
+@@1297
+A multiple value
+@@1298
+To sets a range.
+@@1299
+What satisfies Case 1, 2, 3?
+@@1300
+The values 1, 2 or 3
+@@1301
+Only the values from 1 to 3
+@@1302
+The value 6
+@@1303
+Any value
+@@1304
+The comma means "or".
+@@1305
+To handle all values that matched no Case, we write:
+@@1306
+What does a mark of 85 give in the grade program (90-100 Excellent, 80-89 Very Good)?
+@@1307
+85 is within the range 80 to 89.
+@@1308
+Which statement is best for checking one variable against more than five cases?
+@@1309
+Only If … Then
+@@1310
+Select Case is clearer and shorter.
+@@1311
+What is the correct form of "Else If" in VB6?
+@@1312
+ElseIf (one word)
+@@1313
+Else If on one line
+@@1314
+ElseIf, with no space.
+@@1315
+Design a program that prints the largest and smallest of three numbers.
+@@1316
+Design a program that reads a number and decides whether it is divisible by 4 or 5.
+@@1317
+Compute y = (x³+5)/(x²−2) for x = 1, 2, 3, 4, y = 7x⁻² for 5≤x≤10, and y = 60−x for x>11.
+@@1318
+Read a user name and a password. When Check is pressed, print: Welcome / Wrong user / Wrong password / Wrong Information.
+@@1319
+Print the larger of two numbers.
+@@1320
+The integrated development environment. It contains all the design and programming tools.
+@@1321
+The form: the window on which you design the program's interface.
+@@1322
+A control (object) placed on the form, such as a button or a text box.
+@@1323
+A property: a characteristic of an object, such as colour or text.
+@@1324
+An event: something that happens to an object, such as a click.
+@@1325
+A method: an action the object performs, such as SetFocus.
+@@1326
+The toolbox: contains the standard controls.
+@@1327
+The Project Explorer: shows the project's files as a tree.
+@@1328
+The Properties window: for setting a control's properties at design time.
+@@1329
+The Code Editor: for writing statements. Opened with F7.
+@@1330
+A control for display only.
+@@1331
+A text box for input and calculation. It always holds text.
+@@1332
+A button for running commands.
+@@1333
+The control's internal name in code.
+@@1334
+The value of a text box.
+@@1335
+Whether the control is shown. True or False.
+@@1336
+Enables or disables the control.
+@@1337
+Locks a text box against editing.
+@@1338
+The click event.
+@@1339
+The double-click event.
+@@1340
+The event of moving the mouse over a control.
+@@1341
+The event of dropping a dragged control on the form.
+@@1342
+A variable: a name for a memory location that holds a value.
+@@1343
+A constant: a value that does not change.
+@@1344
+The statement that declares a variable.
+@@1345
+A whole number (2 bytes).
+@@1346
+A large whole number (4 bytes).
+@@1347
+A decimal number (4 bytes).
+@@1348
+A precise decimal number (8 bytes).
+@@1349
+Text.
+@@1350
+A logical value, True or False.
+@@1351
+A general type that accepts any value.
+@@1352
+A variable's scope: local, form-level or public.
+@@1353
+Forces all variables to be declared.
+@@1354
+A module for declaring public variables and procedures.
+@@1355
+A function that converts text into a number.
+@@1356
+A box for getting a value from the user.
+@@1357
+A box for showing a message. It may return the number of the button pressed.
+@@1358
+Moves execution to another line.
+@@1359
+A conditional statement.
+@@1360
+An extra condition inside If.
+@@1361
+Choosing among several cases.
+@@1362
+The remainder of division.
+@@1363
+A function that gives a random number between 0 and 1.
+@@1364
+A function that gives the whole-number part of a number.
+@@1365
+Prints text on the form.
+@@1366
+Clears what was printed on the form.
+@@1367
+The company that produced {{Visual Basic 6}} is:
+@@1368
+Visual Basic was produced by Microsoft.
+@@1369
+The language is called "visual" because:
+@@1370
+The programmer designs the interface by drawing and dragging and sees how it looks straight away
+@@1371
+The program needs no code at all
+@@1372
+It runs only on colour screens
+@@1373
+It is written with pictures instead of words
+@@1374
+We draw the controls on the form and see the interface before running.
+@@1375
+In event-driven programming, when does code run?
+@@1376
+When an event happens, such as clicking a button
+@@1377
+From the first line to the last without stopping
+@@1378
+Only when the computer shuts down
+@@1379
+Automatically every second
+@@1380
+Each part of the code is tied to an event.
+@@1381
+When opening {{VB6}} to create an ordinary program, in the New Project window we choose:
+@@1382
+Standard EXE is the standard project for a program with an interface.
+@@1383
+The abbreviation {{IDE}} means:
+@@1384
+Integrated development environment
+@@1385
+Data entry interface
+@@1386
+Internal text editor
+@@1387
+Device operating system
+@@1388
+The window on which we draw the program's interface is:
+@@1389
+The form designer is where the interface is drawn.
+@@1390
+Controls such as {{Label}} and {{TextBox}} are taken from:
+@@1391
+The Properties window
+@@1392
+The menu bar
+@@1393
+The Project Explorer
+@@1394
+The toolbox holds all the controls that can be drawn.
+@@1395
+To change a control's colour, text or size at design time we use:
+@@1396
+The Code Editor
+@@1397
+The Form Layout window
+@@1398
+The toolbox
+@@1399
+Each property has a value that we change in the Properties window.
+@@1400
+The shortcut key that shows the Properties window is:
+@@1401
+F4 opens the Properties window.
+@@1402
+The key that runs the program in {{VB6}} is:
+@@1403
+The window that shows all the forms and files in the project is:
+@@1404
+The Project Explorer shows the project's components.
+@@1405
+The shortcut that opens the Project Explorer is:
+@@1406
+The window that sets where the form appears on the screen at run time:
+@@1407
+Form Layout shows where the window will be on the screen.
+@@1408
+We write the program's statements in:
+@@1409
+The Code Editor {{Code Editor}}
+@@1410
+The Form Layout window
+@@1411
+All procedures are written in the Code Editor.
+@@1412
+To reach the Code Editor quickly from a control on the form:
+@@1413
+We double-click the control
+@@1414
+We press F4
+@@1415
+We drag the control off the form
+@@1416
+We press Ctrl + R
+@@1417
+Double-clicking opens the code at the control's default event.
+@@1418
+The key that opens the Code Editor from the {{View}} menu is:
+@@1419
+The default name of the first form in a project is:
+@@1420
+The first form is named Form1.
+@@1421
+The extension of a project file in {{VB6}} is:
+@@1422
+The extension of a form file is:
+@@1423
+Each form is saved in a .frm file.
+@@1424
+To turn the project into a program that runs without {{VB6}}, we make a file with the extension:
+@@1425
+From the File menu we choose Make .exe.
+@@1426
+The Code Editor has two lists at the top. The left one shows:
+@@1427
+The objects (controls)
+@@1428
+The colours
+@@1429
+Only the variables
+@@1430
+The left one is for the object and the right one for the event.
+@@1431
+The right-hand list at the top of the Code Editor shows:
+@@1432
+The events of the chosen object
+@@1433
+File names
+@@1434
+The object's properties
+@@1435
+Errors
+@@1436
+We choose an event from it and the procedure is written automatically.
+@@1437
+The Properties window lists properties in two orders:
+@@1438
+Alphabetical and by category
+@@1439
+Ascending and descending
+@@1440
+By colour and by size
+@@1441
+By date and by name
+@@1442
+Alphabetic and Categorized.
+@@1443
+The first tool in the toolbox (the arrow) is used for:
+@@1444
+Selecting and moving controls
+@@1445
+Drawing a line
+@@1446
+Deleting the form
+@@1447
+The Pointer tool, for selecting.
+@@1448
+To stop the program while it runs from the development environment, we press the button:

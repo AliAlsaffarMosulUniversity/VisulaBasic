@@ -1,0 +1,386 @@
+@@1045
+With Option Explicit
+@@1046
+You can write {{S = 1}} directly without declaring it, and the variable is created automatically as a {{Variant}}
+@@1047
+You must declare {{Dim S As Integer}} before use, or an error appears
+@@1048
+Always write {{Option Explicit}} at the start of your code. It prevents spelling mistakes in variable names.
+@@1049
+3) Public variables {{Public}}
+@@1050
+Declared for use across the whole project. A single project can contain more than one {{Form}}.
+@@1051
+We replace the {{Dim}} statement with {{Public}}, written on its own line at the start of the code.
+@@1052
+Another way: declare them in a {{Module}} window. Add one from the {{Project}} menu → {{Add Module}} → the {{Module}} icon → {{Open}}. A white window like the code window appears, and its icon appears in the Project Explorer.
+@@1053
+Challenge: what do the three buttons produce?
+@@1054
+This is the lecture's homework. Think first, then run it to check.
+@@1055
+{{Command1}}: assigns 10 and 4 and adds them. So z = 14
+@@1056
+{{Command2}}: the local {{Dim b}} hides the outer variable, so its value is 0. So z = 10 − 0 = 10
+@@1057
+{{Command3}}: the local {{Dim a}} hides the outer {{a}}, and its value is 0. So z = z × 0 = 0
+@@1058
+The line {{Dim a, b As Integer}}: the variable {{a}} is a {{Variant}} (because the type was written after {{b}} only). This does not affect the result here, but it is a bad habit.
+@@1059
+Type limits
+@@1060
+A variable is:
+@@1061
+A name for a location in the computer's memory that stores a temporary value
+@@1062
+A control in the toolbox
+@@1063
+A window in the development environment
+@@1064
+A file on disk
+@@1065
+We give the location a name so that we can get the value when we need it.
+@@1066
+Which variable name is valid?
+@@1067
+The underscore is allowed; the others are wrong (digit first, a space, a reserved word).
+@@1068
+Why is Integer not valid as a variable name?
+@@1069
+Because it is a reserved word
+@@1070
+Because it is long
+@@1071
+Because it contains capital letters
+@@1072
+Because it starts with a letter
+@@1073
+Reserved words cannot be used as variable names.
+@@1074
+Which type do we use to store large whole numbers (above 32767)?
+@@1075
+Long, which is 4 bytes in size.
+@@1076
+Which type is suitable for storing text?
+@@1077
+String, for text.
+@@1078
+The correct way to declare a whole-number variable named X:
+@@1079
+Dim name As type.
+@@1080
+What happens when this runs:
+@@1081
+The Overflow error appears
+@@1082
+x becomes 40000
+@@1083
+x becomes 0
+@@1084
+Nothing happens
+@@1085
+An Integer's maximum value is 32767, so the capacity is exceeded.
+@@1086
+A Const differs from a variable in that:
+@@1087
+Its value does not change and no new value may be assigned to it
+@@1088
+It is always slower
+@@1089
+It accepts text only
+@@1090
+It is not written in the code
+@@1091
+Like PI = 3.14.
+@@1092
+A local variable is one that:
+@@1093
+Is declared inside a procedure and is seen by that procedure only
+@@1094
+Is seen by all the project's forms
+@@1095
+Is declared in a Module
+@@1096
+Is declared with Public
+@@1097
+Its scope is one procedure.
+@@1098
+Where do we declare a variable that every procedure of one form can see?
+@@1099
+General Declarations (the top of the code window)
+@@1100
+Inside the button's procedure
+@@1101
+In the Project Explorer
+@@1102
+The first line of the code window.
+@@1103
+To declare a public variable for the whole project we use:
+@@1104
+Public inside a Module
+@@1105
+Dim inside the procedure
+@@1106
+Const inside the procedure
+@@1107
+Option inside the button
+@@1108
+Public in a Module.
+@@1109
+What does the statement Option Explicit do?
+@@1110
+It forces you to declare every variable before using it
+@@1111
+It deletes unused variables
+@@1112
+It converts text into a number
+@@1113
+It closes the program
+@@1114
+It prevents misspelled variable names.
+@@1115
+If Dim x, y As Integer, what is the type of x?
+@@1116
+The type must be written after every variable. Otherwise it becomes Variant.
+@@1117
+In Z = X * Y * Y, which step happens first?
+@@1118
+Computing what follows the = sign, then assigning the result to Z
+@@1119
+Assigning Z first, then computing
+@@1120
+Deleting Z
+@@1121
+Converting Z to text
+@@1122
+We compute the right-hand side, then assign.
+@@1123
+Pick out the valid names: Total_Price, 2nd, My Var, Name1, Print
+@@1124
+Valid: Total_Price and Name1.
+Invalid: 2nd (starts with a digit), My Var (a space), Print (a reserved word).
+@@1125
+What do Command1, then Command2, then Command3 produce in the challenge example?
+@@1126
+Command1: a=10, b=4, z=14.
+Command2: local b=0, so b=0 is printed, then z=10.
+Command3: prints z=10, then the local a=0, so z=0.
+@@1127
+Write a program that computes the area and circumference of a circle.
+@@1128
+Why does an error occur when x = "welcome" runs if x is declared as Integer?
+@@1129
+Because an Integer variable does not accept text. The error Type mismatch appears. The type must be String or Variant.
+@@1130
+Input and message boxes
+@@1131
+InputBox, MsgBox and GoTo
+@@1132
+The input box {{InputBox}}
+@@1133
+One of the most important tools in Visual Basic. The user enters a value through a dialog window.
+@@1134
+It contains a prompt, a text box, and the {{OK}} and {{Cancel}} buttons.
+@@1135
+The box returns text, a {{String}}. To enter numbers we use the {{Val}} function.
+@@1136
+{{Variable}}: the name of the variable that will store the value
+@@1137
+{{Message}}: the prompt shown in the box
+@@1138
+{{Title}}: the box's title (optional)
+@@1139
+Example: adding and subtracting two numbers with input boxes.
+@@1140
+Example: three boxes, one for each variable.
+@@1141
+Example: entering a student's name and stage, then showing them.
+@@1142
+The {{&}} operator joins text: {{"Name: " & x}}. It is different from {{+}}, which adds numbers.
+@@1143
+The message box {{MsgBox}}
+@@1144
+A simple window that shows a message with one or more command buttons.
+@@1145
+We use it so the program can be sure the user has read the message, or so the user can make a decision.
+@@1146
+{{prompt}}: the message text
+@@1147
+{{symbol}}: a whole number that sets the buttons and the icon
+@@1148
+{{title}}: the box's title (optional)
+@@1149
+Buttons value
+@@1150
+Buttons shown
+@@1151
+Icon value
+@@1152
+Appearance
+@@1153
+❌ Critical error {{Critical}}
+@@1154
+❓ Question {{Question}}
+@@1155
+⚠️ Warning {{Exclamation}}
+@@1156
+ℹ️ Information {{Information}}
+@@1157
+Add the buttons number to the icon number. Example: {{1 + 32}} or {{33}} = {{OK/Cancel}} buttons with the question icon.
+@@1158
+Build your own box:
+@@1159
+What does the message box return?
+@@1160
+Each button returns a number. We store it in a variable and act on the choice:
+@@1161
+Value
+@@1162
+Button pressed
+@@1163
+Watch the brackets: when the value is stored in a variable we use brackets. Without a variable we do not need them.
+@@1164
+Three buttons: {{Start}} reads the name, and {{Clear}} and {{Exit}} ask for confirmation.
+@@1165
+The jump statement {{GoTo}}
+@@1166
+It moves execution to another line in the code. There are two kinds:
+@@1167
+1) The unconditional jump
+@@1168
+Jumps directly, with no condition.
+@@1169
+2) The conditional jump
+@@1170
+We usually use a {{Label}} name in the code instead of a line number, followed by a colon {{:}}.
+@@1171
+Too much {{GoTo}} makes code hard to read. Use it only when needed, and prefer {{If}} and {{Select Case}}.
+@@1172
+What does InputBox return?
+@@1173
+Text, a String
+@@1174
+Always a number
+@@1175
+A logical value
+@@1176
+Nothing
+@@1177
+That is why we use Val when we need a number.
+@@1178
+The correct way to enter a number:
+@@1179
+We put InputBox inside Val.
+@@1180
+The third argument in MsgBox "prompt", symbol, "title" is:
+@@1181
+The box's title
+@@1182
+The message
+@@1183
+The buttons number
+@@1184
+title = an optional title.
+@@1185
+Which value shows the Yes and No buttons?
+@@1186
+Which value shows the OK and Cancel buttons?
+@@1187
+What is the value of the ❓ (question) icon?
+@@1188
+16 error, 32 question, 48 warning, 64 information.
+@@1189
+Which expression shows OK/Cancel with the question icon?
+@@1190
+If the user presses Yes, the value returned is:
+@@1191
+Yes = 6 and No = 7.
+@@1192
+If the user presses Cancel, the value returned is:
+@@1193
+OK = 1 and Cancel = 2.
+@@1194
+To store what MsgBox returns in a variable, we write:
+@@1195
+When using the returned value we add brackets.
+@@1196
+What does the statement GoTo 18 do?
+@@1197
+It moves execution straight to line 18
+@@1198
+It repeats line 18 twice
+@@1199
+It deletes line 18
+@@1200
+It stops the program
+@@1201
+An unconditional jump.
+@@1202
+What is the difference between a conditional and an unconditional jump?
+@@1203
+The conditional one follows an If statement; the unconditional one always jumps
+@@1204
+There is no difference
+@@1205
+The conditional one is faster
+@@1206
+The unconditional one is for text only
+@@1207
+The first is inside an If; the second has no condition.
+@@1208
+Write a program that asks for two numbers with InputBox and prints their product.
+@@1209
+Build a message box with the Yes / No / Cancel buttons and a warning icon.
+@@1210
+MsgBox "Continue?", 3 + 48, "Warning"
+(3 for the buttons + 48 for the icon = 51)
+@@1211
+Build an Exit button that asks the user before closing.
+@@1212
+Conditional statements
+@@1213
+If, If-Else, ElseIf and Select Case
+@@1214
+What are conditional statements?
+@@1215
+They are also called control statements {{Control Statements}}.
+@@1216
+Their purpose is to control how the program flows, that is, the program chooses a path depending on a condition.
+@@1217
+The parts of a condition
+@@1218
+A condition is an expression whose result is {{True}} or {{False}}. We build it from:
+@@1219
+Relational operators
+@@1220
+Equal to
+@@1221
+Not equal to
+@@1222
+Greater than
+@@1223
+Less than
+@@1224
+Greater than or equal to
+@@1225
+Less than or equal to
+@@1226
+Logical operators
+@@1227
+True if both conditions are true
+@@1228
+True if at least one condition is true
+@@1229
+Reverses the result
+@@1230
+{{Mod}} gives the remainder of division. So a number is even if {{x Mod 2 = 0}}.
+@@1231
+1. The {{If … Then}} statement
+@@1232
+The statements run if the condition is true. Otherwise the program skips them.
+@@1233
+2. The {{If … Else}} statement
+@@1234
+{{Instruction 1}}: runs if the condition is true
+@@1235
+{{Instruction 2}}: runs if it is not

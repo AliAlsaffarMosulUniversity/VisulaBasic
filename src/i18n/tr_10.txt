@@ -1,0 +1,484 @@
+@@1677
+The text is cleared
+@@1678
+An error appears
+@@1679
+Each click increases Left.
+@@1680
+What happens when you type in {{Text1}}?
+@@1681
+The same text appears in Text2 in capitals, with every character
+@@1682
+Nothing until a button is pressed
+@@1683
+Text2 is deleted
+@@1684
+Which event do we use to show the mouse coordinates continuously?
+@@1685
+It happens with every movement.
+@@1686
+When a button is clicked, the order of events is:
+@@1687
+{{MouseDown}}, then {{MouseUp}}, then {{Click}}
+@@1688
+{{Click}}, then {{MouseDown}}, then {{MouseUp}}
+@@1689
+{{MouseUp}}, then {{Click}}, then {{MouseDown}}
+@@1690
+They all happen together
+@@1691
+Click completes after the release.
+@@1692
+In the event {{Form_DragDrop(Source, X, Y)}}, the argument {{Source}} is:
+@@1693
+The object being dragged
+@@1694
+The object's colour
+@@1695
+The number of drags
+@@1696
+Source.Move X, Y moves it to the drop point.
+@@1697
+Which line moves the dragged object to the drop point?
+@@1698
+Move takes the new coordinates.
+@@1699
+The default unit for control positions in {{VB6}} is:
+@@1700
+The pixel
+@@1701
+The centimetre
+@@1702
+The inch
+@@1703
+One inch ≈ 1440 twips.
+@@1704
+Which of the following is not an event?
+@@1705
+Caption is a property.
+@@1706
+To find a control's events in the Code Editor:
+@@1707
+We choose the control from the left-hand list, then open the right-hand list
+@@1708
+We open the toolbox
+@@1709
+We click the form once
+@@1710
+The right-hand list shows all the control's events.
+@@1711
+The default event of a {{CommandButton}}, opened when you double-click it at design time:
+@@1712
+The button's most used event.
+@@1713
+The default event of a {{TextBox}} is:
+@@1714
+Double-clicking it opens Text1_Change.
+@@1715
+The default event of a {{Form}} is:
+@@1716
+Which event suits checking that the user typed a number after leaving the text box?
+@@1717
+It happens on leaving the box.
+@@1718
+The {{KeyPress}} event happens when:
+@@1719
+The user presses a key on the keyboard
+@@1720
+The user clicks the mouse
+@@1721
+The cursor moves
+@@1722
+And it gives the character code KeyAscii.
+@@1723
+In the {{KeyPress}} event, the argument {{KeyAscii}} with the value 13 means:
+@@1724
+The {{Enter}} key
+@@1725
+The {{Esc}} key
+@@1726
+The space bar
+@@1727
+The letter A
+@@1728
+Enter = 13 and Esc = 27.
+@@1729
+What does the following code do?
+@@1730
+Writes Mouse Down and makes the background blue when Label1 is pressed
+@@1731
+Drags Label1
+@@1732
+Does not work because the event does not exist
+@@1733
+MouseDown is a real event of a Label.
+@@1734
+What happens when {{Label1}} is clicked only once?
+@@1735
+The text is copied
+@@1736
+The code is in DblClick, not in Click.
+@@1737
+Can one control have several events with code written for them?
+@@1738
+Yes, each event has its own procedure
+@@1739
+No, only one event
+@@1740
+Yes, but in one procedure
+@@1741
+Only for the form
+@@1742
+Such as Text1_Change and Text1_GotFocus together.
+@@1743
+Which procedure runs first when the program starts?
+@@1744
+Before the user interacts with anything.
+@@1745
+In the {{MouseMove}} event we want to write the mouse position in {{Text1}} and {{Text2}}. The correct line:
+@@1746
+X and Y come from the event's arguments.
+@@1747
+Event-driven programming means the order in which procedures run is decided by:
+@@1748
+The user, through their actions
+@@1749
+The order in which the procedures are written
+@@1750
+The size of the program
+@@1751
+The name of the form
+@@1752
+Each procedure waits for its event.
+@@1753
+A memory location with a name and a type that holds a value
+@@1754
+A control on the form
+@@1755
+A window in the environment
+@@1756
+An event that happens on a click
+@@1757
+We store data in it temporarily.
+@@1758
+The statement used to declare a variable is:
+@@1759
+The correct way to declare a whole-number variable named {{X}}:
+@@1760
+Dim name As type.
+@@1761
+Which variable name is valid?
+@@1762
+The underscore is allowed; a space or a hyphen is not.
+@@1763
+Why is the name {{73AB}} invalid?
+@@1764
+Because it starts with a digit
+@@1765
+A name must start with a letter.
+@@1766
+Why is {{Date}} not valid as a variable name?
+@@1767
+Because it starts with a capital letter
+@@1768
+Because it is short
+@@1769
+Because it is an English word
+@@1770
+Reserved words may not be used.
+@@1771
+The maximum length of a variable name is:
+@@1772
+255 characters
+@@1773
+8 characters
+@@1774
+32 characters
+@@1775
+1000 characters
+@@1776
+According to the naming rules in the syllabus.
+@@1777
+The suitable type for small whole numbers such as a student's age:
+@@1778
+Integer, for whole numbers.
+@@1779
+The range of the {{Integer}} type is:
+@@1780
+From -32768 to 32767
+@@1781
+From 0 to 255
+@@1782
+From about -2 billion to 2 billion
+@@1783
+Unlimited
+@@1784
+Its size is 2 bytes.
+@@1785
+The size of the {{Integer}} type in memory:
+@@1786
+2 bytes
+@@1787
+1 byte
+@@1788
+4 bytes
+@@1789
+8 bytes
+@@1790
+Long = 4 bytes.
+@@1791
+For large whole numbers such as 100000 we use:
+@@1792
+Long holds up to about 2 billion.
+@@1793
+The size of the {{Long}} type:
+@@1794
+Twice an Integer.
+@@1795
+The suitable type for decimal numbers such as 3.75:
+@@1796
+Or Double for higher precision.
+@@1797
+The difference between {{Single}} and {{Double}}:
+@@1798
+{{Double}} is more precise and is 8 bytes
+@@1799
+{{Single}} is more precise
+@@1800
+{{Double}} is for text
+@@1801
+Single is 4 bytes and Double 8 bytes.
+@@1802
+The suitable type for storing a student's name:
+@@1803
+The type that holds only {{True}} or {{False}}:
+@@1804
+Logical values.
+@@1805
+The suitable type for exact money amounts:
+@@1806
+Currency is 8 bytes.
+@@1807
+A variable whose type we do not state is of the type:
+@@1808
+Variant accepts any type but uses more memory.
+@@1809
+In the following line, what is the type of the variable {{x}}?
+@@1810
+The line is an error
+@@1811
+The type is written after each variable; x has no type.
+@@1812
+To declare a fixed value that never changes, such as π, we use:
+@@1813
+A Const's value may not be changed.
+@@1814
+What is the result of running the code?
+@@1815
+The {{Overflow}} error appears
+@@1816
+40000 is printed
+@@1817
+30000 is printed
+@@1818
+0 is printed
+@@1819
+40000 is larger than 32767.
+@@1820
+An Integer holds no fraction, so it rounds the value.
+@@1821
+In the statement {{Z = PI * R * R}}, what is done first?
+@@1822
+The right-hand side is computed, then the result is assigned to Z
+@@1823
+Z is assigned first
+@@1824
+Z is compared with the right-hand side
+@@1825
+An error occurs
+@@1826
+The assignment rule: from right to left.
+@@1827
+What is the value of {{x}} after the code runs?
+@@1828
+x = 5, then x = 5 + 3.
+@@1829
+A {{Local}} variable is declared:
+@@1830
+Inside a procedure, and is seen only inside it
+@@1831
+At the top of the form
+@@1832
+In a public module
+@@1833
+It ends when the procedure ends.
+@@1834
+A form-level variable is declared in:
+@@1835
+The {{General Declarations}} section at the top of the code, outside the procedures
+@@1836
+Inside Form_Load
+@@1837
+Inside every button
+@@1838
+All the form's procedures can see it.
+@@1839
+A public variable that all the project's forms can see is declared with:
+@@1840
+{{Public}} in a {{Module}}
+@@1841
+{{Dim}} inside a button
+@@1842
+{{Private}} inside a button
+@@1843
+{{Const}} inside Form_Load
+@@1844
+What is the benefit of {{Option Explicit}}?
+@@1845
+It forces the programmer to declare every variable before using it
+@@1846
+It speeds up the program
+@@1847
+It makes every variable an Integer
+@@1848
+It catches spelling mistakes in variable names.
+@@1849
+With {{Option Explicit}}, using an undeclared variable gives the error:
+@@1850
+A compile error before running.
+@@1851
+Where is {{Option Explicit}} written?
+@@1852
+On the first line of the code
+@@1853
+At the end of the code
+@@1854
+In the General Declarations section.
+@@1855
+What happens when {{Command1}} is clicked three times?
+@@1856
+1, then 2, then 3 are printed
+@@1857
+1 is printed three times
+@@1858
+3 is printed once
+@@1859
+n is form-level, so it keeps its value.
+@@1860
+n is local and starts from zero every time.
+@@1861
+The initial value of a numeric variable straight after it is declared:
+@@1862
+Empty, and it causes an error
+@@1863
+Numeric variables start at zero.
+@@1864
+The initial value of a {{String}} variable:
+@@1865
+An empty string ""
+@@1866
+A single space
+@@1867
+Strings start empty.
+@@1868
+The sign used to join two strings:
+@@1869
+As in "Hello " & name.
+@@1870
+The result of {{17 Mod 5}} is:
+@@1871
+Mod gives the remainder of division.
+@@1872
+The result of {{17 \ 5}} is:
+@@1873
+The \ sign is integer division with no fraction.
+@@1874
+The result of {{2 ^ 3}} is:
+@@1875
+The ^ sign is for powers.
+@@1876
+Which is a correct declaration of several variables with their types?
+@@1877
+We write As type after each variable.
+@@1878
+We want a variable to hold a date of birth. The most suitable declaration:
+@@1879
+Date is 8 bytes.
+@@1880
+The function that shows a box asking the user to type a value:
+@@1881
+InputBox, for input.
+@@1882
+The {{InputBox}} function returns the typed value as:
+@@1883
+Always a number
+@@1884
+A date
+@@1885
+That is why we use Val for numbers.
+@@1886
+In {{InputBox("Enter x", "Title", "5")}}, the value "5" is:
+@@1887
+The default value shown in the box
+@@1888
+The number of tries
+@@1889
+The error number
+@@1890
+The order is: message, title, default value.
+@@1891
+In {{InputBox("Enter x", "Title")}}, the word "Title" appears in:
+@@1892
+The box's title bar
+@@1893
+Inside the typing field
+@@1894
+On the OK button
+@@1895
+The second argument is the title.
+@@1896
+If the user presses {{Cancel}} in an {{InputBox}}, the value returned is:
+@@1897
+The word Cancel
+@@1898
+You must check for an empty answer.
+@@1899
+The correct line for reading a number from the user and storing it in {{x}}:
+@@1900
+The function that shows the user a message with buttons:
+@@1901
+The general form of the message box:
+@@1902
+{{MsgBox}}, then the message, then the buttons-and-icon number, then the title
+@@1903
+{{MsgBox}}, then the title, then the message
+@@1904
+{{MsgBox}}, then the buttons number, then the message, then the title
+@@1905
+{{MsgBox}}, then the message only; it accepts nothing else
+@@1906
+The number 0 in the buttons argument means:
+@@1907
+Only an {{OK}} button
+@@1908
+{{OK}} and {{Cancel}}
+@@1909
+{{Yes}} and {{No}}
+@@1910
+No buttons
+@@1911
+The number 1 in the buttons argument means:
+@@1912
+Only {{OK}}
+@@1913
+{{Retry}} and {{Cancel}}
+@@1914
+The number 2 in the buttons argument means:
+@@1915
+{{Abort}}, {{Retry}} and {{Ignore}}
+@@1916
+{{Yes}}, {{No}} and {{Cancel}}
+@@1917
+The number 3 in the buttons argument means:
+@@1918
+The number 4 in the buttons argument means:

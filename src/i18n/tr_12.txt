@@ -1,0 +1,325 @@
+@@2139
+<details class="guide" open><summary>📖 About this program: what does it do?</summary>
+@@2140
+<div class="gsub">① What to type in the fields</div>
+@@2141
+<div class="gsub">② What each button or event does</div>
+@@2142
+<div class="gsub">③ Expected result</div><p>
+@@2143
+<div class="gsub">④ The code, line by line</div>
+@@2144
+<div class="gsub">🛠 How to build it in Visual Basic 6</div><ol class="gsteps">
+@@2145
+<div class="gsub">🎓 What the student learns</div><p>
+@@2146
+<div class="gsub">💡 Try it</div><p>
+@@2147
+"><div class="exhead"><span class="exbadge">Try it</span><b>
+@@2148
+<div class="runner"></div><div class="exbtns"><button data-act="reset">↻ Reset</button><button data-act="code">{ } Code</button><button data-act="lab">🧪 Open in the lab</button></div>
+@@2149
+<div class="excode" hidden><div class="subh">Design table (controls and their properties)</div>
+@@2150
+<div class="subh">Code</div>
+@@2151
+Menu bar and toolbar
+@@2152
+Menu Bar and Toolbar: they hold the project commands (File, Edit, View, Project, Run…) and quick buttons such as Start to run the program and End to stop it.
+@@2153
+The Toolbox
+@@2154
+Holds 20 standard controls. You drag a control from it onto the form, or double-click it.
+@@2155
+The Form Designer window
+@@2156
+The drawing surface. Here you design the program's interface and place the controls. Its first title is Form1, and it has a grid of dots to help with alignment.
+@@2157
+The Project Explorer
+@@2158
+Shows the project's files as a tree (Forms and Modules). It has the View Code and View Object buttons. The project file has the extension VBP.
+@@2159
+The Properties Window
+@@2160
+Shows the properties of the selected control. You choose the control from the list at its top. It has two tabs: Alphabetic and Categorized.
+@@2161
+The Form Layout window
+@@2162
+Shows where the form will appear on the screen at run time. Right-click → Resolution Guide to see different resolutions.
+@@2163
+The Code Editor window
+@@2164
+This is where you write statements. It opens when you double-click a control or press F7. It has two lists: objects (left) and events (right).
+@@2165
+Returns the mouse pointer to normal after placing a control (it places nothing on the form).
+@@2166
+For putting pictures on the form and embedding them in the project.
+@@2167
+A caption for display only on the form.
+@@2168
+Shows or enters data, such as an employee's name.
+@@2169
+A frame that holds controls you want to share the same properties (inheritance).
+@@2170
+A button that runs particular commands, such as Save, Exit and Cancel.
+@@2171
+A check box for one or more options from a set.
+@@2172
+For choosing exactly one option from a set.
+@@2173
+A drop-down list: shows one option and can be opened to show the others.
+@@2174
+A list on the form holding a set of options, which allows choosing several at once.
+@@2175
+A horizontal scroll bar.
+@@2176
+A vertical scroll bar. (Both are used to put a scroll bar on the window.)
+@@2177
+The timer: runs a statement after a set period of time (the Interval property).
+@@2178
+A list that shows the drives (floppy, CD and others).
+@@2179
+Like the previous one, but for folders and their contents.
+@@2180
+Like the previous one, but for files.
+@@2181
+Draws geometric shapes (rectangle, circle…).
+@@2182
+Draws a line on the form.
+@@2183
+Puts pictures on forms (slightly different from PictureBox, and lighter).
+@@2184
+For working with databases.
+@@2185
+For working with objects such as Word and Excel.
+@@2186
+<div class="ide" dir="ltr"><button class="r r-menu" data-r="menu">Menu Bar · Toolbar</button><div class="ide-main"><button class="r r-tb" data-r="toolbox">Toolbox</button><button class="r r-form" data-r="form"><span>Form1</span></button><div class="ide-right"><button class="r" data-r="proj">Project Explorer</button><button class="r" data-r="props">Properties</button><button class="r" data-r="layout">Form Layout</button></div></div><button class="r r-code" data-r="code">Code Editor (F7)</button></div><div class="winfo" id="ideinfo">Tap any part.</div>
+@@2187
+</div><div class="winfo">Tap a control to learn what it does.</div>
+@@2188
+<label class="wl">Type a variable name:</label><input class="winput" dir="ltr" value="My Name" spellcheck="false"><div class="rules"></div>
+@@2189
+Starts with a letter (not a digit)
+@@2190
+No spaces
+@@2191
+No symbols (+ - * . ,)
+@@2192
+Not a reserved word
+@@2193
+Valid name ✔
+@@2194
+Invalid name ✘
+@@2195
+<div class="memdemo"><div class="mrow"><label>Name<input id="mn" dir="ltr" value="x"></label><label>Type<select id="mt" dir="ltr"><option>Integer</option><option>Long</option><option>Single</option><option>Double</option><option>String</option><option>Boolean</option><option>Variant</option></select></label><label>Value<input id="mv" dir="ltr" value="3.7"></label></div><div class="mcode" dir="ltr"></div><div class="mbox"></div></div>
+@@2196
+Overflow — the value is larger than the type can hold
+@@2197
+Type mismatch — the type does not accept this value
+@@2198
+<div class="mb"><div class="mrow"><label>Buttons<select id="bb" dir="ltr"><option value="0">0 — OK</option><option value="1">1 — OK / Cancel</option><option value="2">2 — Abort / Retry / Ignore</option><option value="3">3 — Yes / No / Cancel</option><option value="4">4 — Yes / No</option><option value="5">5 — Retry / Cancel</option></select></label><label>Icon<select id="bi" dir="ltr"><option value="0">0 — none</option><option value="16">16 — Critical</option><option value="32">32 — Question</option><option value="48">48 — Exclamation</option><option value="64">64 — Information</option></select></label></div><div class="mcode" dir="ltr"></div><button class="btn" id="bs">▶ Show the box</button><div class="mbstage"></div><div class="mbres"></div></div>
+@@2199
+Value returned: <b class="en">
+@@2200
+<div class="mouse" dir="ltr"><div class="marea">Move / click here</div><div class="mout"><div><span>Event</span><b id="m_e">—</b></div><div><span>Button</span><b id="m_b">0</b></div><div><span>Shift</span><b id="m_s">0</b></div><div><span>X</span><b id="m_x">0</b></div><div><span>Y</span><b id="m_y">0</b></div></div></div><div class="winfo">Click with different mouse buttons (or with Shift / Ctrl / Alt held down). On a phone only the left button is shown.</div>
+@@2201
+<div class="qprog"><span>Question
+@@2202
+ of
+@@2203
+<b>Well done ✔</b>
+@@2204
+<b>Correct answer: </b>
+@@2205
+Next →
+@@2206
+Show result
+@@2207
+Excellent
+@@2208
+Very Good
+@@2209
+Good
+@@2210
+Average
+@@2211
+Pass
+@@2212
+Fail
+@@2213
+<div class="subh">Review these questions:</div>
+@@2214
+<p>All answers correct! 🎉</p>
+@@2215
+<button class="btn" id="qre">↻ Try again</button></div>
+@@2216
+" alt="College logo"><div><span>College of Administration and Economics</span><span>Department of Management Information Systems</span><h1>Visual Programming Kit</h1></div></div><p>Learn → try → test yourself. Every code example really runs in front of you, and you can edit its code.</p>
+@@2217
+Continue where you left off
+@@2218
+Start learning
+@@2219
+</a><a class="btn ghost" href="#lab">🧪 Lab</a></div></div>
+@@2220
+%</b><small>Progress</small></div></section>
+@@2221
+<div class="install"><span>📲</span><div><b>Install the app on your device</b><small>On a computer or phone, and it works offline</small></div><button class="btn" onclick="installApp()">Install</button></div>
+@@2222
+" alt="QR code for the app link"><div class="invtxt"><b>📣 Invite your classmates</b><small>Scan the code with a phone camera to open the app</small><bdi class="en">
+@@2223
+<div class="invbtns"><button class="btn small" onclick="shareApp()">Share</button><button class="btn small ghost" onclick="copyApp(this)">Copy link</button><a class="btn small ghost" href="
+@@2224
+" download="VisualBasic-QR.png">Download QR</a></div></div></div>
+@@2225
+<h2 class="sec">Chapters</h2><div class="cards">
+@@2226
+</div><div class="chnum">Chapter
+@@2227
+ examples · quiz
+@@2228
+%</div><div class="chnew"><span class="newbadge">New</span>
+@@2229
+ practice questions</div></a>
+@@2230
+<h2 class="sec">Quick tools</h2><div class="quick"><a href="#apps"><span>🎨</span>Designs<small>
+@@2231
+ ready apps</small></a><a href="#lab"><span>🧪</span>VB lab<small>Write and run</small></a><a href="#exam"><span>📝</span>Final exam<small>20 questions</small></a><a href="#gloss"><span>📖</span>Glossary<small>
+@@2232
+ terms</small></a><a href="#me"><span>📊</span>My progress<small>Notes</small></a></div>
+@@2233
+<footer class="foot"><b>Design and programming:</b><br>Lect. Suhair Abd Dawood<br>Lect. Lama Fawaz Al-Dulaimi<br>Asst. Lect. Ali Abdulwahab Al-Saffar<small>The content is based on the lectures of the Visual Programming course</small></footer>
+@@2234
+Lesson
+@@2235
+Test yourself
+@@2236
+Practice <span class="newbadge">New</span>
+@@2237
+Homework
+@@2238
+"><a class="back" href="#home">‹ Home</a><div class="chico">
+@@2239
+</div><div><div class="chnum">Chapter
+@@2240
+">‹ Previous</a>
+@@2241
+<button class="btn" data-go="quiz">Test yourself →</button></div>
+@@2242
+<div class="qintro"><b>Chapter quiz
+@@2243
+ questions. Your best score:
+@@2244
+<div class="qintro pracintro"><b>🏋️ Practice questions <span class="newbadge">New</span></b><span>
+@@2245
+ new questions to practise Chapter
+@@2246
+, with marking and explanations. Your best score:
+@@2247
+<div class="pracn"><span>Number of questions:</span>
+@@2248
+All (
+@@2249
+<p class="muted">Try to solve it yourself first, then press "Solution".</p>
+@@2250
+<details><summary>Show solution</summary>
+@@2251
+">🧪 Try the solution in the lab</button>
+@@2252
+Quick statement examples
+@@2253
+Designs: ready apps
+@@2254
+Chapter
+@@2255
+<div class="pagehead"><h1>🧪 Visual Basic lab</h1><p>Choose an example or write your own code, then press "Run". The controls on the form respond as in a real program.</p></div>
+@@2256
+<label class="wl">Choose an example:</label><select id="labsel" class="sel" aria-label="Choose an example">
+@@2257
+<div class="runner lab" id="labrun"></div><div class="exbtns"><button class="btn" id="labgo">▶ Run the code</button><button class="btn ghost" id="labreset">↺ Restore the original code</button></div>
+@@2258
+<button data-clear="1">🗑 Clear editor</button></div>
+@@2259
+<div class="subh">A complete example for each statement (loads into the editor):</div><div class="snips ex2">
+@@2260
+<textarea id="labcode" class="editor" aria-label="Code editor" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+@@2261
+<details class="cheat"><summary>📋 Quick reference sheet</summary><div class="cheatbody" dir="ltr"><pre class="code">
+@@2262
+<div class="pagehead"><h1>📝 Final exam</h1><p>20 random questions from the six chapters, graded on the lecture's scale.</p></div><div id="exbox"></div>
+@@2263
+<div class="qintro big"><b>Ready?</b><span>Best previous score:
+@@2264
+%</span><div class="scale"><span>90+ Excellent</span><span>80 Very Good</span><span>70 Good</span><span>60 Average</span><span>50 Pass</span><span>Below: Fail</span></div><button class="btn" id="exgo">Start the exam</button></div>
+@@2265
+<div class="pagehead"><h1>📖 Glossary</h1></div><input id="gs" class="winput" placeholder="Search for a term…" dir="auto"><div id="gl" class="gl"></div>
+@@2266
+<p class="muted">No results.</p>
+@@2267
+<div class="pagehead"><h1>📊 My progress</h1></div><div class="cards2">
+@@2268
+</div><div class="pmid"><b>Chapter
+@@2269
+<div class="prow"><div class="pico">📝</div><div class="pmid"><b>Final exam</b><small>Best score</small></div><div class="ppct">
+@@2270
+<h2 class="sec">My notes</h2><p class="muted">Write what you want to ask the lecturer in class. Saved on this device only.</p>
+@@2271
+<label class="wl">Chapter
+@@2272
+" placeholder="Your notes…" dir="auto">
+@@2273
+<button class="btn ghost danger" id="rst">Clear my progress</button>
+@@2274
+Press again to confirm
+@@2275
+<div class="pagehead"><h1>🎨 Designs</h1><p>Small, attractive apps you can build yourself in Visual Basic 6 after finishing the syllabus. Each app runs here, with its design table, build steps and complete code.</p></div>
+@@2276
+You have finished all the chapters. You are ready to build these apps!
+@@2277
+You have finished
+@@2278
+ chapters. You can try the apps now, but you will understand them better after finishing the chapters.
+@@2279
+<div class="callout tip"><span>💡</span><div>For each app: press "{ } Code" to see the <b>design table</b> (controls and their properties), then the code. Copy them into VB6 and build the app yourself.</div></div>
+@@2280
+<div class="pager"><a class="btn ghost" href="#apps">← All apps</a></div>
+@@2281
+Home
+@@2282
+Lab
+@@2283
+Exam
+@@2284
+Glossary
+@@2285
+Progress
+@@2286
+Designs
+@@2287
+Visual Programming Kit — Visual Basic 6
+College of Administration and Economics · Department of Management Information Systems
+Lessons, running examples and quizzes:
+
+@@2288
+Visual Programming Kit
+@@2289
+✔ Copied
+@@2290
+Open the link in Safari.
+@@2291
+Tap the Share button ⬆️ at the bottom of the screen.
+@@2292
+Choose "Add to Home Screen".
+@@2293
+Tap "Add".
+@@2294
+Open the link in Chrome or Edge.
+@@2295
+On a computer: click the install icon ⊕ at the end of the address bar.
+@@2296
+On a phone: tap the menu ⋮, then "Install app" or "Add to Home screen".
+@@2297
+<div class="instbox"><b>📲 Install the app</b><ol>
+@@2298
+</ol><p class="muted">After installing, the app opens from its icon like any other app, and it works even without the internet.</p>
+@@2299
+<p class="muted">Link: <bdi class="en">alialsaffarmosuluniversity.github.io/VisulaBasic</bdi></p><button class="btn">OK</button></div>
