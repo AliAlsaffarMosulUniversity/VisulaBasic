@@ -1,0 +1,506 @@
+[
+ {
+  "cat": "Arithmetic",
+  "desc": "Integer division 7 \\ 2",
+  "exp": "3",
+  "got": "3",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Mod with negative dividend",
+  "exp": "-1",
+  "got": "-1",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Exponent 2 ^ 10",
+  "exp": "1024",
+  "got": "1024",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Float division 7 / 2",
+  "exp": "3.5",
+  "got": "3.5",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Operator precedence 2 + 3 * 4 ^ 2",
+  "exp": "50",
+  "got": "50",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Unary minus with power -2 ^ 2",
+  "exp": "-4",
+  "got": "-4",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Integer * Integer overflow (200*200)",
+  "exp": "ERR:6",
+  "got": "40000",
+  "pass": false
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Division by zero (/)",
+  "exp": "ERR:11",
+  "got": "ERR:11",
+  "pass": true
+ },
+ {
+  "cat": "Arithmetic",
+  "desc": "Division by zero (\\)",
+  "exp": "ERR:11",
+  "got": "ERR:11",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Int(-2.5)",
+  "exp": "-3",
+  "got": "-3",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Fix(-2.5)",
+  "exp": "-2",
+  "got": "-2",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "CInt(2.5) banker's rounding",
+  "exp": "2",
+  "got": "2",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "CInt(3.5) banker's rounding",
+  "exp": "4",
+  "got": "4",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Round(2.5)",
+  "exp": "2",
+  "got": "2",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Sqr(16)",
+  "exp": "4",
+  "got": "4",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Sqr(-1) raises error 5",
+  "exp": "ERR:5",
+  "got": "ERR:5",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "Abs(-3) and Sgn(-9)",
+  "exp": "3 -1",
+  "got": "3 -1",
+  "pass": true
+ },
+ {
+  "cat": "Numeric functions",
+  "desc": "RGB(255, 0, 0)",
+  "exp": "255",
+  "got": "255",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Val(\"12abc\")",
+  "exp": "12",
+  "got": "12",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Val(\"abc\")",
+  "exp": "0",
+  "got": "0",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Val ignores embedded spaces Val(\" 4 5\")",
+  "exp": "45",
+  "got": "45",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Val(\"&H10\") hexadecimal",
+  "exp": "16",
+  "got": "0",
+  "pass": false
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Val(\"1e3\") exponent",
+  "exp": "1000",
+  "got": "1000",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Implicit conversion \"5\" + 3",
+  "exp": "8",
+  "got": "8",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Concatenation \"5\" & 3",
+  "exp": "53",
+  "got": "53",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "String + String concatenates",
+  "exp": "1230",
+  "got": "1230",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Str(5) keeps sign space",
+  "exp": "[ 5]",
+  "got": "[ 5]",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "CStr(5) has no sign space",
+  "exp": "[5]",
+  "got": "[5]",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Type mismatch on Integer = \"abc\"",
+  "exp": "ERR:13",
+  "got": "ERR:13",
+  "pass": true
+ },
+ {
+  "cat": "Conversion",
+  "desc": "Variant arithmetic v = \"12\": v + 1",
+  "exp": "13",
+  "got": "13",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Integer assignment rounds 2.5 to 2",
+  "exp": "2",
+  "got": "2",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Integer assignment rounds 3.7 to 4",
+  "exp": "4",
+  "got": "4",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Integer overflow at 32768",
+  "exp": "ERR:6",
+  "got": "ERR:6",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Long overflow at 2147483648",
+  "exp": "ERR:6",
+  "got": "ERR:6",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Long holds 100000",
+  "exp": "100000",
+  "got": "100000",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Single keeps fraction",
+  "exp": "3.75",
+  "got": "3.75",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "String receives number",
+  "exp": "[5]",
+  "got": "[5]",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Boolean True as number",
+  "exp": "-1",
+  "got": "-1",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Not 0 = -1",
+  "exp": "-1",
+  "got": "-1",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Default numeric value is 0",
+  "exp": "0",
+  "got": "0",
+  "pass": true
+ },
+ {
+  "cat": "Types",
+  "desc": "Const cannot be assigned",
+  "exp": "COMPILE",
+  "got": "COMPILE",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Len(\"Mosul\")",
+  "exp": "5",
+  "got": "5",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "UCase / LCase",
+  "exp": "VB6vb",
+  "got": "VB6vb",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Mid(\"Visual\", 2, 3)",
+  "exp": "isu",
+  "got": "isu",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Left / Right",
+  "exp": "Basic",
+  "got": "Basic",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "InStr(\"Hello\", \"l\")",
+  "exp": "3",
+  "got": "3",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Trim(\"  a  \")",
+  "exp": "[a]",
+  "got": "[a]",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Chr(65) and Asc(\"A\")",
+  "exp": "A 65",
+  "got": "A 65",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Binary comparison \"Ali\" = \"ali\"",
+  "exp": "False",
+  "got": "False",
+  "pass": true
+ },
+ {
+  "cat": "Strings",
+  "desc": "Ordering \"a\" < \"b\"",
+  "exp": "True",
+  "got": "True",
+  "pass": true
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Format(3.14159, \"0.00\")",
+  "exp": "3.14",
+  "got": "3.14",
+  "pass": true
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Format(1234567, \"#,##0\")",
+  "exp": "1,234,567",
+  "got": "1,234,567",
+  "pass": true
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Format(0.5, \"0.00\")",
+  "exp": "0.50",
+  "got": "0.50",
+  "pass": true
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Print omits leading zero (.5)",
+  "exp": ".5",
+  "got": "0.5",
+  "pass": false
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Print negative fraction (-.5)",
+  "exp": "-.5",
+  "got": "-0.5",
+  "pass": false
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Print 1/3 to 15 significant digits",
+  "exp": ".333333333333333",
+  "got": "0.333333333333333",
+  "pass": false
+ },
+ {
+  "cat": "Formatting",
+  "desc": "Print positive number with sign space",
+  "exp": "x 5",
+  "got": "x 5",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "For with Step 3",
+  "exp": "22",
+  "got": "22",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "For with negative Step",
+  "exp": "5",
+  "got": "5",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Do While loop 1..100",
+  "exp": "5050",
+  "got": "5050",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Do ... Loop Until",
+  "exp": "5",
+  "got": "5",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Exit For",
+  "exp": "4",
+  "got": "4",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Single-line If ... Else",
+  "exp": "2",
+  "got": "2",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "If ... ElseIf ... Else",
+  "exp": "T",
+  "got": "T",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Select Case with Is and To",
+  "exp": "VG",
+  "got": "VG",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Select Case list of strings",
+  "exp": "ok",
+  "got": "ok",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "GoTo label skips a line",
+  "exp": "ac",
+  "got": "ac",
+  "pass": true
+ },
+ {
+  "cat": "Control flow",
+  "desc": "Logical And / Or",
+  "exp": "TrueFalse",
+  "got": "TrueFalse",
+  "pass": true
+ },
+ {
+  "cat": "Procedures",
+  "desc": "Sub with ByRef argument",
+  "exp": "2",
+  "got": "1",
+  "pass": false
+ },
+ {
+  "cat": "Procedures",
+  "desc": "Function return value",
+  "exp": "42",
+  "got": "42",
+  "pass": true
+ },
+ {
+  "cat": "Procedures",
+  "desc": "Option Explicit rejects undeclared variable",
+  "exp": "COMPILE",
+  "got": "COMPILE",
+  "pass": true
+ },
+ {
+  "cat": "Procedures",
+  "desc": "Local Dim shadows module variable",
+  "exp": "0 5",
+  "got": "0  5",
+  "pass": true
+ }
+]
